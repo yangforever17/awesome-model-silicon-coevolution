@@ -189,7 +189,7 @@ const COLS = [
     chips: [['k-fb', 'Testbench reward'], ['k-fb', 'Equivalence check'], ['k-search', 'RLVR'], ['k-agent', 'Multi-agent']],
     chips2: [['k-fb', 'Profiler loop'], ['k-search', 'Test-time search'], ['k-agent', 'Skill library'], ['k-fb', 'Anti-hacking']] },
   { id: 'L2', x: 1086, w: 330, color: '#7c3aed', floor: 'rgba(124,58,237,.12)', pill: 'L2', sub: 'Spec in · system out', count: '4',
-    title: 'End-to-End<br>Autonomous Design', rise: 80, scene: 'e2e',
+    title: 'End-to-End<br>Autonomous Design', rise: 6, scene: 'e2e',
     items: [
       ['ms', 'Design Conductor', 'spec → RISC-V core in 12 h'],
       ['ms', 'ASIC-Agent', 'RTL → OpenLane → Caravel'],
@@ -411,19 +411,45 @@ const SCENES = {
     <text x="376" y="72" font-family="Patrick Hand" font-size="20" fill="#334155">profiler</text>
     ${sparkle(70, 84, 0.9)} ${sparkle(238, 210, 0.6, '#93c5fd')} ${sparkle(470, 40, 0.8)} ${sparkle(470, 96, 0.6, '#93c5fd')}
   </svg>`,
-  e2e: () => `<svg width="310" height="180" viewBox="0 0 310 180">
-    <rect x="60" y="128" width="236" height="14" rx="7" fill="#cbd5e1" stroke="${NAVY}" stroke-width="2.2"/>
-    ${[76, 116, 156, 196, 236, 276].map(c => `<circle cx="${c}" cy="135" r="4" fill="#fff" stroke="${NAVY}" stroke-width="1.8"/>`).join('')}
-    ${shadow(178, 150, 120)}
-    ${doc(74, 64, 0.9, 'spec', 2)}
-    <path d="M128 98h18" stroke="${NAVY}" stroke-width="3" marker-end="url(#ah-n)"/>
-    ${chip(160, 76, 0.86, 'GDS')}
-    <path d="M214 98h18" stroke="${NAVY}" stroke-width="3" marker-end="url(#ah-n)"/>
-    ${badge(262, 100)}
-    ${robot(-2, 70, 0.98, { left: 'down', right: 'up' })}
-    <path d="M60 46 C 120 0, 220 0, 262 66" fill="none" stroke="#7c3aed" stroke-width="3.2" stroke-dasharray="8 6" stroke-linecap="round" marker-end="url(#ah-v)"/>
-    <text x="178" y="170" text-anchor="middle" font-family="Patrick Hand" font-size="19" fill="#7c3aed">spec → silicon, no hand-offs</text>
-  </svg>`,
+  e2e: () => {
+    const XS = [14, 72, 130, 188];
+    const tile = (x, y, fill, inner, label) => `
+      <text x="${x + 22}" y="${y - 6}" text-anchor="middle" font-family="Inter" font-weight="700" font-size="10.5" fill="#475569">${label}</text>
+      <g transform="translate(${x},${y})"><rect width="44" height="44" rx="9" fill="${fill}" stroke="${NAVY}" stroke-width="2.2"/>${inner}</g>`;
+    const arrows = (y) => XS.slice(0, 3).map(x => `<path d="M${x + 47} ${y} h9" stroke="${NAVY}" stroke-width="2.6" marker-end="url(#ah-n)"/>`).join('');
+    const belt = (y, fill, ink) => `<rect x="6" y="${y}" width="236" height="10" rx="5" fill="${fill}" stroke="${ink}" stroke-width="2"/>`
+      + [20, 50, 80, 110, 140, 170, 200, 228].map(c => `<circle cx="${c}" cy="${y + 5}" r="2.6" fill="#fff"/>`).join('');
+    const A = 62, B = 150, SI = '#fff7e6', ST = '#e8f8f3';
+    return `<svg width="310" height="250" viewBox="0 0 310 250">
+    <text x="8" y="24" font-family="Patrick Hand" font-size="21" fill="#7c3aed">spec in → system out</text>
+    <g transform="translate(292,22)">
+      <circle r="15" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/>
+      <path d="M0 -11v3M11 0h-3M0 11v-3M-11 0h3" stroke="#94a3b8" stroke-width="1.8"/>
+      <path d="M0 0V-8M0 0l6 3" stroke="#7c3aed" stroke-width="2.6" stroke-linecap="round"/>
+      <rect x="-4" y="-21" width="8" height="5" rx="1.5" fill="${NAVY}"/>
+    </g>
+    <text x="270" y="30" text-anchor="end" font-family="Patrick Hand" font-size="21" fill="#7c3aed">12 h</text>
+    <!-- lane A: Model → Silicon -->
+    ${belt(A + 50, '#fbd38d', '#a2510b')}
+    ${tile(XS[0], A, SI, `<path d="M12 8h14l7 7v21H12z" fill="#fff" stroke="${NAVY}" stroke-width="1.8" stroke-linejoin="round"/><path d="M16 21h12M16 26h9M16 31h11" stroke="#a9bbdd" stroke-width="2" stroke-linecap="round"/>`, 'spec')}
+    ${tile(XS[1], A, SI, `<text x="22" y="27" text-anchor="middle" font-family="Inter" font-weight="800" font-size="13" fill="#2b6fd6">&lt;/&gt;</text>`, 'RTL')}
+    ${tile(XS[2], A, SI, `<path d="M7 28h5v-11h7v11h4v-11h8v11h6" fill="none" stroke="#2b6fd6" stroke-width="2.2" stroke-linejoin="round"/><circle cx="34" cy="11" r="6" fill="#dcfce7" stroke="#16a34a" stroke-width="1.6"/><path d="M31.4 11l1.8 2 3.2-3.6" stroke="#16a34a" stroke-width="1.8" fill="none" stroke-linecap="round"/>`, 'verify')}
+    ${tile(XS[3], A, SI, `<circle cx="22" cy="22" r="16" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.8"/><path d="M10 16h24M8 22h28M10 28h24M16 9v26M22 7v30M28 9v26" stroke="#a2510b" stroke-width=".9" opacity=".7"/><path d="M17 37h10" stroke="#a2510b" stroke-width="2.4"/>`, 'GDSII')}
+    ${arrows(A + 22)}
+    ${sparkle(240, 58, 0.75)}
+    <!-- lane B: Model → Stack -->
+    ${belt(B + 50, '#95e0d3', '#0f766e')}
+    ${tile(XS[0], B, ST, `<g stroke="#6d28d9" stroke-width="1.6" fill="#fff"><path d="M11 26 L22 15 L33 26 M11 26 L22 33 L33 26" fill="none"/><circle cx="11" cy="26" r="3.6"/><circle cx="22" cy="15" r="3.6"/><circle cx="22" cy="33" r="3.6"/><circle cx="33" cy="26" r="3.6"/></g>`, 'workload')}
+    ${tile(XS[1], B, ST, `<rect x="8" y="11" width="28" height="6" rx="2" fill="#fca5a5"/><rect x="8" y="20" width="19" height="6" rx="2" fill="#fcd34d"/><rect x="8" y="29" width="11" height="6" rx="2" fill="#86efac"/>`, 'profile')}
+    ${tile(XS[2], B, ST, `<rect x="7" y="9" width="30" height="26" rx="4" fill="url(#gDie)"/><text x="22" y="27" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11.5" fill="#5eead4">.cu</text>`, 'kernels')}
+    ${tile(XS[3], B, ST, `<rect x="9" y="8" width="26" height="12" rx="3" fill="#334155"/><rect x="9" y="23" width="26" height="12" rx="3" fill="#334155"/><circle cx="14" cy="14" r="2" fill="#4ade80"/><circle cx="14" cy="29" r="2" fill="#4ade80"/><path d="M20 14h10M20 29h10" stroke="#94a3b8" stroke-width="1.8"/><circle cx="37" cy="7" r="7" fill="#dcfce7" stroke="#16a34a" stroke-width="1.8"/><path d="M33.8 7l2.2 2.4 4-4.4" stroke="#16a34a" stroke-width="2" fill="none" stroke-linecap="round"/>`, 'serve')}
+    ${arrows(B + 22)}
+    ${sparkle(240, B - 6, 0.7, '#86efac')}
+    <!-- supervisor -->
+    ${robot(246, 98, 0.9, { left: 'down', right: 'forward', flip: true })}
+    <text x="124" y="244" text-anchor="middle" font-family="Patrick Hand" font-size="19" fill="#7c3aed">no hand-offs between stages</text>
+  </svg>`;
+  },
   cross: () => `<svg width="262" height="386" viewBox="0 0 262 386">
     <text x="131" y="18" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="#b45309">which floor to change?</text>
     ${shadow(140, 240, 104)}
