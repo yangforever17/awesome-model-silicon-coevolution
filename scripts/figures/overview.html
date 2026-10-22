@@ -95,7 +95,7 @@
   .k-loop { background: var(--c-loop); border-color: var(--c-loop-b); }
 
   .scene { position: absolute; left: 0; right: 0; text-align: center; z-index: 2; }
-  .scene .ttl { font-size: 37px; line-height: 1.0; color: var(--ink); }
+  .scene .ttl { font-size: 37px; line-height: 1.0; color: var(--ink); text-shadow: 0 0 4px #fff, 0 0 8px #fff, 0 0 12px rgba(255,255,255,.9); }
   .human .scene .ttl { color: #6b7385; }
   .scene svg { display: block; margin: 2px auto 0; overflow: visible; }
 
@@ -200,13 +200,13 @@ const COLS = [
     ],
     chips: [['k-agent', 'Spec → GDSII'], ['k-agent', 'Task decomposition'], ['k-fb', 'End-to-end profiling'], ['k-search', 'Multi-backend']] },
   { id: 'L3', x: 1428, w: 278, color: '#d97706', floor: 'rgba(217,119,6,.13)', pill: 'L3', sub: 'AI picks the layer', count: '2',
-    title: 'Cross-Layer<br>Co-Design', rise: 150, scene: 'cross',
+    title: 'Cross-Layer<br>Co-Design', rise: 6, scene: 'cross',
     items: [
       ['lp', 'Design Conductor 2.0', 'algorithm paper → accelerator'],
       ['lp', 'HSCO-Bench', 'SW needs → SoC accelerator'],
       ['open', 'Model × kernel × RTL agent', 'open: no instance yet'],
     ],
-    chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'Joint J(M, S, H)'], ['k-loop', 'System world model'], ['k-loop', 'Cross-layer env']] },
+    chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'Joint J(M,S,H)'], ['k-loop', 'World model'], ['k-loop', 'Cross-layer env']] },
   { id: 'L4', x: 1718, w: 304, color: '#16a34a', floor: 'rgba(22,163,74,.13)', pill: 'L4', sub: 'Feeds the designer', count: '1 + 2',
     title: 'Recursive<br>Self-Enhancement', rise: 196, scene: 'recursive', inset: true,
     items: [
@@ -424,15 +424,78 @@ const SCENES = {
     <path d="M60 46 C 120 0, 220 0, 262 66" fill="none" stroke="#7c3aed" stroke-width="3.2" stroke-dasharray="8 6" stroke-linecap="round" marker-end="url(#ah-v)"/>
     <text x="178" y="170" text-anchor="middle" font-family="Patrick Hand" font-size="19" fill="#7c3aed">spec → silicon, no hand-offs</text>
   </svg>`,
-  cross: () => `<svg width="262" height="190" viewBox="0 0 262 190">
-    ${shadow(162, 170, 90)}
-    ${tower(100, 58, 1.0)}
-    <path d="M250 70 C 268 104, 268 136, 254 156" fill="none" stroke="#d97706" stroke-width="3.6" marker-start="url(#ah-o)" marker-end="url(#ah-o)"/>
-    ${robot(4, 72, 1.0, { left: 'down', right: 'up' })}
-    <path d="M86 80 C 100 70, 112 68, 126 70" fill="none" stroke="#d97706" stroke-width="3.2" marker-end="url(#ah-o)"/>
-    <path d="M90 120 C 104 132, 108 140, 112 146" fill="none" stroke="#d97706" stroke-width="3.2" marker-end="url(#ah-o)"/>
-    <text x="164" y="40" text-anchor="middle" font-family="Patrick Hand" font-size="19" fill="#b45309">which layer to change?</text>
-    ${sparkle(30, 50, 0.8)}
+  cross: () => `<svg width="262" height="386" viewBox="0 0 262 386">
+    <text x="131" y="18" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="#b45309">which floor to change?</text>
+    ${shadow(140, 240, 104)}
+    <!-- roof -->
+    <path d="M54 56 L128 30 L202 56 Z" fill="#e2e8f0" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/>
+    <circle cx="128" cy="44" r="5" fill="#fbbf24" stroke="${NAVY}" stroke-width="2"/>
+    <!-- floors -->
+    <g stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round">
+      <rect x="58" y="56" width="142" height="60" fill="#ece5ff"/>
+      <rect x="58" y="116" width="142" height="60" fill="#d6f3ec"/>
+      <rect x="58" y="176" width="142" height="60" fill="url(#gChip)"/>
+    </g>
+    <g font-family="Inter" font-weight="800" font-size="11.5">
+      <text x="66" y="72" fill="#6d28d9">MODEL</text><text x="66" y="132" fill="#0f766e">STACK</text><text x="66" y="192" fill="#8a4208">SILICON</text>
+    </g>
+    <!-- model floor: a small network -->
+    <g stroke="#6d28d9" stroke-width="1.8" fill="#fff">
+      <path d="M126 92 L146 78 L166 92 M126 92 L146 100 L166 92 M146 78 L146 100" fill="none"/>
+      <circle cx="126" cy="92" r="4.5"/><circle cx="146" cy="78" r="4.5"/><circle cx="146" cy="100" r="4.5"/><circle cx="166" cy="92" r="4.5"/>
+      <circle cx="184" cy="84" r="4.5"/><path d="M166 92 L184 84" fill="none"/>
+    </g>
+    <!-- stack floor: kernel window -->
+    <g transform="translate(120,140)">
+      <rect width="64" height="26" rx="5" fill="#16234a" stroke="${NAVY}" stroke-width="2"/>
+      <text x="8" y="18" font-family="Inter" font-weight="800" font-size="12" fill="#5eead4">&gt;_ kernel</text>
+    </g>
+    <!-- silicon floor: die -->
+    <g transform="translate(150,194)">
+      <g stroke="#a2510b" stroke-width="2.4" stroke-linecap="round"><path d="M6 0v-4M14 0v-4M22 0v-4M6 32v4M14 32v4M22 32v4M0 9h-4M0 23h-4M28 9h4M28 23h4"/></g>
+      <rect width="28" height="32" rx="4" fill="url(#gDie)" stroke="#a2510b" stroke-width="2"/>
+    </g>
+    <g transform="translate(112,200)" fill="#fff" stroke="#a2510b" stroke-width="1.6"><rect width="26" height="8" rx="2"/><rect y="12" width="20" height="8" rx="2"/></g>
+    <!-- signal pipes on the outside wall -->
+    <path d="M40 66 V 224" stroke="#2b6fd6" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <path d="M40 210 V 232" stroke="#2b6fd6" stroke-width="3" marker-end="url(#ah-b)"/>
+    <path d="M24 230 V 70" stroke="#ea580c" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <path d="M24 84 V 64" stroke="#ea580c" stroke-width="3" marker-end="url(#ah-o)"/>
+    <text x="131" y="264" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#475569"><tspan fill="#2b6fd6">design ↓</tspan> · <tspan fill="#ea580c">measure ↑</tspan></text>
+    <!-- elevator -->
+    <rect x="200" y="56" width="42" height="180" fill="#f1f5f9" stroke="${NAVY}" stroke-width="2.6"/>
+    <path d="M221 56 V 122" stroke="#64748b" stroke-width="2"/>
+    <path d="M214 50 l7 -9 7 9z" fill="#16a34a"/>
+    <rect x="204" y="122" width="34" height="48" rx="4" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/>
+    <g transform="translate(205,127) scale(.46)">
+      <rect x="6" y="8" width="58" height="42" rx="17" fill="url(#gHead)" stroke="${NAVY}" stroke-width="4"/>
+      <rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a"/>
+      <g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
+      <rect x="13" y="50" width="44" height="30" rx="12" fill="url(#gBody)" stroke="${NAVY}" stroke-width="4"/>
+      <line x1="35" y1="8" x2="35" y2="-2" stroke="${NAVY}" stroke-width="4"/><circle cx="35" cy="-4" r="6" fill="#fbbf24" stroke="${NAVY}" stroke-width="3"/>
+    </g>
+    <path d="M246 74 C 260 116, 260 172, 246 218" fill="none" stroke="#d97706" stroke-width="3" marker-start="url(#ah-o)" marker-end="url(#ah-o)"/>
+    ${sparkle(250, 40, 0.8)} ${sparkle(14, 44, 0.6, '#93c5fd')}
+    <!-- cross-layer gain card -->
+    <g transform="translate(14,278)">
+      <rect width="234" height="102" rx="10" fill="#fff" stroke="#d9dfeb" stroke-width="1.6"/>
+      <text x="12" y="22" font-family="Patrick Hand" font-size="18" fill="#17203a">cross-layer gain</text>
+      <path d="M12 82 H 222" stroke="#94a3b8" stroke-width="1.6"/>
+      <rect x="22" y="62" width="24" height="20" rx="3" fill="#cfc0ff" stroke="#6d28d9" stroke-width="1.6"/>
+      <rect x="62" y="56" width="24" height="26" rx="3" fill="#95e0d3" stroke="#0f766e" stroke-width="1.6"/>
+      <rect x="110" y="56" width="24" height="26" rx="3" fill="#95e0d3" fill-opacity=".45" stroke="#0f766e" stroke-width="1.4" stroke-dasharray="3 2"/>
+      <rect x="110" y="36" width="24" height="20" rx="3" fill="#cfc0ff" fill-opacity=".45" stroke="#6d28d9" stroke-width="1.4" stroke-dasharray="3 2"/>
+      <rect x="162" y="14" width="24" height="68" rx="3" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.8"/>
+      <path d="M104 36 H 200" stroke="#ea580c" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <path d="M200 36 V 16" stroke="#ea580c" stroke-width="2.4" marker-end="url(#ah-o)"/>
+      <text x="206" y="30" font-family="Patrick Hand" font-size="15" fill="#ea580c">&gt; sum</text>
+      <g font-family="Inter" font-weight="700" font-size="11" fill="#475569" text-anchor="middle">
+        <text x="34" y="96">ΔM</text><text x="74" y="96">ΔS</text><text x="122" y="96">ΔM+ΔS</text><text x="174" y="96">joint</text>
+      </g>
+      <text x="96" y="68" font-family="Inter" font-weight="800" font-size="13" fill="#94a3b8" text-anchor="middle">=</text>
+      <text x="54" y="68" font-family="Inter" font-weight="800" font-size="13" fill="#94a3b8" text-anchor="middle">+</text>
+      <text x="148" y="68" font-family="Inter" font-weight="800" font-size="13" fill="#94a3b8" text-anchor="middle">vs</text>
+    </g>
   </svg>`,
   recursive: () => `<svg width="282" height="218" viewBox="0 0 282 218">
     <circle cx="140" cy="100" r="92" fill="url(#gGlowG)"/>
