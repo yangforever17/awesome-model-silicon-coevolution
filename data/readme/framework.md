@@ -4,6 +4,12 @@
 
 **Three layers.** A computing system that hosts a language model is abstracted into the model layer $M$ (architecture, attention and expert routing, numeric formats, training recipe), the software-stack layer $S$ (compilation, kernels, parallel partitioning, serving) and the hardware layer $H$ (microarchitecture, memory hierarchy, interconnect, RTL, layout). The system pursues a joint objective $J(M, S, H)$ under cost, power and area constraints $C$, for example effective tokens per second per watt.
 
+<div align="center">
+  <img src="./assets/tower.png" width="78%" alt="The model / software-stack / silicon tower. Silicon is the base, the software stack is in the middle and the model is on top; their iteration cadences are years, hours and months. On the left, AI-driven arrows go down from the model to the stack and to silicon. On the right, grey arrows show humans and classical search carrying constraints up from silicon to the stack and from the stack to the model; dashed blue arrows show the emerging paths where AI carries those constraints.">
+  <br>
+  <em><b>Figure 2.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far almost entirely carried by people. Dashed arrows mark the paths where AI has just started to carry constraints upward.</em>
+</div>
+
 **Co-evolution dynamics.** Each layer is updated by an operator that reads a measurement of the whole system, and the capability of whoever executes the update may itself depend on the system:
 
 ```math

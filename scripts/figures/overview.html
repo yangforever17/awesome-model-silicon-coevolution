@@ -1,0 +1,389 @@
+<!doctype html>
+<!--
+  Figure 1: overview of model–stack–silicon co-evolution by autonomy level.
+  Render: bash scripts/figures/render.sh   (headless Chrome → assets/overview.png)
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Patrick+Hand&display=block" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1c2541;
+    --muted: #5b6475;
+    --dash: #22305c;
+    --ms-fill: #f8c77e; --ms-ink: #9a4a07;   /* Model → Silicon */
+    --mk-fill: #8fdccf; --mk-ink: #0f766e;   /* Model → Stack */
+    --sm-fill: #f6abc0; --sm-ink: #be123c;   /* Silicon → Model */
+    --lp-fill: #c9b8fd; --lp-ink: #6d28d9;   /* Cross-layer loop */
+    --c-data: #ece7fd; --c-data-b: #cdc2f5;
+    --c-fb: #e1ebfd; --c-fb-b: #b7cdf3;
+    --c-search: #def4e6; --c-search-b: #a9dcbb;
+    --c-agent: #fdf2d2; --c-agent-b: #f0d58a;
+    --c-loop: #fde3e6; --c-loop-b: #f3b4bc;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: #fff; }
+  body { width: 2040px; height: 1030px; position: relative; font-family: Inter, sans-serif; color: var(--ink); overflow: hidden; }
+  .hand { font-family: "Patrick Hand", cursive; }
+
+  /* axes */
+  #yaxis { position: absolute; left: 14px; top: 18px; width: 3px; height: 900px; background: var(--ink); }
+  #yaxis::before { content: ""; position: absolute; top: -10px; left: -7px; border: 8px solid transparent; border-bottom: 12px solid var(--ink); border-top: 0; }
+  #xaxis { position: absolute; left: 14px; top: 916px; width: 2006px; height: 3px; background: var(--ink); }
+  #xaxis::after { content: ""; position: absolute; right: -10px; top: -7px; border: 8px solid transparent; border-left: 12px solid var(--ink); border-right: 0; }
+  .xlabel { position: absolute; top: 926px; font-size: 44px; line-height: 1; white-space: nowrap; transform: translateX(-50%); }
+  .xlabel b { font-weight: 400; font-size: 52px; margin-right: 8px; }
+  .xlabel.dim { color: #b6bcc8; }
+
+  /* legend row */
+  #legend { position: absolute; left: 40px; top: 14px; right: 20px; height: 52px; display: flex; align-items: center; gap: 22px; font-size: 18px; }
+  #legend .grp { display: flex; align-items: center; gap: 16px; }
+  #legend .lab { display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+  #legend .sep { width: 1px; height: 34px; background: #cfd5e2; }
+  #legend .title { font-size: 13px; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+  .chip.legend { font-size: 15px; padding: 4px 10px; }
+
+  /* columns */
+  .col { position: absolute; top: 80px; height: 822px; border: 2.6px dashed var(--dash); border-radius: 4px;
+         background: linear-gradient(180deg, #f3f6fc 0%, #f8f9fd 55%, rgba(255,255,255,0) 100%); padding: 14px 14px 0; }
+  .col.human { border-color: #8d96ab; background: linear-gradient(180deg, #f4f5f7 0%, #fafafa 60%, rgba(255,255,255,0) 100%); }
+  .col.ghost { border-color: #c9ced9; border-style: dotted; background: repeating-linear-gradient(135deg, #fbfbfd 0 10px, #f3f4f8 10px 20px); }
+  .head { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; font-weight: 700; color: var(--muted); margin: 2px 2px 8px; display: flex; justify-content: space-between; }
+  .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+  .split > div:first-child { padding-right: 12px; border-right: 2.4px dashed #9aa5c4; }
+  .split > div:last-child { padding-left: 12px; }
+
+  .item { display: flex; align-items: center; gap: 11px; padding: 6px 2px; position: relative; z-index: 2; }
+  .tile { flex: 0 0 38px; width: 38px; height: 38px; border-radius: 11px; display: grid; place-items: center; border: 2px solid; }
+  .tile svg { width: 22px; height: 22px; }
+  .t-ms { background: var(--ms-fill); border-color: var(--ms-ink); color: var(--ms-ink); }
+  .t-mk { background: var(--mk-fill); border-color: var(--mk-ink); color: var(--mk-ink); }
+  .t-sm { background: var(--sm-fill); border-color: var(--sm-ink); color: var(--sm-ink); }
+  .t-lp { background: var(--lp-fill); border-color: var(--lp-ink); color: var(--lp-ink); }
+  .t-claim { background: repeating-linear-gradient(135deg, var(--lp-fill) 0 4px, #fff 4px 8px); border-color: var(--lp-ink); color: var(--lp-ink); border-style: dashed; }
+  .t-open { background: #fff; border: 2px dashed #9aa5c4; color: #9aa5c4; }
+  .txt { min-width: 0; }
+  .name { font-weight: 700; font-size: 17px; line-height: 1.15; }
+  .desc { font-size: 14.5px; color: var(--muted); line-height: 1.25; margin-top: 2px; }
+  .item.open .name { color: #8d96ab; font-style: italic; }
+  .item.open .desc { color: #a3abbb; }
+  .human .name { color: #3b4254; }
+
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; position: relative; z-index: 2; }
+  .chip { font-size: 14.5px; padding: 4px 10px; border-radius: 6px; border: 1.6px solid; background: #fff; white-space: nowrap; font-weight: 500; }
+  .k-data { background: var(--c-data); border-color: var(--c-data-b); }
+  .k-fb { background: var(--c-fb); border-color: var(--c-fb-b); }
+  .k-search { background: var(--c-search); border-color: var(--c-search-b); }
+  .k-agent { background: var(--c-agent); border-color: var(--c-agent-b); }
+  .k-loop { background: var(--c-loop); border-color: var(--c-loop-b); }
+
+  .scene { position: absolute; left: 0; right: 0; text-align: center; z-index: 2; }
+  .scene .ttl { font-size: 38px; line-height: 1.02; }
+  .human .scene .ttl { color: #6b7385; }
+  .scene svg { display: block; margin: 4px auto 0; }
+
+  .ghosttext { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; color: #a7aebd; text-align: center; }
+  .ghosttext .big { font-size: 34px; line-height: 1; }
+  .ghosttext .small { font-size: 14px; font-family: Inter, sans-serif; line-height: 1.35; }
+
+  .inset { position: absolute; left: 12px; right: 12px; bottom: 12px; border: 2px solid #b9c1d3; border-radius: 6px; background: rgba(255,255,255,.92);
+           padding: 8px 10px 6px; z-index: 3; }
+  .inset .cap { font-size: 12.5px; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; color: var(--muted); }
+
+  #trail { position: absolute; left: 0; top: 0; z-index: 1; pointer-events: none; }
+</style>
+</head>
+<body>
+<div id="yaxis"></div>
+<div id="xaxis"></div>
+<div id="legend"></div>
+<svg id="trail" width="2040" height="1000"></svg>
+<div id="cols"></div>
+
+<script>
+// ---------------------------------------------------------------- glyphs
+const G = {
+  ms: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="6" y="6" width="12" height="12" rx="2"/><rect x="9.5" y="9.5" width="5" height="5" rx=".8" fill="currentColor" stroke="none"/><path d="M9 2.5v3M15 2.5v3M9 18.5v3M15 18.5v3M2.5 9h3M2.5 15h3M18.5 9h3M18.5 15h3"/></svg>',
+  mk: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="2.5" y="4" width="19" height="16" rx="3"/><path d="M7 10l3 2.5L7 15M12.5 15.5h4.5"/></svg>',
+  sm: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5" cy="7" r="2.3"/><circle cx="5" cy="17" r="2.3"/><circle cx="12" cy="12" r="2.3"/><circle cx="19" cy="6.5" r="2.3"/><circle cx="19" cy="17.5" r="2.3"/><path d="M7.1 8.1l2.9 2.6M7.1 15.9l2.9-2.6M14.1 11l2.9-3.3M14.1 13l2.9 3.3"/></svg>',
+  lp: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 11a8 8 0 0 0-14.3-4.6M4 13a8 8 0 0 0 14.3 4.6"/><path d="M5.2 2.8l.5 3.8 3.8-.4M18.8 21.2l-.5-3.8-3.8.4"/></svg>',
+  open: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M9.2 9a3 3 0 1 1 4.2 2.8c-.9.4-1.4 1.1-1.4 2v.7"/><circle cx="12" cy="18" r=".6" fill="currentColor"/></svg>',
+};
+const TILE = { ms: 't-ms', mk: 't-mk', sm: 't-sm', lp: 't-lp', claim: 't-claim', open: 't-open' };
+const GLYPH = { ms: 'ms', mk: 'mk', sm: 'sm', lp: 'lp', claim: 'lp', open: 'open' };
+
+// ---------------------------------------------------------------- data
+const COLS = [
+  { id: 'H', cls: 'human', x: 30, w: 252, head: ['Executor: people', ''], title: 'Human-Led<br>Co-Design', rise: 0, scene: 'human',
+    items: [
+      ['sm', 'FlashAttention', 'IO-aware attention'],
+      ['sm', 'NSA', 'hardware-aligned sparsity'],
+      ['sm', 'DeepSeek-V3.1', 'FP8 format for a future chip'],
+      ['mk', 'DeepGEMM', 'hand-tuned FP8 kernels'],
+      ['lp', 'MTIA v2', 'workload-driven ASIC'],
+      ['lp', 'Pangu Ultra', 'model built for Ascend'],
+    ],
+    chips: [['k-search', 'HW-aware NAS'], ['k-loop', 'Low precision'], ['k-loop', 'MoE & sparsity']] },
+  { id: 'L0', x: 292, w: 246, head: ['Single-shot generation', ''], title: 'Design<br>Assistance', rise: 0, scene: 'assist',
+    items: [
+      ['ms', 'ChipNeMo', 'domain-adapted LLM'],
+      ['ms', 'Chip-Chat', 'conversational tape-out'],
+      ['ms', 'VeriGen', 'Verilog code LLM'],
+      ['ms', 'RTLCoder', 'open synthetic RTL data'],
+      ['ms', 'GPT4AIGChip', 'HLS for AI accelerators'],
+      ['mk', 'LLM Compiler', 'IR-level optimization'],
+    ],
+    chips: [['k-data', 'Domain pretraining'], ['k-data', 'SFT'], ['k-data', 'Synthetic data'], ['k-data', 'RAG']] },
+  { id: 'L1', x: 548, w: 526, head: ['Model → Silicon', 'Model → Stack'], title: 'Local Autonomous Optimization', rise: 22, scene: 'optimize', split: true,
+    items: [
+      ['ms', 'AutoChip', 'compile & sim feedback'],
+      ['ms', 'RTLFixer', 'ReAct debug loop'],
+      ['ms', 'QiMeng-CodeV-R1', 'equivalence-check reward'],
+      ['ms', 'Self-Evolved ABC', 'evolves the synthesis tool'],
+      ['ms', 'AlphaChip', 'RL macro placement'],
+      ['ms', 'PrefixRL', 'RL adders in Hopper'],
+    ],
+    items2: [
+      ['mk', 'CUDA Agent', 'agentic RL for kernels'],
+      ['mk', 'GEAK', 'Triton kernel agent'],
+      ['mk', 'KernelBlaster', 'memory across GPU gens'],
+      ['mk', 'daVinci-kernel', 'verified skill library'],
+      ['lp', 'AlphaTensor', 'hardware-timed matmul search'],
+      ['mk', 'AlphaDev', 'sorting merged into LLVM'],
+    ],
+    chips: [['k-fb', 'Testbench reward'], ['k-fb', 'Equivalence check'], ['k-search', 'RLVR'], ['k-agent', 'Multi-agent']],
+    chips2: [['k-fb', 'Profiler loop'], ['k-search', 'Inference-time search'], ['k-agent', 'Skill library'], ['k-fb', 'Anti-hacking checks']] },
+  { id: 'L2', x: 1086, w: 330, head: ['Spec in · system out', ''], title: 'End-to-End<br>Autonomous Design', rise: 92, scene: 'e2e',
+    items: [
+      ['ms', 'Design Conductor', 'spec → RISC-V core in 12 h'],
+      ['ms', 'ASIC-Agent', 'RTL → OpenLane → Caravel'],
+      ['ms', 'QiMeng', 'HW + SW design agents'],
+      ['mk', 'GEAK v4', 'whole serving workloads'],
+      ['lp', 'Qwen chip–model co-evo', 'NoC spec → layout · Day-0 deploy'],
+      ['ms', 'EDA vendor agents', 'Cadence · Synopsys · Siemens'],
+    ],
+    chips: [['k-agent', 'Spec → GDSII'], ['k-agent', 'Task decomposition'], ['k-fb', 'End-to-end profiling'], ['k-search', 'Multi-backend']] },
+  { id: 'L3', x: 1428, w: 278, head: ['AI picks the layer', ''], title: 'Cross-Layer<br>Co-Design', rise: 170, scene: 'cross',
+    items: [
+      ['lp', 'Design Conductor 2.0', 'algorithm paper → accelerator'],
+      ['lp', 'HSCO-Bench', 'SW needs → SoC accelerator'],
+      ['open', 'Model × kernel × RTL agent', 'open: no instance yet'],
+    ],
+    chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'Joint J(M, S, H)'], ['k-loop', 'System world model'], ['k-loop', 'Cross-layer env']] },
+  { id: 'L4', x: 1718, w: 304, head: ['Output feeds the designer', ''], title: 'Recursive<br>Self-Enhancement', rise: 250, scene: 'recursive', inset: true,
+    items: [
+      ['lp', 'AlphaEvolve', 'TPU circuit + Gemini kernel'],
+      ['claim', 'Jalapeño', 'model-aided chip · undisclosed'],
+      ['claim', 'OpenAI × Broadcom', '~20 optimizations · claimed'],
+    ],
+    chips: [['k-loop', 'Kernel → training'], ['k-loop', 'Circuit → next TPU'], ['k-fb', 'Human sign-off']] },
+];
+const XLABELS = [
+  ['H', 'Human', 156, true], ['L0', 'Assist', 415], ['L1', 'Optimize', 811], ['L2', 'End-to-End', 1251],
+  ['L3', 'Cross-Layer', 1567], ['L4', 'Recursive', 1870],
+];
+
+// ---------------------------------------------------------------- scenes
+const NAVY = '#1e3a6e', BLUE = '#5b8def', VISOR = '#dceaff';
+function robot(x, y, s = 1, flip = false) {
+  const t = `translate(${x},${y}) scale(${flip ? -s : s},${s})`;
+  return `<g transform="${t}" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round">
+    <line x1="30" y1="9" x2="30" y2="1"/><circle cx="30" cy="0" r="4" fill="#f59e0b"/>
+    <path d="M18 76v8M42 76v8" stroke-width="6" stroke-linecap="round"/>
+    <path d="M15 52 L3 63" stroke-width="7" stroke-linecap="round"/><path d="M15 52 L3 63" stroke="${BLUE}" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M45 52 L57 44" stroke-width="7" stroke-linecap="round"/><path d="M45 52 L57 44" stroke="${BLUE}" stroke-width="3.2" stroke-linecap="round"/>
+    <rect x="13" y="46" width="34" height="31" rx="10" fill="${BLUE}"/>
+    <circle cx="30" cy="60" r="5" fill="#fbbf24"/>
+    <rect x="6" y="9" width="48" height="37" rx="14" fill="${BLUE}"/>
+    <rect x="12" y="16" width="36" height="23" rx="9" fill="${VISOR}"/>
+    <ellipse cx="23.5" cy="27.5" rx="3.6" ry="4.6" fill="${NAVY}" stroke="none"/><ellipse cx="36.5" cy="27.5" rx="3.6" ry="4.6" fill="${NAVY}" stroke="none"/>
+    <circle cx="24.6" cy="25.8" r="1.2" fill="#fff" stroke="none"/><circle cx="37.6" cy="25.8" r="1.2" fill="#fff" stroke="none"/>
+  </g>`;
+}
+function chip(x, y, s = 1, fill = '#fde7b0', ink = '#9a4a07', label = '') {
+  let pins = '';
+  for (const p of [12, 24, 36]) pins += `<path d="M${p} 0v-7M${p} 48v7M0 ${p}h-7M48 ${p}h7"/>`;
+  return `<g transform="translate(${x},${y}) scale(${s})" stroke="${ink}" stroke-width="3" stroke-linecap="round">${pins}
+    <rect x="0" y="0" width="48" height="48" rx="7" fill="${fill}"/>
+    <rect x="12" y="12" width="24" height="24" rx="3" fill="#fff" stroke-width="2.4"/>
+    ${label ? `<text x="24" y="29" text-anchor="middle" font-family="Inter" font-weight="700" font-size="10" fill="${ink}" stroke="none">${label}</text>` : ''}</g>`;
+}
+function doc(x, y, s = 1, mark = '</>') {
+  return `<g transform="translate(${x},${y}) scale(${s})" stroke="${NAVY}" stroke-width="2.4" stroke-linejoin="round">
+    <path d="M0 4a4 4 0 0 1 4-4h30l12 12v46a4 4 0 0 1-4 4H4a4 4 0 0 1-4-4z" fill="#fff"/>
+    <path d="M34 0v12h12" fill="#e8eefb"/>
+    <text x="9" y="27" font-family="Inter" font-weight="700" font-size="13" fill="${BLUE}" stroke="none">${mark}</text>
+    <path d="M9 37h26M9 45h20M9 53h24" stroke="#9fb3d9" stroke-width="2.4" stroke-linecap="round"/></g>`;
+}
+function arrowDefs() {
+  return `<defs>
+    <marker id="ah-o" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#f97316"/></marker>
+    <marker id="ah-g" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker>
+    <marker id="ah-n" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${NAVY}"/></marker>
+    <marker id="ah-v" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#6d28d9"/></marker>
+  </defs>`;
+}
+const SCENES = {
+  human: () => `<svg width="210" height="140" viewBox="0 0 210 140">${arrowDefs()}
+    <g stroke="#475569" stroke-width="2.6" stroke-linejoin="round">
+      <rect x="92" y="14" width="104" height="80" rx="6" fill="#fff"/>
+      <path d="M120 30h48l9 14h-66z" fill="#f2f2ef"/><path d="M111 47h66l10 15h-86z" fill="#e9e9e4"/><path d="M101 65h86l9 15h-104z" fill="#dededa"/>
+      <path d="M144 94v18M128 112h32" stroke-linecap="round"/>
+    </g>
+    <g stroke="#475569" stroke-width="2.6" stroke-linejoin="round">
+      <circle cx="46" cy="40" r="16" fill="#f1d3b5"/>
+      <path d="M30 37c2-14 28-16 32 0c-6-5-20-6-32 0z" fill="#475569"/>
+      <path d="M18 120c0-34 12-50 28-50s28 16 28 50z" fill="#94a3b8"/>
+      <path d="M66 86 L92 66" stroke-width="7" stroke-linecap="round"/><path d="M66 86 L92 66" stroke="#94a3b8" stroke-width="3.4" stroke-linecap="round"/>
+    </g>
+    <path d="M196 30 C 208 50, 208 70, 198 84" fill="none" stroke="#94a3b8" stroke-width="3" stroke-dasharray="6 5" marker-end="url(#ah-n)"/>
+  </svg>`,
+  assist: () => `<svg width="220" height="140" viewBox="0 0 220 140">${arrowDefs()}
+    ${robot(30, 38, 1.08)}
+    ${doc(126, 30, 1.25)}
+    <g transform="translate(100,78) rotate(-35)" stroke="${NAVY}" stroke-width="2.2"><rect x="0" y="-4" width="30" height="8" rx="2" fill="#fbbf24"/><path d="M30 -4l8 4-8 4z" fill="#f1d3b5"/></g>
+    <path d="M118 22 q -10 -14 -26 -6" fill="none" stroke="#f97316" stroke-width="3" marker-end="url(#ah-o)"/>
+    <text x="70" y="16" font-family="Patrick Hand" font-size="18" fill="#f97316">?</text>
+  </svg>`,
+  optimize: () => `<svg width="320" height="140" viewBox="0 0 320 140">${arrowDefs()}
+    ${robot(52, 38, 1.08)}
+    ${chip(170, 44, 1.05, '#fde7b0', '#9a4a07', 'RTL')}
+    <path d="M150 50 A 46 46 0 1 1 168 116" fill="none" stroke="#f97316" stroke-width="3.6" marker-end="url(#ah-o)"/>
+    <g transform="translate(250,30)" stroke="${NAVY}" stroke-width="2.4"><rect x="0" y="0" width="56" height="44" rx="6" fill="#fff"/>
+      <path d="M8 34 L18 22 L28 28 L38 12 L48 16" fill="none" stroke="#16a34a" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></g>
+    <g transform="translate(250,82)" stroke="${NAVY}" stroke-width="2.4"><rect x="0" y="0" width="56" height="34" rx="6" fill="#dcfce7"/>
+      <path d="M17 17l7 7 15-14" fill="none" stroke="#16a34a" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/></g>
+  </svg>`,
+  e2e: () => `<svg width="300" height="140" viewBox="0 0 300 140">${arrowDefs()}
+    ${robot(8, 40, 1.05)}
+    ${doc(86, 44, 0.95, 'spec')}
+    <path d="M136 74h20" stroke="${NAVY}" stroke-width="3" marker-end="url(#ah-n)"/>
+    ${chip(170, 52, 0.92, '#fde7b0', '#9a4a07', 'GDS')}
+    <path d="M226 74h18" stroke="${NAVY}" stroke-width="3" marker-end="url(#ah-n)"/>
+    <g transform="translate(270,74)" stroke="#16a34a" stroke-width="3"><circle r="20" fill="#dcfce7"/><path d="M-9 0l6 7 12-13" fill="none" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></g>
+    <path d="M100 30 C 150 4, 220 4, 268 44" fill="none" stroke="#f97316" stroke-width="3" stroke-dasharray="7 5" marker-end="url(#ah-o)"/>
+  </svg>`,
+  cross: () => `<svg width="250" height="150" viewBox="0 0 250 150">${arrowDefs()}
+    ${robot(8, 46, 1.05)}
+    <g stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round">
+      <path d="M128 12h74l14 26h-102z" fill="#ece7fd"/>
+      <text x="165" y="31" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#6d28d9" stroke="none">Model</text>
+      <path d="M114 56h102l12 24h-126z" fill="#d7f2ec"/>
+      <text x="165" y="73" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#0f766e" stroke="none">Stack</text>
+      <path d="M100 98h130l12 26h-154z" fill="#fde7b0"/>
+      <text x="165" y="116" text-anchor="middle" font-family="Inter" font-weight="700" font-size="13" fill="#9a4a07" stroke="none">Silicon</text>
+    </g>
+    <path d="M236 30 C 252 60, 252 90, 240 108" fill="none" stroke="#6d28d9" stroke-width="3.4" marker-start="url(#ah-v)" marker-end="url(#ah-v)"/>
+    <path d="M72 76 C 86 70, 96 60, 108 44" fill="none" stroke="#f97316" stroke-width="3" marker-end="url(#ah-o)"/>
+    <path d="M72 84 C 84 92, 92 100, 96 110" fill="none" stroke="#f97316" stroke-width="3" marker-end="url(#ah-o)"/>
+  </svg>`,
+  recursive: () => `<svg width="270" height="172" viewBox="0 0 270 172">${arrowDefs()}
+    ${robot(28, 44, 1.1)}
+    ${chip(170, 62, 1.0, '#fde7b0', '#9a4a07', 'TPU')}
+    <path d="M100 64 C 130 40, 160 40, 186 56" fill="none" stroke="#f97316" stroke-width="3.6" marker-end="url(#ah-o)"/>
+    <path d="M196 130 C 160 150, 90 152, 60 136" fill="none" stroke="#16a34a" stroke-width="3.6" marker-end="url(#ah-g)"/>
+    <g transform="translate(232,30)" stroke="${NAVY}" stroke-width="2.4">
+      <path d="M0-17l4 0 2 5 5 2 4-3 3 3-3 4 2 5 5 2v4l-5 2-2 5 3 4-3 3-4-3-5 2-2 5h-4l-2-5-5-2-4 3-3-3 3-4-2-5-5-2v-4l5-2 2-5-3-4 3-3 4 3 5-2z" fill="#c9d8f6" transform="translate(-2,17) scale(.95)"/>
+      <circle cx="0" cy="17" r="6" fill="#fff"/></g>
+    <text x="128" y="168" text-anchor="middle" font-family="Patrick Hand" font-size="18" fill="#16a34a">runs &amp; trains the next model</text>
+    <text x="142" y="32" text-anchor="middle" font-family="Patrick Hand" font-size="18" fill="#f97316">designs</text>
+  </svg>`,
+};
+
+function insetTower() {
+  return `<div class="cap">The tower (original Figure 1)</div>
+  <svg width="100%" height="132" viewBox="0 0 272 132">${arrowDefs()}
+    <g stroke="#b9b9ad" stroke-width="1.6" font-family="Inter" font-weight="700" font-size="12.5" text-anchor="middle">
+      <path d="M110 8h52l13 26h-78z" fill="#f8f8f5"/><text x="136" y="26" fill="#3a3a36" stroke="none">Model</text>
+      <path d="M94 42h84l13 28h-110z" fill="#f0f0eb"/><text x="136" y="61" fill="#3a3a36" stroke="none">Stack</text>
+      <path d="M78 78h116l13 30h-142z" fill="#e7e7e0"/><text x="136" y="98" fill="#3a3a36" stroke="none">Silicon</text>
+    </g>
+        <path d="M106 16 H44 V93 H66" fill="none" stroke="#2b6fd6" stroke-width="2.6" marker-end="url(#ah-n)"/>
+    <path d="M102 26 H60 V56 H82" fill="none" stroke="#2b6fd6" stroke-width="2.6" marker-end="url(#ah-n)"/>
+    <path d="M204 93 H232 V60 H200" fill="none" stroke="#a9a99c" stroke-width="2.6" marker-end="url(#ah-n)"/>
+    <path d="M190 52 H216 V22 H184" fill="none" stroke="#a9a99c" stroke-width="2.6" marker-end="url(#ah-n)"/>
+    <text x="6" y="127" font-family="Patrick Hand" font-size="16" fill="#2b6fd6">design flows down</text>
+    <text x="268" y="127" text-anchor="end" font-family="Patrick Hand" font-size="16" fill="#7c7c70">constraints flow up</text>
+  </svg>`;
+}
+
+// ---------------------------------------------------------------- render
+function itemHTML([kind, name, desc]) {
+  return `<div class="item ${kind === 'open' ? 'open' : ''}"><div class="tile ${TILE[kind]}">${G[GLYPH[kind]]}</div>
+    <div class="txt"><div class="name">${name}</div><div class="desc">${desc}</div></div></div>`;
+}
+const chipsHTML = (cs) => `<div class="chips">${cs.map(([k, t]) => `<span class="chip ${k}">${t}</span>`).join('')}</div>`;
+
+const root = document.getElementById('cols');
+for (const c of COLS) {
+  const el = document.createElement('div');
+  el.className = 'col ' + (c.cls || '');
+  el.style.left = c.x + 'px'; el.style.width = c.w + 'px';
+  let body;
+  if (c.split) {
+    body = `<div class="split"><div><div class="head"><span>${c.head[0]}</span></div>${c.items.map(itemHTML).join('')}${chipsHTML(c.chips)}</div>
+            <div><div class="head"><span>${c.head[1]}</span></div>${c.items2.map(itemHTML).join('')}${chipsHTML(c.chips2)}</div></div>`;
+  } else {
+    body = `<div class="head"><span>${c.head[0]}</span><span>${c.head[1]}</span></div>${c.items.map(itemHTML).join('')}${chipsHTML(c.chips)}`;
+  }
+  const sceneBottom = 10 + c.rise;
+  el.innerHTML = body + `<div class="scene" style="bottom:${sceneBottom}px"><div class="ttl hand">${c.title}</div>${SCENES[c.scene]()}</div>`
+    + (c.inset ? `<div class="inset">${insetTower()}</div>` : '');
+  root.appendChild(el);
+}
+// L5–L6 ghost: drawn as a slim strip inside the L4 column's right margin is too tight, so it rides on the axis instead.
+
+// legend
+document.getElementById('legend').innerHTML = `
+  <span class="title">Layer edge</span>
+  <div class="grp">
+    <span class="lab"><span class="tile t-ms" style="width:30px;height:30px;flex-basis:30px;border-radius:9px">${G.ms}</span>Model → Silicon</span>
+    <span class="lab"><span class="tile t-mk" style="width:30px;height:30px;flex-basis:30px;border-radius:9px">${G.mk}</span>Model → Stack</span>
+    <span class="lab"><span class="tile t-sm" style="width:30px;height:30px;flex-basis:30px;border-radius:9px">${G.sm}</span>Silicon → Model</span>
+    <span class="lab"><span class="tile t-lp" style="width:30px;height:30px;flex-basis:30px;border-radius:9px">${G.lp}</span>Cross-layer loop</span>
+    <span class="lab"><span class="tile t-claim" style="width:30px;height:30px;flex-basis:30px;border-radius:9px">${G.lp}</span>Claimed</span>
+  </div>
+  <span class="sep"></span>
+  <span class="title">Mechanism</span>
+  <div class="grp" style="gap:8px">
+    <span class="chip legend k-data">Data</span>
+    <span class="chip legend k-fb">Feedback & verification</span>
+    <span class="chip legend k-search">Search & RL</span>
+    <span class="chip legend k-agent">Agents</span>
+    <span class="chip legend k-loop">Cross-layer</span>
+  </div>`;
+
+// x-axis labels
+for (const [lv, name, x, dim] of XLABELS) {
+  const d = document.createElement('div');
+  d.className = 'xlabel hand' + (dim ? ' dim' : '');
+  d.style.left = x + 'px';
+  d.innerHTML = `<b>${lv}</b>${name}`;
+  document.body.appendChild(d);
+}
+const far = document.createElement('div');
+far.className = 'xlabel hand dim'; far.style.left = '2022px'; far.style.top = '992px'; far.style.fontSize = '22px';
+far.style.transform = 'translateX(-100%)'; far.textContent = 'L5 self-expansion · L6 open-ended evolution →';
+document.body.appendChild(far);
+
+// rising dashed trajectory through each column's title
+function drawTrail() {
+  const pts = [];
+  document.querySelectorAll('.col .ttl').forEach((t, i) => {
+    const r = t.getBoundingClientRect();
+    if (i === 0) pts.push([r.right - 8, r.top - 8]);
+    else pts.push([r.left - 4, r.top - 14]);
+  });
+  let d = `M${pts[0][0]} ${pts[0][1]}`;
+  for (let i = 1; i < pts.length; i++) d += ` L${pts[i][0]} ${pts[i][1]}`;
+  document.getElementById('trail').innerHTML =
+    `<defs><marker id="tr" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#22305c"/></marker></defs>
+     <path d="${d}" fill="none" stroke="#22305c" stroke-width="3" stroke-dasharray="11 8" stroke-linejoin="round" marker-end="url(#tr)"/>
+     <circle cx="${pts[0][0]}" cy="${pts[0][1]}" r="6.5" fill="#22305c"/>`;
+}
+document.fonts.ready.then(drawTrail);
+</script>
+</body>
+</html>

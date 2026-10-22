@@ -31,9 +31,9 @@
 Every model runs on a machine it did not design. That is starting to change: language models now write RTL, tune kernels, orchestrate EDA flows and help design the chips that train and serve them. **Co-evolution** treats the model (M), the software stack (S) and the silicon (H) as three layers that keep rewriting each other's objectives: hardware constraints shape the next model, model demands shape the next chip, and every layer chases a target that the other layers have moved. The question this catalog tracks is how far each piece of work pushes that loop around, and who closes it.
 
 <div align="center">
-  <img src="./assets/tower.png" width="88%" alt="The model / software-stack / silicon tower. Silicon is the base, the software stack is in the middle and the model is on top; their iteration cadences are years, hours and months. On the left, AI-driven arrows go down from the model to the stack and to silicon. On the right, grey arrows show humans and classical search carrying constraints up from silicon to the stack and from the stack to the model; dashed blue arrows show the emerging paths where AI carries those constraints.">
+  <img src="./assets/overview.png" width="100%" alt="Overview of model–stack–silicon co-evolution by autonomy level. Columns from left to right: human-led co-design (FlashAttention, NSA, DeepSeek-V3.1, DeepGEMM, MTIA v2, Pangu Ultra); L0 design assistance (ChipNeMo, Chip-Chat, VeriGen, RTLCoder, GPT4AIGChip, LLM Compiler); L1 local autonomous optimization, split into Model to Silicon (AutoChip, RTLFixer, QiMeng-CodeV-R1, Self-Evolved ABC, AlphaChip, PrefixRL) and Model to Stack (CUDA Agent, GEAK, KernelBlaster, daVinci-kernel, AlphaTensor, AlphaDev); L2 end-to-end autonomous design (Design Conductor, ASIC-Agent, QiMeng, GEAK v4, Qwen chip–model co-evolution, EDA vendor agents); L3 cross-layer co-design (Design Conductor 2.0, HSCO-Bench, and an open slot for a joint model, kernel and RTL agent); L4 recursive self-enhancement (AlphaEvolve, plus Jalapeño and OpenAI with Broadcom as claimed or undisclosed). Each column lists its key mechanisms as colored chips, a dashed line rises from left to right, and an inset shows the model, stack and silicon tower. L5 self-expansion and L6 open-ended evolution lie beyond the axis.">
   <br>
-  <em><b>Figure 1.</b> The model–stack–silicon loop. Design flows down with AI as the designer; constraints flow up, so far almost entirely carried by people. Dashed arrows mark the paths where AI has just started to carry constraints upward.</em>
+  <em><b>Figure 1.</b> The co-evolution landscape by R&D autonomy level, from human-led co-design through L4 recursive self-enhancement. Tiles mark the layer edge each work acts on; chips name the mechanisms that carry each level. Higher levels have fewer instances: L3 has two footprints and L4 one public case.</em>
 </div>
 
 ---
@@ -116,6 +116,12 @@ The survey makes three contributions:
 ## The Framework: Layers, Levels, Signals <sub><a href="#readme-top">↑ top</a></sub>
 
 **Three layers.** A computing system that hosts a language model is abstracted into the model layer $M$ (architecture, attention and expert routing, numeric formats, training recipe), the software-stack layer $S$ (compilation, kernels, parallel partitioning, serving) and the hardware layer $H$ (microarchitecture, memory hierarchy, interconnect, RTL, layout). The system pursues a joint objective $J(M, S, H)$ under cost, power and area constraints $C$, for example effective tokens per second per watt.
+
+<div align="center">
+  <img src="./assets/tower.png" width="78%" alt="The model / software-stack / silicon tower. Silicon is the base, the software stack is in the middle and the model is on top; their iteration cadences are years, hours and months. On the left, AI-driven arrows go down from the model to the stack and to silicon. On the right, grey arrows show humans and classical search carrying constraints up from silicon to the stack and from the stack to the model; dashed blue arrows show the emerging paths where AI carries those constraints.">
+  <br>
+  <em><b>Figure 2.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far almost entirely carried by people. Dashed arrows mark the paths where AI has just started to carry constraints upward.</em>
+</div>
 
 **Co-evolution dynamics.** Each layer is updated by an operator that reads a measurement of the whole system, and the capability of whoever executes the update may itself depend on the system:
 
