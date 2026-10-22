@@ -208,7 +208,7 @@ const COLS = [
     ],
     chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'Joint J(M,S,H)'], ['k-loop', 'World model'], ['k-loop', 'Cross-layer env']] },
   { id: 'L4', x: 1718, w: 304, color: '#16a34a', floor: 'rgba(22,163,74,.13)', pill: 'L4', sub: 'Feeds the designer', count: '1 + 2',
-    title: 'Recursive<br>Self-Enhancement', rise: 10, scene: 'recursive',
+    title: 'Recursive<br>Self-Enhancement', rise: 18, scene: 'recursive',
     items: [
       ['lp', 'AlphaEvolve', 'TPU circuit + Gemini kernel', 'hl'],
       ['claim', 'Jalapeño', 'model-aided chip · undisclosed'],
@@ -492,60 +492,60 @@ const SCENES = {
     <text x="124" y="244" text-anchor="middle" font-family="Patrick Hand" font-size="19" fill="#7c3aed">no hand-offs between stages</text>
   </svg>`;
   },
-  cross: () => `<svg width="262" height="386" viewBox="0 0 262 386">
+  cross: () => `<svg width="262" height="346" viewBox="0 0 262 346">
     <text x="131" y="18" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="#b45309">which floor to change?</text>
-    ${shadow(140, 240, 104)}
+    ${shadow(140, 204, 104)}
     <!-- roof -->
     <path d="M54 56 L128 30 L202 56 Z" fill="#e2e8f0" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/>
     <circle cx="128" cy="44" r="5" fill="#fbbf24" stroke="${NAVY}" stroke-width="2"/>
     <!-- floors -->
     <g stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round">
-      <rect x="58" y="56" width="142" height="60" fill="#ece5ff"/>
-      <rect x="58" y="116" width="142" height="60" fill="#d6f3ec"/>
-      <rect x="58" y="176" width="142" height="60" fill="url(#gChip)"/>
+      <rect x="58" y="56" width="142" height="48" fill="#ece5ff"/>
+      <rect x="58" y="104" width="142" height="48" fill="#d6f3ec"/>
+      <rect x="58" y="152" width="142" height="48" fill="url(#gChip)"/>
     </g>
     <g font-family="Inter" font-weight="800" font-size="11.5">
-      <text x="66" y="72" fill="#6d28d9">MODEL</text><text x="66" y="132" fill="#0f766e">STACK</text><text x="66" y="192" fill="#8a4208">SILICON</text>
+      <text x="66" y="72" fill="#6d28d9">MODEL</text><text x="66" y="120" fill="#0f766e">STACK</text><text x="66" y="168" fill="#8a4208">SILICON</text>
     </g>
     <!-- model floor: a small network -->
-    <g stroke="#6d28d9" stroke-width="1.8" fill="#fff">
+    <g stroke="#6d28d9" stroke-width="1.8" fill="#fff" transform="translate(0,-10)">
       <path d="M126 92 L146 78 L166 92 M126 92 L146 100 L166 92 M146 78 L146 100" fill="none"/>
       <circle cx="126" cy="92" r="4.5"/><circle cx="146" cy="78" r="4.5"/><circle cx="146" cy="100" r="4.5"/><circle cx="166" cy="92" r="4.5"/>
       <circle cx="184" cy="84" r="4.5"/><path d="M166 92 L184 84" fill="none"/>
     </g>
     <!-- stack floor: kernel window -->
-    <g transform="translate(120,140)">
+    <g transform="translate(120,120)">
       <rect width="64" height="26" rx="5" fill="#16234a" stroke="${NAVY}" stroke-width="2"/>
       <text x="8" y="18" font-family="Inter" font-weight="800" font-size="12" fill="#5eead4">&gt;_ kernel</text>
     </g>
     <!-- silicon floor: die -->
-    <g transform="translate(150,194)">
+    <g transform="translate(150,162)">
       <g stroke="#a2510b" stroke-width="2.4" stroke-linecap="round"><path d="M6 0v-4M14 0v-4M22 0v-4M6 32v4M14 32v4M22 32v4M0 9h-4M0 23h-4M28 9h4M28 23h4"/></g>
       <rect width="28" height="32" rx="4" fill="url(#gDie)" stroke="#a2510b" stroke-width="2"/>
     </g>
-    <g transform="translate(112,200)" fill="#fff" stroke="#a2510b" stroke-width="1.6"><rect width="26" height="8" rx="2"/><rect y="12" width="20" height="8" rx="2"/></g>
+    <g transform="translate(112,168)" fill="#fff" stroke="#a2510b" stroke-width="1.6"><rect width="26" height="8" rx="2"/><rect y="12" width="20" height="8" rx="2"/></g>
     <!-- signal pipes on the outside wall -->
-    <path d="M40 66 V 224" stroke="#2b6fd6" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
-    <path d="M40 210 V 232" stroke="#2b6fd6" stroke-width="3" marker-end="url(#ah-b)"/>
-    <path d="M24 230 V 70" stroke="#ea580c" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <path d="M40 66 V 188" stroke="#2b6fd6" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
+    <path d="M40 176 V 198" stroke="#2b6fd6" stroke-width="3" marker-end="url(#ah-b)"/>
+    <path d="M24 196 V 70" stroke="#ea580c" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>
     <path d="M24 84 V 64" stroke="#ea580c" stroke-width="3" marker-end="url(#ah-o)"/>
-    <text x="131" y="264" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#475569"><tspan fill="#2b6fd6">design ↓</tspan> · <tspan fill="#ea580c">measure ↑</tspan></text>
+    <text x="131" y="228" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#475569"><tspan fill="#2b6fd6">design ↓</tspan> · <tspan fill="#ea580c">measure ↑</tspan></text>
     <!-- elevator -->
-    <rect x="200" y="56" width="42" height="180" fill="#f1f5f9" stroke="${NAVY}" stroke-width="2.6"/>
-    <path d="M221 56 V 122" stroke="#64748b" stroke-width="2"/>
+    <rect x="200" y="56" width="42" height="144" fill="#f1f5f9" stroke="${NAVY}" stroke-width="2.6"/>
+    <path d="M221 56 V 106" stroke="#64748b" stroke-width="2"/>
     <path d="M214 50 l7 -9 7 9z" fill="#16a34a"/>
-    <rect x="204" y="122" width="34" height="48" rx="4" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/>
-    <g transform="translate(205,127) scale(.46)">
+    <rect x="204" y="106" width="34" height="44" rx="4" fill="#fff" stroke="${NAVY}" stroke-width="2.4"/>
+    <g transform="translate(206,111) scale(.44)">
       <rect x="6" y="8" width="58" height="42" rx="17" fill="url(#gHead)" stroke="${NAVY}" stroke-width="4"/>
       <rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a"/>
       <g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
       <rect x="13" y="50" width="44" height="30" rx="12" fill="url(#gBody)" stroke="${NAVY}" stroke-width="4"/>
       <line x1="35" y1="8" x2="35" y2="-2" stroke="${NAVY}" stroke-width="4"/><circle cx="35" cy="-4" r="6" fill="#fbbf24" stroke="${NAVY}" stroke-width="3"/>
     </g>
-    <path d="M246 74 C 260 116, 260 172, 246 218" fill="none" stroke="#d97706" stroke-width="3" marker-start="url(#ah-o)" marker-end="url(#ah-o)"/>
+    <path d="M246 72 C 260 104, 260 150, 246 184" fill="none" stroke="#d97706" stroke-width="3" marker-start="url(#ah-o)" marker-end="url(#ah-o)"/>
     ${sparkle(250, 40, 0.8)} ${sparkle(14, 44, 0.6, '#93c5fd')}
     <!-- cross-layer gain card -->
-    <g transform="translate(14,278)">
+    <g transform="translate(14,242)">
       <rect width="234" height="102" rx="10" fill="#fff" stroke="#d9dfeb" stroke-width="1.6"/>
       <text x="12" y="22" font-family="Patrick Hand" font-size="18" fill="#17203a">cross-layer gain</text>
       <path d="M12 82 H 222" stroke="#94a3b8" stroke-width="1.6"/>
@@ -566,7 +566,7 @@ const SCENES = {
     </g>
   </svg>`,
   recursive: () => {
-    const cx = 145, cy = 212, R = 118;
+    const cx = 145, cy = 236, R = 118;
     const P = (deg, r = R) => [cx + r * Math.cos(deg * Math.PI / 180), cy + r * Math.sin(deg * Math.PI / 180)];
     const arc = (a0, a1, color, marker) => {
       const [x0, y0] = P(a0), [x1, y1] = P(a1);
@@ -579,7 +579,8 @@ const SCENES = {
       ${ghost ? '' : `<rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a"/><g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>`}
     </g>`;
     const A = P(-90), B = P(30), C = P(150);
-    return `<svg width="290" height="378" viewBox="0 0 290 378">
+    return `<svg width="290" height="402" viewBox="0 0 290 402">
+    <text x="145" y="22" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="#15803d">the designer improves itself</text>
     <circle cx="${cx}" cy="${cy}" r="${R + 30}" fill="url(#gGlowG)"/>
     ${arc(-90 + 25, 30 - 24, '#f97316', 'ah-o')}
     ${arc(30 + 24, 150 - 24, '#94a3b8', 'ah-n')}
@@ -636,7 +637,7 @@ const SCENES = {
     <text x="${cx + 40}" y="${cy - 72}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#15803d">?</text>
     <!-- packets travelling along the ring -->
     ${[[-40, '#fb923c'], [-20, '#fdba74'], [80, '#cbd5e1'], [196, '#4ade80'], [216, '#86efac']].map(([d, c]) => { const [x, y] = P(d); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${c}" stroke="#fff" stroke-width="2.4"/>`; }).join('')}
-    ${sparkle(24, 60, 0.8)} ${sparkle(268, 60, 0.7, '#86efac')}
+    ${sparkle(24, 84, 0.8)} ${sparkle(268, 84, 0.7, '#86efac')}
   </svg>`;
   },
 };
