@@ -13,186 +13,219 @@
   html, body { background: #fff; }
   body { width: 1400px; height: 880px; overflow: hidden; font-family: Inter, sans-serif;
          background:
-           radial-gradient(rgba(42,55,99,.10) 1px, transparent 1.3px) 0 0 / 16px 16px,
-           radial-gradient(900px 500px at 50% 10%, #f1f5ff 0%, rgba(255,255,255,0) 70%),
-           #fff; }
+           radial-gradient(rgba(42,55,99,.09) 1px, transparent 1.3px) 0 0 / 16px 16px,
+           radial-gradient(760px 420px at 50% 30%, #eef3ff 0%, rgba(255,255,255,0) 70%),
+           linear-gradient(180deg, #fbfcff 0%, #ffffff 60%); }
   svg { display: block; }
 </style>
 </head>
 <body>
 <svg id="fig" width="1400" height="880" viewBox="0 0 1400 880"></svg>
 <script>
-const NAVY = '#1e3a6e';
+const NAVY = '#1e3a6e', BLUE = '#2b6fd6', ROPE = '#8b8b7e';
 const defs = `<defs>
   <linearGradient id="gHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78a8ff"/><stop offset="1" stop-color="#3d6fe0"/></linearGradient>
   <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b9bff"/><stop offset="1" stop-color="#3563d4"/></linearGradient>
   <linearGradient id="gChip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe2a8"/><stop offset="1" stop-color="#f7b955"/></linearGradient>
   <linearGradient id="gDie" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3a66"/><stop offset="1" stop-color="#121a33"/></linearGradient>
-  <linearGradient id="fSi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde3b0"/><stop offset="1" stop-color="#f6c06a"/></linearGradient>
-  <linearGradient id="tSi" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fff4dc"/><stop offset="1" stop-color="#feebc4"/></linearGradient>
-  <linearGradient id="fSt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4f4ec"/><stop offset="1" stop-color="#a8e6d8"/></linearGradient>
-  <linearGradient id="tSt" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f0fbf8"/><stop offset="1" stop-color="#ddf6f0"/></linearGradient>
-  <linearGradient id="fMo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ece6ff"/><stop offset="1" stop-color="#d3c6ff"/></linearGradient>
-  <linearGradient id="tMo" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#faf8ff"/><stop offset="1" stop-color="#efeaff"/></linearGradient>
-  <radialGradient id="gGlow"><stop offset="0" stop-color="#bfdbfe" stop-opacity=".9"/><stop offset="1" stop-color="#bfdbfe" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d39b"/><stop offset="1" stop-color="#d9a55c"/></linearGradient>
+  ${[['Si', '#fde7bb', '#f5bd62', '#fff6e2', '#ffedc8', '#c9832b'],
+     ['St', '#d8f5ee', '#a3e3d4', '#f2fcf9', '#e0f7f1', '#3fa892'],
+     ['Mo', '#eee8ff', '#d0c2ff', '#fbfaff', '#f1ecff', '#8b6fe0']].map(([k, f0, f1, t0, t1, lip]) => `
+    <linearGradient id="f${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${f0}"/><stop offset="1" stop-color="${f1}"/></linearGradient>
+    <linearGradient id="t${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${t0}"/><stop offset="1" stop-color="${t1}"/></linearGradient>
+    <linearGradient id="l${k}" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="${lip}"/><stop offset="1" stop-color="${lip}" stop-opacity=".7"/></linearGradient>`).join('')}
+  <radialGradient id="gHalo"><stop offset="0" stop-color="#c7dbff" stop-opacity=".95"/><stop offset=".6" stop-color="#dbe8ff" stop-opacity=".45"/><stop offset="1" stop-color="#dbe8ff" stop-opacity="0"/></radialGradient>
   <filter id="fEye" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="fSoft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="8" stdDeviation="9" flood-color="#1e3a6e" flood-opacity=".16"/></filter>
-  ${[['b', '#2b6fd6'], ['g', '#9a9a8c'], ['n', NAVY]].map(([k, c]) => `<marker id="ah-${k}" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join('')}
+  <filter id="fSoft" x="-10%" y="-20%" width="120%" height="150%"><feDropShadow dx="0" dy="10" stdDeviation="10" flood-color="#1e3a6e" flood-opacity=".14"/></filter>
+  ${[['b', BLUE], ['g', ROPE]].map(([k, c]) => `<marker id="ah-${k}" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="${c}"/></marker>`).join('')}
 </defs>`;
 
-function shadow(cx, cy, rx, o = .13) { return `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx * 0.15}" fill="${NAVY}" opacity="${o}"/>`; }
-function sparkle(x, y, s = 1, c = '#fbbf24') {
-  return `<path transform="translate(${x},${y}) scale(${s})" d="M0 -9 C1 -2 2 -1 9 0 C2 1 1 2 0 9 C-1 2 -2 1 -9 0 C-2 -1 -1 -2 0 -9z" fill="${c}"/>`;
-}
-function robot(x, y, s = 1, { left = 'down', right = 'forward', flip = false } = {}) {
-  const arm = (side, pose) => {
-    const sx = side === 'L' ? 15 : 55, dir = side === 'L' ? -1 : 1;
-    const end = pose === 'up' ? [sx + dir * 12, 40] : pose === 'forward' ? [sx + dir * 16, 58] : [sx + dir * 9, 76];
-    const d = `M${sx} 58 Q ${sx + dir * 8} ${(58 + end[1]) / 2 + 4} ${end[0]} ${end[1]}`;
-    return `<path d="${d}" fill="none" stroke="${NAVY}" stroke-width="8.5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#4d7fe8" stroke-width="4.6" stroke-linecap="round"/>
-            <circle cx="${end[0]}" cy="${end[1]}" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>`;
-  };
-  return `<g transform="translate(${x},${y}) scale(${flip ? -s : s},${s})${flip ? ' translate(-70,0)' : ''}">
+const shadow = (cx, cy, rx, o = .13) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx * 0.14}" fill="${NAVY}" opacity="${o}"/>`;
+const sparkle = (x, y, s = 1, c = '#fbbf24') =>
+  `<path transform="translate(${x},${y}) scale(${s})" d="M0 -9 C1 -2 2 -1 9 0 C2 1 1 2 0 9 C-1 2 -2 1 -9 0 C-2 -1 -1 -2 0 -9z" fill="${c}"/>`;
+
+function robot(x, y, s = 1) {
+  const arm = (d) => `<path d="${d}" fill="none" stroke="${NAVY}" stroke-width="8.5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#4d7fe8" stroke-width="4.6" stroke-linecap="round"/>`;
+  return `<g transform="translate(${x},${y}) scale(${s})">
     <rect x="21" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
     <rect x="38" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
-    ${arm('L', left)}
+    ${arm('M15 58 Q 2 52 -6 40')}<circle cx="-6" cy="40" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
     <rect x="13" y="48" width="44" height="37" rx="15" fill="url(#gBody)" stroke="${NAVY}" stroke-width="2.6"/>
     <rect x="26" y="58" width="18" height="18" rx="3" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.8"/><rect x="31" y="63" width="8" height="8" rx="1.5" fill="url(#gDie)"/>
-    ${arm('R', right)}
+    ${arm('M55 58 Q 64 66 66 76')}<circle cx="66" cy="76" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
     <line x1="35" y1="9" x2="35" y2="-1" stroke="${NAVY}" stroke-width="2.6"/><circle cx="35" cy="-3" r="5" fill="#fbbf24" stroke="${NAVY}" stroke-width="2.2"/>
     <circle cx="5" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/><circle cx="65" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/>
     <rect x="6" y="8" width="58" height="42" rx="17" fill="url(#gHead)" stroke="${NAVY}" stroke-width="2.6"/>
     <path d="M14 18 q 6 -6 18 -6" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
     <rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a" stroke="${NAVY}" stroke-width="2"/>
-    <g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
-    <path d="M30 37.5 q 5 3.2 10 0" stroke="#67e8f9" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <g filter="url(#fEye)"><rect x="21" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="38" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
+    <path d="M28 37.5 q 5 3.2 10 0" stroke="#67e8f9" stroke-width="2" fill="none" stroke-linecap="round"/>
   </g>`;
 }
-// a person carrying a crate overhead; facing left (toward the tower)
-function porter(x, y, s, label) {
-  return `<g transform="translate(${x},${y}) scale(${s})">
-    ${shadow(0, 2, 26)}
-    <g stroke="#334155" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
-      <path d="M-8 0 L-6 -30 M8 0 L6 -30" stroke-width="8"/><path d="M-8 0 L-6 -30 M8 0 L6 -30" stroke="#475569" stroke-width="4.6"/>
-      <path d="M-14 -28 C -15 -52 -9 -62 0 -62 S 15 -52 14 -28 Z" fill="#94a3b8"/>
-      <path d="M-11 -56 L -16 -86 M11 -56 L 16 -86" stroke-width="7.5"/><path d="M-11 -56 L -16 -86 M11 -56 L 16 -86" stroke="#94a3b8" stroke-width="4.4"/>
-      <circle cx="0" cy="-73" r="11" fill="#f3d5b8"/>
-      <path d="M-11 -75 c 1 -11 20 -12 22 -1 c -6 -4 -15 -4 -22 1z" fill="#334155"/>
-      <rect x="-42" y="-120" width="84" height="32" rx="5" fill="#fef3c7" stroke="#a16207"/>
-      <path d="M-42 -110 h84" stroke="#a16207" stroke-width="1.6"/>
+// paper plane pointing along angle (deg); a horizontal tag hangs from its tail on a string
+function plane(x, y, ang, label, tx, ty) {
+  const r = ang * Math.PI / 180, ex = x - 14 * Math.cos(r), ey = y - 14 * Math.sin(r);
+  const w = label.length * 7.8 + 22;
+  return `<path d="M${ex.toFixed(1)} ${ey.toFixed(1)} Q ${(ex + tx) / 2 - 6} ${(ey + ty) / 2 + 10} ${tx} ${ty}" fill="none" stroke="${BLUE}" stroke-width="1.6"/>
+    <g transform="translate(${tx - w / 2},${ty - 13})"><rect width="${w}" height="26" rx="13" fill="#fff" stroke="${BLUE}" stroke-width="2"/>
+      <text x="${w / 2}" y="17.5" text-anchor="middle" font-family="Inter" font-weight="800" font-size="13" fill="#1d4ed8">${label}</text></g>
+    <g transform="translate(${x},${y}) rotate(${ang})">
+      <path d="M22 0 L-14 -14 L-6 0 L-14 14 Z" fill="#fff" stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M22 0 L-6 0 L-10 7 Z" fill="#dbeafe" stroke="${NAVY}" stroke-width="1.6" stroke-linejoin="round"/>
+    </g>`;
+}
+// crate hanging from a pulley; a person pulls the rope from the ledge above
+function hoist({ px, py, armX, crateY, puller, label }) {
+  const [hx, hy] = puller;
+  return `
+    <path d="M${px} ${py} V ${py - 34} H ${armX + 10}" fill="none" stroke="#475569" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M${px - 8} ${py} H ${px + 8}" stroke="#475569" stroke-width="5" stroke-linecap="round"/>
+    <circle cx="${armX}" cy="${py - 34}" r="9" fill="#e2e8f0" stroke="#475569" stroke-width="2.4"/><circle cx="${armX}" cy="${py - 34}" r="2.4" fill="#475569"/>
+    <path d="M${armX + 9} ${py - 34} V ${crateY - 18}" stroke="${ROPE}" stroke-width="2.2"/>
+    <path d="M${armX - 9} ${py - 34} L ${hx + 12} ${hy - 44}" stroke="${ROPE}" stroke-width="2.2"/>
+    <g transform="translate(${armX + 9},${crateY})">
+      ${shadow(0, 54, 30, .08)}
+      <path d="M-12 -18 L0 -30 L12 -18" fill="none" stroke="${ROPE}" stroke-width="2"/>
+      <rect x="-50" y="-18" width="100" height="40" rx="5" fill="url(#gWood)" stroke="#8a5a1c" stroke-width="2.2"/>
+      <path d="M-50 -4 H50 M-50 8 H50" stroke="#b9853e" stroke-width="1.2" opacity=".7"/>
+      <rect x="-43" y="-12" width="86" height="22" rx="4" fill="#fffbeb" stroke="#a16207" stroke-width="1.4"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11.5" fill="#713f12">${label}</text>
+      <path d="M62 6 l6 -8 6 8 M62 20 l6 -8 6 8" fill="none" stroke="${ROPE}" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
     </g>
-    <text x="0" y="-97" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11.5" fill="#713f12">${label}</text>
+    ${person(hx, hy)}`;
+}
+// a person leaning back, pulling a rope up and to the left
+function person(x, y) {
+  return `<g transform="translate(${x},${y})">
+    ${shadow(0, 2, 20)}
+    <g stroke="#334155" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round">
+      <path d="M-6 0 L-2 -24 M10 0 L4 -24" stroke-width="7.5"/><path d="M-6 0 L-2 -24 M10 0 L4 -24" stroke="#475569" stroke-width="4.2"/>
+      <path d="M-10 -22 C -8 -44 0 -52 8 -50 S 16 -38 12 -22 Z" fill="#94a3b8"/>
+      <path d="M2 -42 L 12 -46" stroke-width="7"/><path d="M2 -42 L 12 -46" stroke="#94a3b8" stroke-width="4"/>
+      <circle cx="13" cy="-46" r="3.6" fill="#f3d5b8"/>
+      <circle cx="9" cy="-60" r="9.5" fill="#f3d5b8"/>
+      <path d="M0 -62 c 1 -10 18 -11 19 -1 c -5 -3 -13 -3 -19 1z" fill="#334155"/>
+    </g>
   </g>`;
 }
-function slab(xl, xr, yTop, h, inset, d, front, top, stroke) {
+function drone(x, y) {
+  return `<g transform="translate(${x},${y})">
+    <g stroke="${NAVY}" stroke-width="2.2">
+      <path d="M-26 -8 H26" stroke-width="4" stroke-linecap="round"/>
+      <ellipse cx="-26" cy="-14" rx="15" ry="3.4" fill="#bfdbfe"/><ellipse cx="26" cy="-14" rx="15" ry="3.4" fill="#bfdbfe"/>
+      <path d="M-26 -8 V-12 M26 -8 V-12"/>
+      <rect x="-14" y="-10" width="28" height="16" rx="7" fill="url(#gHead)"/>
+      <rect x="-8" y="-6" width="16" height="7" rx="3.5" fill="#16234a" stroke="none"/>
+      <circle cx="-3" cy="-2.5" r="1.6" fill="#67e8f9" stroke="none"/><circle cx="3" cy="-2.5" r="1.6" fill="#67e8f9" stroke="none"/>
+      <path d="M-6 6 L-12 18 M6 6 L12 18" stroke="${ROPE}" stroke-width="1.8"/>
+      <rect x="-18" y="18" width="36" height="22" rx="4" fill="url(#gWood)" stroke="#8a5a1c"/>
+    </g>
+  </g>`;
+}
+function slab({ xl, xr, y, h, inset, d, k, stroke }) {
   return `<g filter="url(#fSoft)">
-    <path d="M${xl} ${yTop} L${xl + inset} ${yTop - d} L${xr - inset} ${yTop - d} L${xr} ${yTop} Z" fill="url(#${top})" stroke="${stroke}" stroke-width="2.6" stroke-linejoin="round"/>
-    <rect x="${xl}" y="${yTop}" width="${xr - xl}" height="${h}" rx="12" fill="url(#${front})" stroke="${stroke}" stroke-width="2.6"/>
+    <rect x="${xl + 4}" y="${y + h - 14}" width="${xr - xl - 8}" height="24" rx="12" fill="url(#l${k})"/>
+    <path d="M${xl} ${y} L${xl + inset} ${y - d} L${xr - inset} ${y - d} L${xr} ${y} Z" fill="url(#t${k})" stroke="${stroke}" stroke-width="2.2" stroke-linejoin="round"/>
+    <rect x="${xl}" y="${y}" width="${xr - xl}" height="${h}" rx="14" fill="url(#f${k})" stroke="${stroke}" stroke-width="2.2"/>
+    <path d="M${xl + 14} ${y + 2.5} H ${xr - 14}" stroke="#fff" stroke-opacity=".75" stroke-width="2.4" stroke-linecap="round"/>
   </g>`;
 }
-function pill(x, y, text, c, bg) {
-  const w = 16 + text.length * 9.2 + 26;
-  return `<g transform="translate(${x},${y})"><rect width="${w}" height="30" rx="15" fill="${bg}" stroke="${c}" stroke-width="2"/>
-    <circle cx="17" cy="15" r="8" fill="#fff" stroke="${c}" stroke-width="2"/><path d="M17 10v5l3.5 2" stroke="${c}" stroke-width="2" fill="none" stroke-linecap="round"/>
-    <text x="32" y="20.5" font-family="Inter" font-weight="800" font-size="14" fill="${c}">${text}</text></g>`;
-}
-function tag(x, y, text, c) {
-  const w = 18 + text.length * 8;
-  return `<g transform="translate(${x - w / 2},${y - 14})"><rect width="${w}" height="28" rx="14" fill="#fff" stroke="${c}" stroke-width="2.4"/>
-    <text x="${w / 2}" y="19" text-anchor="middle" font-family="Inter" font-weight="800" font-size="13" fill="${c}">${text}</text></g>`;
+function badge(x, y, text, c, bg) {
+  const w = 44 + text.length * 8.4;
+  return `<g transform="translate(${x},${y})"><rect width="${w}" height="26" rx="13" fill="${bg}" stroke="${c}" stroke-width="1.6"/>
+    <circle cx="14" cy="13" r="7" fill="#fff" stroke="${c}" stroke-width="1.6"/><path d="M14 9v4.4l3 1.8" stroke="${c}" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+    <text x="28" y="17.6" font-family="Inter" font-weight="700" font-size="13" fill="${c}">${text}</text></g>`;
 }
 
 // ---------------------------------------------------------------- geometry
-const SI = { xl: 250, xr: 1150, y: 640, h: 132 };
-const ST = { xl: 380, xr: 1020, y: 490, h: 130 };
-const MO = { xl: 492, xr: 908, y: 344, h: 126 };
+const SI = { xl: 250, xr: 1130, y: 638, h: 124, inset: 48, d: 44, k: 'Si', stroke: '#b7741f' };
+const ST = { xl: 372, xr: 1040, y: 492, h: 120, inset: 46, d: 42, k: 'St', stroke: '#2f8f7d' };
+const MO = { xl: 494, xr: 900, y: 352, h: 114, inset: 42, d: 40, k: 'Mo', stroke: '#7c5ce0' };
 
 let g = defs;
-g += `<ellipse cx="700" cy="790" rx="500" ry="26" fill="${NAVY}" opacity=".10"/>`;
+g += `<ellipse cx="690" cy="790" rx="520" ry="24" fill="${NAVY}" opacity=".09"/>`;
 
 // headings
-g += `<text x="56" y="70" font-family="Patrick Hand" font-size="44" fill="#2b6fd6">Design flows down</text>
-      <text x="58" y="100" font-family="Inter" font-weight="500" font-size="18" fill="#4b5d82">AI as the designer</text>
-      <text x="1344" y="70" text-anchor="end" font-family="Patrick Hand" font-size="44" fill="#17203a">Constraints flow up</text>
-      <text x="1342" y="100" text-anchor="end" font-family="Inter" font-weight="500" font-size="18" fill="#5d6679">hardware shapes the layers above, mostly via people</text>`;
+g += `<text x="56" y="72" font-family="Patrick Hand" font-size="44" fill="${BLUE}">Design flows down</text>
+      <text x="58" y="102" font-family="Inter" font-weight="500" font-size="18" fill="#4b5d82">the model, as designer, sends work to the layers below</text>
+      <text x="1344" y="72" text-anchor="end" font-family="Patrick Hand" font-size="44" fill="#17203a">Constraints flow up</text>
+      <text x="1342" y="102" text-anchor="end" font-family="Inter" font-weight="500" font-size="18" fill="#5d6679">hardware limits are hauled up, mostly by people</text>`;
 
-// slabs
-g += slab(SI.xl, SI.xr, SI.y, SI.h, 50, 44, 'fSi', 'tSi', '#a2510b');
-g += slab(ST.xl, ST.xr, ST.y, ST.h, 50, 44, 'fSt', 'tSt', '#0f766e');
-g += slab(MO.xl, MO.xr, MO.y, MO.h, 44, 42, 'fMo', 'tMo', '#6d28d9');
+// the tower
+g += slab(SI) + slab(ST) + slab(MO);
 
-// silicon face: traces, chips, wafer
-g += `<g stroke="#c27c1a" stroke-width="2" fill="none" opacity=".55">
-    <path d="M640 700 H700 V672 H760 M640 724 H720 V748 H800 M820 690 H860 V664 M840 740 H900 V712"/>
+// silicon face
+g += `<g stroke="#c27c1a" stroke-width="1.8" fill="none" opacity=".5" stroke-linecap="round">
+    <path d="M610 690 H690 V666 H750 M610 716 H710 V742 H790 M830 686 H860 V664 M840 738 H920 V712 M990 742 H940"/>
   </g>`;
-for (const [x, y, s, l] of [[760, 664, .9, 'RTL'], [868, 700, .74, ''], [930, 662, .8, 'GDS']]) {
+for (const [x, y, s, l] of [[752, 660, .86, 'RTL'], [866, 694, .7, ''], [926, 656, .78, 'GDS']]) {
   let pins = ''; for (const p of [13, 24, 35]) pins += `<path d="M${p} 0v-7M${p} 48v7M0 ${p}h-7M48 ${p}h7"/>`;
   g += `<g transform="translate(${x},${y}) scale(${s})"><g stroke="#a2510b" stroke-width="3" stroke-linecap="round">${pins}</g>
-    <rect width="48" height="48" rx="8" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.6"/><rect x="10" y="10" width="28" height="28" rx="4" fill="url(#gDie)"/>
+    <rect width="48" height="48" rx="8" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.4"/><rect x="10" y="10" width="28" height="28" rx="4" fill="url(#gDie)"/>
     ${l ? `<text x="24" y="28" text-anchor="middle" font-family="Inter" font-weight="800" font-size="10" fill="#fde68a">${l}</text>` : ''}</g>`;
 }
-g += `<g transform="translate(1040,706)"><circle r="40" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.6"/>
-  <g stroke="#a2510b" stroke-width="1.2" opacity=".65">${[-28, -14, 0, 14, 28].map(v => `<path d="M${v} -38 V38 M-38 ${v} H38"/>`).join('')}</g>
-  <path d="M-12 39 h24" stroke="#a2510b" stroke-width="4"/></g>`;
-g += `<text x="${SI.xl + 34}" y="${SI.y + 44}" font-family="Inter" font-weight="800" font-size="26" letter-spacing=".06em" fill="#8a4208">SILICON</text>
-      <text x="${SI.xl + 34}" y="${SI.y + 72}" font-family="Inter" font-weight="600" font-size="17" fill="#7a4a12">RTL → GDSII → tape-out</text>`;
-g += pill(SI.xl + 34, SI.y + 86, 'years', '#a2510b', '#fff7e6');
+g += `<g transform="translate(1040,700)"><circle r="38" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.4"/>
+  <g stroke="#a2510b" stroke-width="1.1" opacity=".6">${[-26, -13, 0, 13, 26].map(v => `<path d="M${v} -36 V36 M-36 ${v} H36"/>`).join('')}</g>
+  <path d="M-11 37 h22" stroke="#a2510b" stroke-width="4"/></g>`;
+g += `<text x="${SI.xl + 34}" y="${SI.y + 42}" font-family="Inter" font-weight="800" font-size="24" letter-spacing=".08em" fill="#8a4208">SILICON</text>
+      <text x="${SI.xl + 34}" y="${SI.y + 67}" font-family="Inter" font-weight="600" font-size="16" fill="#7a4a12">RTL → GDSII → tape-out</text>`;
+g += badge(SI.xl + 34, SI.y + 80, 'years', '#a2510b', '#fff7e6');
 
-// stack face: terminal, kernels, compiler gear
-g += `<g transform="translate(792,512)"><rect width="104" height="64" rx="9" fill="#16234a" stroke="${NAVY}" stroke-width="2.4"/>
+// stack face
+g += `<g transform="translate(796,512)"><rect width="104" height="62" rx="9" fill="#16234a" stroke="${NAVY}" stroke-width="2.2"/>
   <circle cx="12" cy="11" r="3" fill="#f87171"/><circle cx="22" cy="11" r="3" fill="#fbbf24"/><circle cx="32" cy="11" r="3" fill="#4ade80"/>
-  <text x="12" y="38" font-family="Inter" font-weight="800" font-size="14" fill="#5eead4">&gt;_ compile</text>
-  <path d="M12 50 h54" stroke="#5eead4" stroke-width="3" stroke-linecap="round" opacity=".6"/></g>`;
-g += `<g transform="translate(910,516)">${[0, 1].map(i => `<g transform="translate(${i * 54},${i * 12})"><rect width="46" height="34" rx="6" fill="url(#gDie)" stroke="${NAVY}" stroke-width="2"/>
+  <text x="12" y="37" font-family="Inter" font-weight="800" font-size="14" fill="#5eead4">&gt;_ compile</text>
+  <path d="M12 49 h54" stroke="#5eead4" stroke-width="3" stroke-linecap="round" opacity=".55"/></g>`;
+g += `<g transform="translate(916,518)">${[0, 1].map(i => `<g transform="translate(${i * 54},${i * 12})"><rect width="46" height="34" rx="6" fill="url(#gDie)" stroke="${NAVY}" stroke-width="2"/>
   <text x="23" y="22" text-anchor="middle" font-family="Inter" font-weight="800" font-size="12" fill="#5eead4">.cu</text></g>`).join('')}</g>`;
-g += `<text x="${ST.xl + 32}" y="${ST.y + 44}" font-family="Inter" font-weight="800" font-size="24" letter-spacing=".06em" fill="#0f766e">SOFTWARE STACK</text>
-      <text x="${ST.xl + 32}" y="${ST.y + 70}" font-family="Inter" font-weight="600" font-size="16.5" fill="#115e59">compilers · kernels · inference engines</text>`;
-g += pill(ST.xl + 32, ST.y + 84, 'hours', '#0f766e', '#ecfdf8');
+g += `<text x="${ST.xl + 32}" y="${ST.y + 42}" font-family="Inter" font-weight="800" font-size="22" letter-spacing=".08em" fill="#0f766e">SOFTWARE STACK</text>
+      <text x="${ST.xl + 32}" y="${ST.y + 66}" font-family="Inter" font-weight="600" font-size="15.5" fill="#115e59">compilers · kernels · inference engines</text>`;
+g += badge(ST.xl + 32, ST.y + 78, 'hours', '#0f766e', '#ecfdf8');
 
-// model face: network
-g += `<g transform="translate(748,368)" stroke="#6d28d9" stroke-width="2.2">
-  <path d="M0 30 L44 8 M0 30 L44 52 M0 30 L44 30 M44 8 L92 22 M44 30 L92 22 M44 52 L92 40 M44 30 L92 40 M92 22 L130 31 M92 40 L130 31" fill="none" opacity=".75"/>
-  ${[[0, 30], [44, 8], [44, 30], [44, 52], [92, 22], [92, 40], [130, 31]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="7" fill="#fff"/>`).join('')}
+// model face
+g += `<g transform="translate(742,374)" stroke="#6d28d9" stroke-width="2">
+  <path d="M0 30 L44 8 M0 30 L44 52 M0 30 L44 30 M44 8 L92 22 M44 30 L92 22 M44 52 L92 40 M44 30 L92 40 M92 22 L128 31 M92 40 L128 31" fill="none" opacity=".7"/>
+  ${[[0, 30], [44, 8], [44, 30], [44, 52], [92, 22], [92, 40], [128, 31]].map(([x, y]) => `<circle cx="${x}" cy="${y}" r="6.5" fill="#fff"/>`).join('')}
 </g>`;
-g += `<text x="${MO.xl + 30}" y="${MO.y + 42}" font-family="Inter" font-weight="800" font-size="24" letter-spacing=".06em" fill="#6d28d9">MODEL</text>
-      <text x="${MO.xl + 30}" y="${MO.y + 68}" font-family="Inter" font-weight="600" font-size="16.5" fill="#5b21b6">designer and workload</text>`;
-g += pill(MO.xl + 30, MO.y + 82, 'months', '#6d28d9', '#f5f3ff');
+g += `<text x="${MO.xl + 28}" y="${MO.y + 40}" font-family="Inter" font-weight="800" font-size="22" letter-spacing=".08em" fill="#6d28d9">MODEL</text>
+      <text x="${MO.xl + 28}" y="${MO.y + 64}" font-family="Inter" font-weight="600" font-size="15.5" fill="#5b21b6">designer and workload</text>`;
+g += badge(MO.xl + 28, MO.y + 76, 'months', '#6d28d9', '#f5f3ff');
 
-// the model on top of the tower
-g += `<circle cx="700" cy="250" r="96" fill="url(#gGlow)"/>`;
-g += shadow(700, 322, 58, .16);
-g += robot(642, 176, 1.66, { left: 'forward', right: 'up' });
-g += sparkle(620, 196, 1.1) + sparkle(790, 170, .8, '#93c5fd') + sparkle(808, 262, .7);
+// the model on top, under a halo
+g += `<circle cx="690" cy="236" r="118" fill="url(#gHalo)"/>`;
+g += `<g fill="none" stroke="#bfdbfe" stroke-width="1.6" stroke-dasharray="3 7" opacity=".9"><circle cx="690" cy="236" r="92"/><circle cx="690" cy="236" r="118"/></g>`;
+g += shadow(690, 330, 54, .15);
+g += robot(632, 172, 1.66);
+g += sparkle(784, 158, 1) + sparkle(600, 168, .7, '#93c5fd') + sparkle(800, 290, .6);
 
-// design flows down: AI-driven pipes from the model into stack and silicon
-const tube = (d) => `<path d="${d}" fill="none" stroke="${NAVY}" stroke-width="15" stroke-linecap="round"/>
-  <path d="${d}" fill="none" stroke="#2b6fd6" stroke-width="10.5" stroke-linecap="round" marker-end="url(#ah-b)"/>
-  <path d="${d}" fill="none" stroke="#93c5fd" stroke-width="3" stroke-linecap="round" stroke-dasharray="2 14"/>`;
-g += tube('M612 270 C 470 250, 330 330, 352 520');
-g += tube('M600 238 C 330 200, 140 360, 216 694');
-g += tag(395, 330, 'kernels', '#2b6fd6') + tag(212, 420, 'RTL', '#2b6fd6');
-g += `<text x="300" y="568" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#2b6fd6" transform="rotate(-8 300 568)">rewrites the stack</text>
-      <text x="140" y="580" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#2b6fd6" transform="rotate(-78 140 580)">designs the silicon</text>`;
+// design flows down: paper planes on dotted flight paths
+const trail = (d) => `<path d="${d}" fill="none" stroke="${BLUE}" stroke-width="3" stroke-linecap="round" stroke-dasharray="1 9" opacity=".9"/>`;
+g += trail('M618 236 C 520 200, 430 250, 412 330 S 420 420, 436 456');
+g += trail('M614 226 C 460 150, 250 220, 228 380 S 260 560, 300 612');
+g += plane(436, 458, 62, 'kernels', 352, 420);
+g += plane(300, 612, 54, 'RTL', 220, 596);
+g += sparkle(470, 236, .7, '#93c5fd') + sparkle(250, 300, .8) + sparkle(392, 392, .5, '#93c5fd');
+g += `<text x="500" y="306" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="${BLUE}">rewrites the stack</text>
+      <text x="146" y="470" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="${BLUE}">designs</text>
+      <text x="146" y="494" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="${BLUE}">the silicon</text>`;
 
-// constraints flow up: people carry crates up the right side
-const up = (d) => `<path d="${d}" fill="none" stroke="#c9c9bd" stroke-width="13" stroke-linecap="round"/>
-  <path d="${d}" fill="none" stroke="#9a9a8c" stroke-width="8" stroke-linecap="round" marker-end="url(#ah-g)"/>`;
-g += up('M1160 716 C 1260 690, 1250 560, 1040 548');
-g += up('M1032 512 C 1120 490, 1110 396, 924 398');
-g += porter(1102, 628, 1.0, 'HBM · FLOPs');
-g += porter(960, 478, .9, 'FP8 · 2:4');
-// emerging: AI carrying a constraint (dashed)
-g += `<path d="M1196 790 C 1290 760, 1290 640, 1170 600" fill="none" stroke="#2b6fd6" stroke-width="4" stroke-dasharray="9 7" stroke-linecap="round" marker-end="url(#ah-b)"/>`;
-g += robot(1200, 708, .62, { left: 'up', right: 'up' });
-g += `<g transform="translate(1194,684)"><rect width="52" height="26" rx="5" fill="#dbeafe" stroke="#2b6fd6" stroke-width="2"/>
-  <text x="26" y="17.5" text-anchor="middle" font-family="Inter" font-weight="800" font-size="10" fill="#1d4ed8">Day-0</text></g>`;
-g += `<text x="1290" y="826" text-anchor="middle" font-family="Patrick Hand" font-size="20" fill="#2b6fd6">AI starts carrying them</text>`;
+// constraints flow up: hoists on the right ledges, worked by people
+g += hoist({ px: 984, py: ST.y - ST.d + 18, armX: 1080, crateY: 560, puller: [944, ST.y - 14], label: 'HBM · FLOPs' });
+g += hoist({ px: 868, py: MO.y - MO.d + 18, armX: 922, crateY: 372, puller: [826, MO.y - 12], label: 'FP8 · 2:4' });
+
+// emerging: an AI drone starting to carry constraints up
+g += `<path d="M1240 640 C 1300 560, 1290 420, 1196 330" fill="none" stroke="${BLUE}" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" marker-end="url(#ah-b)"/>`;
+g += drone(1232, 470);
+g += sparkle(1280, 430, .7, '#93c5fd');
+g += `<text x="1250" y="694" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="${BLUE}">AI is starting to</text>
+      <text x="1250" y="718" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="${BLUE}">carry them too</text>`;
 
 // legend
-const L = (x, style, label) => `<g transform="translate(${x},846)">${style}<text x="66" y="5" font-family="Inter" font-weight="600" font-size="16" fill="#334155">${label}</text></g>`;
-g += L(300, `<path d="M0 0 H50" stroke="#2b6fd6" stroke-width="8" stroke-linecap="round" marker-end="url(#ah-b)"/>`, 'AI-driven');
-g += L(500, `<path d="M0 0 H50" stroke="#9a9a8c" stroke-width="8" stroke-linecap="round" marker-end="url(#ah-g)"/>`, 'people & classical search');
-g += L(800, `<path d="M0 0 H50" stroke="#2b6fd6" stroke-width="4" stroke-dasharray="9 7" stroke-linecap="round" marker-end="url(#ah-b)"/>`, 'constraints carried by AI (emerging)');
+const L = (x, art, label) => `<g transform="translate(${x},846)">${art}<text x="64" y="5.5" font-family="Inter" font-weight="600" font-size="15.5" fill="#334155">${label}</text></g>`;
+g += L(290, `<path d="M0 0 H34" stroke="${BLUE}" stroke-width="3" stroke-dasharray="1 8" stroke-linecap="round"/><g transform="translate(44,0) scale(.62)"><path d="M22 0 L-14 -14 L-6 0 L-14 14 Z" fill="#fff" stroke="${NAVY}" stroke-width="2.6" stroke-linejoin="round"/></g>`, 'AI-driven design');
+g += L(530, `<path d="M0 0 H46" stroke="${ROPE}" stroke-width="3" marker-end="url(#ah-g)"/>`, 'people & classical search');
+g += L(810, `<path d="M0 0 H46" stroke="${BLUE}" stroke-width="3" stroke-dasharray="8 7" stroke-linecap="round" marker-end="url(#ah-b)"/>`, 'constraints carried by AI (emerging)');
 
 document.getElementById('fig').innerHTML = g;
 </script>
