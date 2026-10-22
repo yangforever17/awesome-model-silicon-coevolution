@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+.DS_Store
+scripts/figures/*.pdf
+scripts/figures/*.log

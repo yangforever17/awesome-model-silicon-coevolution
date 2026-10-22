@@ -1,0 +1,51 @@
+% Figure 1 (English): the model / software-stack / silicon loop. Adapted from the survey source.
+\begin{tikzpicture}[
+    x=1cm, y=1cm, font=\footnotesize\sffamily,
+    ai/.style={draw=figblue, line width=2pt, rounded corners=3pt,
+               -{Stealth[length=7pt,width=7pt]}},
+    human/.style={draw=figgray, line width=2pt, rounded corners=3pt,
+                  -{Stealth[length=7pt,width=7pt]}},
+    emerging/.style={draw=figblue, line width=0.9pt, dash pattern=on 3pt off 2pt,
+                     rounded corners=2pt, -{Stealth[length=5pt,width=5pt]}},
+  ]
+  %
+  \def\tw#1{(5.2-0.7*(#1))}
+  \newcommand{\layer}[5]{%
+    \fill[#5, draw=figedge, line width=0.6pt]
+      ({-\tw{#1}},#1) -- ({\tw{#1}},#1) -- ({\tw{#2}},#2) -- ({-\tw{#2}},#2) -- cycle;
+    \node[align=center, text=figink] at (0,{(#1+#2)/2})
+      {{\normalsize\bfseries #3}\\[1pt]#4};
+  }
+
+  %
+  \layer{0}{1.45}{Silicon}{RTL $\rightarrow$ GDSII $\rightarrow$ tape-out\\iteration cadence: years}{figsilicon}
+  \layer{1.55}{3.0}{Software stack}{compilers, kernels, inference engines\\iteration cadence: hours}{figstack}
+  \layer{3.1}{4.55}{Model}{designer and workload\\iteration cadence: months}{figmodel}
+
+  %
+  \draw[ai] ({-\tw{4.1}},4.1) -- (-5.6,4.1) -- (-5.6,0.72) -- ({-\tw{0.72}-0.04},0.72);
+  \draw[ai] ({-\tw{3.6}},3.6) -- (-4.25,3.6) -- (-4.25,2.27) -- ({-\tw{2.27}-0.04},2.27);
+
+  %
+  \draw[human] ({\tw{0.6}},0.6) -- (5.65,0.6) -- (5.65,2.05) -- ({\tw{2.05}+0.04},2.05);
+  \draw[human] ({\tw{2.5}},2.5) -- (4.65,2.5) -- (4.65,3.85) -- ({\tw{3.85}+0.04},3.85);
+  %
+  \draw[emerging] ({\tw{0.95}},0.95) -- (5.15,0.95) -- (5.15,1.78) -- ({\tw{1.78}+0.04},1.78);
+  \draw[emerging] ({\tw{2.8}},2.8) -- (4.15,2.8) -- (4.15,3.55) -- ({\tw{3.55}+0.04},3.55);
+
+  %
+  \node[anchor=west, align=left, text=figblue] at (-6.0,5.15)
+    {{\small\bfseries Design flows down}\\[1pt]AI as the designer};
+  \node[anchor=east, align=right, text=figink] at (6.0,5.15)
+    {{\small\bfseries Constraints flow up}\\[1pt]hardware shapes the layers above};
+
+  %
+  \begin{scope}[yshift=-0.55cm]
+    \draw[ai] (-6.0,0) -- (-5.3,0);
+    \node[anchor=west, text=figink] at (-5.2,0) {AI-driven};
+    \draw[human] (-3.2,0) -- (-2.5,0);
+    \node[anchor=west, text=figink] at (-2.4,0) {humans \& classical search};
+    \draw[emerging] (1.6,0) -- (2.3,0);
+    \node[anchor=west, text=figink] at (2.4,0) {constraints carried by AI (emerging)};
+  \end{scope}
+\end{tikzpicture}

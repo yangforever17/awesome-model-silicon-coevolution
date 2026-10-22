@@ -1,0 +1,1434 @@
+# Per-entry annotations, keyed by the BibTeX key in refs.bib.
+#
+#   topic     topic id from taxonomy.yaml
+#   type      Paper (default) | Survey | Benchmark | Dataset | Tool | Industry | Essay | Book
+#   level     autonomy level L0–L4, or Human (cross-layer work executed by human teams),
+#             Claimed (stated by the organization, not verifiable), Undisclosed
+#   lsrc      survey  = level stated in the survey's tables or text
+#             curator = assigned by the repository curators using the §3.4 criteria (shown with †)
+#   featured  shown in the part's "featured" table
+#   short     display name in the featured table (defaults to the title before its colon)
+#   title_en  English title for non-English sources (the original is shown in parentheses)
+#   url / arxiv / doi            manual link overrides
+#   no_doi / no_arxiv            drop a wrong automatic match
+#   ignore_bib_url               drop a wrong url field from refs.bib
+#   note      one-line summary of the entry's role in the survey
+
+# ---------------------------------------------------------------- §5 cases
+ren2021nvcell:
+  topic: cases
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "RL generates standard-cell layouts and fixes DRC violations, bringing cell-library development into an automated flow."
+fawzi2022discovering:
+  short: "AlphaTensor"
+  topic: cases
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "AlphaTensor searches matrix-multiplication decompositions with RL and can target measured runtime on a specific GPU or TPU, putting hardware measurements directly into algorithm design."
+roy2022prefixrl:
+  topic: cases
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "RL designs parallel-prefix circuits with post-synthesis area/delay as reward; ~13,000 AI-designed circuit instances ship in NVIDIA Hopper."
+mankowitz2023faster:
+  short: "AlphaDev"
+  topic: cases
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "AlphaDev discovers assembly-level sorting routines that were merged into LLVM's libc++, a precedent for AI-found low-level improvements entering production stacks."
+novikov2025alphaevolve:
+  topic: cases
+  edge: loop
+  level: L4
+  lsrc: survey
+  type: Industry
+  featured: true
+  note: "The only public L4 instance: a Gemini-driven evolutionary coding agent rewrote a TPU arithmetic circuit and sped up a Gemini training kernel by 23% (~1% of total training time)."
+openai2025broadcom:
+  topic: cases
+  level: Claimed
+  lsrc: survey
+  type: Industry
+  featured: true
+  note: "OpenAI states its models found ~20 optimizations on human-optimized components of its custom accelerator (L1 by description); not independently verifiable."
+meta2025mtiav2:
+  topic: cases
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "MTIA v2: recommendation-model workloads directly set the chip's compute/memory balance; strong cross-layer coupling executed by human teams."
+yin2025pangu:
+  topic: cases
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "Pangu Ultra: a dense ~100B+ model whose architecture and training recipe were adapted to large Ascend NPU clusters; human-driven co-design."
+openai2026jalapeno:
+  topic: cases
+  level: Undisclosed
+  lsrc: survey
+  type: Industry
+  featured: true
+  note: "OpenAI–Broadcom LLM inference chip taped out nine months from initial design, with models said to have helped design and optimization; the model's role is not disclosed."
+qwen2026xinmo:
+  topic: cases
+  title_en: "Chip–Model Co-Evolution: Qwen in Production Chip Design and Inference Adaptation"
+  level: L2
+  lsrc: survey
+  type: Industry
+  featured: true
+  note: "Qwen3.8-Max takes a NoC module from spec through RTL, verification and physical implementation, and separately deploys and tunes a new model on a domestic accelerator; the two ends are not yet connected."
+
+# ---------------------------------------------------------------- Model → Silicon
+brayton2010abc:
+  topic: mh-substrate
+  type: Tool
+  note: "ABC, the academic logic synthesis and verification system that later became the target of agent-driven source-code evolution (Self-Evolved ABC)."
+wolf2013yosys:
+  topic: mh-substrate
+  type: Tool
+  note: "Yosys, the open-source Verilog synthesis suite underlying many open EDA flows and LLM-for-RTL evaluations."
+  url: https://yosyshq.net/yosys/
+cheng2019replace:
+  topic: mh-substrate
+  note: "RePlAce, an analytic global placer that serves as a strong classical placement baseline."
+lin2019dreamplace:
+  topic: mh-substrate
+  note: "DREAMPlace casts analytic placement as neural-network training to run on GPU deep-learning toolkits."
+  doi: 10.1145/3316781.3317803
+ajayi2019openroad:
+  topic: mh-substrate
+  type: Tool
+  note: "OpenROAD, an autonomous open-source RTL-to-GDSII flow and the backbone of many agentic physical-design studies."
+  doi: 10.1145/3316781.3326334
+xie2018routenet:
+  topic: mh-ml4eda
+  note: "RouteNet predicts routability with a CNN, an early example of ML replacing expensive implementation runs with prediction."
+  doi: 10.1145/3240765.3240843
+synopsys2020dsoai:
+  topic: mh-ml4eda
+  type: Industry
+  note: "Synopsys DSO.ai uses reinforcement learning to search chip design-space parameters."
+  url: https://www.synopsys.com/ai/chip-design/dso-ai.html
+mirhoseini2021graph:
+  short: "AlphaChip"
+  topic: mh-ml4eda
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "AlphaChip: RL macro placement, later reported in use for TPU v5e, v5p and Trillium."
+goldie2024alphachip:
+  topic: mh-ml4eda
+  level: L1
+  lsrc: survey
+  type: Industry
+  note: "Google DeepMind's retrospective on AlphaChip and its use across TPU generations."
+cheng2023assessment:
+  topic: mh-ml4eda
+  note: "Independent assessment of RL macro placement; part of the reproducibility debate around AlphaChip."
+markov2024reevaluating:
+  topic: mh-ml4eda
+  note: "Re-evaluates Google's RL macro placement, highlighting how closed design data makes industrial claims hard to verify."
+kahng2018machine:
+  topic: mh-ml4eda
+  note: "Overview of ML applications in physical design and their open directions."
+  doi: 10.1145/3177540.3177554
+blocklove2023chipchat:
+  topic: mh-early
+  level: L0
+  lsrc: survey
+  featured: true
+  note: "Chip-Chat: a processor designed through conversation with an LLM and taped out, the first LLM-written circuit on real silicon."
+chang2023chipgpt:
+  topic: mh-early
+  level: L0
+  lsrc: curator
+  note: "ChipGPT asks how far LLMs are from natural-language hardware design, combining prompting with output optimization."
+liu2023chipnemo:
+  topic: mh-early
+  level: L0
+  lsrc: survey
+  featured: true
+  note: "ChipNeMo: domain-adaptive pretraining on internal NVIDIA design documents, scripts and code, plus domain tokenization and retrieval."
+cheng2023pushing:
+  topic: mh-early
+  note: "Automated CPU design with AI: a processor core generated from input–output examples without HDL, a precursor of QiMeng-CPU."
+zhang2025qimeng:
+  short: "QiMeng"
+  topic: mh-early
+  featured: true
+  note: "QiMeng builds hardware- and software-design agents on a processor-chip foundation model; QiMeng-CPU-v1 (~4M gates) is described as the first fully automatically designed processor core."
+pearce2020dave:
+  topic: mh-early
+  level: L0
+  lsrc: curator
+  note: "DAVE fine-tunes GPT-2 to derive Verilog from English, handling only simple tasks."
+thakur2023benchmarking:
+  topic: mh-early
+  type: Benchmark
+  note: "Benchmarks LLMs on Verilog generation and shows that fine-tuning on open Verilog narrows the gap left by general models."
+thakur2023autochip:
+  topic: mh-rtl
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "AutoChip feeds compiler and simulation errors back to the LLM, the first-generation prompt-and-feedback loop for RTL."
+thakur2024verigen:
+  topic: mh-rtl
+  level: L0
+  lsrc: survey
+  note: "VeriGen fine-tunes an LLM on open-source Verilog and textbooks."
+liu2024rtlcoder:
+  topic: mh-rtl
+  level: L0
+  lsrc: survey
+  featured: true
+  note: "RTLCoder synthesizes instruction–code pairs with a strong model; a fully open data-centric RTL generator."
+  arxiv: 2312.08617
+pei2024betterv:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "BetterV steers Verilog generation with discriminative guidance."
+zhao2024codev:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "CodeV back-translates code into descriptions through multi-level summarization to build fine-tuning data."
+  arxiv: 2407.10424
+zhao2024mage:
+  topic: mh-rtl
+  level: L1
+  lsrc: curator
+  note: "MAGE uses a multi-agent engine with simulation feedback for RTL generation."
+cui2024origen:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "OriGen augments data code-to-code and adds compiler-feedback self-reflection."
+gao2024autovcoder:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "AutoVCoder adds retrieval augmentation to a systematic Verilog-generation framework."
+ho2025verilogcoder:
+  topic: mh-rtl
+  level: L1
+  lsrc: curator
+  note: "VerilogCoder coordinates agents with graph-based planning and an AST-based waveform-tracing debugging tool."
+liu2025craftrtl:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "CraftRTL converts Karnaugh maps, state diagrams and waveforms into correct-by-construction samples, anchoring synthetic data to external truth."
+liu2025deeprtl:
+  topic: mh-rtl
+  level: L0
+  lsrc: curator
+  note: "DeepRTL unifies Verilog understanding and generation in one representation model."
+wang2025verireason:
+  topic: mh-rtl
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "VeriReason combines testbench feedback with structural heuristics in an RL reward for reasoning-enhanced Verilog generation."
+zhu2025codevr1:
+  short: "QiMeng-CodeV-R1"
+  topic: mh-rtl
+  level: L1
+  lsrc: curator
+  featured: true
+  note: "QiMeng-CodeV-R1 rewards equivalence checks against reference designs and filters data by round-trip consistency; its 7B model beats 671B DeepSeek-R1 on RTLLM."
+verirl2025boosting:
+  topic: mh-rtl
+  level: L1
+  lsrc: curator
+  note: "VeriRL boosts LLM Verilog generation with reinforcement learning."
+tsai2024rtlfixer:
+  topic: mh-debug
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "RTLFixer repairs RTL syntax errors with retrieval augmentation and ReAct-style reasoning, the minimal form of an agent loop."
+xu2024meic:
+  topic: mh-debug
+  level: L1
+  lsrc: curator
+  note: "MEIC rethinks RTL debug automation to handle functional as well as syntax errors."
+yao2024hdldebugger:
+  topic: mh-debug
+  level: L1
+  lsrc: curator
+  note: "HDLdebugger streamlines HDL debugging with LLMs and retrieval."
+kande2023llmassisted:
+  topic: mh-verif
+  level: L0
+  lsrc: curator
+  note: "Early use of LLMs to generate security-relevant SystemVerilog assertions."
+zhang2023llm4dv:
+  topic: mh-verif
+  level: L1
+  lsrc: curator
+  note: "LLM4DV generates hardware test stimuli with LLMs, iterating on coverage feedback."
+fang2024assertllm:
+  topic: mh-verif
+  level: L0
+  lsrc: curator
+  note: "AssertLLM extracts verification assertions from design specifications with multiple LLMs."
+hu2024uvllm:
+  topic: mh-verif
+  level: L1
+  lsrc: curator
+  note: "UVLLM automates UVM-style RTL verification, generating test environments and fixing errors in a loop."
+kumar2025saarthi:
+  topic: mh-verif
+  level: L1
+  lsrc: curator
+  featured: true
+  note: "Saarthi coordinates multiple agents to carry out end-to-end formal verification."
+  arxiv: 2502.16662
+fu2023gpt4aigchip:
+  topic: mh-hls
+  level: L0
+  lsrc: survey
+  featured: true
+  note: "GPT4AIGChip is an early attempt to generate HLS code for AI accelerators with LLMs."
+krishnan2023archgym:
+  topic: mh-hls
+  type: Tool
+  note: "ArchGym wraps ML-driven architecture design-space exploration in a gym: agents tune accelerator parameters, simulators return performance and energy."
+li2024specllm:
+  topic: mh-hls
+  level: L0
+  lsrc: curator
+  note: "SpecLLM explores LLMs for writing and reviewing VLSI architecture specifications."
+xiong2024hlspilot:
+  topic: mh-hls
+  level: L1
+  lsrc: curator
+  note: "HLSPilot rewrites C code into synthesizable HLS with LLM-guided optimization."
+collini2024c2hlsc:
+  topic: mh-hls
+  level: L1
+  lsrc: curator
+  note: "C2HLSC iteratively refactors C into HLS-compatible code using tool feedback."
+wang2025llmdse:
+  topic: mh-hls
+  level: L1
+  lsrc: curator
+  featured: true
+  note: "LLM-DSE coordinates router, specialist, arbiter and critic agents to tune HLS directives, ~2.55x over prior methods on HLSyn."
+sharma2026secdadse:
+  topic: mh-hls
+  level: L1
+  lsrc: curator
+  note: "SECDA-DSE connects LLM-driven design-space exploration to SystemC simulation and FPGA execution."
+he2024chateda:
+  topic: mh-phys
+  level: L1
+  lsrc: curator
+  note: "ChatEDA lets an LLM agent orchestrate the whole EDA flow from natural-language requests."
+orfsagent2025:
+  topic: mh-phys
+  level: L1
+  lsrc: curator
+  note: "ORFS-Agent tunes OpenROAD flow parameters with tool-using agents to improve PPA."
+evodrc2026:
+  topic: mh-phys
+  level: L1
+  lsrc: curator
+  note: "EvoDRC applies a self-evolving agent framework to DRC-violation repair."
+yu2026autonomous:
+  short: "Self-Evolved ABC"
+  topic: mh-phys
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "Self-Evolved ABC: agents rewrite the million-line ABC synthesis tool itself, guarded by formal equivalence checking, and find heuristics that beat human baselines."
+allam2025asicagent:
+  topic: mh-e2e
+  level: L2
+  lsrc: survey
+  featured: true
+  note: "ASIC-Agent assigns sub-agents to RTL generation, verification, OpenLane hardening and Caravel integration, with an agent-oriented benchmark."
+krishna2026design:
+  topic: mh-e2e
+  level: L2
+  lsrc: survey
+  featured: true
+  note: "Design Conductor builds a tape-out-ready RISC-V core from a 219-word spec in 12 hours, closing timing at 1.48 GHz in ASAP7."
+krishna2026conductor2:
+  topic: mh-e2e
+  edge: loop
+  level: L3
+  lsrc: survey
+  featured: true
+  note: "Design Conductor 2.0 reads the TurboQuant paper and designs VerTQ, an LLM-inference accelerator (5,129 FP units, 240-stage pipeline) in 80 hours; the first work on this path to touch L3."
+tomshardware2026agentic:
+  topic: mh-e2e
+  level: L1–L2
+  lsrc: survey
+  type: Industry
+  note: "Overview of the 2026 agentic EDA products from Cadence, Synopsys and Siemens, which automate whole flow segments rather than single steps."
+chang2024lamagic:
+  topic: mh-analog
+  level: L0
+  lsrc: curator
+  note: "LaMAGIC generates power-converter topologies with a language model."
+lai2025analogcoder:
+  topic: mh-analog
+  level: L1
+  lsrc: curator
+  note: "AnalogCoder describes and iterates on analog circuits as Python code, training-free with simulation feedback."
+
+# ---------------------------------------------------------------- Model → Stack
+ragankelley2013halide:
+  topic: ms-found
+  note: "Halide separates algorithm from schedule, the root of the search-plus-cost-model lineage of tensor compilers."
+  doi: 10.1145/2491956.2462176
+chen2018tvm:
+  short: "TVM"
+  topic: ms-found
+  featured: true
+  note: "TVM, an end-to-end optimizing compiler stack for deep learning."
+tillet2019triton:
+  topic: ms-found
+  note: "Triton, a tile-based language and compiler that lowers the bar for writing GPU kernels."
+zheng2020ansor:
+  topic: ms-found
+  note: "Ansor replaces hand-written templates with generated search spaces and a learned cost model."
+shao2022metaschedule:
+  topic: ms-found
+  note: "MetaSchedule unifies tensor-program scheduling primitives as probabilistic programs."
+feng2023tensorir:
+  topic: ms-found
+  note: "TensorIR, an abstraction for automatic tensorized program optimization."
+spector2024thunderkittens:
+  topic: ms-found
+  note: "ThunderKittens offers hardware-near tile abstractions that approach hand-written kernel performance."
+wang2025tilelang:
+  topic: ms-found
+  note: "TileLang, a composable tiled programming model for AI kernels."
+chetlur2014cudnn:
+  topic: ms-found
+  note: "cuDNN, NVIDIA's library of deep-learning primitives that made GPUs the default DL substrate."
+lattner2021mlir:
+  topic: ms-found
+  note: "MLIR, a reusable multi-level compiler infrastructure for domain-specific computation."
+ansel2024pytorch2:
+  topic: ms-found
+  note: "PyTorch 2 graph capture and compilation (TorchDynamo/TorchInductor), the torch.compile baseline that kernel agents compare against."
+deepseek2025deepgemm:
+  short: "DeepGEMM"
+  topic: ms-human
+  type: Tool
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "DeepGEMM: hand-written FP8 GEMM kernels with fine-grained scaling for Hopper, built for DeepSeek-V3's numeric choices."
+  url: https://github.com/deepseek-ai/DeepGEMM
+deepseek2025flashmla:
+  topic: ms-human
+  type: Tool
+  level: Human
+  lsrc: survey
+  note: "FlashMLA: MLA decoding kernels for Hopper, written by hand after the model adopted MLA."
+  url: https://github.com/deepseek-ai/FlashMLA
+deepseek2025deepep:
+  topic: ms-human
+  type: Tool
+  level: Human
+  lsrc: survey
+  note: "DeepEP: expert-parallel communication library; together with DeepGEMM and FlashMLA, the Day-0 adaptation work LLM agents aim to replace."
+  url: https://github.com/deepseek-ai/DeepEP
+nvidia2025automating:
+  topic: ms-kernel
+  type: Industry
+  level: L1
+  lsrc: survey
+  note: "NVIDIA pairs DeepSeek-R1 with a verifier and inference-time scaling to generate attention kernels."
+  url: https://developer.nvidia.com/blog/automating-gpu-kernel-generation-with-deepseek-r1-and-inference-time-scaling/
+lange2025aicuda:
+  topic: ms-kernel
+  type: Industry
+  level: L1
+  lsrc: survey
+  note: "Sakana's AI CUDA Engineer; its inflated speedups from an evaluation loophole were later corrected, an early warning on reward hacking."
+  url: https://sakana.ai/ai-cuda-engineer/
+baronio2025kevin:
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  note: "Kevin trains CUDA-kernel writing with multi-turn reinforcement learning."
+li2025cudal1:
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  note: "CUDA-L1 improves CUDA optimization with contrastive reinforcement learning."
+wang2025geak:
+  short: "GEAK"
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "GEAK generates Triton kernels for AMD GPUs in a Reflexion-style loop: ~55% execution accuracy and 2.59x mean speedup on revised TritonBench."
+dai2026cudaagent:
+  short: "CUDA Agent"
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "CUDA Agent: large-scale agentic RL over 6,000+ synthetic operators in a sandbox with automatic verification and profiling; beats torch.compile on all three KernelBench levels."
+dong2026kernelblaster:
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  note: "KernelBlaster transfers optimization knowledge across GPU generations with memory-augmented in-context RL."
+dong2026stark:
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  note: "STARK explores the optimization space with a strategic team of agents, reporting up to ~16x runtime improvement."
+fu2026davinci:
+  short: "daVinci-kernel"
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  featured: true
+  note: "daVinci-kernel co-evolves a skill library with RL training, admitting a skill only after execution confirms a reproducible speedup."
+kernelpro2026:
+  topic: ms-kernel
+  level: L1
+  lsrc: survey
+  note: "KernelPro closes the loop with profiler feedback and pluggable bottleneck-detection tools."
+amd2026geakv4:
+  short: "GEAK v4"
+  topic: ms-kernel
+  type: Industry
+  level: L2
+  lsrc: survey
+  featured: true
+  note: "GEAK v4 optimizes whole SGLang/vLLM serving workloads: profile, triage with Amdahl's law, generate across Triton/TileLang/HIP, validate end to end."
+trofin2021mlgo:
+  topic: ms-compiler
+  note: "MLGO brings learned policies into LLVM optimization decisions such as inlining."
+cummins2022compilergym:
+  topic: ms-compiler
+  type: Tool
+  note: "CompilerGym wraps compiler optimization as RL environments with code size or runtime as reward."
+cummins2023large:
+  topic: ms-compiler
+  level: L0
+  lsrc: curator
+  note: "Trains an LLM to optimize LLVM IR pass ordering directly."
+cummins2024meta:
+  short: "Meta LLM Compiler"
+  topic: ms-compiler
+  level: L0
+  lsrc: curator
+  featured: true
+  note: "Meta LLM Compiler: foundation models pretrained to understand and optimize compiler IR and assembly."
+yu2022orca:
+  topic: ms-serving
+  note: "Orca introduces iteration-level scheduling for serving generative transformers."
+  url: https://www.usenix.org/conference/osdi22/presentation/yu
+kwon2023vllm:
+  short: "vLLM / PagedAttention"
+  topic: ms-serving
+  featured: true
+  note: "vLLM's PagedAttention manages KV-cache memory like virtual memory pages."
+zhong2024distserve:
+  topic: ms-serving
+  note: "DistServe disaggregates prefill and decoding for goodput-optimized serving."
+zheng2024sglang:
+  topic: ms-serving
+  note: "SGLang executes structured LLM programs efficiently with RadixAttention."
+ye2025flashinfer:
+  topic: ms-serving
+  note: "FlashInfer, a customizable attention engine for LLM inference serving."
+lin2025agentinfer:
+  topic: ms-serving
+  note: "AgentInfer co-designs inference architecture and system for agentic workloads."
+
+# ---------------------------------------------------------------- Silicon → Model
+moore1965cramming:
+  topic: hm-history
+  note: "Moore's law, which the survey reads as a six-decade, human-coordinated co-evolution loop."
+  doi: 10.1109/JPROC.1998.658762
+dennard1974design:
+  topic: hm-history
+  note: "Dennard scaling; its end in the mid-2000s pushed performance growth toward specialization."
+  doi: 10.1109/JSSC.1974.1050511
+esmaeilzadeh2011dark:
+  topic: hm-history
+  note: "Dark silicon and the end of multicore scaling."
+raina2009large:
+  topic: hm-history
+  note: "Early large-scale unsupervised deep learning on GPUs."
+krizhevsky2012imagenet:
+  short: "AlexNet"
+  topic: hm-history
+  featured: true
+  note: "AlexNet, trained on GPUs built for graphics: the hardware lottery's most famous winning ticket."
+  url: https://papers.nips.cc/paper/2012/hash/c399862d3b9d6b76c8436e924a68c45b-Abstract.html
+chen2014diannao:
+  topic: hm-history
+  note: "DianNao, a small-footprint, high-throughput machine-learning accelerator."
+  doi: 10.1145/2541940.2541967
+chen2016eyeriss:
+  topic: hm-history
+  note: "Eyeriss, an energy-efficient reconfigurable CNN accelerator."
+  doi: 10.1109/ISSCC.2016.7418007
+han2016eie:
+  topic: hm-history
+  note: "EIE, an inference engine operating directly on compressed networks."
+han2016deep:
+  topic: hm-history
+  note: "Deep Compression: pruning, trained quantization and Huffman coding, models reshaped for efficient hardware."
+jouppi2017datacenter:
+  short: "TPU v1"
+  topic: hm-history
+  featured: true
+  note: "The first-generation TPU, deployed from 2015 and purpose-built for neural-network inference."
+sze2017efficient:
+  topic: hm-history
+  type: Survey
+  note: "Tutorial and survey on efficient processing of deep neural networks."
+hennessy2019new:
+  topic: hm-history
+  note: "Hennessy and Patterson's new golden age of computer architecture: domain-specific architectures as the main source of future performance."
+leiserson2020there:
+  topic: hm-history
+  note: "After Moore's law, performance gains come from software, algorithms and hardware architecture working together."
+hooker2021hardware:
+  short: "The Hardware Lottery"
+  topic: hm-history
+  featured: true
+  note: "The Hardware Lottery: research ideas win when they happen to fit available hardware."
+firoozshahian2023mtia:
+  topic: hm-history
+  note: "MTIA v1, Meta's first-generation silicon for its recommendation systems."
+jouppi2023tpu:
+  topic: hm-history
+  note: "TPU v4, an optically reconfigurable supercomputer with hardware support for embeddings."
+sutton2019bitter:
+  topic: hm-history
+  type: Essay
+  note: "The Bitter Lesson: general methods that leverage computation win in the long run."
+shazeer2019fast:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "Multi-query attention shares one key/value head to cut memory traffic during decoding."
+dao2022flashattention:
+  short: "FlashAttention"
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "FlashAttention tiles attention around the GPU memory hierarchy to reduce HBM reads and writes."
+dao2023flashattention2:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "FlashAttention-2 improves parallelism and work partitioning."
+ainslie2023gqa:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "Grouped-query attention trades off between MHA and MQA with memory traffic as the main target."
+gu2023mamba:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "Mamba achieves linear-time sequence modeling with a hardware-aware parallel scan."
+liu2023ring:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "Ring Attention splits long sequences across devices and overlaps compute with communication."
+shah2024flashattention3:
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  note: "FlashAttention-3 exploits Hopper's asynchrony and FP8; one algorithm, three versions for three hardware generations."
+yuan2025native:
+  short: "Native Sparse Attention"
+  topic: hm-attn
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "Native Sparse Attention makes hardware alignment a design principle of sparse attention (ACL 2025 best paper)."
+lepikhin2021gshard:
+  topic: hm-sparse
+  level: Human
+  lsrc: survey
+  note: "GShard scales MoE models with conditional computation and automatic sharding."
+mishra2021accelerating:
+  short: "2:4 structured sparsity"
+  topic: hm-sparse
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "2:4 structured sparsity in Ampere tensor cores: hardware fixed the accelerable sparsity pattern, and pruning followed."
+fedus2022switch:
+  topic: hm-sparse
+  level: Human
+  lsrc: survey
+  note: "Switch Transformers trade compute sparsity for parameter scale, moving the bottleneck to inter-device communication."
+leviathan2023fast:
+  topic: hm-sparse
+  level: Human
+  lsrc: survey
+  note: "Speculative decoding exploits idle compute in memory-bound decoding: an algorithm born from a hardware bottleneck."
+dai2024deepseekmoe:
+  topic: hm-sparse
+  level: Human
+  lsrc: survey
+  note: "DeepSeekMoE pushes toward fine-grained expert specialization."
+micikevicius2018mixed:
+  topic: hm-numeric
+  level: Human
+  lsrc: curator
+  note: "Mixed-precision training with FP16 and loss scaling, matched to tensor-core datapaths."
+  arxiv: 1710.03740
+dettmers2022llmint8:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "LLM.int8() adapts existing models to INT8 hardware with outlier handling."
+  arxiv: 2208.07339
+micikevicius2022fp8:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "FP8 formats jointly defined by hardware vendors and model researchers for training."
+yao2022zeroquant:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "ZeroQuant, efficient post-training quantization for large transformers."
+xiao2023smoothquant:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "SmoothQuant migrates activation outliers into weights to enable W8A8 inference."
+frantar2023gptq:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "GPTQ, one-shot post-training weight quantization using approximate second-order information."
+rouhani2023microscaling:
+  short: "Microscaling (MX) formats"
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "OCP Microscaling (MX) formats write block-level scaling into a cross-vendor industry specification."
+lin2024awq:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "AWQ, activation-aware weight quantization for on-device LLMs."
+  arxiv: 2306.00978
+  no_doi: true
+ma2024era:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "BitNet b1.58's ternary weights underperform on current hardware, in effect a requirement placed on future hardware."
+  arxiv: 2402.17764
+zandieh2025turboquant:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "TurboQuant compresses the KV cache with online vector quantization; later the input from which Design Conductor 2.0 built an accelerator."
+nvidia2025pretraining:
+  topic: hm-numeric
+  level: Human
+  lsrc: survey
+  note: "Pretraining LLMs in NVFP4 pushes 4-bit formats into training."
+deepseek2025v31:
+  short: "DeepSeek-V3.1 UE8M0 FP8"
+  topic: hm-numeric
+  type: Industry
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "DeepSeek-V3.1 trains with UE8M0 FP8 scaling for an unreleased domestic chip: a model changing itself for hardware that does not yet exist."
+shoeybi2019megatron:
+  topic: hm-parallel
+  level: Human
+  lsrc: survey
+  note: "Megatron-LM tensor parallelism, which relies on high-bandwidth intra-node interconnect."
+rajbhandari2020zero:
+  topic: hm-parallel
+  level: Human
+  lsrc: survey
+  note: "ZeRO partitions optimizer state according to device memory capacity."
+deepseek2024v2:
+  topic: hm-parallel
+  level: Human
+  lsrc: survey
+  note: "DeepSeek-V2 introduces MLA to compress the KV cache."
+deepseek2024v3:
+  topic: hm-parallel
+  level: Human
+  lsrc: survey
+  note: "DeepSeek-V3 trains on 2,048 H800s with FP8 mixed precision and compute–communication overlap."
+zhao2025insights:
+  short: "Insights into DeepSeek-V3 (ISCA)"
+  topic: hm-parallel
+  level: Human
+  lsrc: survey
+  featured: true
+  note: "DeepSeek's ISCA 2025 industry paper: how memory, compute and interconnect limits shaped V3, and what next-generation hardware should provide."
+
+# ---------------------------------------------------------------- Foundations (§3)
+gajski1983new:
+  topic: fd-codesign
+  note: "The Gajski–Kuhn Y-chart maps design between behavioral, structural and geometric views."
+  doi: 10.1109/MC.1983.1654264
+demicheli1997hardware:
+  topic: fd-codesign
+  note: "Classic formulation of hardware/software co-design as a joint optimization for one product generation."
+  doi: 10.1109/5.558708
+kienhuis1997approach:
+  short: "Y-chart approach"
+  topic: fd-codesign
+  featured: true
+  note: "The Y-chart approach separates application and architecture, maps, evaluates and feeds results back: the static prototype of co-evolution."
+colson2007overview:
+  topic: fd-codesign
+  note: "Overview of bilevel optimization, the structure behind outer-hardware / inner-network joint search."
+teich2012hardware:
+  topic: fd-codesign
+  note: "Retrospective on the past, present and future of HW/SW codesign."
+sinha2018review:
+  topic: fd-codesign
+  note: "Review of bilevel optimization from classical to evolutionary approaches."
+tan2019mnasnet:
+  short: "MnasNet"
+  topic: fd-nas
+  featured: true
+  note: "MnasNet folds measured on-device latency into the NAS objective."
+cai2019proxylessnas:
+  topic: fd-nas
+  note: "ProxylessNAS searches directly on the target task and hardware."
+wu2019fbnet:
+  topic: fd-nas
+  note: "FBNet, hardware-aware differentiable NAS."
+jiang2019accuracy:
+  topic: fd-nas
+  note: "FPGA-implementation-aware NAS that co-explores network and accelerator."
+wang2020hat:
+  topic: fd-nas
+  note: "HAT searches hardware-aware transformers for efficient NLP."
+cai2020once:
+  topic: fd-nas
+  note: "Once-for-All trains one supernet and specializes it per deployment target."
+li2020edd:
+  topic: fd-nas
+  note: "EDD co-searches DNN architecture and implementation for embedded AI."
+li2021hwnasbench:
+  topic: fd-nas
+  type: Benchmark
+  note: "HW-NAS-Bench, a benchmark for hardware-aware NAS."
+  arxiv: 2103.10584
+lin2021naas:
+  short: "NAAS"
+  topic: fd-nas
+  featured: true
+  note: "NAAS searches the neural accelerator architecture together with the network."
+choi2021dance:
+  topic: fd-nas
+  note: "DANCE co-explores accelerator and network differentiably."
+hwcodesign2026scaling:
+  short: "HW co-design scaling laws"
+  topic: fd-nas
+  featured: true
+  note: "Writes scaling laws (accuracy) and Roofline (latency) into one objective to choose on-device LLM structures, cutting selection from months to days."
+williams2009roofline:
+  short: "Roofline"
+  topic: fd-cost
+  featured: true
+  note: "Roofline, the coarsest upper bound on attainable performance."
+  doi: 10.1145/1498765.1498785
+samajdar2018scalesim:
+  topic: fd-cost
+  type: Tool
+  note: "SCALE-Sim, a systolic-array accelerator simulator."
+parashar2019timeloop:
+  topic: fd-cost
+  type: Tool
+  note: "Timeloop, systematic DNN-accelerator evaluation and mapping."
+kwon2019understanding:
+  topic: fd-cost
+  type: Tool
+  note: "MAESTRO, a data-centric model of DNN dataflow reuse, performance and hardware cost."
+wu2019accelergy:
+  topic: fd-cost
+  type: Tool
+  note: "Accelergy, architecture-level energy estimation for accelerators."
+mei2021zigzag:
+  topic: fd-cost
+  type: Tool
+  note: "ZigZag enlarges the joint architecture–mapping design space for DNN accelerators."
+kaplan2020scaling:
+  short: "Neural scaling laws"
+  topic: fd-cost
+  featured: true
+  note: "Neural scaling laws: small runs predict large-scale training outcomes."
+hoffmann2022training:
+  topic: fd-cost
+  note: "Chinchilla: compute-optimal allocation of parameters and data."
+zhang2024llmcompass:
+  topic: fd-cost
+  type: Tool
+  note: "LLMCompass simulates hardware designs for LLM inference."
+agrawal2024vidur:
+  topic: fd-cost
+  type: Tool
+  note: "Vidur, a large-scale simulator of LLM inference serving."
+
+# ---------------------------------------------------------------- Self-improvement engines
+good1965speculations:
+  topic: se-rsi
+  note: "I. J. Good's ultraintelligent machine: a machine that designs better machines triggers an intelligence explosion."
+schmidhuber2003godel:
+  topic: se-rsi
+  note: "Gödel Machines, provably optimal self-referential self-improvement."
+zelikman2022star:
+  topic: se-rsi
+  note: "STaR bootstraps reasoning from the model's own correctness-filtered rationales."
+yuan2024selfrewarding:
+  topic: se-rsi
+  note: "Self-Rewarding Language Models use their own judgments as the training signal."
+lu2024aiscientist:
+  topic: se-rsi
+  note: "The AI Scientist automates idea generation, experiments and paper writing."
+zhang2025darwin:
+  short: "Darwin Gödel Machine"
+  topic: se-rsi
+  featured: true
+  note: "Darwin Gödel Machine: a coding agent rewrites its own code and improves round after round on benchmarks."
+  arxiv: 2505.22954
+  no_doi: true
+davidson2025three:
+  short: "Three Types of Intelligence Explosion"
+  topic: se-rsi
+  type: Essay
+  featured: true
+  note: "Three feedback loops of AI acceleration (software, chip technology, chip production); the survey tracks the chip-technology loop."
+madaan2023selfrefine:
+  topic: se-iter
+  note: "Self-Refine iteratively rewrites outputs using self-generated feedback."
+shinn2023reflexion:
+  topic: se-iter
+  note: "Reflexion writes records of failures into the next attempt's input."
+wang2023voyager:
+  topic: se-iter
+  note: "Voyager accumulates a reusable skill library, an early form of memory that extends an agent's horizon."
+yang2024large:
+  topic: se-iter
+  note: "OPRO proposes new solutions from the history of solutions and scores."
+romeraparedes2024mathematical:
+  short: "FunSearch"
+  topic: se-iter
+  featured: true
+  note: "FunSearch embeds an LLM in evolutionary search scored by a program evaluator; the predecessor of AlphaEvolve."
+yin2024godel:
+  topic: se-iter
+  note: "Gödel Agent moves the search target to the agent's own code."
+  arxiv: 2410.04444
+hu2025automated:
+  topic: se-iter
+  note: "ADAS automatically designs agentic systems with a meta agent."
+
+# ---------------------------------------------------------------- Intelligence (§6)
+chen2021evaluating:
+  topic: in-pretrain
+  note: "Codex shows that models trained on large code corpora can write correct programs from natural language."
+kocetkov2023stack:
+  topic: in-pretrain
+  type: Dataset
+  note: "The Stack: 3 TB of permissively licensed code in dozens of languages, with HDL only a small fraction."
+gururangan2020dont:
+  topic: in-pretrain
+  note: "Continued pretraining on target-domain text reliably improves downstream performance."
+gunasekar2023textbooks:
+  topic: in-pretrain
+  note: "phi-1: a small amount of textbook-quality data beats large amounts of unfiltered code."
+muennighoff2023scaling:
+  topic: in-pretrain
+  note: "Data-constrained scaling: returns from repeated data fall quickly once unique data runs out."
+villalobos2024will:
+  topic: in-pretrain
+  note: "Estimates that high-quality human-generated text will be exhausted within years."
+shumailov2024ai:
+  topic: in-pretrain
+  note: "Models collapse when trained on recursively generated data."
+zhang2024mgverilog:
+  topic: in-pretrain
+  type: Dataset
+  note: "MG-Verilog provides multi-grained descriptions for the same code."
+chang2024data:
+  short: "Data is All You Need (DAC)"
+  topic: in-pretrain
+  featured: true
+  note: "Augments chip-design fine-tuning data with EDA-tool feedback, anchoring synthetic data in external truth."
+polanyi1966tacit:
+  topic: in-pretrain
+  type: Book
+  note: "Tacit knowledge, we know more than we can tell: the kind of cross-layer design judgment that text does not capture."
+silver2017mastering:
+  topic: in-reward
+  note: "AlphaGo Zero surpasses all humans from game rules alone: what a perfect, cheap reward makes possible."
+ouyang2022training:
+  topic: in-reward
+  note: "RLHF teaches instruction following, with capability bounded by human judgment."
+cobbe2021training:
+  topic: in-reward
+  note: "Trained verifiers select math solutions; verification is easier than generation."
+li2022competition:
+  topic: in-reward
+  note: "AlphaCode filters sampled programs with tests."
+le2022coderl:
+  topic: in-reward
+  note: "CodeRL rewards code generation with unit-test outcomes."
+lightman2023lets:
+  topic: in-reward
+  note: "Process reward models extend supervision to intermediate steps."
+  arxiv: 2305.20050
+lambert2024tulu3:
+  topic: in-reward
+  note: "Tülu 3 systematizes RL with verifiable rewards (RLVR) in open post-training."
+deepseek2025r1:
+  short: "DeepSeek-R1"
+  topic: in-reward
+  featured: true
+  note: "DeepSeek-R1 shows that outcome rewards alone can elicit long chains of reasoning."
+yue2025does:
+  topic: in-reward
+  note: "Finds that RLVR mainly improves sampling efficiency within the base model's existing capability rather than expanding it."
+sutton2018reinforcement:
+  topic: in-reward
+  type: Book
+  note: "Sutton and Barto; cross-layer rewards pose the hardest form of long-horizon credit assignment."
+  url: http://incompleteideas.net/book/the-book-2nd.html
+kuehlmann1997equivalence:
+  topic: in-formal
+  note: "Combinational equivalence checking with cuts and heaps."
+biere1999symbolic:
+  topic: in-formal
+  note: "Bounded model checking: symbolic model checking without BDDs."
+bradley2011sat:
+  topic: in-formal
+  note: "IC3: SAT-based model checking without unrolling."
+verilator:
+  topic: in-formal
+  type: Tool
+  url: https://www.veripool.org/verilator/
+  note: "Verilator, a fast open-source SystemVerilog simulator and linter."
+cocotb:
+  topic: in-formal
+  type: Tool
+  url: https://www.cocotb.org
+  note: "cocotb, Python coroutine-based cosimulation testbenches."
+symbiyosys:
+  topic: in-formal
+  type: Tool
+  url: https://github.com/YosysHQ/sby
+  note: "SymbiYosys packages formal verification flows in open source; hardware has verifiers stronger than software's."
+amodei2016concrete:
+  topic: in-hacking
+  note: "Lists reward hacking among the concrete problems in AI safety."
+manheim2018categorizing:
+  topic: in-hacking
+  note: "A taxonomy of Goodhart's law variants."
+  arxiv: 1803.04585
+krakovna2020specification:
+  topic: in-hacking
+  type: Essay
+  note: "A collection of specification-gaming examples."
+  url: https://deepmind.google/discover/blog/specification-gaming-the-flip-side-of-ai-ingenuity/
+skalse2022defining:
+  topic: in-hacking
+  note: "A formal definition and characterization of reward hacking."
+denison2024sycophancy:
+  topic: in-hacking
+  note: "Models can generalize from simple specification gaming to tampering with their own reward."
+baker2025monitoring:
+  topic: in-hacking
+  note: "Optimization pressure on chain-of-thought monitors can teach models to hide intent."
+metr2025reward:
+  topic: in-hacking
+  type: Essay
+  note: "METR reports reward hacking by frontier models during evaluations."
+  url: https://metr.org/blog/2025-06-05-recent-reward-hacking/
+lange2025towards:
+  short: "robust-kbench"
+  topic: in-hacking
+  featured: true
+  note: "robust-kbench: removing contaminated tasks cuts mean reported kernel speedup from ~3.1x to ~1.5x."
+  ignore_bib_url: true
+shapley1953value:
+  topic: in-attrib
+  note: "The Shapley value, the unique fair split of cooperative gains; a template for attributing gains across layers."
+yasin2014topdown:
+  topic: in-attrib
+  note: "Top-down microarchitecture analysis decomposes bottlenecks into frontend, backend and memory."
+curtsinger2015coz:
+  short: "Coz"
+  topic: in-attrib
+  featured: true
+  note: "Coz causal profiling answers the counterfactual: if this code got faster, how much faster would the whole be?"
+lundberg2017unified:
+  topic: in-attrib
+  note: "SHAP brings Shapley values to model explanation."
+kandasamy2016gaussian:
+  topic: in-multifi
+  note: "Multi-fidelity Bayesian optimization allocates budget across evaluations of different cost and accuracy."
+  arxiv: 1603.06288
+li2018hyperband:
+  short: "Hyperband"
+  topic: in-multifi
+  featured: true
+  note: "Hyperband screens many candidates cheaply and sends only winners to expensive evaluation; read S1–S6 as a fidelity ladder."
+falkner2018bohb:
+  topic: in-multifi
+  note: "BOHB combines Bayesian optimization with Hyperband."
+karandikar2018firesim:
+  topic: in-multifi
+  type: Tool
+  note: "FireSim compresses weeks of software simulation into hours with FPGA-accelerated, cycle-exact simulation."
+  doi: 10.1109/ISCA.2018.00014
+clark2016asap7:
+  topic: in-silicon
+  type: Tool
+  note: "ASAP7, the 7 nm predictive PDK in which many academic agents report timing."
+mishra2017postsilicon:
+  topic: in-silicon
+  note: "Post-silicon validation: limited observability and expensive debug."
+skywater2020sky130:
+  topic: in-silicon
+  type: Tool
+  url: https://github.com/google/skywater-pdk
+  note: "SKY130, an open PDK that lets academia tape out, far from advanced nodes."
+amid2020chipyard:
+  topic: in-silicon
+  type: Tool
+  note: "Chipyard, an open framework from SoC generation to tape-out."
+
+# ---------------------------------------------------------------- Benchmarks (§7)
+liu2023verilogeval:
+  short: "VerilogEval"
+  topic: bm-rtl
+  type: Benchmark
+  featured: true
+  note: "VerilogEval checks generated designs with testbenches; its problems come from the public HDLBits site."
+lu2024rtllm:
+  topic: bm-rtl
+  type: Benchmark
+  note: "RTLLM, an open benchmark for design-level RTL generation."
+allam2024rtlrepo:
+  topic: bm-rtl
+  type: Benchmark
+  note: "RTL-Repo extends evaluation to repository-level context."
+pinckney2024revisiting:
+  topic: bm-rtl
+  type: Benchmark
+  note: "VerilogEval v2 adds newer models, in-context learning and specification-to-RTL tasks."
+  arxiv: 2408.11053
+liu2024rtllm2:
+  topic: bm-rtl
+  type: Benchmark
+  note: "RTLLM 2.0 / OpenLLM-RTL expands the dataset and benchmark."
+iccad2024llm4hwdesign:
+  topic: bm-rtl
+  type: Benchmark
+  note: "The ICCAD 2024 LLM4HWDesign contest focuses on training-data quality."
+  url: https://nvlabs.github.io/LLM4HWDesign/
+kang2024fveval:
+  topic: bm-rtl
+  type: Benchmark
+  note: "FVEval evaluates LLMs on formal verification of digital hardware."
+pulavarthi2025assertionbench:
+  topic: bm-rtl
+  type: Benchmark
+  note: "AssertionBench evaluates assertion generation."
+  ignore_bib_url: true
+pinckney2025cvdp:
+  short: "CVDP"
+  topic: bm-rtl
+  type: Benchmark
+  featured: true
+  note: "CVDP: 783 expert-written problems across 13 task types with a containerized agent version; best models stay below 34% pass@1 on code generation."
+lu2026rtlopt:
+  short: "RTL-OPT"
+  topic: bm-rtl
+  type: Benchmark
+  featured: true
+  note: "RTL-OPT scores design quality: 36 designs, each with a suboptimal and a hand-optimized reference, graded by PPA improvement."
+hlseval2026agentic:
+  topic: bm-rtl
+  type: Benchmark
+  note: "HLS-Eval adds an agentic evaluation flow built on mini-swe-agent."
+garciagasulla2025turtle:
+  topic: bm-rtl
+  type: Benchmark
+  note: "TuRTLe unifies existing benchmarks from syntax to PPA and finds some syntax benchmarks saturated."
+chowdhury2021openabcd:
+  topic: bm-pd
+  type: Dataset
+  note: "OpenABC-D, a large dataset for ML-guided logic synthesis."
+chai2023circuitnet:
+  topic: bm-pd
+  type: Dataset
+  note: "CircuitNet, an open dataset for ML in VLSI CAD."
+chipbench2024:
+  topic: bm-pd
+  type: Benchmark
+  note: "ChiPBench evaluates AI placement algorithms by end-to-end PPA."
+wu2024edacorpus:
+  topic: bm-pd
+  type: Dataset
+  note: "EDA Corpus, an LLM dataset for interacting with OpenROAD."
+pdagentbench2026:
+  topic: bm-pd
+  type: Benchmark
+  note: "PDAgent-Bench targets physical-design agents."
+  arxiv: 2606.17253
+cktevo2026:
+  topic: bm-pd
+  type: Benchmark
+  note: "CktEvo benchmarks repository-level RTL design evolution."
+  arxiv: 2603.08718
+closerbench2026:
+  short: "CLOSER-Bench"
+  topic: bm-pd
+  type: Benchmark
+  featured: true
+  note: "CLOSER-Bench tests budget-constrained, cross-stage design closure."
+nichols2024parallel:
+  topic: bm-kernel
+  type: Benchmark
+  note: "ParEval asks whether LLMs can write parallel code."
+ouyang2025kernelbench:
+  short: "KernelBench"
+  topic: bm-kernel
+  type: Benchmark
+  featured: true
+  note: "KernelBench, the standard evaluation for LLM-generated GPU kernels."
+li2025tritonbench:
+  topic: bm-kernel
+  type: Benchmark
+  note: "TritonBench evaluates generation of Triton operators."
+multikernelbench2025:
+  topic: bm-kernel
+  type: Benchmark
+  note: "MultiKernelBench extends kernel evaluation to multiple hardware platforms."
+turing2026kernelquest:
+  short: "KernelQuest"
+  topic: bm-kernel
+  type: Benchmark
+  featured: true
+  note: "KernelQuest adds adversarial verification: 565 of 1,200 agent runs were rejected for correctness or authenticity before timing."
+amd2026agentkernelarena:
+  topic: bm-kernel
+  type: Benchmark
+  note: "AgentKernelArena tests generalization on unseen configurations."
+  arxiv: 2605.16819
+  url: https://github.com/AMD-AGI/AgentKernelArena
+hsco2026bench:
+  short: "HSCO-Bench"
+  topic: bm-cosys
+  type: Benchmark
+  level: L3
+  lsrc: survey
+  featured: true
+  note: "HSCO-Bench asks agents to design an accelerator and allocate SoC resources from software requirements; the closest benchmark to L3, though the model side is a fixed workload."
+wang2025vericontaminated:
+  topic: bm-contam
+  type: Benchmark
+  note: "VeriContaminated detects data contamination in VerilogEval and RTLLM."
+jain2025livecodebench:
+  topic: bm-contam
+  type: Benchmark
+  note: "LiveCodeBench evaluates only on problems published after a model's training cutoff."
+ghorab2025notsotiny:
+  short: "NotSoTiny"
+  topic: bm-contam
+  type: Benchmark
+  featured: true
+  note: "NotSoTiny builds a living RTL benchmark from real Tiny Tapeout designs, adding new ones every shuttle."
+brockman2016openai:
+  topic: bm-env
+  type: Tool
+  note: "OpenAI Gym standardizes the state–action–reward interface."
+nathani2025mlgym:
+  topic: bm-env
+  type: Benchmark
+  note: "MLGym: AI-research agents mostly tune hyperparameters and rarely propose new hypotheses or architectures."
+pan2024swegym:
+  short: "SWE-Gym"
+  topic: bm-env
+  type: Benchmark
+  featured: true
+  note: "SWE-Gym turns real repositories with executable tests into an environment; a few hundred trajectories train notably better agents and verifiers."
+silver2025era:
+  topic: bm-env
+  type: Essay
+  url: "https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf"
+  note: "The era of experience: AI moving from human data to learning from its own experience in environments."
+mattson2020mlperf:
+  topic: bm-rnd
+  type: Benchmark
+  note: "MLPerf Training, standardized end-to-end training performance."
+reddi2020mlperf:
+  topic: bm-rnd
+  type: Benchmark
+  note: "MLPerf Inference, standardized end-to-end inference performance."
+jimenez2024swebench:
+  topic: bm-rnd
+  type: Benchmark
+  note: "SWE-bench, resolving real GitHub issues."
+huang2024mlagentbench:
+  topic: bm-rnd
+  type: Benchmark
+  note: "MLAgentBench, ML experimentation in real code bases."
+chan2024mlebench:
+  topic: bm-rnd
+  type: Benchmark
+  note: "MLE-bench, ML engineering tasks drawn from Kaggle."
+wijk2024rebench:
+  short: "RE-Bench"
+  topic: bm-rnd
+  type: Benchmark
+  featured: true
+  note: "RE-Bench compares frontier agents with human experts on AI R&D under equal time budgets."
+starace2025paperbench:
+  topic: bm-rnd
+  type: Benchmark
+  note: "PaperBench, replicating AI research papers."
+  arxiv: 2504.01848
+
+# ---------------------------------------------------------------- Surveys
+huang2021machine:
+  topic: sv-eda
+  type: Survey
+  note: "ML for EDA survey (TODAES 2021)."
+zhong2024llm4eda:
+  topic: sv-eda
+  type: Survey
+  note: "LLM4EDA: progress of LLMs in EDA."
+he2025llmeda:
+  topic: sv-eda
+  type: Survey
+  note: "LLMs for EDA: future or mirage? (TODAES 2025)."
+pan2025survey:
+  short: "LLMs for EDA survey (TODAES)"
+  topic: sv-eda
+  type: Survey
+  featured: true
+  note: "Survey of research on LLMs for EDA (TODAES 2025)."
+fang2025circuit:
+  topic: sv-eda
+  type: Survey
+  note: "Circuit foundation models pretrained directly on netlists and schematics (TODAES 2026)."
+dawn2025agentic:
+  topic: sv-eda
+  type: Survey
+  note: "The dawn of agentic EDA: autonomous digital chip design."
+handoff2026agentic:
+  short: "Agentic EDA: A Handoff Perspective"
+  topic: sv-eda
+  type: Survey
+  featured: true
+  note: "Agentic EDA from a handoff perspective; its handoff validity is a starting point for verifying assumptions across layers."
+frontend2026llm:
+  topic: sv-eda
+  type: Survey
+  note: "Challenges and opportunities of LLMs for front-end design."
+llmverif2025survey:
+  topic: sv-eda
+  type: Survey
+  note: "Survey of LLM-assisted circuit verification."
+benmeziane2021comprehensive:
+  topic: sv-codesign
+  type: Survey
+  note: "Survey of hardware-aware neural architecture search."
+elsken2019neural:
+  topic: sv-codesign
+  type: Survey
+  note: "Survey of neural architecture search."
+guo2025collaborative:
+  short: "Collaborative HW/SW design in the LLM era"
+  topic: sv-codesign
+  type: Survey
+  featured: true
+  note: "Collaborative hardware/software design in the LLM era; the only compared survey spanning chip, stack and model."
+wang2024survey:
+  topic: sv-agents
+  type: Survey
+  note: "Survey of LLM-based autonomous agents."
+gao2025selfevolving:
+  topic: sv-agents
+  type: Survey
+  note: "Self-evolving agents: what, when, how and where to evolve."
+  arxiv: 2507.21046
+fang2025comprehensive:
+  topic: sv-agents
+  type: Survey
+  note: "Comprehensive survey of self-evolving AI agents."
+  arxiv: 2508.07407
+zong2026coevolution:
+  topic: sv-agents
+  type: Survey
+  note: "Co-evolution in agentic systems toward self-directed evolution beyond human design."
+
+# ---------------------------------------------------------------- Outlook (§8)
+bostrom2014superintelligence:
+  topic: ol-future
+  type: Book
+  note: "Superintelligence: the long-running debate on recursive self-improvement."
+sevilla2022compute:
+  topic: ol-future
+  note: "Compute trends across three eras of ML; training compute has been driven by human investment, exogenous to models."
+sastry2024computing:
+  topic: ol-future
+  note: "Compute is the most detectable, excludable and quantifiable input to AI, and so the most practical governance lever."
+kulp2024hardware:
+  topic: ol-future
+  note: "Hardware-enabled governance mechanisms built into chips."
+  url: https://www.rand.org/pubs/working_papers/WRA3056-1.html
+kokotajlo2025ai2027:
+  topic: ol-future
+  type: Essay
+  note: "AI 2027 places automated AI R&D at the center of acceleration."
+  url: https://ai-2027.com/
+kwa2025measuring:
+  short: "Measuring AI ability to complete long tasks (METR)"
+  topic: ol-future
+  featured: true
+  note: "METR: the length of tasks agents complete autonomously doubles roughly every seven months."
+  arxiv: 2503.14499
+bloom2020ideas:
+  topic: ol-future
+  note: "Ideas are getting harder to find: constant progress needs ever more research effort."
+  doi: 10.1257/aer.20180338
+ha2018world:
+  topic: ol-world
+  note: "World Models: agents learn and plan inside a learned model of the environment."
+  no_doi: true
+schrittwieser2020mastering:
+  topic: ol-world
+  note: "MuZero plans with a learned model to master Atari, Go, chess and shogi."
+hafner2025mastering:
+  topic: ol-world
+  note: "DreamerV3 masters diverse control tasks through world models."

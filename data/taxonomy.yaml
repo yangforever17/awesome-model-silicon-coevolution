@@ -1,0 +1,218 @@
+# Catalog structure. Each part maps to survey sections; each topic lists the
+# entries assigned to it in papers.yaml (topic: <id>).
+#
+# edge: default layer edge for entries in the part (overridable per paper).
+#   model-silicon  Model → Silicon   (design flows down, AI designs hardware)
+#   model-stack    Model → Stack     (design flows down, AI rewrites the software stack)
+#   silicon-model  Silicon → Model   (constraints flow up, hardware shapes models)
+#   loop           Cross-layer loop  (closed loops spanning layers)
+
+parts:
+  - id: cases
+    title: Closed-Loop Case Studies
+    survey: "§5"
+    edge: loop
+    blurb: >-
+      Ten cases where an AI-designed artifact reaches the hardware or software that trains or serves AI,
+      dissected with the same template: which layers the loop crosses, which signal each segment reads,
+      where humans intervene, and where the loop breaks.
+    topics:
+      - id: cases
+        title: Case studies
+
+  - id: model-silicon
+    title: "Design Flows Down (I): Model → Silicon"
+    survey: "§2.1, §4.1"
+    edge: model-silicon
+    blurb: >-
+      Language models as designers of chips. The learned object moves up from tool parameters and policies,
+      to RTL code and design knowledge, to the EDA tools and flows themselves. Most work reaches L0–L2 inside
+      a single layer; Design Conductor 2.0 is the first to touch L3.
+    topics:
+      - id: mh-substrate
+        title: Classical and open-source EDA substrate
+      - id: mh-ml4eda
+        title: Pre-LLM machine learning for EDA
+      - id: mh-early
+        title: LLMs enter chip design
+      - id: mh-rtl
+        title: RTL generation and reasoning models
+      - id: mh-debug
+        title: Debugging and repair
+      - id: mh-verif
+        title: Verification
+      - id: mh-hls
+        title: HLS and architecture exploration
+      - id: mh-phys
+        title: Physical implementation and EDA tools
+      - id: mh-e2e
+        title: End-to-end agents
+      - id: mh-analog
+        title: Analog circuits
+
+  - id: model-stack
+    title: "Design Flows Down (II): Model → Software Stack"
+    survey: "§2.2.4, §4.2"
+    edge: model-stack
+    blurb: >-
+      The stack is the fastest, cheapest layer to get feedback from (profiles in minutes, end-to-end runs in
+      hours), so it is where loops close first. Kernel agents commonly reach L1, GEAK v4 and Qwen's deployment
+      experiment reach L2, and AlphaEvolve's training kernel flows back into the model that drives it.
+    topics:
+      - id: ms-found
+        title: Tensor compilers and kernel languages
+      - id: ms-human
+        title: Human-built stacks for specific models
+      - id: ms-kernel
+        title: LLM-generated kernels
+      - id: ms-compiler
+        title: ML and LLMs for compilers
+      - id: ms-serving
+        title: Inference systems and deployment adaptation
+
+  - id: silicon-model
+    title: "Constraints Flow Up: Silicon → Model"
+    survey: "§2.2, §4.3"
+    edge: silicon-model
+    blurb: >-
+      Many defining design choices of large models are responses to hardware constraints, passed up layer by
+      layer: hardware fixes what the stack can implement efficiently, and the stack fixes what models should
+      adopt. This is the most strongly cross-layer path, but the executors are almost entirely human teams.
+    topics:
+      - id: hm-history
+        title: From the hardware lottery to specialization
+      - id: hm-attn
+        title: Attention and the memory hierarchy
+      - id: hm-sparse
+        title: Sparsity, MoE and decoding
+      - id: hm-numeric
+        title: Low precision and numeric formats
+      - id: hm-parallel
+        title: Parallelism and system-level co-design
+
+  - id: foundations
+    title: Formalization and Co-Design Foundations
+    survey: "§3"
+    blurb: >-
+      The static ancestors of co-evolution: one-shot joint optimization over model, stack and hardware,
+      and the cost models that make the joint objective approximately computable.
+    topics:
+      - id: fd-codesign
+        title: Multi-level optimization and HW/SW co-design theory
+      - id: fd-nas
+        title: Hardware-aware NAS and model–accelerator co-search
+      - id: fd-cost
+        title: Performance models, simulators and scaling laws
+
+  - id: engines
+    title: Self-Improvement Engines
+    survey: "§1, §2.3, §3.3"
+    blurb: >-
+      The update operators that let a model act on the system that runs it. They provide the engine of
+      co-evolution but not the transmission: none of them specifies which layer the signal comes from or
+      which layer the update lands on.
+    topics:
+      - id: se-rsi
+        title: Recursive self-improvement and self-evolving agents
+      - id: se-iter
+        title: LLM-driven iterative optimization
+
+  - id: intelligence
+    title: "Intelligence: Knowledge, Rewards and Verification"
+    survey: "§6"
+    blurb: >-
+      Chip-design ability has grown along the same path as general intelligence: pretraining brings knowledge,
+      post-training teaches iteration toward verifiable targets, and agents extend single generations into
+      long-horizon tool use. Each stage removes a bottleneck and exposes a new boundary.
+    topics:
+      - id: in-pretrain
+        title: Pretraining, data and domain adaptation
+      - id: in-reward
+        title: Verifiable rewards and post-training
+      - id: in-formal
+        title: Simulation and formal verification tools
+      - id: in-hacking
+        title: Reward hacking and specification gaming
+      - id: in-attrib
+        title: Cross-layer attribution and performance analysis
+      - id: in-multifi
+        title: Multi-fidelity optimization and fast simulation
+      - id: in-silicon
+        title: The pre-silicon / post-silicon gap
+
+  - id: benchmarks
+    title: "Benchmarks: From Exam Hall to Training Ground"
+    survey: "§7"
+    blurb: >-
+      With verifiable rewards, a benchmark's verifier becomes a reward and its task set becomes an environment.
+      Almost every benchmark measures ability inside one layer; HSCO-Bench is the closest to an L3 setting.
+    topics:
+      - id: bm-rtl
+        title: RTL, HLS and verification
+        edge: model-silicon
+      - id: bm-pd
+        title: Physical design and EDA datasets
+        edge: model-silicon
+      - id: bm-kernel
+        title: Kernels and the software stack
+        edge: model-stack
+      - id: bm-cosys
+        title: Hardware/software co-design
+        edge: loop
+      - id: bm-contam
+        title: Contamination and living benchmarks
+      - id: bm-env
+        title: Training environments
+      - id: bm-rnd
+        title: AI R&D automation and system benchmarks
+
+  - id: surveys
+    title: Related Surveys
+    survey: "§1.5, §3"
+    blurb: >-
+      Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving agents. Each covers part
+      of the tower; see the survey's Table 2 for a side-by-side comparison.
+    topics:
+      - id: sv-eda
+        title: AI and LLMs for EDA
+      - id: sv-codesign
+        title: Hardware-aware NAS and HW/SW co-design
+      - id: sv-agents
+        title: Agents and self-evolution
+
+  - id: outlook
+    title: "Outlook: Recursion, Governance and World Models"
+    survey: "§8"
+    blurb: >-
+      Whether recursion accelerates or saturates, where humans stay in the loop, and the system-level world
+      model that could turn silicon from the search loop into a calibration step.
+    topics:
+      - id: ol-future
+        title: Recursion, compute and governance
+      - id: ol-world
+        title: World models
+
+levels:
+  L0: {name: Design assistance, color: 64748b, rule: "AI generates code, designs or analysis but does not run a propose–verify–revise loop on its own."}
+  L1: {name: Local autonomous optimization, color: 2563eb, rule: "Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates."}
+  L2: {name: End-to-end autonomous design, color: 7c3aed, rule: "From a spec, AI decomposes the task, orchestrates tools and delivers a verified system within one layer."}
+  L3: {name: Cross-layer autonomous co-design, color: d97706, rule: "Around a system-level goal, AI decides which layers to change; one layer's needs or measurements change another layer's design through AI."}
+  L4: {name: Recursive self-enhancement, color: 16a34a, rule: "Hardware or software that AI helped design is used to train or run the designer itself or its successors."}
+  L5: {name: Recursive self-expansion, color: dc2626, rule: "R&D gains turn into more compute, facilities and deployment capacity, reinvested into the next round."}
+  L6: {name: Open-ended autonomous evolution, color: 991b1b, rule: "Within external goals and constraints, AI discovers research questions, methods and new computing paradigms."}
+
+edges:
+  model-silicon: {label: "Model→Silicon", color: b45309}
+  model-stack: {label: "Model→Stack", color: 0f766e}
+  silicon-model: {label: "Silicon→Model", color: be123c}
+  loop: {label: "Cross-layer loop", color: 6d28d9}
+
+types:
+  Paper: 2563eb
+  Survey: 7c3aed
+  Benchmark: ca8a04
+  Dataset: a16207
+  Tool: 475569
+  Industry: 0f766e
+  Essay: 78716c
+  Book: 57534e
