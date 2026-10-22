@@ -563,23 +563,37 @@ const SCENES = {
         ${[7, 16, 25].map(y => `<circle cx="${x + 4}" cy="${y}" r="1.7" fill="#4ade80"/><path d="M${x + 7} ${y}h3" stroke="#94a3b8" stroke-width="1.4"/>`).join('')}`).join('')}
     </g>
     <text x="${C[0]}" y="${C[1] + 56}" text-anchor="middle" font-family="Inter" font-weight="700" font-size="11.5" fill="#475569">training</text>
-    <!-- human sign-off gate on the deploy arc -->
-    <g transform="translate(${cx - 15},${cy + R - 15})">
-      <rect width="30" height="30" rx="8" fill="#ede9fe" stroke="#6d28d9" stroke-width="2.4"/>
-      <path d="M15 6 l8 3 v6 c0 5 -4 8 -8 9 c-4 -1 -8 -4 -8 -9 v-6z" fill="#fff" stroke="#6d28d9" stroke-width="1.8" stroke-linejoin="round"/>
-      <path d="M11.5 15l2.4 2.6 4.6-5" stroke="#6d28d9" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- human sign-off: a barrier arm across the deploy arc -->
+    <g transform="translate(${cx},${cy + R})">
+      <rect x="16" y="-22" width="9" height="34" rx="2" fill="#475569" stroke="${NAVY}" stroke-width="1.8"/>
+      <circle cx="20.5" cy="-22" r="5.5" fill="#fbbf24" stroke="${NAVY}" stroke-width="1.8"/>
+      <path d="M20 -20 L-30 -12" stroke="${NAVY}" stroke-width="9" stroke-linecap="round"/>
+      <path d="M20 -20 L-30 -12" stroke="#ef4444" stroke-width="6" stroke-linecap="round"/>
+      <path d="M20 -20 L-30 -12" stroke="#fff" stroke-width="6" stroke-dasharray="6 6"/>
+      <g transform="translate(40,-4)" stroke="#334155" stroke-width="1.8">
+        <path d="M-10 18c0-10 4-14 10-14s10 4 10 14z" fill="#94a3b8"/>
+        <circle cx="0" cy="-3" r="6.5" fill="#f3d5b8"/>
+        <path d="M-6 -5c1-6 11-6 12 0c-3-2-9-2-12 0z" fill="#334155"/>
+      </g>
     </g>
     <text x="${cx}" y="${cy + R + 34}" text-anchor="middle" font-family="Patrick Hand" font-size="18" fill="#6d28d9">human sign-off</text>
-    <!-- centre: generations -->
-    ${head(cx - 58, cy - 26, 0.36)}
-    <path d="M${cx - 30} ${cy - 14}h9" stroke="#16a34a" stroke-width="2.6" marker-end="url(#ah-g)"/>
-    ${head(cx - 18, cy - 32, 0.46)}
-    <path d="M${cx + 17} ${cy - 14}h9" stroke="#16a34a" stroke-width="2.6" marker-end="url(#ah-g)"/>
-    ${head(cx + 28, cy - 38, 0.56, true)}
-    <g font-family="Inter" font-weight="700" font-size="10.5" fill="#64748b" text-anchor="middle">
-      <text x="${cx - 45}" y="${cy + 12}">n</text><text x="${cx - 2}" y="${cy + 12}">n+1</text><text x="${cx + 48}" y="${cy + 12}">n+2</text>
+    <!-- centre: generations climb a staircase -->
+    ${shadow(cx, cy + 66, 66)}
+    <g stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round">
+      <rect x="${cx - 60}" y="${cy + 40}" width="40" height="24" rx="4" fill="#bbf7d0"/>
+      <rect x="${cx - 20}" y="${cy + 24}" width="40" height="40" rx="4" fill="#86efac"/>
+      <rect x="${cx + 20}" y="${cy + 8}" width="40" height="56" rx="4" fill="#4ade80"/>
     </g>
-    <text x="${cx}" y="${cy + 40}" text-anchor="middle" font-family="Patrick Hand" font-size="21" fill="#15803d">≈ +1% per turn</text>
+    <g font-family="Inter" font-weight="800" font-size="14" fill="#14532d" text-anchor="middle">
+      <text x="${cx - 40}" y="${cy + 58}">n</text><text x="${cx}" y="${cy + 50}">n+1</text><text x="${cx + 40}" y="${cy + 42}">n+2</text>
+    </g>
+    ${robot(cx - 54, cy + 2, 0.38, { left: 'down', right: 'down' })}
+    ${robot(cx - 18, cy - 28, 0.52, { left: 'down', right: 'up' })}
+    <g opacity=".42">${robot(cx + 18, cy - 62, 0.64, { left: 'up', right: 'up' })}</g>
+    ${sparkle(cx + 66, cy - 50, 0.9)} ${sparkle(cx + 14, cy - 66, 0.6, '#86efac')} ${sparkle(cx + 62, cy - 14, 0.5, '#fde68a')}
+    <text x="${cx + 40}" y="${cy - 72}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#15803d">?</text>
+    <!-- packets travelling along the ring -->
+    ${[[-40, '#fb923c'], [-20, '#fdba74'], [80, '#cbd5e1'], [196, '#4ade80'], [216, '#86efac']].map(([d, c]) => { const [x, y] = P(d); return `<circle cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="5" fill="${c}" stroke="#fff" stroke-width="2.4"/>`; }).join('')}
     ${sparkle(24, 60, 0.8)} ${sparkle(268, 60, 0.7, '#86efac')}
   </svg>`;
   },
