@@ -263,7 +263,7 @@ function chip(x, y, s = 1, label = '') {
     <g stroke="#a2510b" stroke-width="3.2" stroke-linecap="round">${pins}</g>
     <rect x="0" y="0" width="48" height="48" rx="8" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.8"/>
     <rect x="10" y="10" width="28" height="28" rx="4" fill="url(#gDie)"/>
-    ${label ? `<text x="24" y="27.5" text-anchor="middle" font-family="Inter" font-weight="800" font-size="9" fill="#fde68a" letter-spacing=".04em">${label}</text>` : '<circle cx="24" cy="24" r="4" fill="#fbbf24"/>'}
+    ${label ? `<text x="24" y="28" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11" fill="#fde68a">${label}</text>` : '<circle cx="24" cy="24" r="4" fill="#fbbf24"/>'}
   </g>`;
 }
 function doc(x, y, s = 1, mark = '</>', lines = 3) {
@@ -371,7 +371,7 @@ const SCENES = {
     ${sparkle(118, 40, 0.9)} ${sparkle(205, 82, 0.6, '#93c5fd')}
   </svg>`,
   optimize: () => `<svg width="500" height="232" viewBox="0 0 500 232">
-    <text x="250" y="20" text-anchor="middle" font-family="Patrick Hand" font-size="20" fill="#f97316">propose · test · keep</text>
+    <text x="250" y="22" text-anchor="middle" font-family="Patrick Hand" font-size="23" fill="#ea580c">propose · test · keep</text>
     <path d="M250 34 V 222" stroke="#a7b0cb" stroke-width="2.2" stroke-dasharray="6 6"/>
     <!-- Model → Silicon loop -->
     <circle cx="142" cy="148" r="58" fill="url(#gGlow)"/>
@@ -383,9 +383,9 @@ const SCENES = {
       <rect width="60" height="40" rx="7" fill="#fff" stroke="${NAVY}" stroke-width="2.3"/>
       <path d="M8 28 h8 v-14 h10 v14 h6 v-14 h12 v14 h8" fill="none" stroke="#2b6fd6" stroke-width="2.6" stroke-linejoin="round"/>
       <rect x="0" y="48" width="60" height="24" rx="7" fill="#dcfce7" stroke="${NAVY}" stroke-width="2.3"/>
-      <text x="30" y="65" text-anchor="middle" font-family="Inter" font-weight="800" font-size="11.5" fill="#15803d">PASS ✓</text>
+      <text x="30" y="66" text-anchor="middle" font-family="Inter" font-weight="800" font-size="14" fill="#15803d">PASS ✓</text>
     </g>
-    <text x="212" y="140" text-anchor="middle" font-family="Patrick Hand" font-size="16" fill="#64748b">testbench</text>
+    <text x="174" y="72" text-anchor="end" font-family="Patrick Hand" font-size="20" fill="#334155">testbench</text>
     <!-- Model → Stack loop -->
     <circle cx="336" cy="156" r="60" fill="url(#gGlow)"/>
     <g transform="translate(286,128)">
@@ -395,7 +395,7 @@ const SCENES = {
       <path d="M30 13 v28 M16 27 h28 M20 17 l20 20 M40 17 l-20 20" stroke="#cbd5e1" stroke-width="1.6"/>
       <circle cx="30" cy="27" r="4" fill="#cbd5e1"/>
       <rect x="54" y="12" width="36" height="30" rx="4" fill="url(#gDie)" stroke="#94a3b8" stroke-width="1.6"/>
-      <text x="72" y="31" text-anchor="middle" font-family="Inter" font-weight="800" font-size="10" fill="#5eead4">.cu</text>
+      <text x="72" y="32" text-anchor="middle" font-family="Inter" font-weight="800" font-size="13" fill="#5eead4">.cu</text>
       <path d="M14 54 v6 M24 54 v6 M34 54 v6 M44 54 v6 M54 54 v6 M64 54 v6 M74 54 v6 M84 54 v6" stroke="#d6a243" stroke-width="3.4"/>
     </g>
     <path d="M285 125 A 68 48 0 1 1 312 200" fill="none" stroke="#f97316" stroke-width="4" stroke-linecap="round" marker-end="url(#ah-o)"/>
@@ -406,10 +406,10 @@ const SCENES = {
       <rect x="10" y="12" width="56" height="8" rx="3" fill="#fca5a5"/>
       <rect x="10" y="25" width="38" height="8" rx="3" fill="#fcd34d"/>
       <rect x="10" y="38" width="22" height="8" rx="3" fill="#86efac"/>
-      <text x="80" y="47" text-anchor="end" font-family="Inter" font-weight="800" font-size="12" fill="#15803d">2.3×</text>
+      <text x="82" y="48" text-anchor="end" font-family="Inter" font-weight="800" font-size="15" fill="#15803d">2.3×</text>
     </g>
-    <text x="410" y="66" font-family="Patrick Hand" font-size="16" fill="#64748b">profiler</text>
-    ${sparkle(96, 60, 0.9)} ${sparkle(238, 210, 0.6, '#93c5fd')} ${sparkle(400, 44, 0.8)} ${sparkle(470, 96, 0.6, '#93c5fd')}
+    <text x="376" y="72" font-family="Patrick Hand" font-size="20" fill="#334155">profiler</text>
+    ${sparkle(70, 84, 0.9)} ${sparkle(238, 210, 0.6, '#93c5fd')} ${sparkle(470, 40, 0.8)} ${sparkle(470, 96, 0.6, '#93c5fd')}
   </svg>`,
   e2e: () => `<svg width="310" height="180" viewBox="0 0 310 180">
     <rect x="60" y="128" width="236" height="14" rx="7" fill="#cbd5e1" stroke="${NAVY}" stroke-width="2.2"/>
