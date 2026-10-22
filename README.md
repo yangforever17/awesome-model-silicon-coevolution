@@ -2049,3 +2049,5 @@ The catalog is generated from the survey's bibliography ([`data/refs.bib`](data/
 - **69** level assignments come directly from the survey's tables and text; **32** were assigned by the curators with the same criteria and are marked †.
 
 `python scripts/build_readme.py --check` verifies that the README and CSV match the data files; CI runs it on every push.
+
+Organization logos in Figure 1 identify the institution behind a work and are trademarks of their respective owners; they are rendered from [LobeHub Icons](https://github.com/lobehub/lobe-icons) and [Simple Icons](https://simpleicons.org). Works from universities or with mixed affiliations keep the layer-edge glyph. The figure source is [`scripts/figures/overview.html`](scripts/figures/overview.html).

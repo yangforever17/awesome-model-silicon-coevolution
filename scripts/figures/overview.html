@@ -41,10 +41,10 @@
   .xlabel.dim { color: #b2b9c6; }
 
   /* legend row */
-  #legend { position: absolute; left: 40px; top: 12px; right: 20px; height: 56px; display: flex; align-items: center; gap: 14px; }
-  .lgbox { display: flex; align-items: center; gap: 16px; padding: 8px 16px; border-radius: 14px; background: rgba(255,255,255,.85);
+  #legend { position: absolute; left: 34px; top: 12px; right: 16px; height: 56px; display: flex; align-items: center; gap: 10px; }
+  .lgbox { display: flex; align-items: center; gap: 13px; padding: 8px 14px; border-radius: 14px; background: rgba(255,255,255,.85);
            border: 1.5px solid #e3e7f0; box-shadow: 0 1px 2px rgba(23,32,58,.04); font-size: 17px; font-weight: 500; }
-  .lgbox .title { font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-right: 2px; }
+  .lgbox .title { font-size: 12px; letter-spacing: .1em; white-space: nowrap; text-transform: uppercase; color: var(--muted); font-weight: 700; margin-right: 2px; }
   .lab { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .chip.legend { font-size: 14.5px; padding: 4px 10px; }
   .note { margin-left: auto; font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
@@ -78,6 +78,9 @@
   .t-lp { background: var(--lp-fill); border-color: var(--lp-ink); color: var(--lp-ink); }
   .t-claim { background: repeating-linear-gradient(135deg, var(--lp-fill) 0 4px, #fff 4px 8px); border-color: var(--lp-ink); color: var(--lp-ink); border-style: dashed; }
   .t-open { background: #fff; border: 2px dashed #a3acc2; color: #a3acc2; }
+  .tile.logo { background: #fff; border-width: 2.4px; }
+  .tile.logo img, .tile.logo .mask { width: 23px; height: 23px; display: block; }
+  .tile.logo .mask { -webkit-mask: var(--src) center / contain no-repeat; mask: var(--src) center / contain no-repeat; background: var(--c); }
   .txt { min-width: 0; }
   .name { font-weight: 700; font-size: 15.5px; line-height: 1.15; letter-spacing: -.005em; }
   .desc { font-size: 13px; color: var(--muted); line-height: 1.25; margin-top: 2px; }
@@ -141,6 +144,22 @@ const G = {
 };
 const TILE = { ms: 't-ms', mk: 't-mk', sm: 't-sm', lp: 't-lp', claim: 't-claim', open: 't-open' };
 const GLYPH = { ms: 'ms', mk: 'mk', sm: 'sm', lp: 'lp', claim: 'lp', open: 'open' };
+// Organization logos (pinned open icon sets on jsDelivr): LobeHub icons (color) and Simple Icons (mono, tinted).
+const LOBE = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.90.0/icons/';
+const SI = 'https://cdn.jsdelivr.net/npm/simple-icons@16.20.0/icons/';
+const LOGOS = {
+  deepseek: { img: LOBE + 'deepseek-color.svg' }, meta: { img: LOBE + 'meta-color.svg' }, huawei: { img: LOBE + 'huawei-color.svg' },
+  nvidia: { img: LOBE + 'nvidia-color.svg' }, deepmind: { img: LOBE + 'deepmind-color.svg' }, bytedance: { img: LOBE + 'bytedance-color.svg' },
+  qwen: { img: LOBE + 'qwen-color.svg' }, openai: { img: LOBE + 'openai.svg' }, amd: { mask: SI + 'amd.svg', color: '#ED1C24', wide: true },
+};
+// Only where the producing organization is unambiguous.
+const LOGO_OF = {
+  'NSA': 'deepseek', 'DeepSeek-V3.1': 'deepseek', 'DeepGEMM': 'deepseek', 'MTIA v2': 'meta', 'Pangu Ultra': 'huawei',
+  'ChipNeMo': 'nvidia', 'LLM Compiler': 'meta', 'RTLFixer': 'nvidia', 'AlphaChip': 'deepmind', 'PrefixRL': 'nvidia',
+  'CUDA Agent': 'bytedance', 'GEAK': 'amd', 'AlphaTensor': 'deepmind', 'AlphaDev': 'deepmind',
+  'GEAK v4': 'amd', 'Qwen chip–model co-evo': 'qwen', 'AlphaEvolve': 'deepmind', 'Jalapeño': 'openai', 'OpenAI × Broadcom': 'openai',
+};
+const logoHTML = (k) => { const L = LOGOS[k]; return L.img ? `<img src="${L.img}" alt="">` : `<span class="mask" style="--src:url(${L.mask});--c:${L.color}${L.wide ? ';width:29px;height:29px' : ''}"></span>`; };
 
 // ---------------------------------------------------------------- data
 // color: level identity; floor: tint at the bottom of the column; count: entries at this level in data/catalog.csv
@@ -661,7 +680,8 @@ function insetTower() {
 
 // ---------------------------------------------------------------- render
 function itemHTML([kind, name, desc, extra]) {
-  return `<div class="item ${kind === 'open' ? 'open' : ''} ${extra || ''}"><div class="tile ${TILE[kind]}">${G[GLYPH[kind]]}</div>
+  const lg = LOGO_OF[name];
+  return `<div class="item ${kind === 'open' ? 'open' : ''} ${extra || ''}"><div class="tile ${TILE[kind]}${lg ? ' logo' : ''}">${lg ? logoHTML(lg) : G[GLYPH[kind]]}</div>
     <div class="txt"><div class="name">${name}</div><div class="desc">${desc}</div></div></div>`;
 }
 const listHTML = (xs) => `<div class="list">${xs.map(itemHTML).join('')}</div>`;
@@ -697,6 +717,7 @@ document.getElementById('legend').innerHTML = `
     <span class="lab">${T('sm')}Silicon → Model</span>
     <span class="lab">${T('lp')}Cross-layer loop</span>
     <span class="lab">${T('claim', 'lp')}Claimed</span>
+    <span class="lab"><span class="tile logo" style="width:28px;height:28px;flex-basis:28px;border-radius:8px;border-color:#94a3b8">${logoHTML('deepmind')}</span>Organization</span>
   </div>
   <div class="lgbox" style="gap:7px"><span class="title" style="margin-right:6px">Mechanism</span>
     <span class="chip legend k-data">Data</span>
@@ -705,7 +726,7 @@ document.getElementById('legend').innerHTML = `
     <span class="chip legend k-agent">Agents</span>
     <span class="chip legend k-loop">Cross-layer</span>
   </div>
-  <div class="note"><span class="cnt">37</span>entries at this level in the catalog</div>`;
+  <div class="note"><span class="cnt">37</span>entries in catalog</div>`;
 
 // x-axis labels
 for (const [lv, name, x, dim] of XLABELS) {
