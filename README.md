@@ -183,6 +183,9 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 
 ### Classical and open-source EDA substrate
 
+<details>
+<summary>Show 5 entries · 2010–2019</summary>
+
 | Work | Venue | Note |
 | :--- | :--- | :--- |
 | [ABC: An Academic Industrial-Strength Verification Tool](https://doi.org/10.1007/978-3-642-14295-6_5) [![Code](https://img.shields.io/github/stars/berkeley-abc/abc?style=social&label=Code)](https://github.com/berkeley-abc/abc) | CAV&nbsp;2010 | ABC, the academic logic synthesis and verification system that later became the target of agent-driven source-code evolution (Self-Evolved ABC). |
@@ -191,7 +194,12 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [RePlAce: Advancing Solution Quality and Routability Validation in Global Placement](https://doi.org/10.1109/tcad.2018.2859220) [![Code](https://img.shields.io/github/stars/The-OpenROAD-Project/RePlAce?style=social&label=Code)](https://github.com/The-OpenROAD-Project/RePlAce) | TCAD&nbsp;2019 | RePlAce, an analytic global placer that serves as a strong classical placement baseline. |
 | [Toward an Open-Source Digital Flow: First Learnings from the OpenROAD Project](https://doi.org/10.1145/3316781.3326334) [![Code](https://img.shields.io/github/stars/The-OpenROAD-Project/OpenROAD?style=social&label=Code)](https://github.com/The-OpenROAD-Project/OpenROAD) | DAC&nbsp;2019 | OpenROAD, an autonomous open-source RTL-to-GDSII flow and the backbone of many agentic physical-design studies. |
 
+</details>
+
 ### Pre-LLM machine learning for EDA
+
+<details>
+<summary>Show 7 entries · 2018–2024</summary>
 
 | Work | Venue | Level | Note |
 | :--- | :--- | :---: | :--- |
@@ -202,6 +210,8 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [Assessment of Reinforcement Learning for Macro Placement](https://doi.org/10.1145/3569052.3578926) [![Code](https://img.shields.io/github/stars/TILOS-AI-Institute/MacroPlacement?style=social&label=Code)](https://github.com/TILOS-AI-Institute/MacroPlacement) | ISPD&nbsp;2023 |  | Independent assessment of RL macro placement; part of the reproducibility debate around AlphaChip. |
 | [How AlphaChip Transformed Computer Chip Design](https://deepmind.google/blog/how-alphachip-transformed-computer-chip-design/) | Google DeepMind Blog&nbsp;2024 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Google DeepMind's retrospective on AlphaChip and its use across TPU generations. |
 | [Reevaluating Google's Reinforcement Learning for IC Macro Placement](https://doi.org/10.1145/3676845) [![Code](https://img.shields.io/github/stars/TILOS-AI-Institute/MacroPlacement?style=social&label=Code)](https://github.com/TILOS-AI-Institute/MacroPlacement) | CACM&nbsp;2024 |  | Re-evaluates Google's RL macro placement, highlighting how closed design data makes industrial claims hard to verify. |
+
+</details>
 
 ### LLMs enter chip design
 
@@ -371,6 +381,9 @@ Hardware constraints shape model design. This is the most cross-layer path, but 
 
 ### From the hardware lottery to specialization
 
+<details>
+<summary>Show 17 entries · 1965–2023</summary>
+
 | Work | Venue | Note |
 | :--- | :--- | :--- |
 | [Cramming More Components onto Integrated Circuits](https://doi.org/10.1109/JPROC.1998.658762) | Electronics&nbsp;1965 | Moore's law, which the survey reads as a six-decade, human-coordinated co-evolution loop. |
@@ -390,6 +403,8 @@ Hardware constraints shape model design. This is the most cross-layer path, but 
 | ⭐ [The Hardware Lottery](https://arxiv.org/abs/2009.06489) | [CACM&nbsp;2021](https://doi.org/10.1145/3467017) | Research ideas win when they happen to fit available hardware. |
 | [MTIA: First Generation Silicon Targeting Meta's Recommendation Systems](https://doi.org/10.1145/3579371.3589348) | ISCA&nbsp;2023 | MTIA v1, Meta's first-generation silicon for its recommendation systems. |
 | [TPU v4: An Optically Reconfigurable Supercomputer for Machine Learning with Hardware Support for Embeddings](https://arxiv.org/abs/2304.01433) | [ISCA&nbsp;2023](https://doi.org/10.1145/3579371.3589350) | TPU v4, an optically reconfigurable supercomputer with hardware support for embeddings. |
+
+</details>
 
 ### Attention and the memory hierarchy
 
@@ -453,6 +468,9 @@ Static co-design: one-shot joint optimization over model, stack and hardware, an
 
 ### Multi-level optimization and HW/SW co-design theory
 
+<details>
+<summary>Show 6 entries · 1983–2018</summary>
+
 | Work | Venue | Note |
 | :--- | :--- | :--- |
 | [New VLSI Tools](https://doi.org/10.1109/MC.1983.1654264) | IEEE Computer&nbsp;1983 | The Gajski–Kuhn Y-chart maps design between behavioral, structural and geometric views. |
@@ -462,7 +480,12 @@ Static co-design: one-shot joint optimization over model, stack and hardware, an
 | [Hardware/Software Codesign: The Past, the Present, and Predicting the Future](https://doi.org/10.1109/jproc.2011.2182009) | Proc. IEEE&nbsp;2012 | Retrospective on the past, present and future of HW/SW codesign. |
 | [A Review on Bilevel Optimization: From Classical to Evolutionary Approaches and Applications](https://arxiv.org/abs/1705.06270) | [TEVC&nbsp;2018](https://doi.org/10.1109/tevc.2017.2712906) | Review of bilevel optimization from classical to evolutionary approaches. |
 
+</details>
+
 ### Hardware-aware NAS and model–accelerator co-search
+
+<details>
+<summary>Show 11 entries · 2019–2026</summary>
 
 | Work | Venue | Note |
 | :--- | :--- | :--- |
@@ -478,7 +501,12 @@ Static co-design: one-shot joint optimization over model, stack and hardware, an
 | ⭐ [NAAS: Neural Accelerator Architecture Search](https://arxiv.org/abs/2105.13258) | [DAC&nbsp;2021](https://doi.org/10.1109/dac18074.2021.9586250) | NAAS searches the neural accelerator architecture together with the network. |
 | ⭐ [Hardware Co-Design Scaling Laws via Roofline Modelling for On-Device LLMs](https://arxiv.org/abs/2602.10377) | arXiv&nbsp;2026 | Writes scaling laws (accuracy) and Roofline (latency) into one objective to choose on-device LLM structures, cutting selection from months to days. |
 
+</details>
+
 ### Performance models, simulators and scaling laws
+
+<details>
+<summary>Show 10 entries · 2009–2024</summary>
 
 | Work | Venue | Note |
 | :--- | :--- | :--- |
@@ -492,6 +520,8 @@ Static co-design: one-shot joint optimization over model, stack and hardware, an
 | [Training Compute-Optimal Large Language Models](https://arxiv.org/abs/2203.15556) | [NeurIPS&nbsp;2022](https://doi.org/10.52202/068431-2176) | Chinchilla: compute-optimal allocation of parameters and data. |
 | [LLMCompass: Enabling Efficient Hardware Design for Large Language Model Inference](https://doi.org/10.1109/isca59077.2024.00082) [![Code](https://img.shields.io/github/stars/PrincetonUniversity/LLMCompass?style=social&label=Code)](https://github.com/PrincetonUniversity/LLMCompass) | ISCA&nbsp;2024 | LLMCompass simulates hardware designs for LLM inference. |
 | [Vidur: A Large-Scale Simulation Framework for LLM Inference](https://arxiv.org/abs/2405.05465) [![Code](https://img.shields.io/github/stars/microsoft/vidur?style=social&label=Code)](https://github.com/microsoft/vidur) | MLSys&nbsp;2024 | Vidur, a large-scale simulator of LLM inference serving. |
+
+</details>
 
 <p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
 

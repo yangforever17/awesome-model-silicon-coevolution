@@ -16,7 +16,7 @@ shot() {  # html, out, width, height
 shot overview.html overview.png 2040 1030
 shot tower.html tower.png 1400 880
 shot trajectories.html trajectories.png 1400 1060
-shot loop.html loop.png 1600 1040
+shot loop.html loop.png 1600 1230
 pdf() {  # html, out — vector PDF for the paper
   "$chrome" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 \
     --print-to-pdf="$here/../../assets/$2" "file://$here/$1" 2>/dev/null

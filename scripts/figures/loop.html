@@ -1,7 +1,6 @@
 <!doctype html>
 <!--
-  The full co-evolution loop: three concentric loops (stack · hours, model · months, silicon · years) pass through
-  the same five stations; the model at the centre is the executor, and deployment feeds back into it (g, L4).
+  Survey overview: the model–stack–silicon co-evolution loop and how the survey is organised (§2–§8).
   Render: bash scripts/figures/render.sh  (assets/loop.png, assets/loop.pdf)
 -->
 <html>
@@ -10,207 +9,312 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Patrick+Hand&display=block" rel="stylesheet">
 <style>
-  @page { size: 1600px 1040px; margin: 0; }
+  @page { size: 1600px 1230px; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   html, body { background: #fff; }
-  body { width: 1600px; height: 1040px; overflow: hidden; font-family: Inter, sans-serif; color: #17203a;
-         background: radial-gradient(rgba(42,55,99,.08) 1px, transparent 1.3px) 0 0 / 16px 16px,
-                     radial-gradient(640px 640px at 560px 540px, #f1f4ff 0%, rgba(255,255,255,0) 70%), #fff; }
+  body { width: 1600px; height: 1230px; overflow: hidden; font-family: Inter, sans-serif; color: #17203a; }
   svg { display: block; }
 </style>
 </head>
 <body>
-<svg id="fig" width="1600" height="1040" viewBox="0 0 1600 1040"></svg>
+<svg id="fig" width="1600" height="1230" viewBox="0 0 1600 1230"></svg>
 <script>
-const NAVY = '#1e3a6e';
-const C = [560, 548];
-const RING = {
-  st: { r: 150, label: 'STACK · hours', ink: '#0f766e', fill: '#c8efe6', edge: '#5cbfa9' },
-  mo: { r: 236, label: 'MODEL · months', ink: '#6d28d9', fill: '#e2d9ff', edge: '#a993f0' },
-  si: { r: 322, label: 'SILICON · years', ink: '#a2510b', fill: '#fde3b3', edge: '#e0a24a' },
-};
-const BAND = 40;
-// stations, clockwise from the top (SVG angles: -90 = top)
-const ST = [
-  { a: -90, n: 1, name: 'Measure', sub: 'read y = m(M, S, H)' },
-  { a: -18, n: 2, name: 'Propose', sub: 'write candidate changes' },
-  { a: 54, n: 3, name: 'Verify', sub: 'climb the S1→S6 ladder' },
-  { a: 126, n: 4, name: 'Adopt', sub: 'human sign-off gates' },
-  { a: 198, n: 5, name: 'Deploy', sub: 'new M, S, H in service' },
-];
-const P = (a, r) => [C[0] + r * Math.cos(a * Math.PI / 180), C[1] + r * Math.sin(a * Math.PI / 180)];
-const arc = (r, a0, a1) => { const [x0, y0] = P(a0, r), [x1, y1] = P(a1, r); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 ${Math.abs(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
-const shadow = (cx, cy, rx, o = .13) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx * 0.15}" fill="${NAVY}" opacity="${o}"/>`;
-const sparkle = (x, y, s = 1, c = '#fbbf24') => `<path transform="translate(${x},${y}) scale(${s})" d="M0 -9 C1 -2 2 -1 9 0 C2 1 1 2 0 9 C-1 2 -2 1 -9 0 C-2 -1 -1 -2 0 -9z" fill="${c}"/>`;
+const NAVY = '#1e3a6e', INK = '#17203a';
+const LOBE = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.90.0/icons/';
+const LOGO = { deepmind: LOBE + 'deepmind-color.svg', nvidia: LOBE + 'nvidia-color.svg', meta: LOBE + 'meta-color.svg',
+  huawei: LOBE + 'huawei-color.svg', deepseek: LOBE + 'deepseek-color.svg', openai: LOBE + 'openai.svg', qwen: LOBE + 'qwen-color.svg' };
 
-function robot(x, y, s = 1) {
-  const arm = (d) => `<path d="${d}" fill="none" stroke="${NAVY}" stroke-width="8.5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#4d7fe8" stroke-width="4.6" stroke-linecap="round"/>`;
-  return `<g transform="translate(${x},${y}) scale(${s})">
-    <rect x="21" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
-    <rect x="38" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
-    ${arm('M15 58 Q 4 64 2 76')}<circle cx="2" cy="76" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
-    <rect x="13" y="48" width="44" height="37" rx="15" fill="url(#gBody)" stroke="${NAVY}" stroke-width="2.6"/>
-    <rect x="26" y="58" width="18" height="18" rx="3" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.8"/><rect x="31" y="63" width="8" height="8" rx="1.5" fill="url(#gDie)"/>
-    ${arm('M55 58 Q 66 52 72 40')}<circle cx="72" cy="40" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
-    <line x1="35" y1="9" x2="35" y2="-1" stroke="${NAVY}" stroke-width="2.6"/><circle cx="35" cy="-3" r="5" fill="#fbbf24" stroke="${NAVY}" stroke-width="2.2"/>
-    <circle cx="5" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/><circle cx="65" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/>
-    <rect x="6" y="8" width="58" height="42" rx="17" fill="url(#gHead)" stroke="${NAVY}" stroke-width="2.6"/>
-    <path d="M14 18 q 6 -6 18 -6" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
-    <rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a" stroke="${NAVY}" stroke-width="2"/>
-    <g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
-    <path d="M30 37.5 q 5 3.2 10 0" stroke="#67e8f9" stroke-width="2" fill="none" stroke-linecap="round"/>
-  </g>`;
-}
-function gate(a, r, big = false) {
-  // barrier arm laid across the ring band at angle a
-  const [px, py] = P(a, r + BAND / 2 + 10), [ax, ay] = P(a, r - BAND / 2 - 4);
-  const sc = big ? 1.25 : 1;
-  return `<g>
-    <path d="M${px} ${py} L ${ax} ${ay}" stroke="${NAVY}" stroke-width="${9 * sc}" stroke-linecap="round"/>
-    <path d="M${px} ${py} L ${ax} ${ay}" stroke="#ef4444" stroke-width="${6 * sc}" stroke-linecap="round"/>
-    <path d="M${px} ${py} L ${ax} ${ay}" stroke="#fff" stroke-width="${6 * sc}" stroke-dasharray="6 6"/>
-    <circle cx="${px}" cy="${py}" r="${6.5 * sc}" fill="#fbbf24" stroke="${NAVY}" stroke-width="2.2"/></g>`;
-}
-function breakBadge(x, y, title, sub, anchor = 'start') {
-  const tx = anchor === 'start' ? x + 22 : x - 22;
-  return `<g><circle cx="${x}" cy="${y}" r="15" fill="#fee2e2" stroke="#dc2626" stroke-width="2.6"/>
-    <path d="M${x - 6} ${y - 7} L ${x + 1} ${y - 1} L ${x - 3} ${y + 1} L ${x + 6} ${y + 8}" fill="none" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-    <text x="${tx}" y="${y - 2}" text-anchor="${anchor}" font-weight="800" font-size="13.5" fill="#b91c1c">${title}</text>
-    <text x="${tx}" y="${y + 15}" text-anchor="${anchor}" font-weight="500" font-size="12" fill="#7f1d1d">${sub}</text></g>`;
-}
-const pill = (x, y, lv, color, text, anchor = 'start') => {
-  const w = 30;
-  const tx = anchor === 'start' ? x + w + 8 : x - 8;
-  return `<g><rect x="${x}" y="${y - 12}" width="${w}" height="24" rx="12" fill="${color}"/>
-    <text x="${x + w / 2}" y="${y + 4.5}" text-anchor="middle" font-weight="800" font-size="12.5" fill="#fff">${lv}</text>
-    <text x="${tx}" y="${y + 4.5}" text-anchor="${anchor}" font-family="Patrick Hand" font-size="18" fill="${color}">${text}</text></g>`;
+// ---------------------------------------------------------------- icon kit (all drawn in a 48×48 box at (x, y), scale s)
+const g = (x, y, s, body) => `<g transform="translate(${x},${y}) scale(${s})">${body}</g>`;
+const ST = `stroke="${NAVY}" stroke-width="2.2" stroke-linejoin="round" stroke-linecap="round"`;
+const IC = {
+  robot: (x, y, s = 1) => g(x, y, s, `
+    <line x1="24" y1="6" x2="24" y2="1" ${ST}/><circle cx="24" cy="1" r="3" fill="#fbbf24" ${ST}/>
+    <circle cx="5" cy="20" r="3.2" fill="#a9c2f7" ${ST}/><circle cx="43" cy="20" r="3.2" fill="#a9c2f7" ${ST}/>
+    <rect x="6" y="6" width="36" height="28" rx="11" fill="url(#gHead)" ${ST}/>
+    <rect x="11" y="12" width="26" height="16" rx="7" fill="#16234a"/>
+    <rect x="16" y="15.5" width="4.5" height="7" rx="2.2" fill="#67e8f9"/><rect x="27.5" y="15.5" width="4.5" height="7" rx="2.2" fill="#67e8f9"/>
+    <rect x="12" y="35" width="24" height="12" rx="5" fill="url(#gBody)" ${ST}/>
+    <rect x="20" y="37.5" width="8" height="7" rx="1.5" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.2"/>`),
+  chip: (x, y, s = 1, label = '') => g(x, y, s, `
+    <g stroke="#a2510b" stroke-width="2.4" stroke-linecap="round">${[14, 24, 34].map(p => `<path d="M${p} 4v5M${p} 39v5M4 ${p}h5M39 ${p}h5"/>`).join('')}</g>
+    <rect x="9" y="9" width="30" height="30" rx="5" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.2"/>
+    <rect x="15" y="15" width="18" height="18" rx="3" fill="url(#gDie)"/>
+    ${label ? `<text x="24" y="27.5" text-anchor="middle" font-weight="800" font-size="8" fill="#fde68a">${label}</text>` : ''}`),
+  term: (x, y, s = 1, label = '>_') => g(x, y, s, `
+    <rect x="3" y="7" width="42" height="34" rx="6" fill="#16234a" ${ST}/>
+    <circle cx="9" cy="13" r="1.8" fill="#f87171"/><circle cx="15" cy="13" r="1.8" fill="#fbbf24"/><circle cx="21" cy="13" r="1.8" fill="#4ade80"/>
+    <text x="9" y="32" font-weight="800" font-size="11" fill="#5eead4">${label}</text>`),
+  net: (x, y, s = 1) => g(x, y, s, `
+    <rect x="2" y="4" width="44" height="40" rx="9" fill="#efeaff" stroke="#7c5ce0" stroke-width="2"/>
+    <g stroke="#7c3aed" stroke-width="1.6" fill="#fff"><path d="M10 24 L22 12 L36 18 M10 24 L22 24 L36 30 M10 24 L22 36 L36 30 M22 12 L36 30 M22 36 L36 18" fill="none" opacity=".7"/>
+    ${[[10, 24], [22, 12], [22, 24], [22, 36], [36, 18], [36, 30]].map(([a, b]) => `<circle cx="${a}" cy="${b}" r="3.6"/>`).join('')}</g>`),
+  doc: (x, y, s = 1, mark = 'spec') => g(x, y, s, `
+    <path d="M9 3h21l10 10v32H9z" fill="#fff" ${ST}/><path d="M30 3v10h10" fill="#e8eefb" ${ST}/>
+    <text x="13" y="21" font-weight="800" font-size="8" fill="#2b6fd6">${mark}</text>
+    <path d="M14 28h20M14 34h14M14 40h18" stroke="#a9bbdd" stroke-width="2.4" stroke-linecap="round"/>`),
+  wafer: (x, y, s = 1) => g(x, y, s, `
+    <circle cx="24" cy="24" r="20" fill="url(#gChip)" stroke="#a2510b" stroke-width="2.2"/>
+    <g stroke="#a2510b" stroke-width="1" opacity=".6">${[-14, -7, 0, 7, 14].map(v => `<path d="M${24 + v} 6V42M6 ${24 + v}H42"/>`).join('')}</g>
+    <path d="M18 43.5h12" stroke="#a2510b" stroke-width="3"/>`),
+  bars: (x, y, s = 1) => g(x, y, s, `
+    <rect x="3" y="6" width="42" height="36" rx="6" fill="#fff" ${ST}/>
+    <rect x="9" y="13" width="28" height="6" rx="2" fill="#fca5a5"/><rect x="9" y="22" width="19" height="6" rx="2" fill="#fcd34d"/><rect x="9" y="31" width="10" height="6" rx="2" fill="#86efac"/>`),
+  crate: (x, y, s = 1, up = true) => g(x, y, s, `
+    <rect x="6" y="18" width="36" height="24" rx="3" fill="url(#gWood)" stroke="#8a5a1c" stroke-width="2"/>
+    <path d="M6 26H42M6 34H42" stroke="#b9853e" stroke-width="1.2"/>
+    ${up ? `<path d="M24 15V3M18 9l6-6 6 6" fill="none" stroke="#be123c" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>` : ''}`),
+  loop: (x, y, s = 1, c = '#16a34a') => g(x, y, s, `
+    <path d="M40 22a16 16 0 0 0-28.6-9.2M8 26a16 16 0 0 0 28.6 9.2" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round"/>
+    <path d="M10 4l1.4 9 9-1.4M38 44l-1.4-9-9 1.4" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`),
+  person: (x, y, s = 1, c = '#64748b') => g(x, y, s, `
+    <circle cx="24" cy="14" r="8" fill="#f3d5b8" ${ST}/><path d="M17 12c1-9 14-9 15 0c-4-3-11-3-15 0z" fill="#334155"/>
+    <path d="M8 46c0-14 7-21 16-21s16 7 16 21z" fill="${c}" ${ST}/>`),
+  book: (x, y, s = 1) => g(x, y, s, `
+    <path d="M4 10c8-3 14-2 20 2v30c-6-4-12-5-20-2z" fill="#e0e7ff" ${ST}/><path d="M44 10c-8-3-14-2-20 2v30c6-4 12-5 20-2z" fill="#c7d2fe" ${ST}/>
+    <path d="M9 18c4-1 7-1 10 1M9 25c4-1 7-1 10 1M29 19c3-2 6-2 10-1M29 26c3-2 6-2 10-1" stroke="#6366f1" stroke-width="1.6" fill="none"/>`),
+  target: (x, y, s = 1) => g(x, y, s, `
+    <circle cx="22" cy="26" r="18" fill="#fff" stroke="#dc2626" stroke-width="2.4"/><circle cx="22" cy="26" r="11" fill="#fecaca" stroke="#dc2626" stroke-width="2.2"/>
+    <circle cx="22" cy="26" r="4.5" fill="#dc2626"/><path d="M22 26 L42 6" stroke="${NAVY}" stroke-width="2.6"/><path d="M36 4l7 1-1 7" fill="#fbbf24" ${ST}/>`),
+  shield: (x, y, s = 1) => g(x, y, s, `
+    <path d="M24 4l17 6v12c0 12-8 19-17 22c-9-3-17-10-17-22V10z" fill="#fee2e2" stroke="#dc2626" stroke-width="2.4" stroke-linejoin="round"/>
+    <path d="M24 15v12" stroke="#dc2626" stroke-width="3.4" stroke-linecap="round"/><circle cx="24" cy="33" r="2.2" fill="#dc2626"/>`),
+  flask: (x, y, s = 1) => g(x, y, s, `
+    <path d="M18 4h12M20 4v13L8 39a4 4 0 0 0 3.5 6h25A4 4 0 0 0 40 39L28 17V4" fill="#fff" ${ST}/>
+    <path d="M13 31h22l4 8a4 4 0 0 1-3.5 6h-23A4 4 0 0 1 9 39z" fill="#86efac"/><circle cx="20" cy="37" r="2" fill="#fff"/><circle cx="27" cy="34" r="1.6" fill="#fff"/>`),
+  gym: (x, y, s = 1) => g(x, y, s, `
+    <rect x="4" y="16" width="6" height="16" rx="2" fill="#475569"/><rect x="10" y="12" width="6" height="24" rx="2" fill="#64748b"/>
+    <rect x="38" y="16" width="6" height="16" rx="2" fill="#475569"/><rect x="32" y="12" width="6" height="24" rx="2" fill="#64748b"/>
+    <rect x="16" y="22" width="16" height="4" rx="2" fill="#94a3b8"/>`),
+  rack: (x, y, s = 1) => g(x, y, s, `
+    ${[0, 1].map(i => `<rect x="${6 + i * 19}" y="4" width="17" height="40" rx="3" fill="#334155" ${ST}/>${[12, 22, 32].map(yy => `<circle cx="${11 + i * 19}" cy="${yy}" r="2" fill="#4ade80"/><path d="M${15 + i * 19} ${yy}h5" stroke="#94a3b8" stroke-width="1.6"/>`).join('')}`).join('')}`),
+  globe: (x, y, s = 1) => g(x, y, s, `
+    <circle cx="24" cy="24" r="19" fill="#dbeafe" ${ST}/><path d="M5 24h38M24 5c-7 6-7 32 0 38M24 5c7 6 7 32 0 38" fill="none" ${ST}/>
+    <path d="M9 14c9 4 21 4 30 0M9 34c9-4 21-4 30 0" fill="none" stroke="${NAVY}" stroke-width="1.6"/>`),
+  mountain: (x, y, s = 1, c = '#7c3aed') => g(x, y, s, `
+    <path d="M2 44 L18 16 L26 28 L32 20 L46 44Z" fill="#e9e3ff" stroke="${c}" stroke-width="2.2" stroke-linejoin="round"/>
+    <path d="M18 16 L14 23 L18 21 L22 24Z" fill="#fff"/><path d="M18 16V4" stroke="${NAVY}" stroke-width="2"/><path d="M18 4h10l-3 3 3 3H18z" fill="#ef4444"/>`),
+  gauge: (x, y, s = 1) => g(x, y, s, `
+    <path d="M6 34a18 18 0 0 1 36 0" fill="none" stroke="#e2e8f0" stroke-width="7"/>
+    <path d="M6 34a18 18 0 0 1 9-15.6" fill="none" stroke="#ef4444" stroke-width="7"/><path d="M15 18.4a18 18 0 0 1 18 0" fill="none" stroke="#fbbf24" stroke-width="7"/>
+    <path d="M33 18.4a18 18 0 0 1 9 15.6" fill="none" stroke="#22c55e" stroke-width="7"/><path d="M24 34 L35 22" stroke="${NAVY}" stroke-width="3" stroke-linecap="round"/><circle cx="24" cy="34" r="3.5" fill="${NAVY}"/>`),
+  clock: (x, y, s = 1) => g(x, y, s, `
+    <circle cx="24" cy="26" r="17" fill="#fff" ${ST}/><path d="M24 15v11l7 4" fill="none" stroke="#7c3aed" stroke-width="3" stroke-linecap="round"/><rect x="19" y="3" width="10" height="5" rx="1.5" fill="${NAVY}"/>`),
+  barrier: (x, y, s = 1) => g(x, y, s, `
+    <rect x="36" y="14" width="6" height="30" rx="2" fill="#475569"/><circle cx="39" cy="14" r="4.5" fill="#fbbf24" ${ST}/>
+    <path d="M38 16 L4 28" stroke="${NAVY}" stroke-width="8" stroke-linecap="round"/><path d="M38 16 L4 28" stroke="#ef4444" stroke-width="5" stroke-linecap="round"/>
+    <path d="M38 16 L4 28" stroke="#fff" stroke-width="5" stroke-dasharray="5 5"/>`),
+  gear: (x, y, s = 1, c = '#c9d8f6') => g(x, y, s, `
+    ${[...Array(8)].map((_, i) => `<rect x="21" y="3" width="6" height="8" rx="1.5" transform="rotate(${i * 45} 24 24)" fill="${c}" ${ST}/>`).join('')}
+    <circle cx="24" cy="24" r="13" fill="${c}" ${ST}/><circle cx="24" cy="24" r="5" fill="#fff" ${ST}/>`),
+  fab: (x, y, s = 1) => g(x, y, s, `
+    <path d="M3 44V24l10-6v6l10-6v6l10-6v26z" fill="#e2e8f0" ${ST}/><rect x="33" y="8" width="7" height="36" fill="#cbd5e1" ${ST}/>
+    <path d="M36 6c0-4 6-4 6-1" fill="none" stroke="#94a3b8" stroke-width="2"/><rect x="9" y="32" width="6" height="6" fill="#fbbf24"/><rect x="20" y="32" width="6" height="6" fill="#fbbf24"/>`),
+  sparkle: (x, y, s = 1, c = '#fbbf24') => `<path transform="translate(${x},${y}) scale(${s})" d="M0 -9 C1 -2 2 -1 9 0 C2 1 1 2 0 9 C-1 2 -2 1 -9 0 C-2 -1 -1 -2 0 -9z" fill="${c}"/>`,
 };
+const logo = (k, x, y, w = 22) => `<image href="${LOGO[k]}" x="${x}" y="${y}" width="${w}" height="${w}"/>`;
+
+// ---------------------------------------------------------------- shared shapes
+const bigArrow = (x, y, w, label, c = '#2a5b7c') => `<g transform="translate(${x},${y})">
+  <path d="M0 -20 H${w - 26} V-34 L${w} 0 L${w - 26} 34 V20 H0 Z" fill="${c}"/>
+  <text x="${(w - 26) / 2 + 2}" y="7" text-anchor="middle" font-weight="800" font-size="19" fill="#fff">${label}</text></g>`;
+const grayArrow = (x, y, w = 40) => `<path d="M${x} ${y - 7} h${w - 14} v-7 l14 14 -14 14 v-7 h-${w - 14} z" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.6" stroke-linejoin="round"/>`;
+const tag = (x, y, t, c = '#475569', fill = '#fff', fs = 12.5) => {
+  const w = 18 + t.length * fs * 0.56;
+  return `<g transform="translate(${x - w / 2},${y - 12})"><rect width="${w}" height="24" rx="12" fill="${fill}" stroke="${c}" stroke-width="1.6"/>
+    <text x="${w / 2}" y="16.5" text-anchor="middle" font-weight="600" font-size="${fs}" fill="${INK}">${t}</text></g>`;
+};
+const support = (x, y, label = 'Support') => {
+  const w = label.length * 8 + 26;
+  return `<g transform="translate(${x},${y})"><path d="M0 -13 H${w - 12} L${w} 0 L${w - 12} 13 H0 Z" fill="#e5e7eb" stroke="#9ca3af" stroke-width="1.4"/>
+    <text x="${(w - 12) / 2}" y="5" text-anchor="middle" font-weight="700" font-size="12" fill="${INK}">${label}</text></g>`;
+};
+const dotted = (x, y, w, h, c = '#94a3b8') => `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="14" fill="#fff" fill-opacity=".72" stroke="${c}" stroke-width="2" stroke-dasharray="3 5"/>`;
 
 let s = `<defs>
   <linearGradient id="gHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78a8ff"/><stop offset="1" stop-color="#3d6fe0"/></linearGradient>
   <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b9bff"/><stop offset="1" stop-color="#3563d4"/></linearGradient>
   <linearGradient id="gChip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe2a8"/><stop offset="1" stop-color="#f7b955"/></linearGradient>
   <linearGradient id="gDie" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3a66"/><stop offset="1" stop-color="#121a33"/></linearGradient>
-  <radialGradient id="halo"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#cfe0ff" stop-opacity="0"/></radialGradient>
-  <filter id="fEye" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
-  <filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e3a6e" flood-opacity=".13"/></filter>
-  <marker id="ar-g" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker>
-  <marker id="ar-o" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker>
-  ${Object.entries(RING).map(([k, R]) => `<path id="lab-${k}" d="${arc(R.r, -168, -100)}"/>`).join('')}
+  <linearGradient id="gWood" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f3d39b"/><stop offset="1" stop-color="#d9a55c"/></linearGradient>
+  <linearGradient id="gBand" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#f3faf2"/><stop offset=".5" stop-color="#eef3ff"/><stop offset="1" stop-color="#fdf0f6"/></linearGradient>
+  <linearGradient id="gLoop" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#eef6ff"/><stop offset="1" stop-color="#f6f0ff"/></linearGradient>
+  <marker id="arG" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker>
+  <marker id="arO" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto"><path d="M0 0L10 5L0 10z" fill="#f97316"/></marker>
 </defs>`;
 
-// title
-s += `<text x="40" y="54" font-family="Patrick Hand" font-size="38" fill="#17203a">One turn of the co-evolution loop</text>
-      <text x="42" y="80" font-weight="500" font-size="15.5" fill="#5d6679">three loops at three speeds share five stations; the model at the centre both turns them and is changed by them</text>`;
+// ================================================================= row 0: the loop as a story
+s += IC.robot(34, 26, 1.7);
+s += `<text x="74" y="136" text-anchor="middle" font-weight="800" font-size="18" fill="${INK}">Model</text>
+      <text x="74" y="154" text-anchor="middle" font-weight="500" font-size="12.5" fill="#5d6679">designer & workload</text>`;
+s += bigArrow(128, 76, 156, 'Design');
+s += `<rect x="300" y="18" width="380" height="128" rx="18" fill="url(#gLoop)" stroke="#475569" stroke-width="2.4" stroke-dasharray="4 6"/>`;
+s += IC.term(330, 34, 1.3, 'kernel') + IC.gear(410, 36, 1.15, '#a8e6d8') + IC.chip(486, 32, 1.35, 'RTL') + IC.wafer(566, 34, 1.3);
+s += `<text x="490" y="128" text-anchor="middle" font-weight="800" font-size="20" fill="${INK}">Software stack + Silicon</text>`;
+s += bigArrow(696, 76, 176, 'Train & serve');
+s += IC.robot(896, 18, 2.05) + IC.sparkle(1000, 40, 1) + IC.sparkle(888, 104, .7, '#93c5fd');
+s += `<text x="945" y="136" text-anchor="middle" font-weight="800" font-size="18" fill="${INK}">Successor model</text>
+      <text x="945" y="154" text-anchor="middle" font-weight="500" font-size="12.5" fill="#5d6679">runs on what it built</text>`;
+s += bigArrow(1010, 76, 150, 'Recurse');
+s += `<rect x="1176" y="18" width="404" height="128" rx="18" fill="#fff" stroke="#475569" stroke-width="2.4" stroke-dasharray="4 6"/>`;
+s += IC.fab(1206, 30, 1.4) + IC.rack(1290, 30, 1.4) + IC.mountain(1374, 26, 1.5) + IC.globe(1462, 30, 1.4);
+s += `<text x="1378" y="128" text-anchor="middle" font-weight="800" font-size="20" fill="${INK}">Self-scaling intelligence</text>`;
+s += `<path d="M945 160 V 174 H 74 V 166" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-dasharray="7 6" stroke-linejoin="round" marker-end="url(#arG)"/>
+      <rect x="378" y="162" width="264" height="24" rx="12" fill="#fff"/>
+      <text x="510" y="180" text-anchor="middle" font-family="Patrick Hand" font-size="18" fill="#15803d">the successor becomes the next designer</text>`;
 
-// station spokes (behind rings)
-for (const t of ST) {
-  const [x0, y0] = P(t.a, 104), [x1, y1] = P(t.a, RING.si.r + BAND / 2 + 26);
-  s += `<path d="M${x0} ${y0} L ${x1} ${y1}" stroke="#b9c3d8" stroke-width="2" stroke-dasharray="3 6"/>`;
-}
-
-// rings
-for (const [k, R] of Object.entries(RING)) {
-  s += `<circle cx="${C[0]}" cy="${C[1]}" r="${R.r}" fill="none" stroke="${R.edge}" stroke-width="${BAND + 3}"/>
-        <circle cx="${C[0]}" cy="${C[1]}" r="${R.r}" fill="none" stroke="${R.fill}" stroke-width="${BAND - 1}"/>`;
-  // clockwise chevrons
-  for (let a = -84; a < 270; a += k === 'st' ? 30 : k === 'mo' ? 20 : 15) {
-    if (ST.some(t => Math.abs(((a - t.a) % 360 + 360) % 360) < 9 || Math.abs(((t.a - a) % 360 + 360) % 360) < 9)) continue;
-    const an = ((a + 180) % 360 + 360) % 360 - 180;
-    if (an > -172 && an < -96) continue;  // keep the ring label clear
-    const [x, y] = P(a, R.r);
-    s += `<path d="M-5 -8 L 4 0 L -5 8" transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${a + 90})" fill="none" stroke="${R.ink}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>`;
-  }
-  s += `<text font-weight="800" font-size="13" letter-spacing=".12em" fill="${R.ink}" dy="4.5"><textPath href="#lab-${k}" startOffset="50%" text-anchor="middle">${R.label}</textPath></text>`;
-}
-
-// station nodes on each ring
-for (const t of ST) for (const R of Object.values(RING)) {
-  const [x, y] = P(t.a, R.r);
-  s += `<circle cx="${x}" cy="${y}" r="9" fill="#fff" stroke="${R.ink}" stroke-width="3"/>`;
-}
-// station chips around the outside
-for (const t of ST) {
-  const [x, y] = P(t.a, RING.si.r + BAND / 2 + 62);
-  const w = 192;
-  s += `<g transform="translate(${x - w / 2},${y - 27})" filter="url(#soft)"><rect width="${w}" height="54" rx="14" fill="#fff" stroke="#d5dbe8" stroke-width="1.5"/></g>
-        <circle cx="${x - w / 2 + 25}" cy="${y}" r="14" fill="#17203a"/>
-        <text x="${x - w / 2 + 25}" y="${y + 5}" text-anchor="middle" font-weight="800" font-size="14" fill="#fff">${t.n}</text>
-        <text x="${x - w / 2 + 48}" y="${y - 3}" font-weight="800" font-size="17" fill="#17203a">${t.name}</text>
-        <text x="${x - w / 2 + 48}" y="${y + 15}" font-weight="500" font-size="11.5" fill="#5d6679">${t.sub}</text>`;
-}
-
-// human gates at Adopt
-s += gate(126, RING.st.r) + gate(126, RING.mo.r) + gate(126, RING.si.r, true);
-
-// cross-ring links (L3) between Measure and Propose
-const XA = -54;
-const [l0x, l0y] = P(XA, RING.st.r + BAND / 2 + 2), [l1x, l1y] = P(XA, RING.si.r - BAND / 2 - 2);
-s += `<path d="M${l0x} ${l0y} L ${l1x} ${l1y}" stroke="#d97706" stroke-width="4" stroke-dasharray="7 6" marker-start="url(#ar-o)" marker-end="url(#ar-o)"/>`;
-
-// centre: the executor
-s += `<circle cx="${C[0]}" cy="${C[1]}" r="104" fill="url(#halo)"/>`;
-s += shadow(C[0], C[1] + 56, 40, .15) + robot(C[0] - 40, C[1] - 58, 1.14);
-s += `<text x="${C[0]}" y="${C[1] + 82}" text-anchor="middle" font-weight="800" font-size="14" fill="#17203a">Model θ<tspan baseline-shift="sub" font-size="10">t</tspan></text>
-      <text x="${C[0]}" y="${C[1] + 98}" text-anchor="middle" font-weight="500" font-size="11.5" fill="#5d6679">the executor</text>`;
-s += sparkle(C[0] + 64, C[1] - 52, .8) + sparkle(C[0] - 70, C[1] - 30, .55, '#93c5fd');
-
-// recursion g: from Deploy back into the executor (L4)
-const [gx0, gy0] = P(198, RING.st.r - BAND / 2 - 4);
-s += `<path d="M${gx0} ${gy0} C ${gx0 + 24} ${gy0 + 46}, ${C[0] - 86} ${C[1] + 56}, ${C[0] - 50} ${C[1] + 30}" fill="none" stroke="#16a34a" stroke-width="5" stroke-linecap="round" marker-end="url(#ar-g)"/>`;
-
-// level annotations
-s += pill(790, 214, 'L0', '#64748b', 'AI proposes, people check');
-s += pill(906, 478, 'L1', '#2563eb', 'propose ↔ verify');
-s += pill(P(90, RING.si.r)[0] - 98, P(90, RING.si.r)[1] + 52, 'L2', '#7c3aed', 'a full lap of one ring');
-s += pill(P(XA, RING.mo.r)[0] + 18, P(XA, RING.mo.r)[1] - 40, 'L3', '#d97706', 'AI picks which ring to turn');
-s += pill(36, 492, 'L4', '#16a34a', 'output re-enters');
-s += `<text x="74" y="514" font-family="Patrick Hand" font-size="18" fill="#16a34a">the executor</text>
-      <text x="36" y="538" font-weight="600" font-size="12.5" fill="#15803d">θ<tspan baseline-shift="sub" font-size="9.5">t+1</tspan> = g(θ<tspan baseline-shift="sub" font-size="9.5">t</tspan>; M, S, H)</text>`;
-
-// where the loop breaks (§1.5)
-s += breakBadge(P(78, RING.si.r + BAND / 2 + 30)[0] + 18, P(78, RING.si.r + BAND / 2 + 30)[1] + 8, 'Physics', 'silicon feedback is slow and sparse');
-s += breakBadge(60, 156, 'Agent', 'horizon of hours, loop of years');
-s += breakBadge(52, 760, 'Ecosystem', 'layers owned by different firms');
-
-// ---------------------------------------------------------------- right panel: the five stations
-const PX = 1090, PW = 476;
-s += `<text x="${PX}" y="54" font-weight="800" font-size="12.5" letter-spacing=".12em" fill="#5d6679">WHAT HAPPENS AT EACH STATION</text>`;
-const LANE = [['st', 'Stack'], ['mo', 'Model'], ['si', 'Silicon']];
-const CARDS = [
-  { n: 1, name: 'Measure', lines: ['profiles, end-to-end latency', 'evals, scaling-law fits', 'PPA reports, post-silicon data'], foot: 'reading across rings is what L3 needs' },
-  { n: 2, name: 'Propose', lines: ['kernels, schedules, serving configs', 'attention, numerics, MoE layout', 'RTL, HLS pragmas, μarch params'], foot: 'L0 suggests · L1 searches · L2 decomposes a spec' },
-  { n: 3, name: 'Verify', ladder: true, foot: 'cheap tiers screen many; few reach silicon · reward hacking lives here' },
-  { n: 4, name: 'Adopt', lines: ['code review, merge', 'training-run approval', 'sign-off, tape-out decision'], foot: 'people hold the slowest gates' },
-  { n: 5, name: 'Deploy', lines: ['new kernels go live within hours', 'next model trained within months', 'new chips in service within years'], foot: 'when the new S or H runs the designer itself: L4' },
+// ================================================================= row 1: co-design → co-evolution
+s += `<rect x="20" y="190" width="1560" height="92" rx="18" fill="url(#gBand)" stroke="#d6dbe6" stroke-width="1.4"/>
+      <text x="44" y="230" font-weight="800" font-size="21" fill="${INK}">Co-design</text>${grayArrow(164, 223, 44)}
+      <text x="218" y="230" font-weight="800" font-size="21" fill="${INK}">Co-evolution</text>
+      <text x="196" y="262" text-anchor="middle" font-weight="700" font-size="16" fill="${INK}">(▷ §2–§3)</text>`;
+const SHIFT = [
+  { k: 'Problem', a: 'Fixed target', b: 'Moving target', ia: (x, y) => IC.target(x, y, .78), ib: (x, y) => IC.loop(x, y, .78, '#7c3aed') },
+  { k: 'Executor', a: 'People', b: 'Model', ia: (x, y) => IC.person(x, y, .78), ib: (x, y) => IC.robot(x, y, .8) },
+  { k: 'Feedback', a: 'One-shot', b: 'S1→S6 ladder', ia: (x, y) => IC.doc(x, y, .78, 'spec'), ib: (x, y) => IC.bars(x, y, .78) },
+  { k: 'Autonomy', a: 'L0 assist', b: 'L4 recursive', ia: (x, y) => IC.person(x, y, .7, '#94a3b8'), ib: (x, y) => IC.loop(x, y, .78) },
 ];
-const CH = 168, CG = 12;
-CARDS.forEach((c, i) => {
-  const y0 = 76 + i * (CH + CG);
-  s += `<g transform="translate(${PX},${y0})" filter="url(#soft)"><rect width="${PW}" height="${CH}" rx="14" fill="#fff" stroke="#dfe4ee" stroke-width="1.4"/></g>
-        <circle cx="${PX + 26}" cy="${y0 + 28}" r="14" fill="#17203a"/>
-        <text x="${PX + 26}" y="${y0 + 33}" text-anchor="middle" font-weight="800" font-size="14" fill="#fff">${c.n}</text>
-        <text x="${PX + 50}" y="${y0 + 34}" font-weight="800" font-size="18" fill="#17203a">${c.name}</text>`;
-  if (c.ladder) {
-    const tiers = [['S1', 'compile', 's'], ['S2', 'function', 'min–h'], ['S3', 'PPA', 'h'], ['S4', 'profile', 'min'], ['S5', 'end-to-end', 'h–d'], ['S6', 'post-silicon', 'mo–yr']];
-    tiers.forEach(([k, nm, t], j) => {
-      const bx = PX + 22 + j * 74, bh = 52 - j * 7.5, by = y0 + 112 - bh;
-      const col = ['#93c5fd', '#7fb3f5', '#a78bfa', '#5eead4', '#fbbf24', '#f59e0b'][j];
-      s += `<rect x="${bx}" y="${by}" width="64" height="${bh}" rx="6" fill="${col}" opacity=".85"/>
-            <text x="${bx + 32}" y="${by - 6}" text-anchor="middle" font-weight="800" font-size="12" fill="#17203a">${k}</text>
-            <text x="${bx + 32}" y="${y0 + 126}" text-anchor="middle" font-weight="600" font-size="11" fill="#334155">${nm}</text>
-            <text x="${bx + 32}" y="${y0 + 140}" text-anchor="middle" font-weight="500" font-size="10.5" fill="#6b7385">${t}</text>`;
+SHIFT.forEach((t, i) => {
+  const x0 = 384 + i * 284;
+  s += `<rect x="${x0}" y="200" width="268" height="72" rx="12" fill="#fff" fill-opacity=".8" stroke="#94a3b8" stroke-width="1.6" stroke-dasharray="3 5"/>
+        <text x="${x0 + 134}" y="220" text-anchor="middle" font-weight="700" font-size="13.5" fill="${INK}">${t.k}</text>
+        ${t.ia(x0 + 34, 216)}${grayArrow(x0 + 114, 240, 40)}${t.ib(x0 + 196, 216)}
+        ${tag(x0 + 58, 262, t.a, '#64748b', '#fff', 11)}${tag(x0 + 212, 262, t.b, '#64748b', '#fff', 11)}`;
+});
+s += `<text x="1546" y="234" text-anchor="middle" font-weight="700" font-size="14" fill="#475569">And</text>
+      <text x="1546" y="252" text-anchor="middle" font-weight="700" font-size="14" fill="#475569">more…</text>`;
+
+// ================================================================= panels
+function panel({ x, y, w, h, c, bg, footer, cols, bullets, mini }) {
+  let o = `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="${bg}" stroke="${c}" stroke-width="2.6"/>`;
+  const cw = (w - 40) / 3;
+  cols.forEach((col, i) => {
+    const cx = x + 20 + i * cw;
+    o += col.icon(cx + 8, y + 18) + `<text x="${cx + 80}" y="${y + 44}" font-weight="800" font-size="22" fill="${c}">${col.t1}</text>
+         <text x="${cx + 80}" y="${y + 70}" font-weight="800" font-size="22" fill="${c}">${col.t2 || ''}</text>`;
+    bullets[i].forEach((b, j) => o += `<text x="${cx + 12}" y="${y + 112 + j * 27}" font-weight="500" font-size="15.5" fill="${INK}"><tspan font-weight="800">➢</tspan>  ${b}</text>`);
+  });
+  o += mini(x, y + 196);
+  o += `<text x="${x + w / 2}" y="${y + h - 18}" text-anchor="middle" font-weight="800" font-size="22" fill="${c}">${footer}</text>`;
+  return o;
+}
+const PW = 770, PH = 412;
+
+// ---- §4 design down / constraints up
+s += panel({
+  x: 20, y: 298, w: PW, h: PH, c: '#9a5b2a', bg: '#fffaf3',
+  footer: 'Design Flows Down, Constraints Flow Up (▷ §4)',
+  cols: [
+    { icon: (x, y) => IC.chip(x, y, 1.35), t1: 'Model →', t2: 'Silicon' },
+    { icon: (x, y) => IC.term(x, y, 1.35), t1: 'Model →', t2: 'Stack' },
+    { icon: (x, y) => IC.crate(x, y, 1.35), t1: 'Silicon →', t2: 'Model' },
+  ],
+  bullets: [['RTL generation', 'Verification & debug', 'EDA tools, end-to-end'], ['LLM-written kernels', 'Compilers', 'Serving & deployment'], ['Attention & memory', 'Sparsity & MoE', 'Numeric formats']],
+  mini: (x, y) => {
+    let m = dotted(x + 22, y, 340, 150, '#c08a57') + dotted(x + 400, y, 348, 150, '#c08a57');
+    m += IC.doc(x + 38, y + 18, 1.05) + grayArrow(x + 94, y + 44, 30) + IC.term(x + 132, y + 18, 1.05, '</>') + grayArrow(x + 188, y + 44, 30) + IC.chip(x + 226, y + 18, 1.05, 'GDS');
+    m += IC.bars(x + 290, y + 18, 1.05);
+    m += `<text x="${x + 192}" y="${y + 100}" text-anchor="middle" font-weight="700" font-size="12.5" fill="#5d6679">spec → RTL → GDSII · kernel → profile</text>`;
+    m += tag(x + 110, y + 128, 'AI-driven · L0–L2', '#2b6fd6', '#eef4ff', 12) + tag(x + 270, y + 128, 'reaches L3', '#d97706', '#fff7e6', 12);
+    m += IC.chip(x + 414, y + 66, 1.0) + `<path d="M${x + 466} ${y + 90} C ${x + 494} ${y + 90}, ${x + 494} ${y + 62}, ${x + 522} ${y + 62}" fill="none" stroke="#9ca3af" stroke-width="3"/>`;
+    m += IC.term(x + 522, y + 38, 1.0, '>_') + `<path d="M${x + 576} ${y + 58} C ${x + 602} ${y + 58}, ${x + 602} ${y + 34}, ${x + 628} ${y + 34}" fill="none" stroke="#9ca3af" stroke-width="3"/>`;
+    m += IC.net(x + 628, y + 10, 1.0) + IC.crate(x + 470, y + 22, .8) + IC.crate(x + 580, y - 2, .8);
+    m += IC.person(x + 690, y + 66, .9);
+    m += `<text x="${x + 574}" y="${y + 138}" text-anchor="middle" font-weight="700" font-size="12.5" fill="#5d6679">HBM · FP8 · 2:4 · MoE, carried up by people</text>`;
+    m += support(x + 350, y + 75, 'vs');
+    return m;
+  },
+});
+
+// ---- §5 closed loops
+s += panel({
+  x: 810, y: 298, w: PW, h: PH, c: '#1f5f8b', bg: '#f3f8fd',
+  footer: 'Closed Loops and Where They Break (▷ §5)',
+  cols: [
+    { icon: (x, y) => IC.gear(x, y, 1.35, '#bfdbfe'), t1: 'Industrial', t2: 'Precedents' },
+    { icon: (x, y) => IC.loop(x, y, 1.35), t1: 'Recursive', t2: 'Loop (L4)' },
+    { icon: (x, y) => IC.person(x, y, 1.3, '#60a5fa'), t1: 'Human-led', t2: 'Co-design' },
+  ],
+  bullets: [['RL adders, layouts', 'Chip placement', 'Algorithm discovery'], ['Circuit → next TPU', 'Kernel → training', 'Human sign-off'], ['Workload-driven ASIC', 'Model built for NPU', 'Claims, undisclosed']],
+  mini: (x, y) => {
+    let m = dotted(x + 22, y, 300, 150, '#6b9ac0') + dotted(x + 428, y, 320, 150, '#6b9ac0');
+    m += `<text x="${x + 172}" y="${y + 24}" text-anchor="middle" font-weight="700" font-size="13" fill="#1f5f8b">AI-designed circuits in AI hardware</text>`;
+    [['nvidia', 'PrefixRL', 74], ['deepmind', 'AlphaChip', 172], ['deepmind', 'AlphaDev', 270]].forEach(([k, n, dx]) => {
+      m += `<g transform="translate(${x + dx - 46},${y + 40})"><rect width="92" height="32" rx="16" fill="#fff" stroke="#93c5fd" stroke-width="1.6"/>${logo(k, 7, 5, 22)}
+            <text x="33" y="21" font-weight="700" font-size="11.5" fill="${INK}">${n}</text></g>`;
     });
-    s += `<text x="${PX + PW - 18}" y="${y0 + 34}" text-anchor="end" font-weight="600" font-size="11.5" fill="#6b7385">fewer candidates, slower, more trusted →</text>`;
-  } else {
-    c.lines.forEach((ln, j) => {
-      const [k, nm] = LANE[j], R = RING[k], yy = y0 + 64 + j * 26;
-      s += `<rect x="${PX + 22}" y="${yy - 13}" width="64" height="20" rx="10" fill="${R.fill}" stroke="${R.edge}" stroke-width="1.4"/>
-            <text x="${PX + 54}" y="${yy + 1.5}" text-anchor="middle" font-weight="700" font-size="11.5" fill="${R.ink}">${nm}</text>
-            <text x="${PX + 98}" y="${yy + 2}" font-weight="500" font-size="14" fill="#17203a">${ln}</text>`;
+    m += `<text x="${x + 172}" y="${y + 104}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#b91c1c">designer ≠ trained model</text>
+          <text x="${x + 172}" y="${y + 128}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#b91c1c">signal not connected · gain too small</text>`;
+    m += support(x + 334, y + 75, 'Learn');
+    m += `<g transform="translate(${x + 448},${y + 14})">
+            ${logo('deepmind', 0, 0, 24)}<text x="32" y="18" font-weight="800" font-size="14" fill="${INK}">AlphaEvolve</text>
+            ${IC.robot(4, 40, 1.05)}<path d="M60 62 h40" stroke="#f97316" stroke-width="3" marker-end="url(#arO)"/>${IC.chip(106, 38, 1.05, 'TPU')}
+            <path d="M160 62 h40" stroke="#16a34a" stroke-width="3" marker-end="url(#arG)"/>${IC.rack(206, 38, 1.0)}
+            <path d="M230 94 C 230 120, 28 120, 28 96" fill="none" stroke="#16a34a" stroke-width="2.6" stroke-dasharray="6 5" marker-end="url(#arG)"/>
+            ${IC.barrier(54, 96, .55)}<text x="160" y="111" text-anchor="middle" font-family="Patrick Hand" font-size="15" fill="#15803d">trains the next Gemini</text>
+          </g>`;
+    return m;
+  },
+});
+
+// ---- §6 intelligence
+s += panel({
+  x: 20, y: 724, w: PW, h: PH, c: '#6b2d6b', bg: '#fcf5fb',
+  footer: 'Intelligence for the Loop (▷ §6)',
+  cols: [
+    { icon: (x, y) => IC.book(x, y, 1.35), t1: 'Pre-', t2: 'training' },
+    { icon: (x, y) => IC.target(x, y, 1.35), t1: 'Post-', t2: 'training' },
+    { icon: (x, y) => IC.robot(x, y, 1.3), t1: 'Agents', t2: '' },
+  ],
+  bullets: [['Domain-adaptive data', 'Synthetic, anchored', 'Tacit, cross-layer'], ['Verifiable rewards', 'Formal checks', 'Reward hacking'], ['Horizon & memory', 'Multi-fidelity S1–S6', 'Cross-layer attribution']],
+  mini: (x, y) => {
+    let m = dotted(x + 22, y, 726, 150, '#a868a8');
+    const chain = [[IC.book, 'knowledge'], [IC.target, 'reward'], [IC.robot, 'agent'], [IC.globe, 'world model']];
+    chain.forEach(([f, n], i) => {
+      const cx = x + 96 + i * 186;
+      m += f(cx - 30, y + 18, 1.25) + `<text x="${cx}" y="${y + 96}" text-anchor="middle" font-weight="700" font-size="13" fill="${INK}">${n}</text>`;
+      if (i < 3) m += support(cx + 44, y + 46, i === 2 ? 'Needs' : 'Support');
     });
-  }
-  s += `<text x="${PX + 22}" y="${y0 + CH - 12}" font-style="italic" font-weight="500" font-size="12.5" fill="#55648a">${c.foot}</text>`;
+    m += IC.shield(x + 248, y + 100, .62) + `<text x="${x + 284}" y="${y + 126}" font-family="Patrick Hand" font-size="16" fill="#b91c1c">optimizers find verifier gaps</text>`;
+    m += `<text x="${x + 654}" y="${y + 126}" text-anchor="middle" font-family="Patrick Hand" font-size="16" fill="#6b2d6b">silicon as calibration</text>`;
+    return m;
+  },
+});
+
+// ---- §7 benchmarks
+s += `<rect x="810" y="724" width="${PW}" height="${PH}" rx="20" fill="#f6fbf4" stroke="#3f7d3a" stroke-width="2.6"/>`;
+const ROW = (y, title, items) => {
+  let m = dotted(830, y, 730, 160, '#7fb27a');
+  title.forEach((t, i) => m += `<text x="886" y="${y + 66 + i * 20}" text-anchor="middle" font-weight="700" font-size="15" fill="${INK}">${t}</text>`);
+  items.forEach(([f, n, ex], i) => {
+    const cx = 1010 + i * 116;
+    m += f(cx - 30, y + 18, 1.25) + tag(cx, y + 104, n, '#64748b', '#fff', 11.5) + `<text x="${cx}" y="${y + 140}" text-anchor="middle" font-weight="500" font-size="11" fill="#5d6679">${ex}</text>`;
+  });
+  return m;
+};
+s += ROW(740, ['Exam', 'benches', '(one layer)'], [
+  [(x, y, sc) => IC.term(x, y, sc, '</>'), 'RTL', 'VerilogEval · CVDP'],
+  [IC.shield, 'Verification', 'FVEval'],
+  [IC.wafer, 'Physical', 'ChiPBench'],
+  [(x, y, sc) => IC.term(x, y, sc, '.cu'), 'Kernels', 'KernelBench'],
+  [IC.flask, 'Living', 'NotSoTiny'],
+]);
+s += ROW(910, ['Training', 'grounds', '(toward L3)'], [
+  [IC.gym, 'Environments', 'SWE-Gym · MLGym'],
+  [IC.robot, 'AI R&D', 'RE-Bench'],
+  [IC.chip, 'HW/SW', 'HSCO-Bench'],
+  [IC.gauge, 'Cross-layer', 'joint > sum'],
+  [IC.clock, 'Loop period', 'time per turn'],
+]);
+s += `<text x="1195" y="1118" text-anchor="middle" font-weight="800" font-size="22" fill="#3f7d3a">Benchmarks: From Exam Hall to Training Ground (▷ §7)</text>`;
+
+// ================================================================= bottom strip: §8
+s += `<rect x="20" y="1150" width="1560" height="64" rx="16" fill="url(#gBand)" stroke="#d6dbe6" stroke-width="1.4"/>
+      <text x="44" y="1189" font-weight="800" font-size="19" fill="${INK}">Open Problems (▷ §8)</text>`;
+const OPEN = [[IC.wafer, 'Physics: proxy worlds, faster chips'], [IC.globe, 'Intelligence: world models, memory'], [IC.fab, 'Ecosystem: open data, shared gyms'], [IC.mountain, 'Beyond: self-expansion (L5–L6)']];
+OPEN.forEach(([f, t], i) => {
+  const x0 = 262 + i * 330;
+  s += f(x0, 1160, .9) + `<text x="${x0 + 52}" y="1188" font-weight="600" font-size="14" fill="${INK}">${t}</text>`;
 });
 
 document.getElementById('fig').innerHTML = s;

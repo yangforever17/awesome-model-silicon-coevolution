@@ -1,6 +1,8 @@
 # Catalog structure. Each part maps to survey sections; each topic lists the
 # entries assigned to it in papers.yaml (topic: <id>).
 #
+# fold: true collapses a topic's table by default (used for classic background topics).
+#
 # edge: default layer edge for entries in the part (overridable per paper).
 #   model-silicon  Model → Silicon   (design flows down, AI designs hardware)
 #   model-stack    Model → Stack     (design flows down, AI rewrites the software stack)
@@ -27,8 +29,10 @@ parts:
     topics:
       - id: mh-substrate
         title: Classical and open-source EDA substrate
+        fold: true
       - id: mh-ml4eda
         title: Pre-LLM machine learning for EDA
+        fold: true
       - id: mh-early
         title: LLMs enter chip design
       - id: mh-rtl
@@ -73,6 +77,7 @@ parts:
     topics:
       - id: hm-history
         title: From the hardware lottery to specialization
+        fold: true
       - id: hm-attn
         title: Attention and the memory hierarchy
       - id: hm-sparse
@@ -90,10 +95,13 @@ parts:
     topics:
       - id: fd-codesign
         title: Multi-level optimization and HW/SW co-design theory
+        fold: true
       - id: fd-nas
         title: Hardware-aware NAS and model–accelerator co-search
+        fold: true
       - id: fd-cost
         title: Performance models, simulators and scaling laws
+        fold: true
 
   - id: engines
     title: Self-Improvement Engines

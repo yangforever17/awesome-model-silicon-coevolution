@@ -287,7 +287,12 @@ def render_part(tax, p, number, entries):
         ts = sorted((x for x in xs if x["topic"] == t["id"]), key=sort_key)
         if len(topics) > 1:
             out += [f"### {t['title']}", ""]
-        out += [entry_table(tax, ts), ""]
+        if t.get("fold"):
+            years = sorted(x["year"] for x in ts if x["year"].isdigit())
+            span = f" · {years[0]}–{years[-1]}" if years else ""
+            out += ["<details>", f"<summary>Show {len(ts)} entries{span}</summary>", "", entry_table(tax, ts), "", "</details>", ""]
+        else:
+            out += [entry_table(tax, ts), ""]
     out += ['<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>', ""]
     return "\n".join(out)
 
