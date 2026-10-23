@@ -10,6 +10,7 @@
 #   short     short name; a leading "short: " in the note is dropped in the README
 #   title_en  English title for non-English sources (the original is shown in parentheses)
 #   url / arxiv / doi            manual link overrides
+#   code      official GitHub repository as owner/repo (shown with a live star badge)
 #   no_doi / no_arxiv            drop a wrong automatic match
 #   ignore_bib_url               drop a wrong url field from refs.bib
 #   note      one-line summary of the entry's role in the survey
@@ -22,6 +23,7 @@ ren2021nvcell:
   featured: true
   note: "RL generates standard-cell layouts and fixes DRC violations, bringing cell-library development into an automated flow."
 fawzi2022discovering:
+  code: google-deepmind/alphatensor
   short: "AlphaTensor"
   topic: cases
   level: L1
@@ -35,6 +37,7 @@ roy2022prefixrl:
   featured: true
   note: "RL designs parallel-prefix circuits with post-synthesis area/delay as reward; ~13,000 AI-designed circuit instances ship in NVIDIA Hopper."
 mankowitz2023faster:
+  code: google-deepmind/alphadev
   short: "AlphaDev"
   topic: cases
   level: L1
@@ -86,22 +89,27 @@ qwen2026xinmo:
 
 # ---------------------------------------------------------------- Model → Silicon
 brayton2010abc:
+  code: berkeley-abc/abc
   topic: mh-substrate
   type: Tool
   note: "ABC, the academic logic synthesis and verification system that later became the target of agent-driven source-code evolution (Self-Evolved ABC)."
 wolf2013yosys:
+  code: YosysHQ/yosys
   topic: mh-substrate
   type: Tool
   note: "Yosys, the open-source Verilog synthesis suite underlying many open EDA flows and LLM-for-RTL evaluations."
   url: https://yosyshq.net/yosys/
 cheng2019replace:
+  code: The-OpenROAD-Project/RePlAce
   topic: mh-substrate
   note: "RePlAce, an analytic global placer that serves as a strong classical placement baseline."
 lin2019dreamplace:
+  code: limbo018/DREAMPlace
   topic: mh-substrate
   note: "DREAMPlace casts analytic placement as neural-network training to run on GPU deep-learning toolkits."
   doi: 10.1145/3316781.3317803
 ajayi2019openroad:
+  code: The-OpenROAD-Project/OpenROAD
   topic: mh-substrate
   type: Tool
   note: "OpenROAD, an autonomous open-source RTL-to-GDSII flow and the backbone of many agentic physical-design studies."
@@ -116,6 +124,7 @@ synopsys2020dsoai:
   note: "Synopsys DSO.ai uses reinforcement learning to search chip design-space parameters."
   url: https://www.synopsys.com/ai/chip-design/dso-ai.html
 mirhoseini2021graph:
+  code: google-research/circuit_training
   short: "AlphaChip"
   topic: mh-ml4eda
   level: L1
@@ -129,9 +138,11 @@ goldie2024alphachip:
   type: Industry
   note: "Google DeepMind's retrospective on AlphaChip and its use across TPU generations."
 cheng2023assessment:
+  code: TILOS-AI-Institute/MacroPlacement
   topic: mh-ml4eda
   note: "Independent assessment of RL macro placement; part of the reproducibility debate around AlphaChip."
 markov2024reevaluating:
+  code: TILOS-AI-Institute/MacroPlacement
   topic: mh-ml4eda
   note: "Re-evaluates Google's RL macro placement, highlighting how closed design data makes industrial claims hard to verify."
 kahng2018machine:
@@ -169,21 +180,25 @@ pearce2020dave:
   lsrc: curator
   note: "DAVE fine-tunes GPT-2 to derive Verilog from English, handling only simple tasks."
 thakur2023benchmarking:
+  code: shailja-thakur/VGen
   topic: mh-early
   type: Benchmark
   note: "Benchmarks LLMs on Verilog generation and shows that fine-tuning on open Verilog narrows the gap left by general models."
 thakur2023autochip:
+  code: shailja-thakur/AutoChip
   topic: mh-rtl
   level: L1
   lsrc: survey
   featured: true
   note: "AutoChip feeds compiler and simulation errors back to the LLM, the first-generation prompt-and-feedback loop for RTL."
 thakur2024verigen:
+  code: shailja-thakur/VGen
   topic: mh-rtl
   level: L0
   lsrc: survey
   note: "VeriGen fine-tunes an LLM on open-source Verilog and textbooks."
 liu2024rtlcoder:
+  code: hkust-zhiyao/RTL-Coder
   topic: mh-rtl
   level: L0
   lsrc: survey
@@ -196,48 +211,57 @@ pei2024betterv:
   lsrc: curator
   note: "BetterV steers Verilog generation with discriminative guidance."
 zhao2024codev:
+  code: IPRC-DIP/CodeV
   topic: mh-rtl
   level: L0
   lsrc: curator
   note: "CodeV back-translates code into descriptions through multi-level summarization to build fine-tuning data."
   arxiv: 2407.10424
 zhao2024mage:
+  code: stable-lab/MAGE
   topic: mh-rtl
   level: L1
   lsrc: curator
   note: "MAGE uses a multi-agent engine with simulation feedback for RTL generation."
 cui2024origen:
+  code: pku-liang/OriGen
   topic: mh-rtl
   level: L0
   lsrc: curator
   note: "OriGen augments data code-to-code and adds compiler-feedback self-reflection."
 gao2024autovcoder:
+  code: sjtu-zhao-lab/AutoVCoder
   topic: mh-rtl
   level: L0
   lsrc: curator
   note: "AutoVCoder adds retrieval augmentation to a systematic Verilog-generation framework."
 ho2025verilogcoder:
+  code: NVlabs/VerilogCoder
   topic: mh-rtl
   level: L1
   lsrc: curator
   note: "VerilogCoder coordinates agents with graph-based planning and an AST-based waveform-tracing debugging tool."
 liu2025craftrtl:
+  code: NVlabs/CraftRTL
   topic: mh-rtl
   level: L0
   lsrc: curator
   note: "CraftRTL converts Karnaugh maps, state diagrams and waveforms into correct-by-construction samples, anchoring synthetic data to external truth."
 liu2025deeprtl:
+  code: PeterLau61/DeepRTL
   topic: mh-rtl
   level: L0
   lsrc: curator
   note: "DeepRTL unifies Verilog understanding and generation in one representation model."
 wang2025verireason:
+  code: NellyW8/VeriReason
   topic: mh-rtl
   level: L1
   lsrc: survey
   featured: true
   note: "VeriReason combines testbench feedback with structural heuristics in an RL reward for reasoning-enhanced Verilog generation."
 zhu2025codevr1:
+  code: IPRC-DIP/CodeV-R1
   short: "QiMeng-CodeV-R1"
   topic: mh-rtl
   level: L1
@@ -245,11 +269,13 @@ zhu2025codevr1:
   featured: true
   note: "QiMeng-CodeV-R1 rewards equivalence checks against reference designs and filters data by round-trip consistency; its 7B model beats 671B DeepSeek-R1 on RTLLM."
 verirl2025boosting:
+  code: ZJU-OmniAI/VeriRL
   topic: mh-rtl
   level: L1
   lsrc: curator
   note: "VeriRL boosts LLM Verilog generation with reinforcement learning."
 tsai2024rtlfixer:
+  code: NVlabs/RTLFixer
   topic: mh-debug
   level: L1
   lsrc: survey
@@ -271,16 +297,19 @@ kande2023llmassisted:
   lsrc: curator
   note: "Early use of LLMs to generate security-relevant SystemVerilog assertions."
 zhang2023llm4dv:
+  code: ZixiBenZhang/ml4dv
   topic: mh-verif
   level: L1
   lsrc: curator
   note: "LLM4DV generates hardware test stimuli with LLMs, iterating on coverage feedback."
 fang2024assertllm:
+  code: hkust-zhiyao/AssertLLM
   topic: mh-verif
   level: L0
   lsrc: curator
   note: "AssertLLM extracts verification assertions from design specifications with multiple LLMs."
 hu2024uvllm:
+  code: amyuch/UVLLM
   topic: mh-verif
   level: L1
   lsrc: curator
@@ -299,25 +328,30 @@ fu2023gpt4aigchip:
   featured: true
   note: "GPT4AIGChip is an early attempt to generate HLS code for AI accelerators with LLMs."
 krishnan2023archgym:
+  code: srivatsankrishnan/oss-arch-gym
   topic: mh-hls
   type: Tool
   note: "ArchGym wraps ML-driven architecture design-space exploration in a gym: agents tune accelerator parameters, simulators return performance and energy."
 li2024specllm:
+  code: hkust-zhiyao/SpecLLM
   topic: mh-hls
   level: L0
   lsrc: curator
   note: "SpecLLM explores LLMs for writing and reviewing VLSI architecture specifications."
 xiong2024hlspilot:
+  code: xcw-1010/HLSPilot
   topic: mh-hls
   level: L1
   lsrc: curator
   note: "HLSPilot rewrites C code into synthesizable HLS with LLM-guided optimization."
 collini2024c2hlsc:
+  code: Lucaz97/c2hlsc
   topic: mh-hls
   level: L1
   lsrc: curator
   note: "C2HLSC iteratively refactors C into HLS-compatible code using tool feedback."
 wang2025llmdse:
+  code: Nozidoali/LLM-DSE
   topic: mh-hls
   level: L1
   lsrc: curator
@@ -329,16 +363,19 @@ sharma2026secdadse:
   lsrc: curator
   note: "SECDA-DSE connects LLM-driven design-space exploration to SystemC simulation and FPGA execution."
 he2024chateda:
+  code: wuhy68/ChatEDA
   topic: mh-phys
   level: L1
   lsrc: curator
   note: "ChatEDA lets an LLM agent orchestrate the whole EDA flow from natural-language requests."
 orfsagent2025:
+  code: ABKGroup/ORFS-Agent
   topic: mh-phys
   level: L1
   lsrc: curator
   note: "ORFS-Agent tunes OpenROAD flow parameters with tool-using agents to improve PPA."
 evodrc2026:
+  code: ASU-VDA-Lab/EvoDRC
   topic: mh-phys
   level: L1
   lsrc: curator
@@ -381,6 +418,7 @@ chang2024lamagic:
   lsrc: curator
   note: "LaMAGIC generates power-converter topologies with a language model."
 lai2025analogcoder:
+  code: laiyao1/AnalogCoder
   topic: mh-analog
   level: L1
   lsrc: curator
@@ -388,39 +426,49 @@ lai2025analogcoder:
 
 # ---------------------------------------------------------------- Model → Stack
 ragankelley2013halide:
+  code: halide/Halide
   topic: ms-found
   note: "Halide separates algorithm from schedule, the root of the search-plus-cost-model lineage of tensor compilers."
   doi: 10.1145/2491956.2462176
 chen2018tvm:
+  code: apache/tvm
   short: "TVM"
   topic: ms-found
   featured: true
   note: "TVM, an end-to-end optimizing compiler stack for deep learning."
 tillet2019triton:
+  code: triton-lang/triton
   topic: ms-found
   note: "Triton, a tile-based language and compiler that lowers the bar for writing GPU kernels."
 zheng2020ansor:
+  code: apache/tvm
   topic: ms-found
   note: "Ansor replaces hand-written templates with generated search spaces and a learned cost model."
 shao2022metaschedule:
+  code: apache/tvm
   topic: ms-found
   note: "MetaSchedule unifies tensor-program scheduling primitives as probabilistic programs."
 feng2023tensorir:
+  code: apache/tvm
   topic: ms-found
   note: "TensorIR, an abstraction for automatic tensorized program optimization."
 spector2024thunderkittens:
+  code: HazyResearch/ThunderKittens
   topic: ms-found
   note: "ThunderKittens offers hardware-near tile abstractions that approach hand-written kernel performance."
 wang2025tilelang:
+  code: tile-ai/tilelang
   topic: ms-found
   note: "TileLang, a composable tiled programming model for AI kernels."
 chetlur2014cudnn:
   topic: ms-found
   note: "cuDNN, NVIDIA's library of deep-learning primitives that made GPUs the default DL substrate."
 lattner2021mlir:
+  code: llvm/llvm-project
   topic: ms-found
   note: "MLIR, a reusable multi-level compiler infrastructure for domain-specific computation."
 ansel2024pytorch2:
+  code: pytorch/pytorch
   topic: ms-found
   note: "PyTorch 2 graph capture and compilation (TorchDynamo/TorchInductor), the torch.compile baseline that kernel agents compare against."
 deepseek2025deepgemm:
@@ -466,11 +514,13 @@ baronio2025kevin:
   lsrc: survey
   note: "Kevin trains CUDA-kernel writing with multi-turn reinforcement learning."
 li2025cudal1:
+  code: ornith-ai/CUDA-L1
   topic: ms-kernel
   level: L1
   lsrc: survey
   note: "CUDA-L1 improves CUDA optimization with contrastive reinforcement learning."
 wang2025geak:
+  code: AMD-AGI/GEAK
   short: "GEAK"
   topic: ms-kernel
   level: L1
@@ -478,6 +528,7 @@ wang2025geak:
   featured: true
   note: "GEAK generates Triton kernels for AMD GPUs in a Reflexion-style loop: ~55% execution accuracy and 2.59x mean speedup on revised TritonBench."
 dai2026cudaagent:
+  code: BytedTsinghua-SIA/CUDA-Agent
   short: "CUDA Agent"
   topic: ms-kernel
   level: L1
@@ -485,6 +536,7 @@ dai2026cudaagent:
   featured: true
   note: "CUDA Agent: large-scale agentic RL over 6,000+ synthetic operators in a sandbox with automatic verification and profiling; beats torch.compile on all three KernelBench levels."
 dong2026kernelblaster:
+  code: NVlabs/KernelBlaster
   topic: ms-kernel
   level: L1
   lsrc: survey
@@ -515,9 +567,11 @@ amd2026geakv4:
   featured: true
   note: "GEAK v4 optimizes whole SGLang/vLLM serving workloads: profile, triage with Amdahl's law, generate across Triton/TileLang/HIP, validate end to end."
 trofin2021mlgo:
+  code: google/ml-compiler-opt
   topic: ms-compiler
   note: "MLGO brings learned policies into LLVM optimization decisions such as inlining."
 cummins2022compilergym:
+  code: facebookresearch/CompilerGym
   topic: ms-compiler
   type: Tool
   note: "CompilerGym wraps compiler optimization as RL environments with code size or runtime as reward."
@@ -538,17 +592,21 @@ yu2022orca:
   note: "Orca introduces iteration-level scheduling for serving generative transformers."
   url: https://www.usenix.org/conference/osdi22/presentation/yu
 kwon2023vllm:
+  code: vllm-project/vllm
   short: "vLLM / PagedAttention"
   topic: ms-serving
   featured: true
   note: "vLLM's PagedAttention manages KV-cache memory like virtual memory pages."
 zhong2024distserve:
+  code: LLMServe/DistServe
   topic: ms-serving
   note: "DistServe disaggregates prefill and decoding for goodput-optimized serving."
 zheng2024sglang:
+  code: sgl-project/sglang
   topic: ms-serving
   note: "SGLang executes structured LLM programs efficiently with RadixAttention."
 ye2025flashinfer:
+  code: flashinfer-ai/flashinfer
   topic: ms-serving
   note: "FlashInfer, a customizable attention engine for LLM inference serving."
 lin2025agentinfer:
@@ -626,6 +684,7 @@ shazeer2019fast:
   lsrc: survey
   note: "Multi-query attention shares one key/value head to cut memory traffic during decoding."
 dao2022flashattention:
+  code: Dao-AILab/flash-attention
   short: "FlashAttention"
   topic: hm-attn
   level: Human
@@ -633,6 +692,7 @@ dao2022flashattention:
   featured: true
   note: "FlashAttention tiles attention around the GPU memory hierarchy to reduce HBM reads and writes."
 dao2023flashattention2:
+  code: Dao-AILab/flash-attention
   topic: hm-attn
   level: Human
   lsrc: survey
@@ -643,16 +703,19 @@ ainslie2023gqa:
   lsrc: survey
   note: "Grouped-query attention trades off between MHA and MQA with memory traffic as the main target."
 gu2023mamba:
+  code: state-spaces/mamba
   topic: hm-attn
   level: Human
   lsrc: survey
   note: "Mamba achieves linear-time sequence modeling with a hardware-aware parallel scan."
 liu2023ring:
+  code: haoliuhl/ringattention
   topic: hm-attn
   level: Human
   lsrc: survey
   note: "Ring Attention splits long sequences across devices and overlaps compute with communication."
 shah2024flashattention3:
+  code: Dao-AILab/flash-attention
   topic: hm-attn
   level: Human
   lsrc: survey
@@ -687,6 +750,7 @@ leviathan2023fast:
   lsrc: survey
   note: "Speculative decoding exploits idle compute in memory-bound decoding: an algorithm born from a hardware bottleneck."
 dai2024deepseekmoe:
+  code: deepseek-ai/DeepSeek-MoE
   topic: hm-sparse
   level: Human
   lsrc: survey
@@ -698,6 +762,7 @@ micikevicius2018mixed:
   note: "Mixed-precision training with FP16 and loss scaling, matched to tensor-core datapaths."
   arxiv: 1710.03740
 dettmers2022llmint8:
+  code: bitsandbytes-foundation/bitsandbytes
   topic: hm-numeric
   level: Human
   lsrc: survey
@@ -709,21 +774,25 @@ micikevicius2022fp8:
   lsrc: survey
   note: "FP8 formats jointly defined by hardware vendors and model researchers for training."
 yao2022zeroquant:
+  code: deepspeedai/DeepSpeed
   topic: hm-numeric
   level: Human
   lsrc: survey
   note: "ZeroQuant, efficient post-training quantization for large transformers."
 xiao2023smoothquant:
+  code: mit-han-lab/smoothquant
   topic: hm-numeric
   level: Human
   lsrc: survey
   note: "SmoothQuant migrates activation outliers into weights to enable W8A8 inference."
 frantar2023gptq:
+  code: IST-DASLab/gptq
   topic: hm-numeric
   level: Human
   lsrc: survey
   note: "GPTQ, one-shot post-training weight quantization using approximate second-order information."
 rouhani2023microscaling:
+  code: microsoft/microxcaling
   short: "Microscaling (MX) formats"
   topic: hm-numeric
   level: Human
@@ -731,6 +800,7 @@ rouhani2023microscaling:
   featured: true
   note: "OCP Microscaling (MX) formats write block-level scaling into a cross-vendor industry specification."
 lin2024awq:
+  code: mit-han-lab/llm-awq
   topic: hm-numeric
   level: Human
   lsrc: survey
@@ -738,6 +808,7 @@ lin2024awq:
   arxiv: 2306.00978
   no_doi: true
 ma2024era:
+  code: microsoft/BitNet
   topic: hm-numeric
   level: Human
   lsrc: survey
@@ -762,21 +833,25 @@ deepseek2025v31:
   featured: true
   note: "DeepSeek-V3.1 trains with UE8M0 FP8 scaling for an unreleased domestic chip: a model changing itself for hardware that does not yet exist."
 shoeybi2019megatron:
+  code: NVIDIA/Megatron-LM
   topic: hm-parallel
   level: Human
   lsrc: survey
   note: "Megatron-LM tensor parallelism, which relies on high-bandwidth intra-node interconnect."
 rajbhandari2020zero:
+  code: deepspeedai/DeepSpeed
   topic: hm-parallel
   level: Human
   lsrc: survey
   note: "ZeRO partitions optimizer state according to device memory capacity."
 deepseek2024v2:
+  code: deepseek-ai/DeepSeek-V2
   topic: hm-parallel
   level: Human
   lsrc: survey
   note: "DeepSeek-V2 introduces MLA to compress the KV cache."
 deepseek2024v3:
+  code: deepseek-ai/DeepSeek-V3
   topic: hm-parallel
   level: Human
   lsrc: survey
@@ -818,6 +893,7 @@ tan2019mnasnet:
   featured: true
   note: "MnasNet folds measured on-device latency into the NAS objective."
 cai2019proxylessnas:
+  code: mit-han-lab/proxylessnas
   topic: fd-nas
   note: "ProxylessNAS searches directly on the target task and hardware."
 wu2019fbnet:
@@ -827,15 +903,18 @@ jiang2019accuracy:
   topic: fd-nas
   note: "FPGA-implementation-aware NAS that co-explores network and accelerator."
 wang2020hat:
+  code: mit-han-lab/hardware-aware-transformers
   topic: fd-nas
   note: "HAT searches hardware-aware transformers for efficient NLP."
 cai2020once:
+  code: mit-han-lab/once-for-all
   topic: fd-nas
   note: "Once-for-All trains one supernet and specializes it per deployment target."
 li2020edd:
   topic: fd-nas
   note: "EDD co-searches DNN architecture and implementation for embedded AI."
 li2021hwnasbench:
+  code: GATECH-EIC/HW-NAS-Bench
   topic: fd-nas
   type: Benchmark
   note: "HW-NAS-Bench, a benchmark for hardware-aware NAS."
@@ -860,22 +939,27 @@ williams2009roofline:
   note: "Roofline, the coarsest upper bound on attainable performance."
   doi: 10.1145/1498765.1498785
 samajdar2018scalesim:
+  code: scalesim-project/SCALE-Sim
   topic: fd-cost
   type: Tool
   note: "SCALE-Sim, a systolic-array accelerator simulator."
 parashar2019timeloop:
+  code: NVlabs/timeloop
   topic: fd-cost
   type: Tool
   note: "Timeloop, systematic DNN-accelerator evaluation and mapping."
 kwon2019understanding:
+  code: maestro-project/maestro
   topic: fd-cost
   type: Tool
   note: "MAESTRO, a data-centric model of DNN dataflow reuse, performance and hardware cost."
 wu2019accelergy:
+  code: Accelergy-Project/accelergy
   topic: fd-cost
   type: Tool
   note: "Accelergy, architecture-level energy estimation for accelerators."
 mei2021zigzag:
+  code: KULeuven-MICAS/zigzag
   topic: fd-cost
   type: Tool
   note: "ZigZag enlarges the joint architecture–mapping design space for DNN accelerators."
@@ -888,10 +972,12 @@ hoffmann2022training:
   topic: fd-cost
   note: "Chinchilla: compute-optimal allocation of parameters and data."
 zhang2024llmcompass:
+  code: PrincetonUniversity/LLMCompass
   topic: fd-cost
   type: Tool
   note: "LLMCompass simulates hardware designs for LLM inference."
 agrawal2024vidur:
+  code: microsoft/vidur
   topic: fd-cost
   type: Tool
   note: "Vidur, a large-scale simulator of LLM inference serving."
@@ -904,15 +990,18 @@ schmidhuber2003godel:
   topic: se-rsi
   note: "Gödel Machines, provably optimal self-referential self-improvement."
 zelikman2022star:
+  code: ezelikman/STaR
   topic: se-rsi
   note: "STaR bootstraps reasoning from the model's own correctness-filtered rationales."
 yuan2024selfrewarding:
   topic: se-rsi
   note: "Self-Rewarding Language Models use their own judgments as the training signal."
 lu2024aiscientist:
+  code: SakanaAI/AI-Scientist
   topic: se-rsi
   note: "The AI Scientist automates idea generation, experiments and paper writing."
 zhang2025darwin:
+  code: jennyzzt/dgm
   short: "Darwin Gödel Machine"
   topic: se-rsi
   featured: true
@@ -926,32 +1015,40 @@ davidson2025three:
   featured: true
   note: "Three feedback loops of AI acceleration (software, chip technology, chip production); the survey tracks the chip-technology loop."
 madaan2023selfrefine:
+  code: madaan/self-refine
   topic: se-iter
   note: "Self-Refine iteratively rewrites outputs using self-generated feedback."
 shinn2023reflexion:
+  code: noahshinn/reflexion
   topic: se-iter
   note: "Reflexion writes records of failures into the next attempt's input."
 wang2023voyager:
+  code: MineDojo/Voyager
   topic: se-iter
   note: "Voyager accumulates a reusable skill library, an early form of memory that extends an agent's horizon."
 yang2024large:
+  code: google-deepmind/opro
   topic: se-iter
   note: "OPRO proposes new solutions from the history of solutions and scores."
 romeraparedes2024mathematical:
+  code: google-deepmind/funsearch
   short: "FunSearch"
   topic: se-iter
   featured: true
   note: "FunSearch embeds an LLM in evolutionary search scored by a program evaluator; the predecessor of AlphaEvolve."
 yin2024godel:
+  code: Arvid-pku/Godel_Agent
   topic: se-iter
   note: "Gödel Agent moves the search target to the agent's own code."
   arxiv: 2410.04444
 hu2025automated:
+  code: ShengranHu/ADAS
   topic: se-iter
   note: "ADAS automatically designs agentic systems with a meta agent."
 
 # ---------------------------------------------------------------- Intelligence (§6)
 chen2021evaluating:
+  code: openai/human-eval
   topic: in-pretrain
   note: "Codex shows that models trained on large code corpora can write correct programs from natural language."
 kocetkov2023stack:
@@ -965,6 +1062,7 @@ gunasekar2023textbooks:
   topic: in-pretrain
   note: "phi-1: a small amount of textbook-quality data beats large amounts of unfiltered code."
 muennighoff2023scaling:
+  code: huggingface/datablations
   topic: in-pretrain
   note: "Data-constrained scaling: returns from repeated data fall quickly once unique data runs out."
 villalobos2024will:
@@ -974,10 +1072,12 @@ shumailov2024ai:
   topic: in-pretrain
   note: "Models collapse when trained on recursively generated data."
 zhang2024mgverilog:
+  code: GATECH-EIC/mg-verilog
   topic: in-pretrain
   type: Dataset
   note: "MG-Verilog provides multi-grained descriptions for the same code."
 chang2024data:
+  code: aichipdesign/chipgptft
   short: "Data is All You Need (DAC)"
   topic: in-pretrain
   featured: true
@@ -993,22 +1093,28 @@ ouyang2022training:
   topic: in-reward
   note: "RLHF teaches instruction following, with capability bounded by human judgment."
 cobbe2021training:
+  code: openai/grade-school-math
   topic: in-reward
   note: "Trained verifiers select math solutions; verification is easier than generation."
 li2022competition:
+  code: google-deepmind/code_contests
   topic: in-reward
   note: "AlphaCode filters sampled programs with tests."
 le2022coderl:
+  code: salesforce/CodeRL
   topic: in-reward
   note: "CodeRL rewards code generation with unit-test outcomes."
 lightman2023lets:
+  code: openai/prm800k
   topic: in-reward
   note: "Process reward models extend supervision to intermediate steps."
   arxiv: 2305.20050
 lambert2024tulu3:
+  code: allenai/open-instruct
   topic: in-reward
   note: "Tülu 3 systematizes RL with verifiable rewards (RLVR) in open post-training."
 deepseek2025r1:
+  code: deepseek-ai/DeepSeek-R1
   short: "DeepSeek-R1"
   topic: in-reward
   featured: true
@@ -1031,11 +1137,13 @@ bradley2011sat:
   topic: in-formal
   note: "IC3: SAT-based model checking without unrolling."
 verilator:
+  code: verilator/verilator
   topic: in-formal
   type: Tool
   url: https://www.veripool.org/verilator/
   note: "Verilator, a fast open-source SystemVerilog simulator and linter."
 cocotb:
+  code: cocotb/cocotb
   topic: in-formal
   type: Tool
   url: https://www.cocotb.org
@@ -1072,6 +1180,7 @@ metr2025reward:
   note: "METR reports reward hacking by frontier models during evaluations."
   url: https://metr.org/blog/2025-06-05-recent-reward-hacking/
 lange2025towards:
+  code: SakanaAI/robust-kbench
   short: "robust-kbench"
   topic: in-hacking
   featured: true
@@ -1084,11 +1193,13 @@ yasin2014topdown:
   topic: in-attrib
   note: "Top-down microarchitecture analysis decomposes bottlenecks into frontend, backend and memory."
 curtsinger2015coz:
+  code: plasma-umass/coz
   short: "Coz"
   topic: in-attrib
   featured: true
   note: "Coz causal profiling answers the counterfactual: if this code got faster, how much faster would the whole be?"
 lundberg2017unified:
+  code: shap/shap
   topic: in-attrib
   note: "SHAP brings Shapley values to model explanation."
 kandasamy2016gaussian:
@@ -1101,14 +1212,17 @@ li2018hyperband:
   featured: true
   note: "Hyperband screens many candidates cheaply and sends only winners to expensive evaluation; read S1–S6 as a fidelity ladder."
 falkner2018bohb:
+  code: automl/HpBandSter
   topic: in-multifi
   note: "BOHB combines Bayesian optimization with Hyperband."
 karandikar2018firesim:
+  code: firesim/firesim
   topic: in-multifi
   type: Tool
   note: "FireSim compresses weeks of software simulation into hours with FPGA-accelerated, cycle-exact simulation."
   doi: 10.1109/ISCA.2018.00014
 clark2016asap7:
+  code: The-OpenROAD-Project/asap7
   topic: in-silicon
   type: Tool
   note: "ASAP7, the 7 nm predictive PDK in which many academic agents report timing."
@@ -1121,31 +1235,37 @@ skywater2020sky130:
   url: https://github.com/google/skywater-pdk
   note: "SKY130, an open PDK that lets academia tape out, far from advanced nodes."
 amid2020chipyard:
+  code: ucb-bar/chipyard
   topic: in-silicon
   type: Tool
   note: "Chipyard, an open framework from SoC generation to tape-out."
 
 # ---------------------------------------------------------------- Benchmarks (§7)
 liu2023verilogeval:
+  code: NVlabs/verilog-eval
   short: "VerilogEval"
   topic: bm-rtl
   type: Benchmark
   featured: true
   note: "VerilogEval checks generated designs with testbenches; its problems come from the public HDLBits site."
 lu2024rtllm:
+  code: hkust-zhiyao/RTLLM
   topic: bm-rtl
   type: Benchmark
   note: "RTLLM, an open benchmark for design-level RTL generation."
 allam2024rtlrepo:
+  code: AUCOHL/RTL-Repo
   topic: bm-rtl
   type: Benchmark
   note: "RTL-Repo extends evaluation to repository-level context."
 pinckney2024revisiting:
+  code: NVlabs/verilog-eval
   topic: bm-rtl
   type: Benchmark
   note: "VerilogEval v2 adds newer models, in-context learning and specification-to-RTL tasks."
   arxiv: 2408.11053
 liu2024rtllm2:
+  code: hkust-zhiyao/RTLLM
   topic: bm-rtl
   type: Benchmark
   note: "RTLLM 2.0 / OpenLLM-RTL expands the dataset and benchmark."
@@ -1155,6 +1275,7 @@ iccad2024llm4hwdesign:
   note: "The ICCAD 2024 LLM4HWDesign contest focuses on training-data quality."
   url: https://nvlabs.github.io/LLM4HWDesign/
 kang2024fveval:
+  code: NVlabs/FVEval
   topic: bm-rtl
   type: Benchmark
   note: "FVEval evaluates LLMs on formal verification of digital hardware."
@@ -1164,6 +1285,7 @@ pulavarthi2025assertionbench:
   note: "AssertionBench evaluates assertion generation."
   ignore_bib_url: true
 pinckney2025cvdp:
+  code: NVlabs/cvdp_benchmark
   short: "CVDP"
   topic: bm-rtl
   type: Benchmark
@@ -1176,35 +1298,43 @@ lu2026rtlopt:
   featured: true
   note: "RTL-OPT scores design quality: 36 designs, each with a suboptimal and a hand-optimized reference, graded by PPA improvement."
 hlseval2026agentic:
+  code: sharc-lab/hls-eval
   topic: bm-rtl
   type: Benchmark
   note: "HLS-Eval adds an agentic evaluation flow built on mini-swe-agent."
 garciagasulla2025turtle:
+  code: HPAI-BSC/TuRTLe
   topic: bm-rtl
   type: Benchmark
   note: "TuRTLe unifies existing benchmarks from syntax to PPA and finds some syntax benchmarks saturated."
 chowdhury2021openabcd:
+  code: NYU-MLDA/OpenABC
   topic: bm-pd
   type: Dataset
   note: "OpenABC-D, a large dataset for ML-guided logic synthesis."
 chai2023circuitnet:
+  code: circuitnet/CircuitNet
   topic: bm-pd
   type: Dataset
   note: "CircuitNet, an open dataset for ML in VLSI CAD."
 chipbench2024:
+  code: MIRALab-USTC/ChiPBench
   topic: bm-pd
   type: Benchmark
   note: "ChiPBench evaluates AI placement algorithms by end-to-end PPA."
 wu2024edacorpus:
+  code: OpenROAD-Assistant/EDA-Corpus
   topic: bm-pd
   type: Dataset
   note: "EDA Corpus, an LLM dataset for interacting with OpenROAD."
 pdagentbench2026:
+  code: fenggev56/PDAGENT-BENCH
   topic: bm-pd
   type: Benchmark
   note: "PDAgent-Bench targets physical-design agents."
   arxiv: 2606.17253
 cktevo2026:
+  code: zshi0616/cktevo
   topic: bm-pd
   type: Benchmark
   note: "CktEvo benchmarks repository-level RTL design evolution."
@@ -1216,20 +1346,24 @@ closerbench2026:
   featured: true
   note: "CLOSER-Bench tests budget-constrained, cross-stage design closure."
 nichols2024parallel:
+  code: parallelcodefoundry/ParEval
   topic: bm-kernel
   type: Benchmark
   note: "ParEval asks whether LLMs can write parallel code."
 ouyang2025kernelbench:
+  code: ScalingIntelligence/KernelBench
   short: "KernelBench"
   topic: bm-kernel
   type: Benchmark
   featured: true
   note: "KernelBench, the standard evaluation for LLM-generated GPU kernels."
 li2025tritonbench:
+  code: thunlp/TritonBench
   topic: bm-kernel
   type: Benchmark
   note: "TritonBench evaluates generation of Triton operators."
 multikernelbench2025:
+  code: wzzll123/MultiKernelBench
   topic: bm-kernel
   type: Benchmark
   note: "MultiKernelBench extends kernel evaluation to multiple hardware platforms."
@@ -1246,6 +1380,7 @@ amd2026agentkernelarena:
   arxiv: 2605.16819
   url: https://github.com/AMD-AGI/AgentKernelArena
 hsco2026bench:
+  code: B07901087/hsco_bench
   short: "HSCO-Bench"
   topic: bm-cosys
   type: Benchmark
@@ -1254,10 +1389,12 @@ hsco2026bench:
   featured: true
   note: "HSCO-Bench asks agents to design an accelerator and allocate SoC resources from software requirements; the closest benchmark to L3, though the model side is a fixed workload."
 wang2025vericontaminated:
+  code: DfX-NYUAD/VeriContaminated
   topic: bm-contam
   type: Benchmark
   note: "VeriContaminated detects data contamination in VerilogEval and RTLLM."
 jain2025livecodebench:
+  code: LiveCodeBench/LiveCodeBench
   topic: bm-contam
   type: Benchmark
   note: "LiveCodeBench evaluates only on problems published after a model's training cutoff."
@@ -1268,14 +1405,17 @@ ghorab2025notsotiny:
   featured: true
   note: "NotSoTiny builds a living RTL benchmark from real Tiny Tapeout designs, adding new ones every shuttle."
 brockman2016openai:
+  code: openai/gym
   topic: bm-env
   type: Tool
   note: "OpenAI Gym standardizes the state–action–reward interface."
 nathani2025mlgym:
+  code: facebookresearch/MLGym
   topic: bm-env
   type: Benchmark
   note: "MLGym: AI-research agents mostly tune hyperparameters and rarely propose new hypotheses or architectures."
 pan2024swegym:
+  code: SWE-Gym/SWE-Gym
   short: "SWE-Gym"
   topic: bm-env
   type: Benchmark
@@ -1287,32 +1427,39 @@ silver2025era:
   url: "https://storage.googleapis.com/deepmind-media/Era-of-Experience%20/The%20Era%20of%20Experience%20Paper.pdf"
   note: "The era of experience: AI moving from human data to learning from its own experience in environments."
 mattson2020mlperf:
+  code: mlcommons/training
   topic: bm-rnd
   type: Benchmark
   note: "MLPerf Training, standardized end-to-end training performance."
 reddi2020mlperf:
+  code: mlcommons/inference
   topic: bm-rnd
   type: Benchmark
   note: "MLPerf Inference, standardized end-to-end inference performance."
 jimenez2024swebench:
+  code: SWE-bench/SWE-bench
   topic: bm-rnd
   type: Benchmark
   note: "SWE-bench, resolving real GitHub issues."
 huang2024mlagentbench:
+  code: snap-stanford/MLAgentBench
   topic: bm-rnd
   type: Benchmark
   note: "MLAgentBench, ML experimentation in real code bases."
 chan2024mlebench:
+  code: openai/mle-bench
   topic: bm-rnd
   type: Benchmark
   note: "MLE-bench, ML engineering tasks drawn from Kaggle."
 wijk2024rebench:
+  code: METR/RE-Bench
   short: "RE-Bench"
   topic: bm-rnd
   type: Benchmark
   featured: true
   note: "RE-Bench compares frontier agents with human experts on AI R&D under equal time budgets."
 starace2025paperbench:
+  code: openai/frontier-evals
   topic: bm-rnd
   type: Benchmark
   note: "PaperBench, replicating AI research papers."
@@ -1324,6 +1471,7 @@ huang2021machine:
   type: Survey
   note: "ML for EDA survey (TODAES 2021)."
 zhong2024llm4eda:
+  code: Thinklab-SJTU/Awesome-LLM4EDA
   topic: sv-eda
   type: Survey
   note: "LLM4EDA: progress of LLMs in EDA."
@@ -1374,15 +1522,18 @@ guo2025collaborative:
   featured: true
   note: "Collaborative hardware/software design in the LLM era; the only compared survey spanning chip, stack and model."
 wang2024survey:
+  code: Paitesanshi/LLM-Agent-Survey
   topic: sv-agents
   type: Survey
   note: "Survey of LLM-based autonomous agents."
 gao2025selfevolving:
+  code: CharlesQ9/Self-Evolving-Agents
   topic: sv-agents
   type: Survey
   note: "Self-evolving agents: what, when, how and where to evolve."
   arxiv: 2507.21046
 fang2025comprehensive:
+  code: ANative-Lab/Awesome-Self-Evolving-Agents
   topic: sv-agents
   type: Survey
   note: "Comprehensive survey of self-evolving AI agents."
@@ -1429,6 +1580,7 @@ bloom2020ideas:
   note: "Ideas are getting harder to find: constant progress needs ever more research effort."
   doi: 10.1257/aer.20180338
 ha2018world:
+  code: hardmaru/WorldModelsExperiments
   topic: ol-world
   note: "World Models: agents learn and plan inside a learned model of the environment."
   no_doi: true
@@ -1436,5 +1588,6 @@ schrittwieser2020mastering:
   topic: ol-world
   note: "MuZero plans with a learned model to master Atari, Go, chess and shogi."
 hafner2025mastering:
+  code: danijar/dreamerv3
   topic: ol-world
   note: "DreamerV3 masters diverse control tasks through world models."

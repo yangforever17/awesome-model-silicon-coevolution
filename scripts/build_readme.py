@@ -54,6 +54,9 @@ VENUE_ABBR = {
 }
 
 
+GITHUB = re.compile(r"https://github\.com/([\w.-]+/[\w.-]+?)(?:\.git)?/?$")
+
+
 # --------------------------------------------------------------------------- data
 
 
@@ -167,6 +170,7 @@ def build_entries(bib, tax, ann, res):
                 "short": a.get("short"),
                 "note": a.get("note", ""),
                 "links": links,
+                "code": a.get("code") or next((m.group(1) for _, u in links for m in [GITHUB.match(u)] if m), None),
                 "arxiv": arxiv,
                 "doi": doi,
                 "section": e.get("section", ""),
@@ -231,6 +235,9 @@ def entry_row(tax, x, with_level):
     title = cell(x["title"]) + (f" ({cell(x['title_orig'])})" if x["title_orig"] else "")
     if x["links"]:
         title = f"[{title}]({x['links'][0][1]})" + "".join(f" [[{lab}]({u})]" for lab, u in x["links"][1:])
+    if x["code"]:
+        stars = f"https://img.shields.io/github/stars/{x['code']}?style=social&label=Code"
+        title += f" [![Code]({stars})](https://github.com/{x['code']})"
     star = "⭐ " if x["featured"] else ""
     cols = [star + title, venue_cell(x)]
     if with_level:
@@ -352,7 +359,7 @@ def render(bib, tax, ann, res):
     readme = re.sub(r"\n{3,}", "\n\n", readme)
 
     buf = io.StringIO()
-    cols = ["key", "title", "authors", "year", "venue", "part", "topic", "edge", "type", "level", "level_source", "arxiv", "doi", "links", "note"]
+    cols = ["key", "title", "authors", "year", "venue", "part", "topic", "edge", "type", "level", "level_source", "arxiv", "doi", "code", "links", "note"]
     w = csv.DictWriter(buf, fieldnames=cols, lineterminator="\n")
     w.writeheader()
     for x in sorted(entries, key=lambda x: (x["part"], x["topic"], sort_key(x))):
@@ -363,6 +370,7 @@ def render(bib, tax, ann, res):
                 "level_source": x["lsrc"] or "",
                 "arxiv": x["arxiv"] or "",
                 "doi": x["doi"] or "",
+                "code": f"https://github.com/{x['code']}" if x["code"] else "",
                 "links": " ".join(u for _, u in x["links"]),
             }
         )

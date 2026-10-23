@@ -1,0 +1,75 @@
+name: Recommend a paper
+description: Suggest a paper, tool, benchmark or industry report for the list.
+title: "[Add] "
+labels: ["add paper"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the suggestion! Fill in what you know; we will place the work and add it to the list.
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      placeholder: "Design Conductor: An Agent Autonomously Builds a RISC-V CPU"
+    validations:
+      required: true
+  - type: input
+    id: link
+    attributes:
+      label: Paper link
+      description: arXiv, DOI, proceedings page, or the organization's own post.
+      placeholder: https://arxiv.org/abs/...
+    validations:
+      required: true
+  - type: input
+    id: code
+    attributes:
+      label: Code link (optional)
+      placeholder: https://github.com/...
+  - type: input
+    id: venue
+    attributes:
+      label: Venue and year (optional)
+      placeholder: DAC 2026, arXiv 2026, ...
+  - type: dropdown
+    id: direction
+    attributes:
+      label: Direction
+      description: Which way does the work act on the model–stack–silicon tower?
+      options:
+        - Model → Silicon (AI designs hardware)
+        - Model → Software Stack (AI writes kernels, compilers, serving)
+        - Silicon → Model (hardware shapes model design)
+        - Cross-layer loop
+        - Benchmark or dataset
+        - Foundations, theory or survey
+        - Not sure
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: Autonomy level (optional)
+      description: How much of the R&D loop does the AI run? See the Framework section of the README.
+      options:
+        - Not sure
+        - L0 · design assistance
+        - L1 · local autonomous optimization
+        - L2 · end-to-end autonomous design
+        - L3 · cross-layer co-design
+        - L4 · recursive self-enhancement
+        - Human-driven co-design
+  - type: textarea
+    id: note
+    attributes:
+      label: One-sentence summary
+      description: What does the work change, and what feedback does it read?
+    validations:
+      required: true
+  - type: checkboxes
+    id: author
+    attributes:
+      label: Relation
+      options:
+        - label: I am an author of this work

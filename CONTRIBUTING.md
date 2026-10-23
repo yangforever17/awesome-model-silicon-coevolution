@@ -1,6 +1,6 @@
 # Contributing
 
-Thanks for helping keep this map accurate. `README.md` and `data/catalog.csv` are generated; edit the files under `data/` and rebuild.
+Thanks for helping keep this map accurate. The quickest way to suggest a work is the [Recommend a paper](https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml) issue form; the curators place it and add it. To add it yourself by pull request: `README.md` and `data/catalog.csv` are generated; edit the files under `data/` and rebuild.
 
 ## Files
 
