@@ -212,7 +212,7 @@ LEVELS.forEach(([lv, name, c], k) => {
 for (const yr of [2024, 2025, 2026]) s += `<path d="M${x(yr)} ${T1} V ${B1} M${x(yr)} ${T2} V ${B2}" stroke="#e1e5ef" stroke-width="1.4"/>`;
 s += `<path d="M${x(RSI)} ${T1 - 6} V ${B2 + 6}" stroke="#17203a" stroke-width="1.6" stroke-dasharray="5 5"/>`;
 
-// staircase of first arrivals L0 → L3, then the illustrative climb to L4–L6
+// staircase of first arrivals L0 → L3, then the climb toward L4–L6
 let st = `M${x(FIRST[0][0])} ${ly(0)}`;
 FIRST.slice(1).forEach(([d, k], i) => { st += ` H ${x(d)} V ${ly(k)}`; });
 st += ` H ${x(RSI)}`;
@@ -263,8 +263,7 @@ s += `<text x="${(x(RSI) + R) / 2 - 22}" y="${ly(1) + 2}" text-anchor="middle" f
 // ---------------------------------------------------------------- shared time axis
 for (const yr of [2023, 2024, 2025, 2026]) s += `<text x="${x(yr + 0.5)}" y="${B2 + 32}" text-anchor="middle" font-weight="800" font-size="17" fill="#17203a">${yr}</text>`;
 s += `<text x="${(L + x(RSI)) / 2}" y="${B2 + 62}" text-anchor="middle" font-weight="700" font-size="14" fill="#475569">Release date · panel ① annual frontier measured mid-year · panel ② first public date</text>
-      <text x="${(x(RSI) + R) / 2}" y="${B2 + 32}" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#6d28d9">post-2026</text>
-      <text x="${(x(RSI) + R) / 2}" y="${B2 + 54}" text-anchor="middle" font-weight="600" font-size="12.5" fill="#6b7385">illustrative</text>`;
+      <text x="${(x(RSI) + R) / 2}" y="${B2 + 32}" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#6d28d9">post-2026</text>`;
 
 document.getElementById('fig').innerHTML = s;
 </script>
