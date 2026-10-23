@@ -15,4 +15,7 @@ Missing a work or disagree with a level? **[Recommend a paper](https://github.co
   </picture>
 </a>
 
-<p align="right"><a href="#readme-top">back to top ↑</a></p>
+<div align="center">
+  <br>
+  <a href="#readme-top"><img alt="Back to top" src="https://img.shields.io/badge/%E2%86%91%20Back%20to%20top-2563eb?style=for-the-badge"></a>
+</div>

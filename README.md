@@ -169,9 +169,9 @@ Three failure patterns: the **executor** is not the trained model or is a human 
 | ⭐ Chip–Model Co-Evolution: Qwen in Production Chip Design and Inference Adaptation (芯模协同进化：Qwen 落地生产级芯片设计与推理适配) | WeChat&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | Qwen3.8-Max takes a NoC module from spec through RTL, verification and physical implementation, and separately deploys and tunes a new model on a domestic accelerator; the two ends are not yet connected. |
 | ⭐ [OpenAI and Broadcom Unveil LLM-Optimized Inference Chip Jalapeño](https://semiwiki.com/forum/threads/25367) | Press release&nbsp;2026 | ![Undisclosed](https://img.shields.io/badge/-Undisclosed-a8a29e?style=flat-square) | OpenAI–Broadcom LLM inference chip taped out nine months from initial design, with models said to have helped design and optimization; the model's role is not disclosed. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
-
 </details>
+
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-model-silicon"></a>
 
@@ -299,7 +299,7 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [LaMAGIC: Language-Model-Based Topology Generation for Analog Integrated Circuits](https://arxiv.org/abs/2407.18269) | ICML&nbsp;2024 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) † | LaMAGIC generates power-converter topologies with a language model. |
 | [AnalogCoder: Analog Circuit Design via Training-Free Code Generation](https://arxiv.org/abs/2405.14918) [![Code](https://img.shields.io/github/stars/laiyao1/AnalogCoder?style=social&label=Code)](https://github.com/laiyao1/AnalogCoder) | [AAAI&nbsp;2025](https://doi.org/10.1609/aaai.v39i1.32016) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) † | AnalogCoder describes and iterates on analog circuits as Python code, training-free with simulation feedback. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-model-stack"></a>
 
@@ -369,7 +369,7 @@ The stack returns feedback fastest (profiles in minutes, end-to-end runs in hour
 | [FlashInfer: Efficient and Customizable Attention Engine for LLM Inference Serving](https://arxiv.org/abs/2501.01005) [![Code](https://img.shields.io/github/stars/flashinfer-ai/flashinfer?style=social&label=Code)](https://github.com/flashinfer-ai/flashinfer) | MLSys&nbsp;2025 | FlashInfer, a customizable attention engine for LLM inference serving. |
 | [Towards Efficient Agents: A Co-Design of Inference Architecture and System](https://arxiv.org/abs/2512.18337) | arXiv&nbsp;2025 | AgentInfer co-designs inference architecture and system for agentic workloads. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-silicon-model"></a>
 
@@ -456,7 +456,7 @@ Hardware constraints shape model design. This is the most cross-layer path, but 
 | [DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437) [![Code](https://img.shields.io/github/stars/deepseek-ai/DeepSeek-V3?style=social&label=Code)](https://github.com/deepseek-ai/DeepSeek-V3) | arXiv&nbsp;2024 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | DeepSeek-V3 trains on 2,048 H800s with FP8 mixed precision and compute–communication overlap. |
 | ⭐ [Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures](https://arxiv.org/abs/2505.09343) | [ISCA Industry&nbsp;2025](https://doi.org/10.1145/3695053.3731412) | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | DeepSeek's ISCA 2025 industry paper: how memory, compute and interconnect limits shaped V3, and what next-generation hardware should provide. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-foundations"></a>
 
@@ -523,7 +523,7 @@ Static co-design: one-shot joint optimization over model, stack and hardware, an
 
 </details>
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-engines"></a>
 
@@ -557,7 +557,7 @@ Update operators that let a model act on the system that runs it. <sub>Survey §
 | ⭐ [Mathematical Discoveries from Program Search with Large Language Models](https://doi.org/10.1038/s41586-023-06924-6) [![Code](https://img.shields.io/github/stars/google-deepmind/funsearch?style=social&label=Code)](https://github.com/google-deepmind/funsearch) | Nature&nbsp;2024 | FunSearch embeds an LLM in evolutionary search scored by a program evaluator; the predecessor of AlphaEvolve. |
 | [Automated Design of Agentic Systems](https://arxiv.org/abs/2408.08435) [![Code](https://img.shields.io/github/stars/ShengranHu/ADAS?style=social&label=Code)](https://github.com/ShengranHu/ADAS) | ICLR&nbsp;2025 | ADAS automatically designs agentic systems with a meta agent. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-intelligence"></a>
 
@@ -648,7 +648,7 @@ Pretraining brings knowledge, post-training teaches iteration toward verifiable 
 | [Chipyard: Integrated Design, Simulation, and Implementation Framework for Custom SoCs](https://doi.org/10.1109/mm.2020.2996616) [![Code](https://img.shields.io/github/stars/ucb-bar/chipyard?style=social&label=Code)](https://github.com/ucb-bar/chipyard) | IEEE Micro&nbsp;2020 | Chipyard, an open framework from SoC generation to tape-out. |
 | [SKY130: Open Source Process Design Kit](https://github.com/google/skywater-pdk) [![Code](https://img.shields.io/github/stars/google/skywater-pdk?style=social&label=Code)](https://github.com/google/skywater-pdk) | Tool&nbsp;2020 | SKY130, an open PDK that lets academia tape out, far from advanced nodes. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-benchmarks"></a>
 
@@ -733,7 +733,7 @@ A verifier becomes a reward and a task set becomes an environment. Almost every 
 | [SWE-bench: Can Language Models Resolve Real-World GitHub Issues?](https://arxiv.org/abs/2310.06770) [![Code](https://img.shields.io/github/stars/SWE-bench/SWE-bench?style=social&label=Code)](https://github.com/SWE-bench/SWE-bench) | ICLR&nbsp;2024 | SWE-bench, resolving real GitHub issues. |
 | [PaperBench: Evaluating AI's Ability to Replicate AI Research](https://arxiv.org/abs/2504.01848) [![Code](https://img.shields.io/github/stars/openai/frontier-evals?style=social&label=Code)](https://github.com/openai/frontier-evals) | arXiv&nbsp;2025 | PaperBench, replicating AI research papers. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-surveys"></a>
 
@@ -775,7 +775,7 @@ Surveys that each cover part of the tower; the survey's Table 2 compares them. <
 | [Co-Evolution in Agentic Systems: Toward Self-Directed Evolution Beyond Human Design](https://arxiv.org/abs/2608.10299) | arXiv&nbsp;2026 | Co-evolution in agentic systems toward self-directed evolution beyond human design. |
 | ⭐ [The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement](https://arxiv.org/abs/2609.11873) | arXiv&nbsp;2026 | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI, which panel ① of Figure 2 cites. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="part-outlook"></a>
 
@@ -805,7 +805,7 @@ Whether recursion accelerates or saturates, where humans stay in the loop, and s
 | [Mastering Atari, Go, Chess and Shogi by Planning with a Learned Model](https://arxiv.org/abs/1911.08265) | [Nature&nbsp;2020](https://doi.org/10.1038/s41586-020-03051-4) | MuZero plans with a learned model to master Atari, Go, chess and shogi. |
 | [Mastering Diverse Control Tasks through World Models](https://doi.org/10.1038/s41586-025-08744-2) [![Code](https://img.shields.io/github/stars/danijar/dreamerv3?style=social&label=Code)](https://github.com/danijar/dreamerv3) | Nature&nbsp;2025 | DreamerV3 masters diverse control tasks through world models. |
 
-<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>
+<p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
 
 <a id="survey"></a>
 
@@ -848,4 +848,7 @@ Missing a work or disagree with a level? **[Recommend a paper](https://github.co
   </picture>
 </a>
 
-<p align="right"><a href="#readme-top">back to top ↑</a></p>
+<div align="center">
+  <br>
+  <a href="#readme-top"><img alt="Back to top" src="https://img.shields.io/badge/%E2%86%91%20Back%20to%20top-2563eb?style=for-the-badge"></a>
+</div>

@@ -265,6 +265,12 @@ def sort_key(x):
     return (y, x["title"].lower())
 
 
+BACK_TO_CONTENTS = (
+    '<p align="right"><a href="#contents"><img alt="Back to contents" '
+    'src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>\n'
+)
+
+
 def render_part(tax, p, number, entries):
     xs = [x for x in entries if x["part"] == p["id"]]
     out = [
@@ -293,7 +299,6 @@ def render_part(tax, p, number, entries):
             out += ["<details>", f"<summary>Show {len(ts)} entries{span}</summary>", "", entry_table(tax, ts), "", "</details>", ""]
         else:
             out += [entry_table(tax, ts), ""]
-    out += ['<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>', ""]
     return "\n".join(out)
 
 
@@ -362,7 +367,7 @@ def render(bib, tax, ann, res):
             # The case table already summarizes each case; keep the source list folded.
             head, _, rest = part_md.partition("| Work |")
             part_md = head + snippet("cases-table") + "\n<details>\n<summary>Sources</summary>\n\n| Work |" + rest.rstrip() + "\n\n</details>\n"
-        body.append(part_md)
+        body.append(part_md + "\n" + BACK_TO_CONTENTS)
     body += [fill(snippet(name), values) for name in ("survey", "contributing")]
     readme = "\n".join(body).rstrip() + "\n"
     readme = re.sub(r"\n{3,}", "\n\n", readme)
