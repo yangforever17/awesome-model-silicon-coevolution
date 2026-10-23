@@ -7,7 +7,7 @@ Thanks for helping keep this map accurate. `README.md` and `data/catalog.csv` ar
 | File | What it holds |
 | --- | --- |
 | `data/refs.bib` | Bibliographic records (the companion survey's bibliography). |
-| `data/papers.yaml` | Per-entry annotations: topic, type, level, level source, note, featured flag, and link overrides. |
+| `data/papers.yaml` | Per-entry annotations: topic, type, level, level source, note, key-work flag (⭐), and link overrides. |
 | `data/taxonomy.yaml` | Parts and topics, level definitions, layer edges and badge colors. |
 | `data/resolved.json` | Cached arXiv / Crossref matches from `scripts/resolve_links.py`, with title similarity scores. |
 | `data/readme/*.md` | Hand-written README sections. |
@@ -38,4 +38,4 @@ If a work changes several layers, place it under the highest level it actually d
 
 ## Links
 
-Link research to its proceedings page, DOI or arXiv record, and industry items to the organization's own publication, not a repost. If automatic resolution picks the wrong record, set `url`, `arxiv` or `doi` explicitly in `papers.yaml`, or set `no_auto_link: true`.
+Automatic links are accepted only when the registry title matches the bibliography title (similarity ≥ 0.92) and the year is consistent; every candidate is kept in `data/resolved.json`. Link research to its proceedings page, DOI or arXiv record, and industry items to the organization's own publication, not a repost. If automatic resolution picks the wrong record, set `url`, `arxiv` or `doi` explicitly in `papers.yaml`, or set `no_auto_link: true`.

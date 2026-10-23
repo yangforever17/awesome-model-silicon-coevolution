@@ -33,7 +33,6 @@ DOI_MIN_SIM = 0.93
 # Entries whose automatic matches are known to be wrong (same title, different work).
 NO_AUTO_LINK_TYPES = {"Essay", "Book"}
 
-LEVEL_ORDER = ["L0", "L1", "L1–L2", "L2", "L3", "L4", "Human", "Claimed", "Undisclosed"]
 EXTRA_LEVEL_COLORS = {"L1–L2": "4f46e5", "Human": "78716c", "Claimed": "a8a29e", "Undisclosed": "a8a29e"}
 LEVEL_LABELS = {"Human": "Human-driven", "Claimed": "Claimed", "Undisclosed": "Undisclosed"}
 
@@ -182,11 +181,18 @@ def build_entries(bib, tax, ann, res):
 
 def badge(label, color):
     text = label.replace("-", "--").replace("_", "__").replace(" ", "_")
-    return f"![](https://img.shields.io/badge/-{urllib.parse.quote(text, safe='_-.')}-{color})"
+    return f"![{label}](https://img.shields.io/badge/-{urllib.parse.quote(text, safe='_-.')}-{color}?style=flat-square)"
 
 
 def level_color(tax, level):
     return tax["levels"][level]["color"] if level in tax["levels"] else EXTRA_LEVEL_COLORS[level]
+
+
+def level_badge(tax, x):
+    if not x["level"]:
+        return ""
+    dagger = " †" if x["lsrc"] == "curator" else ""
+    return badge(LEVEL_LABELS.get(x["level"], x["level"]), level_color(tax, x["level"])) + dagger
 
 
 def anchor(text):
@@ -196,35 +202,8 @@ def anchor(text):
     return a.replace(" ", "-")
 
 
-def entry_md(tax, x):
-    link_md = " ".join(f"[[{lab}]({u})]" for lab, u in x["links"])
-    if not link_md:
-        link_md = "" if x["type"] == "Book" else "_link pending_"
-    meta = " · ".join(s for s in (x["authors"], " ".join(s for s in (x["venue"], x["year"]) if s)) if s)
-    badges = []
-    if x["level"]:
-        lab = LEVEL_LABELS.get(x["level"], f"Level-{x['level']}")
-        badges.append(badge(lab, level_color(tax, x["level"])))
-    if x["edge"]:
-        ed = tax["edges"][x["edge"]]
-        badges.append(badge(ed["label"], ed["color"]))
-    badges.append(badge(x["type"], tax["types"][x["type"]]))
-    dagger = " †" if x["lsrc"] == "curator" else ""
-    orig = f" ({x['title_orig']})" if x["title_orig"] else ""
-    lines = [
-        f"1. **{x['title']}**{orig}  ",
-        "   " + " · ".join(s for s in (link_md, meta) if s) + "  ",
-        f"   {' '.join(badges)}  ",
-    ]
-    if x["note"]:
-        lines.append(f"   {x['note']}{dagger}")
-    else:
-        lines[-1] = lines[-1].rstrip()
-    return "\n".join(lines)
-
-
-def first_link(x):
-    return x["links"][0][1] if x["links"] else None
+def cell(s):
+    return s.replace("|", "\\|")
 
 
 def short_name(title):
@@ -232,17 +211,40 @@ def short_name(title):
     return m.group(1) if m else title
 
 
-def featured_table(tax, xs):
-    rows = ["| Work | Level | Why it matters |", "| --- | :---: | --- |"]
-    for x in xs:
-        name = x["short"] or short_name(x["title"])
-        u = first_link(x)
-        cell = f"[{name}]({u})" if u else name
-        lvl = ""
-        if x["level"]:
-            lvl = LEVEL_LABELS.get(x["level"], x["level"]) + (" †" if x["lsrc"] == "curator" else "")
-        rows.append(f"| {cell} ({x['year']}) | {lvl} | {x['note']} |")
-    return "\n".join(rows)
+def tidy_note(x):
+    """Drop a leading 'Name:' that repeats the work's own name, since the title sits in the same row."""
+    note = x["note"]
+    for name in filter(None, (x["short"], short_name(x["title"]))):
+        m = re.match(re.escape(name) + r"\s*:\s+", note)
+        if m:
+            rest = note[m.end():]
+            return rest[:1].upper() + rest[1:]
+    return note
+
+
+def venue_cell(x):
+    venue = x["venue"] if x["venue"] not in ("", "Website") else ("" if x["type"] == "Paper" else x["type"])
+    return " ".join(s for s in (venue, x["year"]) if s)
+
+
+def entry_row(tax, x, with_level):
+    title = cell(x["title"]) + (f" ({cell(x['title_orig'])})" if x["title_orig"] else "")
+    if x["links"]:
+        title = f"[{title}]({x['links'][0][1]})" + "".join(f" [[{lab}]({u})]" for lab, u in x["links"][1:])
+    star = "⭐ " if x["featured"] else ""
+    cols = [star + title, venue_cell(x)]
+    if with_level:
+        cols.append(level_badge(tax, x))
+    cols.append(cell(tidy_note(x)))
+    return "| " + " | ".join(cols) + " |"
+
+
+def entry_table(tax, xs):
+    with_level = any(x["level"] for x in xs)
+    head = ["Work", "Venue"] + (["Level"] if with_level else []) + ["Note"]
+    align = [":---", ":---"] + ([":---:"] if with_level else []) + [":---"]
+    rows = ["| " + " | ".join(head) + " |", "| " + " | ".join(align) + " |"]
+    return "\n".join(rows + [entry_row(tax, x, with_level) for x in xs])
 
 
 def sort_key(x):
@@ -258,34 +260,24 @@ def render_part(tax, p, number, entries):
     out = [
         f'<a id="part-{p["id"]}"></a>',
         "",
-        f"## {number}. {p['title']} <sub><a href=\"#readme-top\">↑ top</a></sub>",
+        f"## {number}. {p['title']}",
         "",
-        f"{p['blurb'].strip()} *Survey: {p['survey']}.* **{len(xs)} entries.**",
+        f"{p['blurb'].strip()} <sub>Survey {p['survey']} · {len(xs)} entries</sub>",
         "",
     ]
-    feat = sorted((x for x in xs if x["featured"]), key=sort_key)
-    if feat and p["id"] != "cases":
-        out += ["### Featured", "", featured_table(tax, feat), ""]
-    topics = p["topics"]
+    topics = [t for t in p["topics"] if any(x["topic"] == t["id"] for x in xs)]
     if len(topics) > 1:
-        out.append(
-            "Topics: "
-            + " · ".join(
-                f"[{t['title']}](#{anchor(t['title'] + ' ' + str(sum(1 for x in xs if x['topic'] == t['id'])))})"
-                for t in topics
-            )
-        )
-        out.append("")
+        out += [
+            "> " + " · ".join(
+                f"[{t['title']}](#{anchor(t['title'])}) {sum(1 for x in xs if x['topic'] == t['id'])}" for t in topics
+            ),
+            "",
+        ]
     for t in topics:
         ts = sorted((x for x in xs if x["topic"] == t["id"]), key=sort_key)
-        if not ts:
-            continue
         if len(topics) > 1:
-            out += [f"### {t['title']} ({len(ts)})", ""]
-        noun = "entry" if len(ts) == 1 else "entries"
-        out += ["<details>", f"<summary>Show {len(ts)} {noun}</summary>", ""]
-        out += [entry_md(tax, x) for x in ts]
-        out += ["", "</details>", ""]
+            out += [f"### {t['title']}", ""]
+        out += [entry_table(tax, ts), ""]
     return "\n".join(out)
 
 
@@ -308,79 +300,54 @@ def stats(entries):
     }
 
 
+def fill(text, values):
+    for k, v in values.items():
+        text = text.replace("{{" + k + "}}", str(v))
+    return text
+
+
 def render(bib, tax, ann, res):
     entries = build_entries(bib, tax, ann, res)
     st = stats(entries)
     parts = tax["parts"]
     numbered = list(enumerate(parts, 1))
 
-    glance = ["| # | Part | Survey | Entries | Levels present |", "| ---: | --- | --- | ---: | --- |"]
-    for i, p in numbered:
-        xs = [x for x in entries if x["part"] == p["id"]]
-        lv = collections.Counter(x["level"] for x in xs if x["level"])
-        lv_s = ", ".join(f"{LEVEL_LABELS.get(k, k)} ×{lv[k]}" for k in LEVEL_ORDER if k in lv) or "—"
-        glance.append(f"| {i} | [{p['title']}](#part-{p['id']}) | {p['survey']} | {len(xs)} | {lv_s} |")
-
     lvl_counts = collections.Counter(x["level"] for x in entries if x["level"])
-    level_rows = ["| Level | Name | Decision rule | Entries |", "| --- | --- | --- | ---: |"]
+    level_rows = ["| Level | Name | Decision rule | Entries |", "| :---: | --- | --- | ---: |"]
     for k, v in tax["levels"].items():
         level_rows.append(f"| {badge(k, v['color'])} | {v['name']} | {v['rule']} | {lvl_counts.get(k, 0) or '—'} |")
 
-    toc = [
-        "- [Start Here](#start-here)",
-        "- [Latest Updates](#latest-updates)",
-        "- [Companion Survey](#companion-survey)",
-        "- [Why Now: Intelligence Is Climbing Toward RSI](#why-now)",
-        "- [The Framework: Layers, Levels, Signals](#the-framework)",
-        "- [Where the Loop Breaks](#where-the-loop-breaks)",
-        "- [How to Read the Tags](#how-to-read-the-tags)",
-        "- [Catalog at a Glance](#catalog-at-a-glance)",
-    ]
-    toc += [f"- [{i}. {p['title']}](#part-{p['id']})" for i, p in numbered]
-    toc += ["- [Contributing](#contributing)", "- [Citation](#citation)", "- [Data Provenance and Validation](#data-provenance-and-validation)"]
-
-    body = []
-    body.append(
-        snippet("header")
-        .replace("{{N}}", str(st["n"]))
-    )
-    body.append(snippet("intro"))
-    body.append(snippet("start-here"))
-    body.append(snippet("updates"))
-    body.append("## Table of Contents\n\n" + "\n".join(toc) + "\n")
-    body.append(snippet("survey"))
-    body.append(snippet("whynow"))
-    body.append(snippet("framework").replace("{{LEVEL_TABLE}}", "\n".join(level_rows)))
-    body.append(snippet("loop-breaks"))
-    body.append(snippet("tags"))
-    body.append(
-        '<a id="catalog-at-a-glance"></a>\n\n## Catalog at a Glance <sub><a href="#readme-top">↑ top</a></sub>\n\n'
-        f"**{st['n']} entries** in {len(parts)} parts. Each entry appears once, under its primary topic.\n\n"
-        + "\n".join(glance)
-        + "\n"
-    )
+    contents = ["| | Part | Entries | Survey |", "| ---: | --- | ---: | --- |"]
     for i, p in numbered:
-        part_md = render_part(tax, p, i, entries)
-        if p["id"] == "cases":
-            part_md = part_md.replace("<details>", snippet("cases-table") + "\n<details>", 1)
-        body.append(part_md)
-    body.append(snippet("contributing"))
-    body.append(snippet("citation"))
-    prov = snippet("provenance")
-    unlinked = ", ".join(f"`{x['key']}`" for x in st["unlinked"]) or "none"
-    for k, v in {
+        n = sum(1 for x in entries if x["part"] == p["id"])
+        contents.append(f"| {i} | [{p['title']}](#part-{p['id']}) | {n} | {p['survey']} |")
+
+    legend = " ".join(badge(k, v["color"]) for k, v in tax["levels"].items() if k in lvl_counts)
+    legend += " " + " ".join(badge(LEVEL_LABELS[k], EXTRA_LEVEL_COLORS[k]) for k in ("Human", "Claimed", "Undisclosed"))
+
+    values = {
         "N": st["n"],
         "ARXIV": st["arxiv"],
         "DOI": st["doi"],
         "LINKED": st["linked"],
         "UNLINKED_N": len(st["unlinked"]),
-        "UNLINKED": unlinked,
+        "UNLINKED": ", ".join(f"`{x['key']}`" for x in st["unlinked"]) or "none",
         "LV_SURVEY": st["lv_survey"],
         "LV_CURATOR": st["lv_curator"],
         "VERIFIED": st["verified"],
-    }.items():
-        prov = prov.replace("{{" + k + "}}", str(v))
-    body.append(prov)
+        "LEVEL_TABLE": "\n".join(level_rows),
+        "CONTENTS": "\n".join(contents),
+        "LEGEND": legend,
+    }
+    body = [fill(snippet(name), values) for name in ("header", "intro", "whynow", "framework", "catalog")]
+    for i, p in numbered:
+        part_md = render_part(tax, p, i, entries)
+        if p["id"] == "cases":
+            # The case table already summarizes each case; keep the source list folded.
+            head, _, rest = part_md.partition("| Work |")
+            part_md = head + snippet("cases-table") + "\n<details>\n<summary>Sources</summary>\n\n| Work |" + rest.rstrip() + "\n\n</details>\n"
+        body.append(part_md)
+    body += [fill(snippet(name), values) for name in ("survey", "contributing")]
     readme = "\n".join(body).rstrip() + "\n"
     readme = re.sub(r"\n{3,}", "\n\n", readme)
 

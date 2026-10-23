@@ -13,9 +13,7 @@ parts:
     survey: "§5"
     edge: loop
     blurb: >-
-      Ten cases where an AI-designed artifact reaches the hardware or software that trains or serves AI,
-      dissected with the same template: which layers the loop crosses, which signal each segment reads,
-      where humans intervene, and where the loop breaks.
+      Ten cases where an AI-designed artifact reaches the hardware or software that trains or serves AI.
     topics:
       - id: cases
         title: Case studies
@@ -25,9 +23,7 @@ parts:
     survey: "§2.1, §4.1"
     edge: model-silicon
     blurb: >-
-      Language models as designers of chips. The learned object moves up from tool parameters and policies,
-      to RTL code and design knowledge, to the EDA tools and flows themselves. Most work reaches L0–L2 inside
-      a single layer; Design Conductor 2.0 is the first to touch L3.
+      Language models as chip designers, from tuning tools to writing RTL to rewriting the EDA tools themselves. Most work stays inside one layer at L0–L2.
     topics:
       - id: mh-substrate
         title: Classical and open-source EDA substrate
@@ -55,9 +51,7 @@ parts:
     survey: "§2.2.4, §4.2"
     edge: model-stack
     blurb: >-
-      The stack is the fastest, cheapest layer to get feedback from (profiles in minutes, end-to-end runs in
-      hours), so it is where loops close first. Kernel agents commonly reach L1, GEAK v4 and Qwen's deployment
-      experiment reach L2, and AlphaEvolve's training kernel flows back into the model that drives it.
+      The stack returns feedback fastest (profiles in minutes, end-to-end runs in hours), so loops close here first.
     topics:
       - id: ms-found
         title: Tensor compilers and kernel languages
@@ -75,9 +69,7 @@ parts:
     survey: "§2.2, §4.3"
     edge: silicon-model
     blurb: >-
-      Many defining design choices of large models are responses to hardware constraints, passed up layer by
-      layer: hardware fixes what the stack can implement efficiently, and the stack fixes what models should
-      adopt. This is the most strongly cross-layer path, but the executors are almost entirely human teams.
+      Hardware constraints shape model design. This is the most cross-layer path, but its executors are almost all human teams.
     topics:
       - id: hm-history
         title: From the hardware lottery to specialization
@@ -94,8 +86,7 @@ parts:
     title: Formalization and Co-Design Foundations
     survey: "§3"
     blurb: >-
-      The static ancestors of co-evolution: one-shot joint optimization over model, stack and hardware,
-      and the cost models that make the joint objective approximately computable.
+      Static co-design: one-shot joint optimization over model, stack and hardware, and the cost models that make it computable.
     topics:
       - id: fd-codesign
         title: Multi-level optimization and HW/SW co-design theory
@@ -108,9 +99,7 @@ parts:
     title: Self-Improvement Engines
     survey: "§1, §2.3, §3.3"
     blurb: >-
-      The update operators that let a model act on the system that runs it. They provide the engine of
-      co-evolution but not the transmission: none of them specifies which layer the signal comes from or
-      which layer the update lands on.
+      Update operators that let a model act on the system that runs it.
     topics:
       - id: se-rsi
         title: Recursive self-improvement and self-evolving agents
@@ -121,9 +110,7 @@ parts:
     title: "Intelligence: Knowledge, Rewards and Verification"
     survey: "§6"
     blurb: >-
-      Chip-design ability has grown along the same path as general intelligence: pretraining brings knowledge,
-      post-training teaches iteration toward verifiable targets, and agents extend single generations into
-      long-horizon tool use. Each stage removes a bottleneck and exposes a new boundary.
+      Pretraining brings knowledge, post-training teaches iteration toward verifiable targets, and agents extend both to long-horizon tool use.
     topics:
       - id: in-pretrain
         title: Pretraining, data and domain adaptation
@@ -144,8 +131,7 @@ parts:
     title: "Benchmarks: From Exam Hall to Training Ground"
     survey: "§7"
     blurb: >-
-      With verifiable rewards, a benchmark's verifier becomes a reward and its task set becomes an environment.
-      Almost every benchmark measures ability inside one layer; HSCO-Bench is the closest to an L3 setting.
+      A verifier becomes a reward and a task set becomes an environment. Almost every benchmark stays inside one layer.
     topics:
       - id: bm-rtl
         title: RTL, HLS and verification
@@ -170,8 +156,7 @@ parts:
     title: Related Surveys
     survey: "§1.5, §3"
     blurb: >-
-      Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving agents. Each covers part
-      of the tower; see the survey's Table 2 for a side-by-side comparison.
+      Surveys that each cover part of the tower; the survey's Table 2 compares them.
     topics:
       - id: sv-eda
         title: AI and LLMs for EDA
@@ -184,8 +169,7 @@ parts:
     title: "Outlook: Recursion, Governance and World Models"
     survey: "§8"
     blurb: >-
-      Whether recursion accelerates or saturates, where humans stay in the loop, and the system-level world
-      model that could turn silicon from the search loop into a calibration step.
+      Whether recursion accelerates or saturates, where humans stay in the loop, and system-level world models.
     topics:
       - id: ol-future
         title: Recursion, compute and governance

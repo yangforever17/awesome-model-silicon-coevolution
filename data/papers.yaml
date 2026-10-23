@@ -6,8 +6,8 @@
 #             Claimed (stated by the organization, not verifiable), Undisclosed
 #   lsrc      survey  = level stated in the survey's tables or text
 #             curator = assigned by the repository curators using the §3.4 criteria (shown with †)
-#   featured  shown in the part's "featured" table
-#   short     display name in the featured table (defaults to the title before its colon)
+#   featured  marked ⭐ as a key work
+#   short     short name; a leading "short: " in the note is dropped in the README
 #   title_en  English title for non-English sources (the original is shown in parentheses)
 #   url / arxiv / doi            manual link overrides
 #   no_doi / no_arxiv            drop a wrong automatic match
