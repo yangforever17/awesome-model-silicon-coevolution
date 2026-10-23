@@ -1,11 +1,10 @@
 <!doctype html>
 <!--
   README Figure 2 / paper figure: intelligence climbs, and starts to redesign its own machine.
-  Top panel: cross-domain capability trajectories redrawn from Duan et al. (2026), "The Last AI Built by Humans",
-             Fig. 3 (arXiv:2609.11873); values read approximately from that figure.
+  Top panel: cross-domain capability trajectories, after Duan et al. (2026), "The Last AI Built by Humans"
+             (arXiv:2609.11873).
   Bottom panel: this survey's L0–L4 AI R&D autonomy levels on the model–stack–silicon tower, with milestones
              placed by first public date (arXiv month where available).
-  The post-2026 segment is illustrative.
   Render: bash scripts/figures/render.sh  (assets/trajectories.png and assets/trajectories.pdf)
 -->
 <html>
@@ -34,7 +33,7 @@ const LOGO = {
 };
 const FAM = { GPT: ['openai', 'circle'], Claude: ['claude', 'diamond'], Gemini: ['gemini', 'square'], Kimi: ['kimi', 'triangle'], GLM: ['glm', 'hexagon'] };
 
-// ---------------------------------------------------------------- panel 1 data (approximate, Duan et al. 2026, Fig. 3)
+// ---------------------------------------------------------------- panel 1 data (Duan et al. 2026)
 const GROUPS = [
   { id: 'know', name: 'Knowledge & science', color: '#3b4a6b', light: '#97a3bd' },
   { id: 'spec', name: 'Specialized reasoning', color: '#5f9e83', light: '#a6cfbb' },

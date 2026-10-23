@@ -1850,7 +1850,7 @@ Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving a
 | [LLMs for EDA survey (TODAES)](https://arxiv.org/abs/2501.09655) (2025) |  | Survey of research on LLMs for EDA (TODAES 2025). |
 | [Collaborative HW/SW design in the LLM era](https://arxiv.org/abs/2410.07265) (2025) |  | Collaborative hardware/software design in the LLM era; the only compared survey spanning chip, stack and model. |
 | [Agentic EDA: A Handoff Perspective](https://arxiv.org/abs/2606.19795) (2026) |  | Agentic EDA from a handoff perspective; its handoff validity is a starting point for verifying assumptions across layers. |
-| [The Last AI Built by Humans](https://arxiv.org/abs/2609.11873) (2026) |  | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; panel ① of Figure 2 here is redrawn from its Fig. 3. |
+| [The Last AI Built by Humans](https://arxiv.org/abs/2609.11873) (2026) |  | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI, which panel ① of Figure 2 cites. |
 
 Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and HW/SW co-design](#hardware-aware-nas-and-hwsw-co-design-3) · [Agents and self-evolution](#agents-and-self-evolution-5)
 
@@ -1942,7 +1942,7 @@ Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and
 1. **The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement**  
    [[arXiv](https://arxiv.org/abs/2609.11873)] · Duan et al. · arXiv 2026  
    ![](https://img.shields.io/badge/-Survey-7c3aed)  
-   RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; panel ① of Figure 2 here is redrawn from its Fig. 3.
+   RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI, which panel ① of Figure 2 cites.
 
 </details>
 
