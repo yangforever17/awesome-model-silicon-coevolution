@@ -1,0 +1,219 @@
+<!doctype html>
+<!--
+  The full co-evolution loop: three concentric loops (stack · hours, model · months, silicon · years) pass through
+  the same five stations; the model at the centre is the executor, and deployment feeds back into it (g, L4).
+  Render: bash scripts/figures/render.sh  (assets/loop.png, assets/loop.pdf)
+-->
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,400;0,500;0,600;0,700;0,800;1,500&family=Patrick+Hand&display=block" rel="stylesheet">
+<style>
+  @page { size: 1600px 1040px; margin: 0; }
+  * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  html, body { background: #fff; }
+  body { width: 1600px; height: 1040px; overflow: hidden; font-family: Inter, sans-serif; color: #17203a;
+         background: radial-gradient(rgba(42,55,99,.08) 1px, transparent 1.3px) 0 0 / 16px 16px,
+                     radial-gradient(640px 640px at 560px 540px, #f1f4ff 0%, rgba(255,255,255,0) 70%), #fff; }
+  svg { display: block; }
+</style>
+</head>
+<body>
+<svg id="fig" width="1600" height="1040" viewBox="0 0 1600 1040"></svg>
+<script>
+const NAVY = '#1e3a6e';
+const C = [560, 548];
+const RING = {
+  st: { r: 150, label: 'STACK · hours', ink: '#0f766e', fill: '#c8efe6', edge: '#5cbfa9' },
+  mo: { r: 236, label: 'MODEL · months', ink: '#6d28d9', fill: '#e2d9ff', edge: '#a993f0' },
+  si: { r: 322, label: 'SILICON · years', ink: '#a2510b', fill: '#fde3b3', edge: '#e0a24a' },
+};
+const BAND = 40;
+// stations, clockwise from the top (SVG angles: -90 = top)
+const ST = [
+  { a: -90, n: 1, name: 'Measure', sub: 'read y = m(M, S, H)' },
+  { a: -18, n: 2, name: 'Propose', sub: 'write candidate changes' },
+  { a: 54, n: 3, name: 'Verify', sub: 'climb the S1→S6 ladder' },
+  { a: 126, n: 4, name: 'Adopt', sub: 'human sign-off gates' },
+  { a: 198, n: 5, name: 'Deploy', sub: 'new M, S, H in service' },
+];
+const P = (a, r) => [C[0] + r * Math.cos(a * Math.PI / 180), C[1] + r * Math.sin(a * Math.PI / 180)];
+const arc = (r, a0, a1) => { const [x0, y0] = P(a0, r), [x1, y1] = P(a1, r); return `M${x0.toFixed(1)} ${y0.toFixed(1)} A ${r} ${r} 0 ${Math.abs(a1 - a0) > 180 ? 1 : 0} 1 ${x1.toFixed(1)} ${y1.toFixed(1)}`; };
+const shadow = (cx, cy, rx, o = .13) => `<ellipse cx="${cx}" cy="${cy}" rx="${rx}" ry="${rx * 0.15}" fill="${NAVY}" opacity="${o}"/>`;
+const sparkle = (x, y, s = 1, c = '#fbbf24') => `<path transform="translate(${x},${y}) scale(${s})" d="M0 -9 C1 -2 2 -1 9 0 C2 1 1 2 0 9 C-1 2 -2 1 -9 0 C-2 -1 -1 -2 0 -9z" fill="${c}"/>`;
+
+function robot(x, y, s = 1) {
+  const arm = (d) => `<path d="${d}" fill="none" stroke="${NAVY}" stroke-width="8.5" stroke-linecap="round"/><path d="${d}" fill="none" stroke="#4d7fe8" stroke-width="4.6" stroke-linecap="round"/>`;
+  return `<g transform="translate(${x},${y}) scale(${s})">
+    <rect x="21" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
+    <rect x="38" y="80" width="11" height="18" rx="5" fill="#2f5fc4" stroke="${NAVY}" stroke-width="2.4"/>
+    ${arm('M15 58 Q 4 64 2 76')}<circle cx="2" cy="76" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
+    <rect x="13" y="48" width="44" height="37" rx="15" fill="url(#gBody)" stroke="${NAVY}" stroke-width="2.6"/>
+    <rect x="26" y="58" width="18" height="18" rx="3" fill="url(#gChip)" stroke="#a2510b" stroke-width="1.8"/><rect x="31" y="63" width="8" height="8" rx="1.5" fill="url(#gDie)"/>
+    ${arm('M55 58 Q 66 52 72 40')}<circle cx="72" cy="40" r="5" fill="#dbe7ff" stroke="${NAVY}" stroke-width="2.2"/>
+    <line x1="35" y1="9" x2="35" y2="-1" stroke="${NAVY}" stroke-width="2.6"/><circle cx="35" cy="-3" r="5" fill="#fbbf24" stroke="${NAVY}" stroke-width="2.2"/>
+    <circle cx="5" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/><circle cx="65" cy="28" r="4.5" fill="#a9c2f7" stroke="${NAVY}" stroke-width="2.2"/>
+    <rect x="6" y="8" width="58" height="42" rx="17" fill="url(#gHead)" stroke="${NAVY}" stroke-width="2.6"/>
+    <path d="M14 18 q 6 -6 18 -6" stroke="#fff" stroke-opacity=".55" stroke-width="3" fill="none" stroke-linecap="round"/>
+    <rect x="13" y="17" width="44" height="26" rx="11" fill="#16234a" stroke="${NAVY}" stroke-width="2"/>
+    <g filter="url(#fEye)"><rect x="23" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/><rect x="40" y="23" width="7" height="10" rx="3.5" fill="#67e8f9"/></g>
+    <path d="M30 37.5 q 5 3.2 10 0" stroke="#67e8f9" stroke-width="2" fill="none" stroke-linecap="round"/>
+  </g>`;
+}
+function gate(a, r, big = false) {
+  // barrier arm laid across the ring band at angle a
+  const [px, py] = P(a, r + BAND / 2 + 10), [ax, ay] = P(a, r - BAND / 2 - 4);
+  const sc = big ? 1.25 : 1;
+  return `<g>
+    <path d="M${px} ${py} L ${ax} ${ay}" stroke="${NAVY}" stroke-width="${9 * sc}" stroke-linecap="round"/>
+    <path d="M${px} ${py} L ${ax} ${ay}" stroke="#ef4444" stroke-width="${6 * sc}" stroke-linecap="round"/>
+    <path d="M${px} ${py} L ${ax} ${ay}" stroke="#fff" stroke-width="${6 * sc}" stroke-dasharray="6 6"/>
+    <circle cx="${px}" cy="${py}" r="${6.5 * sc}" fill="#fbbf24" stroke="${NAVY}" stroke-width="2.2"/></g>`;
+}
+function breakBadge(x, y, title, sub, anchor = 'start') {
+  const tx = anchor === 'start' ? x + 22 : x - 22;
+  return `<g><circle cx="${x}" cy="${y}" r="15" fill="#fee2e2" stroke="#dc2626" stroke-width="2.6"/>
+    <path d="M${x - 6} ${y - 7} L ${x + 1} ${y - 1} L ${x - 3} ${y + 1} L ${x + 6} ${y + 8}" fill="none" stroke="#dc2626" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="${tx}" y="${y - 2}" text-anchor="${anchor}" font-weight="800" font-size="13.5" fill="#b91c1c">${title}</text>
+    <text x="${tx}" y="${y + 15}" text-anchor="${anchor}" font-weight="500" font-size="12" fill="#7f1d1d">${sub}</text></g>`;
+}
+const pill = (x, y, lv, color, text, anchor = 'start') => {
+  const w = 30;
+  const tx = anchor === 'start' ? x + w + 8 : x - 8;
+  return `<g><rect x="${x}" y="${y - 12}" width="${w}" height="24" rx="12" fill="${color}"/>
+    <text x="${x + w / 2}" y="${y + 4.5}" text-anchor="middle" font-weight="800" font-size="12.5" fill="#fff">${lv}</text>
+    <text x="${tx}" y="${y + 4.5}" text-anchor="${anchor}" font-family="Patrick Hand" font-size="18" fill="${color}">${text}</text></g>`;
+};
+
+let s = `<defs>
+  <linearGradient id="gHead" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#78a8ff"/><stop offset="1" stop-color="#3d6fe0"/></linearGradient>
+  <linearGradient id="gBody" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6b9bff"/><stop offset="1" stop-color="#3563d4"/></linearGradient>
+  <linearGradient id="gChip" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffe2a8"/><stop offset="1" stop-color="#f7b955"/></linearGradient>
+  <linearGradient id="gDie" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#2b3a66"/><stop offset="1" stop-color="#121a33"/></linearGradient>
+  <radialGradient id="halo"><stop offset="0" stop-color="#cfe0ff"/><stop offset="1" stop-color="#cfe0ff" stop-opacity="0"/></radialGradient>
+  <filter id="fEye" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="1.6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+  <filter id="soft" x="-10%" y="-10%" width="120%" height="140%"><feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#1e3a6e" flood-opacity=".13"/></filter>
+  <marker id="ar-g" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#16a34a"/></marker>
+  <marker id="ar-o" viewBox="0 0 10 10" refX="6.5" refY="5" markerWidth="4" markerHeight="4" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#d97706"/></marker>
+  ${Object.entries(RING).map(([k, R]) => `<path id="lab-${k}" d="${arc(R.r, -168, -100)}"/>`).join('')}
+</defs>`;
+
+// title
+s += `<text x="40" y="54" font-family="Patrick Hand" font-size="38" fill="#17203a">One turn of the co-evolution loop</text>
+      <text x="42" y="80" font-weight="500" font-size="15.5" fill="#5d6679">three loops at three speeds share five stations; the model at the centre both turns them and is changed by them</text>`;
+
+// station spokes (behind rings)
+for (const t of ST) {
+  const [x0, y0] = P(t.a, 104), [x1, y1] = P(t.a, RING.si.r + BAND / 2 + 26);
+  s += `<path d="M${x0} ${y0} L ${x1} ${y1}" stroke="#b9c3d8" stroke-width="2" stroke-dasharray="3 6"/>`;
+}
+
+// rings
+for (const [k, R] of Object.entries(RING)) {
+  s += `<circle cx="${C[0]}" cy="${C[1]}" r="${R.r}" fill="none" stroke="${R.edge}" stroke-width="${BAND + 3}"/>
+        <circle cx="${C[0]}" cy="${C[1]}" r="${R.r}" fill="none" stroke="${R.fill}" stroke-width="${BAND - 1}"/>`;
+  // clockwise chevrons
+  for (let a = -84; a < 270; a += k === 'st' ? 30 : k === 'mo' ? 20 : 15) {
+    if (ST.some(t => Math.abs(((a - t.a) % 360 + 360) % 360) < 9 || Math.abs(((t.a - a) % 360 + 360) % 360) < 9)) continue;
+    const an = ((a + 180) % 360 + 360) % 360 - 180;
+    if (an > -172 && an < -96) continue;  // keep the ring label clear
+    const [x, y] = P(a, R.r);
+    s += `<path d="M-5 -8 L 4 0 L -5 8" transform="translate(${x.toFixed(1)},${y.toFixed(1)}) rotate(${a + 90})" fill="none" stroke="${R.ink}" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" opacity=".55"/>`;
+  }
+  s += `<text font-weight="800" font-size="13" letter-spacing=".12em" fill="${R.ink}" dy="4.5"><textPath href="#lab-${k}" startOffset="50%" text-anchor="middle">${R.label}</textPath></text>`;
+}
+
+// station nodes on each ring
+for (const t of ST) for (const R of Object.values(RING)) {
+  const [x, y] = P(t.a, R.r);
+  s += `<circle cx="${x}" cy="${y}" r="9" fill="#fff" stroke="${R.ink}" stroke-width="3"/>`;
+}
+// station chips around the outside
+for (const t of ST) {
+  const [x, y] = P(t.a, RING.si.r + BAND / 2 + 62);
+  const w = 192;
+  s += `<g transform="translate(${x - w / 2},${y - 27})" filter="url(#soft)"><rect width="${w}" height="54" rx="14" fill="#fff" stroke="#d5dbe8" stroke-width="1.5"/></g>
+        <circle cx="${x - w / 2 + 25}" cy="${y}" r="14" fill="#17203a"/>
+        <text x="${x - w / 2 + 25}" y="${y + 5}" text-anchor="middle" font-weight="800" font-size="14" fill="#fff">${t.n}</text>
+        <text x="${x - w / 2 + 48}" y="${y - 3}" font-weight="800" font-size="17" fill="#17203a">${t.name}</text>
+        <text x="${x - w / 2 + 48}" y="${y + 15}" font-weight="500" font-size="11.5" fill="#5d6679">${t.sub}</text>`;
+}
+
+// human gates at Adopt
+s += gate(126, RING.st.r) + gate(126, RING.mo.r) + gate(126, RING.si.r, true);
+
+// cross-ring links (L3) between Measure and Propose
+const XA = -54;
+const [l0x, l0y] = P(XA, RING.st.r + BAND / 2 + 2), [l1x, l1y] = P(XA, RING.si.r - BAND / 2 - 2);
+s += `<path d="M${l0x} ${l0y} L ${l1x} ${l1y}" stroke="#d97706" stroke-width="4" stroke-dasharray="7 6" marker-start="url(#ar-o)" marker-end="url(#ar-o)"/>`;
+
+// centre: the executor
+s += `<circle cx="${C[0]}" cy="${C[1]}" r="104" fill="url(#halo)"/>`;
+s += shadow(C[0], C[1] + 56, 40, .15) + robot(C[0] - 40, C[1] - 58, 1.14);
+s += `<text x="${C[0]}" y="${C[1] + 82}" text-anchor="middle" font-weight="800" font-size="14" fill="#17203a">Model θ<tspan baseline-shift="sub" font-size="10">t</tspan></text>
+      <text x="${C[0]}" y="${C[1] + 98}" text-anchor="middle" font-weight="500" font-size="11.5" fill="#5d6679">the executor</text>`;
+s += sparkle(C[0] + 64, C[1] - 52, .8) + sparkle(C[0] - 70, C[1] - 30, .55, '#93c5fd');
+
+// recursion g: from Deploy back into the executor (L4)
+const [gx0, gy0] = P(198, RING.st.r - BAND / 2 - 4);
+s += `<path d="M${gx0} ${gy0} C ${gx0 + 24} ${gy0 + 46}, ${C[0] - 86} ${C[1] + 56}, ${C[0] - 50} ${C[1] + 30}" fill="none" stroke="#16a34a" stroke-width="5" stroke-linecap="round" marker-end="url(#ar-g)"/>`;
+
+// level annotations
+s += pill(790, 214, 'L0', '#64748b', 'AI proposes, people check');
+s += pill(906, 478, 'L1', '#2563eb', 'propose ↔ verify');
+s += pill(P(90, RING.si.r)[0] - 98, P(90, RING.si.r)[1] + 52, 'L2', '#7c3aed', 'a full lap of one ring');
+s += pill(P(XA, RING.mo.r)[0] + 18, P(XA, RING.mo.r)[1] - 40, 'L3', '#d97706', 'AI picks which ring to turn');
+s += pill(36, 492, 'L4', '#16a34a', 'output re-enters');
+s += `<text x="74" y="514" font-family="Patrick Hand" font-size="18" fill="#16a34a">the executor</text>
+      <text x="36" y="538" font-weight="600" font-size="12.5" fill="#15803d">θ<tspan baseline-shift="sub" font-size="9.5">t+1</tspan> = g(θ<tspan baseline-shift="sub" font-size="9.5">t</tspan>; M, S, H)</text>`;
+
+// where the loop breaks (§1.5)
+s += breakBadge(P(78, RING.si.r + BAND / 2 + 30)[0] + 18, P(78, RING.si.r + BAND / 2 + 30)[1] + 8, 'Physics', 'silicon feedback is slow and sparse');
+s += breakBadge(60, 156, 'Agent', 'horizon of hours, loop of years');
+s += breakBadge(52, 760, 'Ecosystem', 'layers owned by different firms');
+
+// ---------------------------------------------------------------- right panel: the five stations
+const PX = 1090, PW = 476;
+s += `<text x="${PX}" y="54" font-weight="800" font-size="12.5" letter-spacing=".12em" fill="#5d6679">WHAT HAPPENS AT EACH STATION</text>`;
+const LANE = [['st', 'Stack'], ['mo', 'Model'], ['si', 'Silicon']];
+const CARDS = [
+  { n: 1, name: 'Measure', lines: ['profiles, end-to-end latency', 'evals, scaling-law fits', 'PPA reports, post-silicon data'], foot: 'reading across rings is what L3 needs' },
+  { n: 2, name: 'Propose', lines: ['kernels, schedules, serving configs', 'attention, numerics, MoE layout', 'RTL, HLS pragmas, μarch params'], foot: 'L0 suggests · L1 searches · L2 decomposes a spec' },
+  { n: 3, name: 'Verify', ladder: true, foot: 'cheap tiers screen many; few reach silicon · reward hacking lives here' },
+  { n: 4, name: 'Adopt', lines: ['code review, merge', 'training-run approval', 'sign-off, tape-out decision'], foot: 'people hold the slowest gates' },
+  { n: 5, name: 'Deploy', lines: ['new kernels go live within hours', 'next model trained within months', 'new chips in service within years'], foot: 'when the new S or H runs the designer itself: L4' },
+];
+const CH = 168, CG = 12;
+CARDS.forEach((c, i) => {
+  const y0 = 76 + i * (CH + CG);
+  s += `<g transform="translate(${PX},${y0})" filter="url(#soft)"><rect width="${PW}" height="${CH}" rx="14" fill="#fff" stroke="#dfe4ee" stroke-width="1.4"/></g>
+        <circle cx="${PX + 26}" cy="${y0 + 28}" r="14" fill="#17203a"/>
+        <text x="${PX + 26}" y="${y0 + 33}" text-anchor="middle" font-weight="800" font-size="14" fill="#fff">${c.n}</text>
+        <text x="${PX + 50}" y="${y0 + 34}" font-weight="800" font-size="18" fill="#17203a">${c.name}</text>`;
+  if (c.ladder) {
+    const tiers = [['S1', 'compile', 's'], ['S2', 'function', 'min–h'], ['S3', 'PPA', 'h'], ['S4', 'profile', 'min'], ['S5', 'end-to-end', 'h–d'], ['S6', 'post-silicon', 'mo–yr']];
+    tiers.forEach(([k, nm, t], j) => {
+      const bx = PX + 22 + j * 74, bh = 52 - j * 7.5, by = y0 + 112 - bh;
+      const col = ['#93c5fd', '#7fb3f5', '#a78bfa', '#5eead4', '#fbbf24', '#f59e0b'][j];
+      s += `<rect x="${bx}" y="${by}" width="64" height="${bh}" rx="6" fill="${col}" opacity=".85"/>
+            <text x="${bx + 32}" y="${by - 6}" text-anchor="middle" font-weight="800" font-size="12" fill="#17203a">${k}</text>
+            <text x="${bx + 32}" y="${y0 + 126}" text-anchor="middle" font-weight="600" font-size="11" fill="#334155">${nm}</text>
+            <text x="${bx + 32}" y="${y0 + 140}" text-anchor="middle" font-weight="500" font-size="10.5" fill="#6b7385">${t}</text>`;
+    });
+    s += `<text x="${PX + PW - 18}" y="${y0 + 34}" text-anchor="end" font-weight="600" font-size="11.5" fill="#6b7385">fewer candidates, slower, more trusted →</text>`;
+  } else {
+    c.lines.forEach((ln, j) => {
+      const [k, nm] = LANE[j], R = RING[k], yy = y0 + 64 + j * 26;
+      s += `<rect x="${PX + 22}" y="${yy - 13}" width="64" height="20" rx="10" fill="${R.fill}" stroke="${R.edge}" stroke-width="1.4"/>
+            <text x="${PX + 54}" y="${yy + 1.5}" text-anchor="middle" font-weight="700" font-size="11.5" fill="${R.ink}">${nm}</text>
+            <text x="${PX + 98}" y="${yy + 2}" font-weight="500" font-size="14" fill="#17203a">${ln}</text>`;
+    });
+  }
+  s += `<text x="${PX + 22}" y="${y0 + CH - 12}" font-style="italic" font-weight="500" font-size="12.5" fill="#55648a">${c.foot}</text>`;
+});
+
+document.getElementById('fig').innerHTML = s;
+</script>
+</body>
+</html>
