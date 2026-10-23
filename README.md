@@ -7,7 +7,7 @@
 <strong>A layer-aware, auditable map of how models, software stacks and chips are starting to improve one another.</strong>
 
 <p>
-  <a href="#catalog-at-a-glance"><img alt="Entries" src="https://img.shields.io/badge/entries-303-2563eb?style=flat-square"></a>
+  <a href="#catalog-at-a-glance"><img alt="Entries" src="https://img.shields.io/badge/entries-304-2563eb?style=flat-square"></a>
   <a href="#companion-survey"><img alt="Companion survey" src="https://img.shields.io/badge/Companion%20Survey-ACM%20TODAES%20(in%20preparation)-b31b1b?style=flat-square"></a>
   <a href="#the-framework"><img alt="Levels" src="https://img.shields.io/badge/autonomy-L0--L6-7c3aed?style=flat-square"></a>
   <a href="#the-framework"><img alt="Signals" src="https://img.shields.io/badge/feedback-S1--S6-0f766e?style=flat-square"></a>
@@ -77,6 +77,7 @@ Every model runs on a machine it did not design. That is starting to change: lan
 - [Start Here](#start-here)
 - [Latest Updates](#latest-updates)
 - [Companion Survey](#companion-survey)
+- [Why Now: Intelligence Is Climbing Toward RSI](#why-now)
 - [The Framework: Layers, Levels, Signals](#the-framework)
 - [Where the Loop Breaks](#where-the-loop-breaks)
 - [How to Read the Tags](#how-to-read-the-tags)
@@ -111,6 +112,20 @@ The survey makes three contributions:
 
 ---
 
+<a id="why-now"></a>
+
+## Why Now: Intelligence Is Climbing Toward RSI <sub><a href="#readme-top">↑ top</a></sub>
+
+Across knowledge, specialized reasoning, software and tool-use benchmarks, the annual frontier has closed most of the gap between where each benchmark started and a perfect score within three years. The steepest recent climbs are in software and agentic tool use, the same capabilities that chip design and kernel optimization now lean on. Extrapolated, every domain is pulled toward the summit, and the question this catalog asks is what happens when that pull reaches the machines the models run on.
+
+<div align="center">
+  <img src="./assets/trajectories.png" width="100%" alt="Line chart of cross-domain capability trajectories from 2023 to 2026, measured as gap closed (HCI), where 0 is a benchmark's entry-year frontier and 100 is a perfect score. Four domain groups: knowledge and scientific evaluation (general knowledge, graduate science, academic breadth, mathematics), specialized reasoning (multimodal, legal), software environments (cybersecurity, software engineering) and tool-mediated workflows (tool use, search and terminal). All rise steeply; by 2026 most sit between 40 and 92. Model releases from the GPT, Claude, Gemini, Kimi and GLM families are marked with logos. A faint mountain rises behind the curves, and in the post-2026 region dashed projections converge on a glowing RSI marker at the top-right, labelled RSI-enabled adaptation.">
+  <br>
+  <em><b>Figure 2.</b> Cross-domain capability trajectories and an illustrative RSI extension. Each line is an annual domain frontier in HCI (0 = the benchmark's entry-year frontier, 100 = a perfect score). Curves are redrawn from <a href="https://arxiv.org/abs/2609.11873">Duan et al. (2026), Fig. 3</a>, with values read approximately; the post-2026 segment is illustrative, not a forecast.</em>
+</div>
+
+---
+
 <a id="the-framework"></a>
 
 ## The Framework: Layers, Levels, Signals <sub><a href="#readme-top">↑ top</a></sub>
@@ -120,7 +135,7 @@ The survey makes three contributions:
 <div align="center">
   <img src="./assets/tower.png" width="82%" alt="The model, software-stack and silicon tower drawn as three stacked slabs. Silicon at the base, with chips and a wafer, iterates in years; the software stack in the middle, with a compiler terminal and CUDA kernels, iterates in hours; the model on top, a neural network, iterates in months. A robot, the model as designer and workload, stands on top under a halo. On the left, paper planes fly along dotted paths from the robot, one tagged kernels landing on the stack and one tagged RTL landing on the silicon. On the right, people work pulley hoists on the tower's ledges, hauling crates labelled HBM and FLOPs and FP8 and 2:4 up one level at a time; a small drone carrying a crate on a dashed path shows AI starting to carry constraints too.">
   <br>
-  <em><b>Figure 2.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far hauled almost entirely by people. The drone marks where AI has just begun to carry constraints upward.</em>
+  <em><b>Figure 3.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far hauled almost entirely by people. The drone marks where AI has just begun to carry constraints upward.</em>
 </div>
 
 **Co-evolution dynamics.** Each layer is updated by an operator that reads a measurement of the whole system, and the capability of whoever executes the update may itself depend on the system:
@@ -209,7 +224,7 @@ Levels are only assigned where the question "how much of the R&D loop does the A
 
 ## Catalog at a Glance <sub><a href="#readme-top">↑ top</a></sub>
 
-**303 entries** in 10 parts. Each entry appears once, under its primary topic.
+**304 entries** in 10 parts. Each entry appears once, under its primary topic.
 
 | # | Part | Survey | Entries | Levels present |
 | ---: | --- | --- | ---: | --- |
@@ -221,7 +236,7 @@ Levels are only assigned where the question "how much of the R&D loop does the A
 | 6 | [Self-Improvement Engines](#part-engines) | §1, §2.3, §3.3 | 14 | — |
 | 7 | [Intelligence: Knowledge, Rewards and Verification](#part-intelligence) | §6 | 46 | — |
 | 8 | [Benchmarks: From Exam Hall to Training Ground](#part-benchmarks) | §7 | 40 | L3 ×1 |
-| 9 | [Related Surveys](#part-surveys) | §1.5, §3 | 16 | — |
+| 9 | [Related Surveys](#part-surveys) | §1.5, §3 | 17 | — |
 | 10 | [Outlook: Recursion, Governance and World Models](#part-outlook) | §8 | 10 | — |
 
 <a id="part-cases"></a>
@@ -1826,7 +1841,7 @@ Topics: [RTL, HLS and verification](#rtl-hls-and-verification-12) · [Physical d
 
 ## 9. Related Surveys <sub><a href="#readme-top">↑ top</a></sub>
 
-Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving agents. Each covers part of the tower; see the survey's Table 2 for a side-by-side comparison. *Survey: §1.5, §3.* **16 entries.**
+Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving agents. Each covers part of the tower; see the survey's Table 2 for a side-by-side comparison. *Survey: §1.5, §3.* **17 entries.**
 
 ### Featured
 
@@ -1835,8 +1850,9 @@ Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving a
 | [LLMs for EDA survey (TODAES)](https://arxiv.org/abs/2501.09655) (2025) |  | Survey of research on LLMs for EDA (TODAES 2025). |
 | [Collaborative HW/SW design in the LLM era](https://arxiv.org/abs/2410.07265) (2025) |  | Collaborative hardware/software design in the LLM era; the only compared survey spanning chip, stack and model. |
 | [Agentic EDA: A Handoff Perspective](https://arxiv.org/abs/2606.19795) (2026) |  | Agentic EDA from a handoff perspective; its handoff validity is a starting point for verifying assumptions across layers. |
+| [The Last AI Built by Humans](https://arxiv.org/abs/2609.11873) (2026) |  | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3. |
 
-Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and HW/SW co-design](#hardware-aware-nas-and-hwsw-co-design-3) · [Agents and self-evolution](#agents-and-self-evolution-4)
+Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and HW/SW co-design](#hardware-aware-nas-and-hwsw-co-design-3) · [Agents and self-evolution](#agents-and-self-evolution-5)
 
 ### AI and LLMs for EDA (9)
 
@@ -1902,10 +1918,10 @@ Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and
 
 </details>
 
-### Agents and self-evolution (4)
+### Agents and self-evolution (5)
 
 <details>
-<summary>Show 4 entries</summary>
+<summary>Show 5 entries</summary>
 
 1. **A Survey on Large Language Model Based Autonomous Agents**  
    [[arXiv](https://arxiv.org/abs/2308.11432)] [[DOI](https://doi.org/10.1007/s11704-024-40231-1)] · Wang et al. · Frontiers of Computer Science 2024  
@@ -1923,6 +1939,10 @@ Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and
    [[arXiv](https://arxiv.org/abs/2608.10299)] · Zong et al. · arXiv 2026  
    ![](https://img.shields.io/badge/-Survey-7c3aed)  
    Co-evolution in agentic systems toward self-directed evolution beyond human design.
+1. **The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement**  
+   [[arXiv](https://arxiv.org/abs/2609.11873)] · Duan et al. · arXiv 2026  
+   ![](https://img.shields.io/badge/-Survey-7c3aed)  
+   RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3.
 
 </details>
 
@@ -2043,8 +2063,8 @@ If you find this repository or its framework useful, please cite the companion s
 
 The catalog is generated from the survey's bibliography ([`data/refs.bib`](data/refs.bib)) and a per-entry annotation file ([`data/papers.yaml`](data/papers.yaml)); a flat export is in [`data/catalog.csv`](data/catalog.csv).
 
-- **303** entries, each listed exactly once under its primary topic.
-- **299 / 303** entries have at least one link: **213** arXiv records and **144** DOIs, plus official pages for blogs, releases and tools. Links were resolved by exact-title lookup against DataCite (for arXiv records) and Crossref, and accepted only when the registry title matches the bibliography title (similarity ≥ 0.92) and the year is consistent; all candidate matches are recorded in [`data/resolved.json`](data/resolved.json). Links that could not be matched automatically, or that matched the wrong record, are set by hand in `papers.yaml` after checking the registry entry.
+- **304** entries, each listed exactly once under its primary topic.
+- **300 / 304** entries have at least one link: **214** arXiv records and **144** DOIs, plus official pages for blogs, releases and tools. Links were resolved by exact-title lookup against DataCite (for arXiv records) and Crossref, and accepted only when the registry title matches the bibliography title (similarity ≥ 0.92) and the year is consistent; all candidate matches are recorded in [`data/resolved.json`](data/resolved.json). Links that could not be matched automatically, or that matched the wrong record, are set by hand in `papers.yaml` after checking the registry entry.
 - Entries still without a link (4): `kernelpro2026`, `qwen2026xinmo`, `bostrom2014superintelligence`, `polanyi1966tacit`.
 - **69** level assignments come directly from the survey's tables and text; **32** were assigned by the curators with the same criteria and are marked †.
 

@@ -330,6 +330,7 @@ def render(bib, tax, ann, res):
         "- [Start Here](#start-here)",
         "- [Latest Updates](#latest-updates)",
         "- [Companion Survey](#companion-survey)",
+        "- [Why Now: Intelligence Is Climbing Toward RSI](#why-now)",
         "- [The Framework: Layers, Levels, Signals](#the-framework)",
         "- [Where the Loop Breaks](#where-the-loop-breaks)",
         "- [How to Read the Tags](#how-to-read-the-tags)",
@@ -348,6 +349,7 @@ def render(bib, tax, ann, res):
     body.append(snippet("updates"))
     body.append("## Table of Contents\n\n" + "\n".join(toc) + "\n")
     body.append(snippet("survey"))
+    body.append(snippet("whynow"))
     body.append(snippet("framework").replace("{{LEVEL_TABLE}}", "\n".join(level_rows)))
     body.append(snippet("loop-breaks"))
     body.append(snippet("tags"))

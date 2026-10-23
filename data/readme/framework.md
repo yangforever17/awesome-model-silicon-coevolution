@@ -7,7 +7,7 @@
 <div align="center">
   <img src="./assets/tower.png" width="82%" alt="The model, software-stack and silicon tower drawn as three stacked slabs. Silicon at the base, with chips and a wafer, iterates in years; the software stack in the middle, with a compiler terminal and CUDA kernels, iterates in hours; the model on top, a neural network, iterates in months. A robot, the model as designer and workload, stands on top under a halo. On the left, paper planes fly along dotted paths from the robot, one tagged kernels landing on the stack and one tagged RTL landing on the silicon. On the right, people work pulley hoists on the tower's ledges, hauling crates labelled HBM and FLOPs and FP8 and 2:4 up one level at a time; a small drone carrying a crate on a dashed path shows AI starting to carry constraints too.">
   <br>
-  <em><b>Figure 2.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far hauled almost entirely by people. The drone marks where AI has just begun to carry constraints upward.</em>
+  <em><b>Figure 3.</b> The model–stack–silicon tower. Design flows down with AI as the designer; constraints flow up, so far hauled almost entirely by people. The drone marks where AI has just begun to carry constraints upward.</em>
 </div>
 
 **Co-evolution dynamics.** Each layer is updated by an operator that reads a measurement of the whole system, and the capability of whoever executes the update may itself depend on the system:

@@ -1387,6 +1387,12 @@ fang2025comprehensive:
   type: Survey
   note: "Comprehensive survey of self-evolving AI agents."
   arxiv: 2508.07407
+duan2026last:
+  topic: sv-agents
+  type: Survey
+  featured: true
+  short: "The Last AI Built by Humans"
+  note: "RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3."
 zong2026coevolution:
   topic: sv-agents
   type: Survey
