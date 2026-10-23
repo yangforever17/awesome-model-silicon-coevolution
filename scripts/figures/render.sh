@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Render the figure sources to PNG with headless Chrome (fonts and logos load from CDNs).
-#   overview.html     → assets/overview.png                    (README Figure 1)
-#   tower.html        → assets/tower.png                       (README Figure 3)
+#   overview.html     → assets/overview.png / .pdf             (README Figure 1; paper §3.4)
+#   tower.html        → assets/tower.png / .pdf                (README Figure 3; paper intro)
 #   trajectories.html → assets/trajectories.png / .pdf         (README Figure 2; paper figure)
 set -euo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
@@ -15,6 +15,11 @@ shot() {  # html, out, width, height
 shot overview.html overview.png 2040 1030
 shot tower.html tower.png 1400 880
 shot trajectories.html trajectories.png 1400 1060
-"$chrome" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 \
-  --print-to-pdf="$here/../../assets/trajectories.pdf" "file://$here/trajectories.html" 2>/dev/null
-echo "wrote assets/trajectories.pdf"
+pdf() {  # html, out — vector PDF for the paper
+  "$chrome" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 \
+    --print-to-pdf="$here/../../assets/$2" "file://$here/$1" 2>/dev/null
+  echo "wrote assets/$2"
+}
+pdf overview.html overview.pdf
+pdf tower.html tower.pdf
+pdf trajectories.html trajectories.pdf
