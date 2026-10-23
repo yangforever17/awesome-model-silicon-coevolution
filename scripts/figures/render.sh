@@ -14,7 +14,7 @@ shot() {  # html, out, width, height
 }
 shot overview.html overview.png 2040 1030
 shot tower.html tower.png 1400 880
-shot trajectories.html trajectories.png 1400 900
+shot trajectories.html trajectories.png 1400 1060
 "$chrome" --headless=new --disable-gpu --no-pdf-header-footer --virtual-time-budget=8000 \
   --print-to-pdf="$here/../../assets/trajectories.pdf" "file://$here/trajectories.html" 2>/dev/null
 echo "wrote assets/trajectories.pdf"

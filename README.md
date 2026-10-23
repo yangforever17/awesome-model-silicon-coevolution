@@ -116,12 +116,12 @@ The survey makes three contributions:
 
 ## Why Now: Intelligence Is Climbing Toward RSI <sub><a href="#readme-top">↑ top</a></sub>
 
-Across knowledge, specialized reasoning, software and tool-use benchmarks, the annual frontier has closed most of the gap between where each benchmark started and a perfect score within three years. The steepest recent climbs are in software and agentic tool use, the same capabilities that chip design and kernel optimization now lean on. Extrapolated, every domain is pulled toward the summit, and the question this catalog asks is what happens when that pull reaches the machines the models run on.
+General capability is climbing fast: across knowledge, specialized reasoning, software and tool-use benchmarks, the annual frontier has closed most of the gap to a perfect score within three years, and the steepest recent climbs are in software engineering and agentic tool use. Those are exactly the abilities that kernel agents and end-to-end design agents run on. Panel ② replays the same years on this survey's autonomy scale: the first arrival of each level steps up from L0 (2023) to L3 (2026), with AlphaEvolve as an early, narrow L4, while L5 and L6 have not been reached.
 
 <div align="center">
-  <img src="./assets/trajectories.png" width="100%" alt="Line chart of cross-domain capability trajectories from 2023 to 2026, measured as gap closed (HCI), where 0 is a benchmark's entry-year frontier and 100 is a perfect score. Four domain groups: knowledge and scientific evaluation (general knowledge, graduate science, academic breadth, mathematics), specialized reasoning (multimodal, legal), software environments (cybersecurity, software engineering) and tool-mediated workflows (tool use, search and terminal). All rise steeply; by 2026 most sit between 40 and 92. Model releases from the GPT, Claude, Gemini, Kimi and GLM families are marked with logos. A faint mountain rises behind the curves, and in the post-2026 region dashed projections converge on a glowing RSI marker at the top-right, labelled RSI-enabled adaptation.">
+  <img src="./assets/trajectories.png" width="100%" alt="Two-panel figure sharing a 2023 to 2026 timeline plus a post-2026 RSI stage. Panel one, Intelligence is climbing: capability trajectories in gap closed (HCI) for four domain groups, knowledge and science, specialized reasoning, software environments and tool-mediated workflows, rising from 0 toward 40 to 92 by 2026, with software engineering and tool use drawn as thick lines, model releases from the GPT, Claude, Gemini, Kimi and GLM families marked with logos, and a faint mountain rising toward a glowing RSI marker. Panel two, and starting to redesign its own machine: lanes for this survey's autonomy levels L0 to L6, with milestones by first public date colored by layer edge: Chip-Chat and ChipNeMo at L0; AutoChip, VeriReason, GEAK, CUDA Agent and Self-Evolved ABC at L1; ASIC-Agent, Design Conductor and Qwen chip-model co-evolution at L2; Design Conductor 2.0 and HSCO-Bench at L3; AlphaEvolve as an early, narrow L4 and Jalapeño as an unverified claim. A staircase marks the first arrival of each level and continues as a dashed arrow through empty L5 and L6 lanes into the RSI marker. Dotted bridges link the software-engineering curve to CUDA Agent and the tool-use curve to Design Conductor.">
   <br>
-  <em><b>Figure 2.</b> Cross-domain capability trajectories and an illustrative RSI extension. Each line is an annual domain frontier in HCI (0 = the benchmark's entry-year frontier, 100 = a perfect score). Curves are redrawn from <a href="https://arxiv.org/abs/2609.11873">Duan et al. (2026), Fig. 3</a>, with values read approximately; the post-2026 segment is illustrative, not a forecast.</em>
+  <em><b>Figure 2.</b> Intelligence is climbing, and starting to redesign its own machine. ① Annual domain frontiers in HCI (0 = the benchmark's entry-year frontier, 100 = a perfect score), redrawn from <a href="https://arxiv.org/abs/2609.11873">Duan et al. (2026), Fig. 3</a>, with values read approximately. ② This survey's AI R&amp;D autonomy levels on the model–stack–silicon tower, with milestones placed by first public date; the staircase marks each level's first arrival. The post-2026 segment is illustrative, not a forecast.</em>
 </div>
 
 ---
@@ -1850,7 +1850,7 @@ Surveys on LLMs for EDA, hardware-aware NAS, HW/SW co-design and self-evolving a
 | [LLMs for EDA survey (TODAES)](https://arxiv.org/abs/2501.09655) (2025) |  | Survey of research on LLMs for EDA (TODAES 2025). |
 | [Collaborative HW/SW design in the LLM era](https://arxiv.org/abs/2410.07265) (2025) |  | Collaborative hardware/software design in the LLM era; the only compared survey spanning chip, stack and model. |
 | [Agentic EDA: A Handoff Perspective](https://arxiv.org/abs/2606.19795) (2026) |  | Agentic EDA from a handoff perspective; its handoff validity is a starting point for verifying assumptions across layers. |
-| [The Last AI Built by Humans](https://arxiv.org/abs/2609.11873) (2026) |  | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3. |
+| [The Last AI Built by Humans](https://arxiv.org/abs/2609.11873) (2026) |  | RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; panel ① of Figure 2 here is redrawn from its Fig. 3. |
 
 Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and HW/SW co-design](#hardware-aware-nas-and-hwsw-co-design-3) · [Agents and self-evolution](#agents-and-self-evolution-5)
 
@@ -1942,7 +1942,7 @@ Topics: [AI and LLMs for EDA](#ai-and-llms-for-eda-9) · [Hardware-aware NAS and
 1. **The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement**  
    [[arXiv](https://arxiv.org/abs/2609.11873)] · Duan et al. · arXiv 2026  
    ![](https://img.shields.io/badge/-Survey-7c3aed)  
-   RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3.
+   RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; panel ① of Figure 2 here is redrawn from its Fig. 3.
 
 </details>
 

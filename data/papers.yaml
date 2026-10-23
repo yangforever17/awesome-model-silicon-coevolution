@@ -1392,7 +1392,7 @@ duan2026last:
   type: Survey
   featured: true
   short: "The Last AI Built by Humans"
-  note: "RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; Figure 2 here is redrawn from its Fig. 3."
+  note: "RSI survey with an L1–L5 roadmap and cross-domain capability trajectories in HCI; panel ① of Figure 2 here is redrawn from its Fig. 3."
 zong2026coevolution:
   topic: sv-agents
   type: Survey

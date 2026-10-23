@@ -1,8 +1,11 @@
 <!doctype html>
 <!--
-  README Figure 2: cross-domain capability trajectories toward RSI.
-  Curves are redrawn from Duan et al. (2026), "The Last AI Built by Humans", Fig. 3 (arXiv:2609.11873);
-  values are read approximately from that figure. The post-2026 segment is illustrative.
+  README Figure 2 / paper figure: intelligence climbs, and starts to redesign its own machine.
+  Top panel: cross-domain capability trajectories redrawn from Duan et al. (2026), "The Last AI Built by Humans",
+             Fig. 3 (arXiv:2609.11873); values read approximately from that figure.
+  Bottom panel: this survey's L0–L4 AI R&D autonomy levels on the model–stack–silicon tower, with milestones
+             placed by first public date (arXiv month where available).
+  The post-2026 segment is illustrative.
   Render: bash scripts/figures/render.sh  (assets/trajectories.png and assets/trajectories.pdf)
 -->
 <html>
@@ -12,150 +15,150 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Patrick+Hand&display=block" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.8.5/d3.min.js"></script>
 <style>
-  @page { size: 1400px 900px; margin: 0; }
+  @page { size: 1400px 1060px; margin: 0; }
   * { margin: 0; padding: 0; box-sizing: border-box; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   html, body { background: #fff; }
-  body { width: 1400px; height: 900px; overflow: hidden; font-family: Inter, sans-serif; color: #17203a; }
+  body { width: 1400px; height: 1060px; overflow: hidden; font-family: Inter, sans-serif; color: #17203a; }
   svg { display: block; }
 </style>
 </head>
 <body>
-<svg id="fig" width="1400" height="900" viewBox="0 0 1400 900"></svg>
+<svg id="fig" width="1400" height="1060" viewBox="0 0 1400 1060"></svg>
 <script>
 const NAVY = '#1e3a6e';
 const LOBE = 'https://cdn.jsdelivr.net/npm/@lobehub/icons-static-svg@1.90.0/icons/';
-const FAM = {
-  GPT: { logo: LOBE + 'openai.svg', shape: 'circle' },
-  Claude: { logo: LOBE + 'claude-color.svg', shape: 'diamond' },
-  Gemini: { logo: LOBE + 'gemini-color.svg', shape: 'square' },
-  Kimi: { logo: LOBE + 'moonshot.svg', shape: 'triangle' },
-  GLM: { logo: LOBE + 'zhipu-color.svg', shape: 'hexagon' },
+const LOGO = {
+  openai: LOBE + 'openai.svg', claude: LOBE + 'claude-color.svg', gemini: LOBE + 'gemini-color.svg', kimi: LOBE + 'moonshot.svg',
+  glm: LOBE + 'zhipu-color.svg', nvidia: LOBE + 'nvidia-color.svg', deepmind: LOBE + 'deepmind-color.svg', bytedance: LOBE + 'bytedance-color.svg',
+  qwen: LOBE + 'qwen-color.svg', amd: 'https://cdn.jsdelivr.net/npm/simple-icons@16.20.0/icons/amd.svg',
 };
+const FAM = { GPT: ['openai', 'circle'], Claude: ['claude', 'diamond'], Gemini: ['gemini', 'square'], Kimi: ['kimi', 'triangle'], GLM: ['glm', 'hexagon'] };
 
-// ---------------------------------------------------------------- data (approximate, from Duan et al. 2026, Fig. 3)
-// Annual frontier in HCI measured at mid-year; end = illustrative post-2026 target.
+// ---------------------------------------------------------------- panel 1 data (approximate, Duan et al. 2026, Fig. 3)
 const GROUPS = [
-  { id: 'know', name: 'Knowledge & scientific evaluation', color: '#3b4a6b', light: '#8e9ab5' },
-  { id: 'spec', name: 'Specialized reasoning', color: '#5f9e83', light: '#9fcbb6' },
-  { id: 'soft', name: 'Software environments', color: '#b4533c', light: '#e5a08c' },
-  { id: 'tool', name: 'Tool-mediated workflows', color: '#b07d2b', light: '#dcbb7a' },
+  { id: 'know', name: 'Knowledge & science', color: '#3b4a6b', light: '#97a3bd' },
+  { id: 'spec', name: 'Specialized reasoning', color: '#5f9e83', light: '#a6cfbb' },
+  { id: 'soft', name: 'Software environments', color: '#b4533c', light: '#e6a592' },
+  { id: 'tool', name: 'Tool-mediated workflows', color: '#b07d2b', light: '#dcbd80' },
 ];
 const SERIES = [
-  { g: 'know', name: 'General knowledge', bench: 'MMLU-Pro · LiveBench', dash: '', w: 2.6, pts: [[2023.5, 0], [2024.5, 33], [2025.5, 60], [2026.5, 77.5]], end: 97 },
-  { g: 'know', name: 'Graduate science', bench: 'GPQA Diamond', dash: '12 6', w: 2.2, pts: [[2023.5, 0], [2024.5, 6], [2025.5, 67], [2026.5, 86]], end: 99 },
-  { g: 'know', name: 'Academic breadth', bench: "Humanity's Last Exam", dash: '2 5', w: 2.2, pts: [[2024.5, 0], [2025.5, 31], [2026.5, 60]], end: 95 },
-  { g: 'know', name: 'Mathematics', bench: 'FrontierMath T1–3', dash: '9 4 2 4', w: 2.2, pts: [[2024.5, 0], [2025.5, 35], [2026.5, 62]], end: 94 },
-  { g: 'spec', name: 'Multimodal', bench: 'MMMU-Pro', dash: '10 6', w: 2.4, pts: [[2023.5, 0], [2024.5, 48], [2025.5, 60], [2026.5, 62]], end: 91 },
-  { g: 'spec', name: 'Legal', bench: 'Vals LegalBench', dash: '4 5', w: 2.2, pts: [[2024.5, 0], [2025.5, 59], [2026.5, 64.5]], end: 92 },
-  { g: 'soft', name: 'Cybersecurity', bench: 'Cybench', dash: '10 6', w: 2.4, pts: [[2024.5, 0], [2025.5, 59], [2026.5, 92]], end: 98 },
-  { g: 'soft', name: 'Software engineering', bench: 'LiveCodeBench · SWE-bench', dash: '', w: 5, pts: [[2024.5, 0], [2025.5, 41], [2026.5, 52.5]], end: 90 },
-  { g: 'tool', name: 'Tool use', bench: 'BFCL v3 · τ²-bench', dash: '', w: 5, pts: [[2023.5, 0], [2024.5, 6], [2025.5, 8.5], [2026.5, 40]], end: 86 },
-  { g: 'tool', name: 'Search / terminal', bench: 'BrowseComp · Terminal-Bench', dash: '10 6', w: 2.6, pts: [[2025.5, 0], [2026.5, 57]], end: 88 },
+  { g: 'know', name: 'General knowledge', dash: '', w: 2.2, pts: [[2023.5, 0], [2024.5, 33], [2025.5, 60], [2026.5, 77.5]], end: 97 },
+  { g: 'know', name: 'Graduate science', dash: '10 6', w: 2, pts: [[2023.5, 0], [2024.5, 6], [2025.5, 67], [2026.5, 86]], end: 99 },
+  { g: 'know', name: 'Academic breadth', dash: '2 5', w: 2, pts: [[2024.5, 0], [2025.5, 31], [2026.5, 60]], end: 95 },
+  { g: 'know', name: 'Mathematics', dash: '8 4 2 4', w: 2, pts: [[2024.5, 0], [2025.5, 35], [2026.5, 62]], end: 94 },
+  { g: 'spec', name: 'Multimodal', dash: '10 6', w: 2, pts: [[2023.5, 0], [2024.5, 48], [2025.5, 60], [2026.5, 62]], end: 91 },
+  { g: 'spec', name: 'Legal', dash: '4 5', w: 2, pts: [[2024.5, 0], [2025.5, 59], [2026.5, 64.5]], end: 92 },
+  { g: 'soft', name: 'Cybersecurity', dash: '10 6', w: 2, pts: [[2024.5, 0], [2025.5, 59], [2026.5, 92]], end: 98 },
+  { g: 'soft', name: 'Software engineering', dash: '', w: 5, pts: [[2024.5, 0], [2025.5, 41], [2026.5, 52.5]], end: 90, hero: true },
+  { g: 'tool', name: 'Tool use', dash: '', w: 5, pts: [[2023.5, 0], [2024.5, 6], [2025.5, 8.5], [2026.5, 40]], end: 86, hero: true },
+  { g: 'tool', name: 'Search / terminal', dash: '10 6', w: 2.2, pts: [[2025.5, 0], [2026.5, 57]], end: 88 },
 ];
-// model releases: [family, name, date, HCI, group, label dx, label dy]
+// [family, name, date, HCI, group, label dx, label dy]
 const MODELS = [
-  ['GPT', 'GPT-4o', 2024.37, 28, 'know', -64, 30],
-  ['GPT', 'o1', 2024.93, 52, 'spec', -46, -42],
-  ['Claude', 'Claude 3.5 Sonnet', 2024.5, 0, 'soft', 62, 26],
-  ['Gemini', 'Gemini 2.5 Pro', 2025.23, 46, 'soft', -150, -8],
-  ['Kimi', 'Kimi K2', 2025.52, 34, 'know', 30, 36],
-  ['GLM', 'GLM-4.5', 2025.57, 10, 'tool', 20, -34],
-  ['Claude', 'Opus 4.5', 2025.9, 68, 'soft', -54, -40],
-  ['Claude', 'Fable 5', 2026.44, 52, 'soft', -18, 38],
-  ['Kimi', 'Kimi K3', 2026.54, 40, 'tool', 20, 40],
-  ['Claude', 'Sonnet 5', 2026.5, 60.5, 'know', -150, -28],
-  ['GPT', 'GPT-5.6 Terra', 2026.52, 62, 'spec', -64, 44],
-  ['GLM', 'GLM-5.3', 2026.63, 60.5, 'know', 26, -30],
-  ['GPT', 'GPT-5.6 Sol', 2026.52, 86.5, 'know', -150, -26],
-  ['Claude', 'Fable 5.1', 2026.67, 86, 'know', -20, -46],
-  ['Claude', 'Opus 5', 2026.56, 57, 'tool', 64, 50],
+  ['GPT', 'GPT-4o', 2024.37, 28, 'know', -86, 4],
+  ['GPT', 'o1', 2024.93, 52, 'spec', -60, -22],
+  ['Claude', 'Claude 3.5 Sonnet', 2024.5, 0, 'soft', 14, 22],
+  ['Gemini', 'Gemini 2.5 Pro', 2025.23, 46, 'soft', -150, -2],
+  ['Claude', 'Opus 4.5', 2025.9, 68, 'soft', -112, -10],
+  ['Kimi', 'Kimi K3', 2026.54, 40, 'tool', 18, 20],
+  ['GPT', 'GPT-5.6 Sol', 2026.52, 86.5, 'know', -150, -12],
+  ['Claude', 'Fable 5.1', 2026.67, 86, 'know', -40, -32],
 ];
+
+// ---------------------------------------------------------------- panel 2 data (this survey)
+const EDGE = {
+  ms: { label: 'Model → Silicon', color: '#b45309', fill: '#fff7e6' },
+  mk: { label: 'Model → Stack', color: '#0f766e', fill: '#ecfdf8' },
+  lp: { label: 'Cross-layer loop', color: '#6d28d9', fill: '#f5f3ff' },
+};
+const LEVELS = [
+  ['L0', 'Design assistance', '#64748b'], ['L1', 'Local optimization', '#2563eb'], ['L2', 'End-to-end design', '#7c3aed'],
+  ['L3', 'Cross-layer co-design', '#d97706'], ['L4', 'Recursive self-enhancement', '#16a34a'],
+  ['L5', 'Self-expansion', '#dc2626'], ['L6', 'Open-ended evolution', '#991b1b'],
+];
+// [name, level, date, edge, logo, sub-row (-1 above / 0 / +1 below), anchor ('R' pill right of dot, 'L' left)]
+const MILES = [
+  ['Chip-Chat', 0, 2023.37, 'ms', null, 0, 'R'],
+  ['ChipNeMo', 0, 2023.83, 'ms', 'nvidia', 1, 'R'],
+  ['AutoChip', 1, 2023.86, 'ms', null, -1, 'R'],
+  ['VeriReason', 1, 2025.37, 'ms', null, -1, 'R'],
+  ['GEAK', 1, 2025.57, 'mk', 'amd', 1, 'R'],
+  ['CUDA Agent', 1, 2026.15, 'mk', 'bytedance', 1, 'R'],
+  ['Self-Evolved ABC', 1, 2026.28, 'ms', null, -1, 'R'],
+  ['ASIC-Agent', 2, 2025.62, 'ms', null, -1, 'L'],
+  ['Design Conductor', 2, 2026.18, 'ms', null, -1, 'R'],
+  ['Qwen chip–model', 2, 2026.68, 'lp', 'qwen', 1, 'L'],
+  ['Design Conductor 2.0', 3, 2026.34, 'lp', null, -1, 'L'],
+  ['HSCO-Bench', 3, 2026.37, 'lp', null, 1, 'R'],
+  ['AlphaEvolve', 4, 2025.37, 'lp', 'deepmind', 0, 'R'],
+];
+const FIRST = [[2023.37, 0], [2023.86, 1], [2025.62, 2], [2026.34, 3]];   // first arrival of L0–L3
 
 // ---------------------------------------------------------------- layout
-const P = { l: 108, r: 1352, t: 218, b: 790 };
-const RSI = 2026.8, XEND = 2027.42;
-const x = d3.scaleLinear().domain([2023.2, XEND + 0.06]).range([P.l, P.r]);
-const y = d3.scaleLinear().domain([-6, 106]).range([P.b, P.t]);
+const L = 262, R = 1352, RSI = 2026.8, XEND = 2027.42;
+const T1 = 92, B1 = 492;            // panel 1
+const T2 = 586, B2 = 958;           // panel 2
+const x = d3.scaleLinear().domain([2023.22, XEND + 0.06]).range([L, R]);
+const y = d3.scaleLinear().domain([-6, 106]).range([B1, T1]);
+const LH = [62, 62, 62, 62, 62, 31, 31];                  // lane heights, L0 at the bottom
+const lb = (k) => B2 - LH.slice(0, k).reduce((a, b) => a + b, 0);
+const ly = (k) => { const f = Math.floor(k), r = k - f; const c = (q) => lb(q) - LH[Math.min(q, 6)] / 2; return r ? c(f) + (c(Math.min(f + 1, 6)) - c(f)) * r : c(f); };
+const laneH = 62;
 const curve = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
 const G = Object.fromEntries(GROUPS.map(g => [g.id, g]));
+const ORB = [x(XEND) + 2, (T1 + T2) / 2 - 40];
 
 let s = `<defs>
-  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f1ff"/><stop offset=".55" stop-color="#f8faff"/><stop offset="1" stop-color="#ffffff"/></linearGradient>
+  <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f1ff"/><stop offset=".6" stop-color="#f8faff"/><stop offset="1" stop-color="#fff"/></linearGradient>
   <linearGradient id="rsiBg" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#fff7e8" stop-opacity=".85"/><stop offset="1" stop-color="#efe7ff"/></linearGradient>
   <linearGradient id="mtn" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#d4cbfb"/><stop offset=".7" stop-color="#e8e4fd" stop-opacity=".6"/><stop offset="1" stop-color="#eef2ff" stop-opacity=".1"/></linearGradient>
+  <linearGradient id="stair" gradientUnits="userSpaceOnUse" x1="${x(2023.3)}" y1="0" x2="${x(XEND)}" y2="0">
+    <stop offset="0" stop-color="#64748b"/><stop offset=".35" stop-color="#2563eb"/><stop offset=".62" stop-color="#7c3aed"/><stop offset=".8" stop-color="#d97706"/><stop offset="1" stop-color="#dc2626"/></linearGradient>
   <pattern id="hatch" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V10" stroke="#9aa6c4" stroke-width="1" opacity=".35"/></pattern>
+  <pattern id="hatchC" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V6" stroke="#c4b5fd" stroke-width="2.4"/></pattern>
   <radialGradient id="orb"><stop offset="0" stop-color="#fff"/><stop offset=".35" stop-color="#fde68a"/><stop offset=".7" stop-color="#f59e0b" stop-opacity=".55"/><stop offset="1" stop-color="#f59e0b" stop-opacity="0"/></radialGradient>
+  <radialGradient id="burst"><stop offset="0" stop-color="#bbf7d0"/><stop offset="1" stop-color="#bbf7d0" stop-opacity="0"/></radialGradient>
   <filter id="soft" x="-20%" y="-20%" width="140%" height="160%"><feDropShadow dx="0" dy="3" stdDeviation="4" flood-color="#1e3a6e" flood-opacity=".14"/></filter>
   ${GROUPS.map(g => `<marker id="ar-${g.id}" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4.2" markerHeight="4.2" orient="auto"><path d="M0 0L10 5L0 10z" fill="${g.color}"/></marker>`).join('')}
+  <marker id="ar-st" viewBox="0 0 10 10" refX="7" refY="5" markerWidth="4" markerHeight="4" orient="auto"><path d="M0 0L10 5L0 10z" fill="#dc2626"/></marker>
 </defs>`;
 
-// ---------------------------------------------------------------- legend cards (2 × 2)
-const cardW = 652, cardH = 86;
+// ---------------------------------------------------------------- shared RSI column (spans both panels)
+s += `<rect x="${x(RSI)}" y="${T1}" width="${R - x(RSI)}" height="${B2 - T1}" rx="0" fill="url(#rsiBg)"/>
+      <rect x="${x(RSI)}" y="${T1}" width="${R - x(RSI)}" height="${B2 - T1}" fill="url(#hatch)"/>`;
+
+// ---------------------------------------------------------------- panel headers
+s += `<text x="34" y="44" font-family="Patrick Hand" font-size="31" fill="#17203a">① Intelligence is climbing</text>
+      <text x="36" y="68" font-weight="600" font-size="13.5" fill="#5d6679">frontier capability across domains, as gap closed (HCI)</text>`;
 GROUPS.forEach((g, i) => {
-  const cx = 40 + (i % 2) * (cardW + 16), cy = 12 + Math.floor(i / 2) * (cardH + 10), mem = SERIES.filter(t => t.g === g.id);
-  s += `<g transform="translate(${cx},${cy})" filter="url(#soft)"><rect width="${cardW}" height="${cardH}" rx="14" fill="#fff" stroke="#e3e7f0" stroke-width="1.4"/></g>
-        <g transform="translate(${cx + 18},${cy + 24})"><rect x="0" y="-6" width="26" height="12" rx="6" fill="${g.color}"/>
-        <text x="36" y="5" font-weight="800" font-size="14.5" fill="${g.color}">${g.name}</text></g>`;
-  mem.forEach((t, j) => {
-    const lx = cx + 18 + j * 160, ly = cy + 56;
-    s += `<path d="M${lx} ${ly} h22" stroke="${t.w >= 4 ? g.color : g.light}" stroke-width="${Math.min(t.w, 4.4)}" stroke-dasharray="${t.dash}" stroke-linecap="round"/>
-          <circle cx="${lx + 11}" cy="${ly}" r="3.6" fill="#fff" stroke="${g.color}" stroke-width="2"/>
-          <text x="${lx + 30}" y="${ly - 2}" font-weight="700" font-size="12.6" fill="#17203a">${t.name}</text>
-          <text x="${lx + 30}" y="${ly + 14}" font-weight="500" font-size="10.5" fill="#6b7385">${t.bench}</text>`;
-  });
+  const gx = 520 + i * 212;
+  s += `<path d="M${gx} 46 h30" stroke="${g.color}" stroke-width="5" stroke-linecap="round"/>
+        <text x="${gx + 40}" y="51" font-weight="700" font-size="13.5" fill="${g.color}">${g.name}</text>`;
+});
+s += `<text x="34" y="${T2 - 40}" font-family="Patrick Hand" font-size="31" fill="#17203a">② …and starting to redesign its own machine</text>
+      <text x="36" y="${T2 - 16}" font-weight="600" font-size="13.5" fill="#5d6679">AI R&amp;D autonomy on the model–stack–silicon tower (this survey)</text>`;
+Object.values(EDGE).forEach((e, i) => {
+  const ex = [578, 728, 866][i];
+  s += `<rect x="${ex}" y="${T2 - 50}" width="22" height="16" rx="5" fill="${e.fill}" stroke="${e.color}" stroke-width="2"/>
+        <text x="${ex + 28}" y="${T2 - 37}" font-weight="700" font-size="12.8" fill="${e.color}">${e.label}</text>`;
 });
 
-// ---------------------------------------------------------------- plot frame
-s += `<rect x="${P.l}" y="${P.t}" width="${P.r - P.l}" height="${P.b - P.t}" rx="10" fill="url(#sky)" stroke="#d7dceb" stroke-width="1.4"/>`;
-// RSI stage
-s += `<rect x="${x(RSI)}" y="${P.t}" width="${P.r - x(RSI)}" height="${P.b - P.t}" fill="url(#rsiBg)"/>
-      <rect x="${x(RSI)}" y="${P.t}" width="${P.r - x(RSI)}" height="${P.b - P.t}" fill="url(#hatch)"/>
-      <path d="M${P.l} ${P.b} L ${x(2023.7)} ${y(14)} L ${x(2024.1)} ${y(8)} L ${x(2024.7)} ${y(34)} L ${x(2025.05)} ${y(26)} L ${x(2025.6)} ${y(56)} L ${x(2025.95)} ${y(48)} L ${x(2026.5)} ${y(74)} L ${x(2026.85)} ${y(70)} L ${x(XEND) + 2} ${y(101)} L ${P.r} ${y(92)} L ${P.r} ${P.b} Z" fill="url(#mtn)" opacity=".9"/>
-      <path d="M${x(2024.7)} ${y(34)} l 10 9 l -14 3 Z M${x(2025.6)} ${y(56)} l 11 10 l -15 3 Z M${x(2026.5)} ${y(74)} l 12 11 l -16 3 Z" fill="#fff" opacity=".7"/>
-      <path d="M${x(RSI)} ${P.t} V ${P.b}" stroke="#17203a" stroke-width="1.6" stroke-dasharray="5 5"/>`;
-// grid
+// ---------------------------------------------------------------- panel 1 frame
+s += `<rect x="${L}" y="${T1}" width="${x(RSI) - L}" height="${B1 - T1}" fill="url(#sky)"/>`;
+s += `<path d="M${L} ${B1} L ${x(2023.7)} ${y(14)} L ${x(2024.1)} ${y(8)} L ${x(2024.7)} ${y(34)} L ${x(2025.05)} ${y(26)} L ${x(2025.6)} ${y(56)} L ${x(2025.95)} ${y(48)} L ${x(2026.5)} ${y(74)} L ${x(2026.85)} ${y(70)} L ${x(XEND)} ${y(100)} L ${R} ${y(92)} L ${R} ${B1} Z" fill="url(#mtn)" opacity=".85"/>
+      <path d="M${x(2024.7)} ${y(34)} l 10 9 l -14 3 Z M${x(2025.6)} ${y(56)} l 11 10 l -15 3 Z M${x(2026.5)} ${y(74)} l 12 11 l -16 3 Z" fill="#fff" opacity=".7"/>`;
+s += `<rect x="${L}" y="${T1}" width="${R - L}" height="${B1 - T1}" rx="10" fill="none" stroke="#d7dceb" stroke-width="1.4"/>`;
 for (const v of [0, 20, 40, 60, 80, 100]) {
-  s += `<path d="M${P.l} ${y(v)} H ${P.r}" stroke="${v === 0 ? '#475569' : '#cfd6e6'}" stroke-width="${v === 0 ? 1.4 : 1}" stroke-dasharray="${v === 0 ? '6 5' : '2 6'}"/>
-        <text x="${P.l - 12}" y="${y(v) + 5}" text-anchor="end" font-weight="600" font-size="14" fill="#5d6679">${v}</text>`;
+  s += `<path d="M${L} ${y(v)} H ${R}" stroke="${v === 0 ? '#475569' : '#d3d9e8'}" stroke-width="${v === 0 ? 1.3 : 1}" stroke-dasharray="${v === 0 ? '6 5' : '2 6'}"/>
+        <text x="${L - 10}" y="${y(v) + 5}" text-anchor="end" font-weight="600" font-size="13" fill="#5d6679">${v}</text>`;
 }
-// year boundaries and labels
-for (const yr of [2024, 2025, 2026]) s += `<path d="M${x(yr)} ${P.t} V ${P.b}" stroke="#e1e5ef" stroke-width="1.4"/>`;
-for (const yr of [2023, 2024, 2025, 2026]) s += `<text x="${x(yr + 0.5)}" y="${P.b + 30}" text-anchor="middle" font-weight="800" font-size="17" fill="#17203a">${yr}</text>`;
-s += `<text x="${(x(2023.2) + x(RSI)) / 2}" y="${P.b + 62}" text-anchor="middle" font-weight="700" font-size="15" fill="#475569">Model release date · annual frontier measured mid-year</text>
-      <text x="${(x(RSI) + P.r) / 2}" y="${P.b + 30}" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#6d28d9">post-2026</text>
-      <text x="${(x(RSI) + P.r) / 2}" y="${P.b + 54}" text-anchor="middle" font-weight="600" font-size="13" fill="#6b7385">illustrative</text>
-      <text transform="translate(${P.l - 58},${(P.t + P.b) / 2}) rotate(-90)" text-anchor="middle" font-weight="700" font-size="15" fill="#475569">Gap closed (HCI) · 0 = entry-year frontier · 100 = perfect score</text>`;
-// summit line at 100
-s += `<path d="M${P.l} ${y(100)} H ${P.r}" stroke="#d4a017" stroke-width="2" stroke-dasharray="8 6" opacity=".9"/>
-      <text x="${P.l + 186}" y="${y(100) - 8}" font-family="Patrick Hand" font-size="19" fill="#a16207">summit: perfect score</text>
-      <text x="${P.l + 12}" y="${y(0) + 22}" font-family="Patrick Hand" font-size="18" fill="#64748b">entry-year frontier</text>`;
-
-// ---------------------------------------------------------------- projections (illustrative) into the RSI orb
-const ORB = [x(XEND) + 2, y(101)];
-SERIES.forEach(t => {
-  const g = G[t.g], last = t.pts[t.pts.length - 1][1];
-  const x0 = x(RSI), y0 = y(last), x1 = x(XEND) - 14, y1 = y(t.end);
-  s += `<path d="M${x0} ${y0} C ${x0 + 120} ${y0}, ${x1 - 90} ${y1 + 60}, ${x1} ${y1}" fill="none" stroke="${t.w >= 4 ? g.color : g.light}" stroke-width="${t.w >= 4 ? 4.2 : 2.4}" stroke-dasharray="10 7" stroke-linecap="round" marker-end="url(#ar-${t.g})" opacity="${t.w >= 4 ? 1 : .9}"/>`;
-});
-s += `<circle cx="${ORB[0]}" cy="${ORB[1]}" r="46" fill="url(#orb)"/>
-      ${[0, 45, 90, 135].map(a => `<path d="M${ORB[0]} ${ORB[1] - 30} V ${ORB[1] - 18}" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" transform="rotate(${a} ${ORB[0]} ${ORB[1]})"/><path d="M${ORB[0]} ${ORB[1] + 18} V ${ORB[1] + 30}" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" transform="rotate(${a} ${ORB[0]} ${ORB[1]})"/>`).join('')}
-      <circle cx="${ORB[0]}" cy="${ORB[1]}" r="14" fill="#fff" stroke="#f59e0b" stroke-width="3"/>
-      <text x="${ORB[0]}" y="${ORB[1] + 5}" text-anchor="middle" font-weight="800" font-size="12" fill="#b45309">RSI</text>`;
-s += `<text x="${(x(RSI) + P.r) / 2}" y="${y(17)}" text-anchor="middle" font-family="Patrick Hand" font-size="27" fill="#4c1d95">RSI-enabled</text>
-      <text x="${(x(RSI) + P.r) / 2}" y="${y(10)}" text-anchor="middle" font-family="Patrick Hand" font-size="27" fill="#4c1d95">adaptation</text>
-      <text x="${(x(RSI) + P.r) / 2}" y="${y(3.5)}" text-anchor="middle" font-weight="600" font-size="12.5" fill="#6b5aa6">pulled to the summit</text>`;
-
-// ---------------------------------------------------------------- measured trajectories
-SERIES.forEach(t => {
-  const g = G[t.g], pts = t.pts.concat([[RSI, t.pts[t.pts.length - 1][1]]]);
-  if (t.w >= 4) s += `<path d="${curve(pts)}" fill="none" stroke="#fff" stroke-width="${t.w + 5}" stroke-linecap="round" opacity=".9"/>`;
-  s += `<path d="${curve(pts)}" fill="none" stroke="${t.w >= 4 ? g.color : g.light}" stroke-width="${t.w}" stroke-dasharray="${t.dash}" stroke-linecap="${t.dash.startsWith('2') ? 'round' : 'round'}"/>`;
-  t.pts.forEach(([px, py], i) => s += `<circle cx="${x(px)}" cy="${y(py)}" r="${i === 0 ? 6 : 4.6}" fill="#fff" stroke="${g.color}" stroke-width="${i === 0 ? 3 : 2.2}"/>`);
-});
-
-// ---------------------------------------------------------------- model releases
-function mark(shape, cx, cy, fill) {
-  const r = 7;
+s += `<text transform="translate(${L - 44},${(T1 + B1) / 2}) rotate(-90)" text-anchor="middle" font-weight="700" font-size="13" fill="#475569">HCI · 0 = entry-year frontier · 100 = perfect</text>
+      <path d="M${L} ${y(100)} H ${R}" stroke="#d4a017" stroke-width="2" stroke-dasharray="8 6"/>
+      <text x="${L + 12}" y="${y(100) - 8}" font-family="Patrick Hand" font-size="18" fill="#a16207">summit: perfect score</text>`;
+// model family key in the left margin
+s += `<g transform="translate(34,${T1 + 120})" filter="url(#soft)"><rect width="150" height="150" rx="12" fill="#fff" stroke="#e3e7f0" stroke-width="1.2"/></g>
+      <text x="48" y="${T1 + 144}" font-weight="800" font-size="10.5" letter-spacing=".1em" fill="#6b7385">MODEL FAMILY</text>`;
+function mark(shape, cx, cy, fill, r = 6.5) {
   if (shape === 'circle') return `<circle cx="${cx}" cy="${cy}" r="${r}" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
   if (shape === 'square') return `<rect x="${cx - r}" y="${cy - r}" width="${2 * r}" height="${2 * r}" rx="2" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
   if (shape === 'diamond') return `<path d="M${cx} ${cy - r - 2} L${cx + r + 2} ${cy} L${cx} ${cy + r + 2} L${cx - r - 2} ${cy} Z" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
@@ -163,25 +166,107 @@ function mark(shape, cx, cy, fill) {
   const h = d3.range(6).map(k => [cx + (r + 1) * Math.cos(Math.PI / 6 + k * Math.PI / 3), cy + (r + 1) * Math.sin(Math.PI / 6 + k * Math.PI / 3)]);
   return `<path d="M${h.map(p => p.join(' ')).join(' L')} Z" fill="${fill}" stroke="#fff" stroke-width="2"/>`;
 }
-MODELS.forEach(([fam, name, dx, hv, gid, ox, oy]) => {
-  const g = G[gid], cx = x(dx), cy = y(hv), w = 34 + name.length * 7.3;
-  const lx = cx + ox, ly = cy + oy;
-  s += `<path d="M${cx} ${cy} L ${lx + (ox < 0 ? w / 2 : -w / 2) * 0 + (ox < 0 ? w - 4 : 4)} ${ly}" stroke="${g.color}" stroke-width="1.4" opacity=".7"/>`;
-  s += `<g transform="translate(${ox < 0 ? lx - 0 : lx},${ly - 13})" filter="url(#soft)">
-          <rect width="${w}" height="26" rx="13" fill="#fff" stroke="${g.color}" stroke-width="1.6"/>
-          <image href="${FAM[fam].logo}" x="7" y="5" width="16" height="16"/>
-          <text x="28" y="17.5" font-weight="700" font-size="12.5" fill="#17203a">${name}</text></g>`;
-  s += mark(FAM[fam].shape, cx, cy, g.color);
+Object.entries(FAM).forEach(([k, [lg, sh]], i) => {
+  const yy = T1 + 166 + i * 22;
+  s += `<image href="${LOGO[lg]}" x="48" y="${yy - 8}" width="16" height="16"/>${mark(sh, 80, yy, '#475569', 5.5)}
+        <text x="96" y="${yy + 4.5}" font-weight="700" font-size="12.5" fill="#17203a">${k}</text>`;
 });
 
-// family key (marker shapes) inside the plot, bottom-left
-s += `<g transform="translate(${P.l + 18},${y(94)})" filter="url(#soft)"><rect width="150" height="158" rx="12" fill="#fff" stroke="#e3e7f0" stroke-width="1.2"/></g>
-      <text x="${P.l + 32}" y="${y(94) + 24}" font-weight="800" font-size="11" letter-spacing=".1em" fill="#6b7385">MODEL FAMILY</text>`;
-Object.entries(FAM).forEach(([k, f], i) => {
-  const yy = y(94) + 48 + i * 24;
-  s += `<image href="${f.logo}" x="${P.l + 32}" y="${yy - 9}" width="17" height="17"/>${mark(f.shape, P.l + 66, yy, '#475569')}
-        <text x="${P.l + 84}" y="${yy + 5}" font-weight="700" font-size="13" fill="#17203a">${k}</text>`;
+// projections into the orb
+SERIES.forEach(t => {
+  const g = G[t.g], last = t.pts[t.pts.length - 1][1];
+  const x0 = x(RSI), y0 = y(last), x1 = x(XEND) - 16, y1 = y(t.end);
+  s += `<path d="M${x0} ${y0} C ${x0 + 110} ${y0}, ${x1 - 80} ${y1 + 50}, ${x1} ${y1}" fill="none" stroke="${t.hero ? g.color : g.light}" stroke-width="${t.hero ? 4 : 2.2}" stroke-dasharray="10 7" stroke-linecap="round" marker-end="url(#ar-${t.g})"/>`;
 });
+// measured lines
+SERIES.forEach(t => {
+  const g = G[t.g], pts = t.pts.concat([[RSI, t.pts[t.pts.length - 1][1]]]);
+  if (t.hero) s += `<path d="${curve(pts)}" fill="none" stroke="#fff" stroke-width="${t.w + 5}" stroke-linecap="round" opacity=".9"/>`;
+  s += `<path d="${curve(pts)}" fill="none" stroke="${t.hero ? g.color : g.light}" stroke-width="${t.w}" stroke-dasharray="${t.dash}" stroke-linecap="round"/>`;
+  t.pts.forEach(([px, py], i) => s += `<circle cx="${x(px)}" cy="${y(py)}" r="${t.hero ? 5 : 3.8}" fill="#fff" stroke="${g.color}" stroke-width="${t.hero ? 2.6 : 1.8}"/>`);
+});
+s += `<text x="${x(2025.62)}" y="${y(43) - 14}" font-family="Patrick Hand" font-size="18" fill="#b4533c" transform="rotate(-14 ${x(2025.62)} ${y(43) - 14})">software engineering</text>
+      <text x="${x(2026.02)}" y="${y(19)}" font-family="Patrick Hand" font-size="18" fill="#b07d2b" transform="rotate(-24 ${x(2026.02)} ${y(19)})">tool use</text>`;
+// model pills
+MODELS.forEach(([fam, name, dx, hv, gid, ox, oy]) => {
+  const g = G[gid], cx = x(dx), cy = y(hv), w = 32 + name.length * 7;
+  const lx = cx + ox, lyy = cy + oy;
+  s += `<path d="M${cx} ${cy} L ${ox < 0 ? lx + w - 6 : lx + 6} ${lyy}" stroke="${g.color}" stroke-width="1.3" opacity=".7"/>
+        <g transform="translate(${lx},${lyy - 12})" filter="url(#soft)"><rect width="${w}" height="24" rx="12" fill="#fff" stroke="${g.color}" stroke-width="1.5"/>
+        <image href="${LOGO[FAM[fam][0]]}" x="6" y="4.5" width="15" height="15"/>
+        <text x="26" y="16.5" font-weight="700" font-size="12" fill="#17203a">${name}</text></g>`;
+  s += mark(FAM[fam][1], cx, cy, g.color);
+});
+
+// ---------------------------------------------------------------- panel 2: autonomy lanes
+LEVELS.forEach(([lv, name, c], k) => {
+  const yc = ly(k), ghost = k >= 5;
+  const h = LH[k];
+  if (!ghost) s += `<rect x="${L}" y="${yc - h / 2 + 2}" width="${x(RSI) - L}" height="${h - 4}" rx="10" fill="${k % 2 ? '#f6f8fc' : '#fbfcfe'}"/>`;
+  else s += `<rect x="${L}" y="${yc - h / 2 + 2}" width="${x(RSI) - L}" height="${h - 4}" rx="9" fill="none" stroke="#d6dbe7" stroke-width="1.4" stroke-dasharray="5 6"/>
+             <text x="${x(2023.75)}" y="${yc + 5}" text-anchor="middle" font-family="Patrick Hand" font-size="16" fill="#b0b7c6">not yet</text>`;
+  s += `<rect x="34" y="${yc - 12}" width="34" height="24" rx="12" fill="${ghost ? '#fff' : c}" stroke="${c}" stroke-width="2" ${ghost ? 'stroke-dasharray="4 3"' : ''}/>
+        <text x="51" y="${yc + 5}" text-anchor="middle" font-weight="800" font-size="12.5" fill="${ghost ? c : '#fff'}">${lv}</text>
+        <text x="78" y="${yc + 5}" font-weight="700" font-size="13" fill="${ghost ? '#a3abbb' : '#17203a'}">${name}</text>`;
+});
+// year grid across both panels
+for (const yr of [2024, 2025, 2026]) s += `<path d="M${x(yr)} ${T1} V ${B1} M${x(yr)} ${T2} V ${B2}" stroke="#e1e5ef" stroke-width="1.4"/>`;
+s += `<path d="M${x(RSI)} ${T1 - 6} V ${B2 + 6}" stroke="#17203a" stroke-width="1.6" stroke-dasharray="5 5"/>`;
+
+// staircase of first arrivals L0 → L3, then the illustrative climb to L4–L6
+let st = `M${x(FIRST[0][0])} ${ly(0)}`;
+FIRST.slice(1).forEach(([d, k], i) => { st += ` H ${x(d)} V ${ly(k)}`; });
+st += ` H ${x(RSI)}`;
+s += `<path d="${st}" fill="none" stroke="#fff" stroke-width="10" stroke-linejoin="round"/>
+      <path d="${st}" fill="none" stroke="url(#stair)" stroke-width="4.5" stroke-linejoin="round" stroke-linecap="round"/>`;
+FIRST.forEach(([d, k]) => s += `<circle cx="${x(d)}" cy="${ly(k)}" r="6.5" fill="#fff" stroke="${LEVELS[k][2]}" stroke-width="3"/>`);
+s += `<path d="M${x(RSI)} ${ly(3)} C ${x(RSI) + 80} ${ly(3)}, ${x(XEND) - 60} ${ly(4.6)}, ${x(XEND) - 10} ${ly(6.2)}" fill="none" stroke="#dc2626" stroke-width="4" stroke-dasharray="10 7" stroke-linecap="round" marker-end="url(#ar-st)"/>`;
+s += `<text x="${x(2024.55)}" y="${ly(1) - 12}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#2563eb">first arrival of each level</text>`;
+
+// ---------------------------------------------------------------- bridges between the panels
+const bridge = (d, hv, k, sub, color, label, lane) => {
+  const x0 = x(d), y0 = y(hv), y1 = ly(k) + sub * 16 - 12;
+  return `<path d="M${x0} ${y0 + 8} V ${y1}" stroke="${color}" stroke-width="2" stroke-dasharray="3 5" stroke-linecap="round"/>
+          <circle cx="${x0}" cy="${y0}" r="6" fill="#fff" stroke="${color}" stroke-width="2.6"/>
+          <text x="${x(2026.15) - 12}" y="${ly(lane) + 6}" text-anchor="end" font-family="Patrick Hand" font-size="18" fill="${color}">${label}</text>`;
+};
+s += bridge(2026.15, 49, 1, 1, '#b4533c', 'coding ability → kernel agents', 5);
+s += bridge(2026.215, 33, 2, -1, '#b07d2b', 'tool use → end-to-end flows', 6);
+
+// milestone pills
+MILES.forEach(([name, k, d, e, lg, sub, anc]) => {
+  const E = EDGE[e], cx = x(d), cy = ly(k) + sub * 16, w = (lg ? 30 : 16) + name.length * 6.9;
+  s += `<circle cx="${cx}" cy="${cy}" r="4.2" fill="${E.color}" stroke="#fff" stroke-width="1.6"/>
+        <g transform="translate(${anc === 'L' ? cx - 7 - w : cx + 7},${cy - 11})"><rect width="${w}" height="22" rx="11" fill="${E.fill}" stroke="${E.color}" stroke-width="1.6"/>
+        ${lg ? `<image href="${LOGO[lg]}" x="6" y="4" width="14" height="14"/>` : ''}
+        <text x="${lg ? 25 : 9}" y="15.5" font-weight="700" font-size="11.8" fill="#17203a">${name}</text></g>`;
+});
+// AlphaEvolve: early, narrow L4
+const ae = [x(2025.37), ly(4)];
+s += `<circle cx="${ae[0]}" cy="${ae[1]}" r="34" fill="url(#burst)"/>
+      <text x="${ae[0] - 14}" y="${ae[1] + 5}" text-anchor="end" font-family="Patrick Hand" font-size="18" fill="#15803d">an early, narrow L4 →</text>`;
+// Jalapeño (claimed, undisclosed)
+s += `<circle cx="${x(2026.45)}" cy="${ly(4)}" r="4.2" fill="#6d28d9" stroke="#fff" stroke-width="1.6"/>
+      <g transform="translate(${x(2026.45) + 7},${ly(4) - 11})"><rect width="104" height="22" rx="11" fill="url(#hatchC)" stroke="#6d28d9" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <rect x="3" y="3" width="98" height="16" rx="8" fill="#fff" opacity=".82"/>
+      <image href="${LOGO.openai}" x="7" y="4" width="14" height="14"/><text x="26" y="15.5" font-weight="700" font-size="11.8" fill="#17203a">Jalapeño ?</text></g>`;
+
+// ---------------------------------------------------------------- RSI orb and labels
+s += `<circle cx="${ORB[0]}" cy="${ORB[1]}" r="58" fill="url(#orb)"/>
+      ${[0, 45, 90, 135].map(a => `<path d="M${ORB[0]} ${ORB[1] - 36} V ${ORB[1] - 22}" stroke="#f59e0b" stroke-width="2.6" stroke-linecap="round" transform="rotate(${a} ${ORB[0]} ${ORB[1]})"/><path d="M${ORB[0]} ${ORB[1] + 22} V ${ORB[1] + 36}" stroke="#f59e0b" stroke-width="2.6" stroke-linecap="round" transform="rotate(${a} ${ORB[0]} ${ORB[1]})"/>`).join('')}
+      <circle cx="${ORB[0]}" cy="${ORB[1]}" r="17" fill="#fff" stroke="#f59e0b" stroke-width="3"/>
+      <text x="${ORB[0]}" y="${ORB[1] + 5}" text-anchor="middle" font-weight="800" font-size="13" fill="#b45309">RSI</text>`;
+// guide the projections and the staircase into the orb
+s += `<path d="M${x(XEND) - 10} ${y(97)} Q ${ORB[0] - 4} ${(y(97) + ORB[1]) / 2} ${ORB[0] - 2} ${ORB[1] - 22}" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 5" opacity=".8"/>
+      <path d="M${x(XEND) - 10} ${ly(6.2) - 8} Q ${ORB[0] - 4} ${(ly(6.2) + ORB[1]) / 2} ${ORB[0] - 2} ${ORB[1] + 22}" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 5" opacity=".8"/>`;
+s += `<text x="${(x(RSI) + R) / 2 - 22}" y="${ly(1) + 2}" text-anchor="middle" font-family="Patrick Hand" font-size="25" fill="#4c1d95">RSI-enabled</text>
+      <text x="${(x(RSI) + R) / 2 - 22}" y="${ly(1) + 28}" text-anchor="middle" font-family="Patrick Hand" font-size="25" fill="#4c1d95">adaptation</text>`;
+
+// ---------------------------------------------------------------- shared time axis
+for (const yr of [2023, 2024, 2025, 2026]) s += `<text x="${x(yr + 0.5)}" y="${B2 + 32}" text-anchor="middle" font-weight="800" font-size="17" fill="#17203a">${yr}</text>`;
+s += `<text x="${(L + x(RSI)) / 2}" y="${B2 + 62}" text-anchor="middle" font-weight="700" font-size="14" fill="#475569">Release date · panel ① annual frontier measured mid-year · panel ② first public date</text>
+      <text x="${(x(RSI) + R) / 2}" y="${B2 + 32}" text-anchor="middle" font-family="Patrick Hand" font-size="22" fill="#6d28d9">post-2026</text>
+      <text x="${(x(RSI) + R) / 2}" y="${B2 + 54}" text-anchor="middle" font-weight="600" font-size="12.5" fill="#6b7385">illustrative</text>`;
 
 document.getElementById('fig').innerHTML = s;
 </script>
