@@ -11,7 +11,7 @@ Missing a work or disagree with a level? **[Recommend a paper](https://github.co
 <a href="https://star-history.com/#yangforever17/awesome-model-silicon-coevolution&Date">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=yangforever17/awesome-model-silicon-coevolution&type=Date&theme=dark">
-    <img alt="Star history chart" src="https://api.star-history.com/svg?repos=yangforever17/awesome-model-silicon-coevolution&type=Date" width="600">
+    <img alt="Star history chart" src="https://api.star-history.com/svg?repos=yangforever17/awesome-model-silicon-coevolution&type=Date" width="100%">
   </picture>
 </a>
 
