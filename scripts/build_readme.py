@@ -339,7 +339,7 @@ def render(bib, tax, ann, res):
         "CONTENTS": "\n".join(contents),
         "LEGEND": legend,
     }
-    body = [fill(snippet(name), values) for name in ("header", "intro", "whynow", "framework", "catalog")]
+    body = [fill(snippet(name), values) for name in ("header", "intro", "news", "whynow", "framework", "catalog")]
     for i, p in numbered:
         part_md = render_part(tax, p, i, entries)
         if p["id"] == "cases":

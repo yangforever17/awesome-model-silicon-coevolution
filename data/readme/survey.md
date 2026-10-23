@@ -2,7 +2,7 @@
 
 ## Survey
 
-**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** Manuscript in preparation for *ACM TODAES*; the preprint link will appear here.
+**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** Manuscript in preparation; the preprint link will appear here.
 
 <details>
 <summary>Abstract</summary>
@@ -14,10 +14,9 @@ Every model runs on a machine it did not design. This is changing. Language mode
 </details>
 
 ```bibtex
-@article{model-silicon-coevolution-2026,
+@misc{model-silicon-coevolution-2026,
   title   = {When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence},
   author  = {TBD},
-  journal = {ACM Transactions on Design Automation of Electronic Systems},
   year    = {2026},
   note    = {Manuscript in preparation}
 }

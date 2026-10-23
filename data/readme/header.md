@@ -8,11 +8,11 @@
 
 <p>
   <a href="#contents"><img alt="Entries" src="https://img.shields.io/badge/entries-{{N}}-2563eb?style=flat-square"></a>
-  <a href="#survey"><img alt="Survey" src="https://img.shields.io/badge/survey-ACM%20TODAES%20(in%20prep.)-b31b1b?style=flat-square"></a>
   <a href="LICENSE"><img alt="License: CC0" src="https://img.shields.io/badge/license-CC0-64748b?style=flat-square"></a>
 </p>
 
 <p>
+  <a href="#news">News</a> ·
   <a href="#framework">Framework</a> ·
   <a href="#contents">Catalog</a> ·
   <a href="#part-cases">Closed loops</a> ·

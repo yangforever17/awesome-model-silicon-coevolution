@@ -5,5 +5,3 @@ Every model runs on a machine it did not design. That is starting to change: lan
   <br>
   <sub><b>Figure 1.</b> The landscape by autonomy level. The higher the level, the fewer the works: 37 at L1, 4 at L2, 2 at L3, one public case at L4.</sub>
 </div>
-
-**News** · 2026-10-22 · Repository launched with the survey's full reference map.

@@ -8,11 +8,11 @@
 
 <p>
   <a href="#contents"><img alt="Entries" src="https://img.shields.io/badge/entries-304-2563eb?style=flat-square"></a>
-  <a href="#survey"><img alt="Survey" src="https://img.shields.io/badge/survey-ACM%20TODAES%20(in%20prep.)-b31b1b?style=flat-square"></a>
   <a href="LICENSE"><img alt="License: CC0" src="https://img.shields.io/badge/license-CC0-64748b?style=flat-square"></a>
 </p>
 
 <p>
+  <a href="#news">News</a> ·
   <a href="#framework">Framework</a> ·
   <a href="#contents">Catalog</a> ·
   <a href="#part-cases">Closed loops</a> ·
@@ -30,7 +30,11 @@ Every model runs on a machine it did not design. That is starting to change: lan
   <sub><b>Figure 1.</b> The landscape by autonomy level. The higher the level, the fewer the works: 37 at L1, 4 at L2, 2 at L3, one public case at L4.</sub>
 </div>
 
-**News** · 2026-10-22 · Repository launched with the survey's full reference map.
+<a id="news"></a>
+
+## News
+
+- **2026-10-22** Repository launched with the survey's full reference map.
 
 <a id="why-now"></a>
 
@@ -753,7 +757,7 @@ Whether recursion accelerates or saturates, where humans stay in the loop, and s
 
 ## Survey
 
-**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** Manuscript in preparation for *ACM TODAES*; the preprint link will appear here.
+**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** Manuscript in preparation; the preprint link will appear here.
 
 <details>
 <summary>Abstract</summary>
@@ -765,10 +769,9 @@ Every model runs on a machine it did not design. This is changing. Language mode
 </details>
 
 ```bibtex
-@article{model-silicon-coevolution-2026,
+@misc{model-silicon-coevolution-2026,
   title   = {When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence},
   author  = {TBD},
-  journal = {ACM Transactions on Design Automation of Electronic Systems},
   year    = {2026},
   note    = {Manuscript in preparation}
 }
