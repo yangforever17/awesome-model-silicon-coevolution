@@ -106,7 +106,7 @@ const ly = (k) => { const f = Math.floor(k), r = k - f; const c = (q) => lb(q) -
 const laneH = 62;
 const curve = d3.line().x(d => x(d[0])).y(d => y(d[1])).curve(d3.curveMonotoneX);
 const G = Object.fromEntries(GROUPS.map(g => [g.id, g]));
-const ORB = [x(XEND) + 2, (T1 + T2) / 2 - 40];
+const ORB = [x(XEND) + 2, y(102)];
 
 let s = `<defs>
   <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f4f1ff"/><stop offset=".6" stop-color="#f8faff"/><stop offset="1" stop-color="#fff"/></linearGradient>
@@ -257,8 +257,7 @@ s += `<circle cx="${ORB[0]}" cy="${ORB[1]}" r="58" fill="url(#orb)"/>
       <circle cx="${ORB[0]}" cy="${ORB[1]}" r="17" fill="#fff" stroke="#f59e0b" stroke-width="3"/>
       <text x="${ORB[0]}" y="${ORB[1] + 5}" text-anchor="middle" font-weight="800" font-size="13" fill="#b45309">RSI</text>`;
 // guide the projections and the staircase into the orb
-s += `<path d="M${x(XEND) - 10} ${y(97)} Q ${ORB[0] - 4} ${(y(97) + ORB[1]) / 2} ${ORB[0] - 2} ${ORB[1] - 22}" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 5" opacity=".8"/>
-      <path d="M${x(XEND) - 10} ${ly(6.2) - 8} Q ${ORB[0] - 4} ${(ly(6.2) + ORB[1]) / 2} ${ORB[0] - 2} ${ORB[1] + 22}" fill="none" stroke="#f59e0b" stroke-width="2" stroke-dasharray="2 5" opacity=".8"/>`;
+s += `<path d="M${x(XEND) - 10} ${ly(6.2) - 8} C ${ORB[0] + 14} ${ly(6.2) - 120}, ${ORB[0] + 14} ${ORB[1] + 160}, ${ORB[0] + 4} ${ORB[1] + 24}" fill="none" stroke="#f59e0b" stroke-width="2.4" stroke-dasharray="2 6" stroke-linecap="round" opacity=".9"/>`;
 s += `<text x="${(x(RSI) + R) / 2 - 22}" y="${ly(1) + 2}" text-anchor="middle" font-family="Patrick Hand" font-size="25" fill="#4c1d95">RSI-enabled</text>
       <text x="${(x(RSI) + R) / 2 - 22}" y="${ly(1) + 28}" text-anchor="middle" font-family="Patrick Hand" font-size="25" fill="#4c1d95">adaptation</text>`;
 
