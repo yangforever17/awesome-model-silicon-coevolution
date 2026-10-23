@@ -16,7 +16,7 @@
 <p>
   <a href="#news">News</a> ·
   <a href="#framework">Framework</a> ·
-  <a href="#contents">Catalog</a> ·
+  <a href="#contents">Contents</a> ·
   <a href="#part-cases">Closed loops</a> ·
   <a href="#survey">Survey &amp; citation</a> ·
   <a href="#contributing">Contribute</a>

@@ -226,20 +226,23 @@ def tidy_note(x):
     return note
 
 
-def venue_cell(x):
+def venue_cell(x, url=None):
     venue = x["venue"] if x["venue"] not in ("", "Website") else ("" if x["type"] == "Paper" else x["type"])
-    return " ".join(s for s in (venue, x["year"]) if s)
+    text = "&nbsp;".join(cell(s) for s in (venue, x["year"]) if s)
+    return f"[{text}]({url})" if url and text else text
 
 
 def entry_row(tax, x, with_level):
     title = cell(x["title"]) + (f" ({cell(x['title_orig'])})" if x["title_orig"] else "")
-    if x["links"]:
-        title = f"[{title}]({x['links'][0][1]})" + "".join(f" [[{lab}]({u})]" for lab, u in x["links"][1:])
+    # The title links to the primary source and the venue to the second (usually the DOI).
+    links = [u for _, u in x["links"]]
+    if links:
+        title = f"[{title}]({links[0]})" + "".join(f" [[{lab}]({u})]" for lab, u in x["links"][2:])
     if x["code"]:
         stars = f"https://img.shields.io/github/stars/{x['code']}?style=social&label=Code"
         title += f" [![Code]({stars})](https://github.com/{x['code']})"
     star = "⭐ " if x["featured"] else ""
-    cols = [star + title, venue_cell(x)]
+    cols = [star + title, venue_cell(x, links[1] if len(links) > 1 else None)]
     if with_level:
         cols.append(level_badge(tax, x))
     cols.append(cell(tidy_note(x)))
@@ -285,6 +288,7 @@ def render_part(tax, p, number, entries):
         if len(topics) > 1:
             out += [f"### {t['title']}", ""]
         out += [entry_table(tax, ts), ""]
+    out += ['<p align="right"><sub><a href="#contents">↑ Contents</a></sub></p>', ""]
     return "\n".join(out)
 
 
@@ -346,7 +350,7 @@ def render(bib, tax, ann, res):
         "CONTENTS": "\n".join(contents),
         "LEGEND": legend,
     }
-    body = [fill(snippet(name), values) for name in ("header", "intro", "news", "whynow", "framework", "catalog")]
+    body = [fill(snippet(name), values) for name in ("header", "intro", "news", "catalog", "whynow", "framework", "legend")]
     for i, p in numbered:
         part_md = render_part(tax, p, i, entries)
         if p["id"] == "cases":

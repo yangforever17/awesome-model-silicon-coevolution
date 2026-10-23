@@ -2,6 +2,6 @@
 
 ## Contents
 
-{{CONTENTS}}
+**Background** · [Why now](#why-now) · [Framework: layers and autonomy levels](#framework) · [Survey &amp; citation](#survey) · [Contributing](#contributing)
 
-{{LEGEND}} &nbsp; ⭐ key work · † level assigned by the curators, not the survey
+{{CONTENTS}}

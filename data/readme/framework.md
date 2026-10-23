@@ -6,8 +6,7 @@ We split the system into three layers: the **model** $M$, the **software stack**
 
 <div align="center">
   <img src="./assets/tower.png" width="78%" alt="The model, software-stack and silicon tower. Silicon at the base iterates in years, the software stack in hours, the model in months. A robot on top sends kernels and RTL down; people on the side haul constraints such as HBM, FLOPs, FP8 and 2:4 sparsity up, with a small drone showing AI starting to carry constraints too.">
-  <br>
-  <sub><b>Figure 3.</b> The model–stack–silicon tower. AI already sends designs down; constraints are still hauled up almost entirely by people.</sub>
+  <p><sub><b>Figure 3.</b> The model–stack–silicon tower. AI already sends designs down; constraints are still hauled up almost entirely by people.</sub></p>
 </div>
 
 **Autonomy levels.** How much of the R&D loop does the AI run? The catalog covers L0–L4; L5–L6 are the horizon.
