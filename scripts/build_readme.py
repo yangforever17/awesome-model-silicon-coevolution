@@ -33,8 +33,8 @@ DOI_MIN_SIM = 0.93
 # Entries whose automatic matches are known to be wrong (same title, different work).
 NO_AUTO_LINK_TYPES = {"Essay", "Book"}
 
-EXTRA_LEVEL_COLORS = {"L1–L2": "4f46e5", "Human": "78716c", "Claimed": "a8a29e", "Undisclosed": "a8a29e"}
-LEVEL_LABELS = {"Human": "Human-driven", "Claimed": "Claimed", "Undisclosed": "Undisclosed"}
+EXTRA_LEVEL_COLORS = {"L1–L2": "4f46e5", "Human": "78716c", "Possible L1": "93c5fd", "Possible L3": "86efac"}
+LEVEL_LABELS = {"Human": "Human-driven"}
 
 VENUE_ABBR = {
     "ACM Transactions on Design Automation of Electronic Systems": "TODAES",
@@ -344,7 +344,7 @@ def render(bib, tax, ann, res):
         contents.append(f"| {i} | [{p['title']}](#part-{p['id']}) | {n} | {p['survey']} |")
 
     legend = " ".join(badge(k, v["color"]) for k, v in tax["levels"].items() if k in lvl_counts)
-    legend += " " + " ".join(badge(LEVEL_LABELS[k], EXTRA_LEVEL_COLORS[k]) for k in ("Human", "Claimed", "Undisclosed"))
+    legend += " " + " ".join(badge(LEVEL_LABELS.get(k, k), EXTRA_LEVEL_COLORS[k]) for k in ("Human", "Possible L1", "Possible L3") if k in lvl_counts)
 
     values = {
         "N": st["n"],

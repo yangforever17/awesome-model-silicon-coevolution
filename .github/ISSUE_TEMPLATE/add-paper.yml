@@ -55,10 +55,10 @@ body:
       options:
         - Not sure
         - L0 · design assistance
-        - L1 · local autonomous optimization
+        - L1 · autonomous optimization
         - L2 · end-to-end autonomous design
-        - L3 · cross-layer co-design
-        - L4 · recursive self-enhancement
+        - L3 · self-improvement
+        - L4 · cross-layer co-evolution
         - Human-driven co-design
   - type: textarea
     id: note

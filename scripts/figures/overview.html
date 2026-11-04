@@ -2,7 +2,6 @@
 <!--
   Figure 1: overview of model–stack–silicon co-evolution by autonomy level.
   Edit the COLS data below, then render: bash scripts/figures/render.sh  (headless Chrome → assets/overview.png)
-  Work counts in the column headers come from data/catalog.csv (level column).
 -->
 <html>
 <head>
@@ -10,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Patrick+Hand&display=block" rel="stylesheet">
 <style>
-  @page { size: 2040px 1030px; margin: 0; }
+  @page { size: 2150px 1030px; margin: 0; }
   html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
   :root {
     --ink: #17203a;
@@ -28,7 +27,7 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body { background: #fff; }
-  body { width: 2040px; height: 1030px; position: relative; font-family: Inter, sans-serif; color: var(--ink); overflow: hidden;
+  body { width: 2150px; height: 1030px; position: relative; font-family: Inter, sans-serif; color: var(--ink); overflow: hidden;
          background: radial-gradient(1200px 500px at 85% -10%, #f3f0ff 0%, rgba(255,255,255,0) 60%),
                      radial-gradient(900px 500px at 5% 110%, #eef4ff 0%, rgba(255,255,255,0) 60%), #fff; }
   .hand { font-family: "Patrick Hand", cursive; }
@@ -50,7 +49,6 @@
   .lab { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .chip.legend { font-size: 14.5px; padding: 4px 10px; }
   .note { margin-left: auto; font-size: 13.5px; color: var(--muted); display: flex; align-items: center; gap: 8px; white-space: nowrap; }
-  .note .cnt { font-weight: 700; color: var(--ink); background: #fff; border: 1.5px solid #dfe3ec; border-radius: 999px; padding: 2px 9px; font-size: 13px; }
 
   /* columns */
   .col { position: absolute; top: 80px; height: 822px; border: 2.6px dashed var(--dash); border-radius: 6px; padding: 12px 12px 0; overflow: hidden;
@@ -62,7 +60,6 @@
   .hdr { display: flex; align-items: center; gap: 8px; margin: 0 2px 9px; }
   .pill { color: #fff; font-weight: 800; font-size: 14px; letter-spacing: .02em; padding: 3px 10px; border-radius: 999px; }
   .hdr .sub { font-size: 11px; letter-spacing: .07em; text-transform: uppercase; font-weight: 700; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .hdr .cnt { margin-left: auto; font-size: 12.5px; font-weight: 700; color: var(--ink); background: #fff; border: 1.5px solid #dfe3ec; border-radius: 999px; padding: 2px 9px; white-space: nowrap; }
   .split { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
   .split > div:first-child { padding-right: 10px; border-right: 2.2px dashed #a7b0cb; }
   .split > div:last-child { padding-left: 10px; }
@@ -132,7 +129,7 @@
 <div id="yaxis"></div>
 <div id="xaxis"></div>
 <div id="legend"></div>
-<svg id="trail" width="2040" height="1030"></svg>
+<svg id="trail" width="2150" height="1030"></svg>
 <div id="cols"></div>
 
 <script>
@@ -164,9 +161,9 @@ const LOGO_OF = {
 const logoHTML = (k) => { const L = LOGOS[k]; return L.img ? `<img src="${L.img}" alt="">` : `<span class="mask" style="--src:url(${L.mask});--c:${L.color}${L.wide ? ';width:29px;height:29px' : ''}"></span>`; };
 
 // ---------------------------------------------------------------- data
-// color: level identity; floor: tint at the bottom of the column; count: entries at this level in data/catalog.csv
+// color: level identity; floor: tint at the bottom of the column
 const COLS = [
-  { id: 'H', cls: 'human', x: 30, w: 252, color: '#8a94a8', floor: 'rgba(138,148,168,.16)', pill: 'H', sub: 'Executor: people', count: '35',
+  { id: 'H', cls: 'human', x: 30, w: 252, color: '#8a94a8', floor: 'rgba(138,148,168,.16)', pill: 'H', sub: 'Executor: people',
     title: 'Human-Led<br>Co-Design', rise: 0, scene: 'human',
     items: [
       ['sm', 'FlashAttention', 'IO-aware attention'],
@@ -177,23 +174,24 @@ const COLS = [
       ['lp', 'Pangu Ultra', 'built for Ascend NPUs'],
     ],
     chips: [['k-search', 'HW-aware NAS'], ['k-loop', 'Low precision'], ['k-loop', 'MoE & sparsity']] },
-  { id: 'L0', x: 292, w: 246, color: '#64748b', floor: 'rgba(100,116,139,.15)', pill: 'L0', sub: 'Generates once', count: '19',
+  { id: 'L0', x: 292, w: 246, color: '#64748b', floor: 'rgba(100,116,139,.15)', pill: 'L0', sub: 'Generates once',
     title: 'Design<br>Assistance', rise: 0, scene: 'assist',
     items: [
       ['ms', 'ChipNeMo', 'domain-adapted LLM'],
       ['ms', 'Chip-Chat', 'chat-driven tape-out'],
       ['ms', 'VeriGen', 'Verilog code LLM'],
       ['ms', 'RTLCoder', 'open synthetic RTL data'],
-      ['ms', 'GPT4AIGChip', 'HLS for AI accelerators'],
+      ['ms', 'EDA-Copilot', 'RAG for EDA tools'],
       ['mk', 'LLM Compiler', 'IR-level optimization'],
+      ['mk', 'KernelLLM', 'PyTorch → Triton model'],
     ],
     chips: [['k-data', 'Domain pretraining'], ['k-data', 'SFT'], ['k-data', 'Synthetic data'], ['k-data', 'RAG']] },
-  { id: 'L1', x: 548, w: 526, color: '#2563eb', floor: 'rgba(37,99,235,.13)', pill: 'L1', sub: 'Closed loop, given evaluator', count: '37',
-    title: 'Local Autonomous Optimization', rise: 10, scene: 'optimize', split: true,
+  { id: 'L1', x: 548, w: 526, color: '#2563eb', floor: 'rgba(37,99,235,.13)', pill: 'L1', sub: 'Closed loop, given evaluator',
+    title: 'Autonomous Optimization', rise: 10, scene: 'optimize', split: true,
     heads: [['Model → Silicon', 'var(--ms-ink)'], ['Model → Stack', 'var(--mk-ink)']],
     items: [
       ['ms', 'AutoChip', 'compile & sim feedback'],
-      ['ms', 'RTLFixer', 'ReAct debug loop'],
+      ['ms', 'RTLRewriter · ASPEN', 'PPA-driven RTL rewriting'],
       ['ms', 'QiMeng-CodeV-R1', 'equivalence reward'],
       ['ms', 'Self-Evolved ABC', 'evolves synthesis tool'],
       ['ms', 'AlphaChip', 'RL macro placement'],
@@ -202,44 +200,44 @@ const COLS = [
     items2: [
       ['mk', 'CUDA Agent', 'agentic RL for kernels'],
       ['mk', 'GEAK', 'Triton kernel agent'],
-      ['mk', 'KernelBlaster', 'memory across GPUs'],
-      ['mk', 'daVinci-kernel', 'verified skill library'],
+      ['mk', 'STARK', 'multi-agent strategic search'],
+      ['mk', 'KernelAgent', 'roofline-guided agents'],
       ['lp', 'AlphaTensor', 'HW-timed matmul search'],
       ['mk', 'AlphaDev', 'sorting merged in LLVM'],
     ],
     chips: [['k-fb', 'Testbench reward'], ['k-fb', 'Equivalence check'], ['k-search', 'RLVR'], ['k-agent', 'Multi-agent']],
     chips2: [['k-fb', 'Profiler loop'], ['k-search', 'Test-time search'], ['k-agent', 'Skill library'], ['k-fb', 'Anti-hacking']] },
-  { id: 'L2', x: 1086, w: 330, color: '#7c3aed', floor: 'rgba(124,58,237,.12)', pill: 'L2', sub: 'Spec in · system out', count: '4',
+  { id: 'L2', x: 1086, w: 330, color: '#7c3aed', floor: 'rgba(124,58,237,.12)', pill: 'L2', sub: 'Spec in · system out',
     title: 'End-to-End<br>Autonomous Design', rise: 6, scene: 'e2e',
     items: [
-      ['ms', 'Design Conductor', 'spec → RISC-V core in 12 h'],
+      ['ms', 'Design Conductor · 2.0', 'spec → core · paper → accelerator'],
       ['ms', 'ASIC-Agent', 'RTL → OpenLane → Caravel'],
-      ['ms', 'QiMeng', 'HW + SW design agents'],
+      ['ms', 'ChatEDA · Spec2RTL-Agent', 'RTL → GDSII flow · spec → RTL'],
       ['mk', 'GEAK v4', 'whole serving workloads'],
-      ['lp', 'Qwen chip–model co-evo', 'NoC spec → layout · Day-0 deploy'],
-      ['ms', 'EDA vendor agents', 'Cadence · Synopsys · Siemens'],
+      ['lp', 'SparseCraft · MACO', 'tune hardware & stack jointly'],
     ],
     chips: [['k-agent', 'Spec → GDSII'], ['k-agent', 'Task decomposition'], ['k-fb', 'End-to-end profiling'], ['k-search', 'Multi-backend']] },
-  { id: 'L3', x: 1428, w: 278, color: '#d97706', floor: 'rgba(217,119,6,.13)', pill: 'L3', sub: 'AI picks the layer', count: '2',
-    title: 'Cross-Layer<br>Co-Design', rise: 6, scene: 'cross',
-    items: [
-      ['lp', 'Design Conductor 2.0', 'algorithm paper → accelerator'],
-      ['lp', 'HSCO-Bench', 'SW needs → SoC accelerator'],
-      ['open', 'Model × kernel × RTL agent', 'open: no instance yet'],
-    ],
-    chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'Joint J(M,S,H)'], ['k-loop', 'World model'], ['k-loop', 'Cross-layer env']] },
-  { id: 'L4', x: 1718, w: 304, color: '#16a34a', floor: 'rgba(22,163,74,.13)', pill: 'L4', sub: 'Feeds the designer', count: '1 + 2',
-    title: 'Recursive<br>Self-Enhancement', rise: 18, scene: 'recursive',
+  { id: 'L3', x: 1428, w: 304, color: '#16a34a', floor: 'rgba(22,163,74,.13)', pill: 'L3', sub: 'Feeds the designer',
+    title: 'Self-Improvement', rise: -8, lift: 26, scene: 'recursive',
     items: [
       ['lp', 'AlphaEvolve', 'TPU circuit + Gemini kernel', 'hl'],
-      ['claim', 'Jalapeño', 'model-aided chip · undisclosed'],
-      ['claim', 'OpenAI × Broadcom', '~20 optimizations · claimed'],
+      ['ms', 'PCPO', 'learns from its own designs'],
+      ['mk', 'KOPE · AccelOpt · CAKE', 'kernel & compiler experience'],
+      ['lp', 'Qwen chip–model co-evo', 'self-run training · chip & stack L2'],
     ],
-    chips: [['k-loop', 'Kernel → training'], ['k-loop', 'Circuit → next TPU'], ['k-fb', 'Human sign-off']] },
+    chips: [] },
+  { id: 'L4', x: 1742, w: 278, color: '#d97706', floor: 'rgba(217,119,6,.13)', pill: 'L4', sub: 'Layers adapt together',
+    title: 'Cross-Layer<br>Co-Evolution', rise: 60, lift: 40, scene: 'cross',
+    items: [
+      ['open', 'L4[S·H]', 'stack ⇄ silicon · none yet'],
+      ['open', 'L4[M·S]', 'model ⇄ stack · none yet'],
+      ['open', 'L4[M·S·H]', 'whole tower · none yet'],
+    ],
+    chips: [['k-loop', 'Cross-layer gain'], ['k-loop', 'World model']] },
 ];
 const XLABELS = [
   ['H', 'Human', 156, true], ['L0', 'Assist', 415], ['L1', 'Optimize', 811], ['L2', 'End-to-End', 1251],
-  ['L3', 'Cross-Layer', 1567], ['L4', 'Recursive', 1870],
+  ['L3', 'Self-Improve', 1580], ['L4', 'Co-Evolution', 1881],
 ];
 
 // ---------------------------------------------------------------- illustration kit
@@ -695,7 +693,7 @@ for (const c of COLS) {
   el.className = 'col ' + (c.cls || '');
   el.style.left = c.x + 'px'; el.style.width = c.w + 'px';
   el.style.setProperty('--floor', c.floor);
-  const hdr = `<div class="hdr"><span class="pill" style="background:${c.color}">${c.pill}</span><span class="sub">${c.sub}</span><span class="cnt">${c.count}</span></div>`;
+  const hdr = `<div class="hdr"><span class="pill" style="background:${c.color}">${c.pill}</span><span class="sub">${c.sub}</span></div>`;
   let body;
   if (c.split) {
     const sh = ([t, col]) => `<div class="subhead"><i style="background:${col}"></i>${t}</div>`;
@@ -718,7 +716,6 @@ document.getElementById('legend').innerHTML = `
     <span class="lab">${T('mk')}Model → Stack</span>
     <span class="lab">${T('sm')}Silicon → Model</span>
     <span class="lab">${T('lp')}Cross-layer loop</span>
-    <span class="lab">${T('claim', 'lp')}Claimed</span>
     <span class="lab"><span class="tile logo" style="width:28px;height:28px;flex-basis:28px;border-radius:8px;border-color:#94a3b8">${logoHTML('deepmind')}</span>Organization</span>
   </div>
   <div class="lgbox" style="gap:7px"><span class="title" style="margin-right:6px">Mechanism</span>
@@ -727,8 +724,7 @@ document.getElementById('legend').innerHTML = `
     <span class="chip legend k-search">Search & RL</span>
     <span class="chip legend k-agent">Agents</span>
     <span class="chip legend k-loop">Cross-layer</span>
-  </div>
-  <div class="note"><span class="cnt">37</span>entries in catalog</div>`;
+  </div>`;
 
 // x-axis labels
 for (const [lv, name, x, dim] of XLABELS) {
@@ -740,7 +736,7 @@ for (const [lv, name, x, dim] of XLABELS) {
 }
 const far = document.createElement('div');
 far.className = 'xlabel hand dim'; far.style.left = '2022px'; far.style.top = '992px'; far.style.fontSize = '22px';
-far.style.transform = 'translateX(-100%)'; far.textContent = 'L5 self-expansion · L6 open-ended evolution →';
+far.style.transform = 'translateX(-100%)'; far.textContent = 'L5 recursive self-expansion · L6 open-ended autonomous evolution →';
 document.body.appendChild(far);
 
 // rising trajectory through each column's title, colored by level
@@ -748,18 +744,62 @@ function drawTrail() {
   const pts = [], cols = [];
   document.querySelectorAll('.col .ttl').forEach((t, i) => {
     const r = t.getBoundingClientRect();
-    pts.push([(r.left + r.right) / 2, r.top - 18]);
+    pts.push([(r.left + r.right) / 2, r.top - 18 - (COLS[i].lift || 0)]);
     cols.push(COLS[i].color);
   });
   const x0 = pts[0][0], x1 = pts[pts.length - 1][0];
   const stops = pts.map((p, i) => `<stop offset="${((p[0] - x0) / (x1 - x0)).toFixed(3)}" stop-color="${cols[i]}"/>`).join('');
   let d = `M${pts[0][0]} ${pts[0][1]}`;
   for (let i = 1; i < pts.length; i++) d += ` L${pts[i][0]} ${pts[i][1]}`;
+  // beyond L4: the trail breaks out of the chart and shoots up the right margin toward L5, L6 and RSI
+  const pe = pts[pts.length - 1], XC = 2088, OY = 128, TIP = OY + 50;
+  const up = `M${pe[0]} ${pe[1]} C${pe[0] + 150} ${pe[1] + 34}, ${XC} ${pe[1] + 6}, ${XC} ${TIP + 16}`;
+  const probe = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+  probe.setAttribute('d', up); document.getElementById('trail').appendChild(probe);
+  const len = probe.getTotalLength(), at = (f) => probe.getPointAtLength(len * f);
+  const way = [[0.66, 'L5', '#dc2626'], [0.86, 'L6', '#991b1b']].map(([f, lv, c]) => { const q = at(f);
+    return `<circle cx="${q.x}" cy="${q.y}" r="19" fill="#fff" stroke="${c}" stroke-width="2.6" stroke-dasharray="5 4"/>
+            <text x="${q.x}" y="${q.y + 5}" text-anchor="middle" font-family="Inter" font-weight="800" font-size="14" fill="${c}">${lv}</text>`; }).join('');
+  const star = (x, y, r, c) => `<path d="M${x} ${y - r} Q${x} ${y} ${x + r} ${y} Q${x} ${y} ${x} ${y + r} Q${x} ${y} ${x - r} ${y} Q${x} ${y} ${x} ${y - r}Z" fill="${c}"/>`;
+  const speed = [[-26, 0.70, 0.80], [26, 0.74, 0.84], [-22, 0.88, 0.95]].map(([dx, a, b]) => { const p1 = at(a), p2 = at(b);
+    return `<path d="M${p1.x + dx} ${p1.y} L${p2.x + dx} ${p2.y}" stroke="#f59e0b" stroke-width="2.4" stroke-linecap="round" opacity=".55"/>`; }).join('');
+  // the margin lane: the tower keeps growing past its three floors, toward self-expansion
+  const BX = 2032, BW = 112, BC = BX + BW / 2;
+  const floor = (y, name, fill, ink) => `<rect x="${BC - 40}" y="${y}" width="80" height="32" rx="6" fill="${fill}" stroke="${ink}" stroke-width="2.4"/>
+    <text x="${BC}" y="${y + 20.5}" text-anchor="middle" font-family="Inter" font-weight="800" font-size="10.5" letter-spacing=".6" fill="${ink}">${name}</text>`;
+  const ghosts = [0.62, 0.46, 0.32, 0.2, 0.11].map((o, i) => `<rect x="${BC - 40}" y="${758 - 36 * (i + 1)}" width="80" height="30" rx="6" fill="#fff" fill-opacity="${o * 0.8}" stroke="#dc2626" stroke-opacity="${o + 0.15}" stroke-width="2" stroke-dasharray="6 5"/>`).join('');
+  const chev = [0, 1, 2, 3].map(i => { const y = 556 - 40 * i, o = 0.25 + 0.2 * i;
+    return `<path d="M${BC - 14} ${y + 9} L${BC} ${y - 5} L${BC + 14} ${y + 9}" fill="none" stroke="${i < 2 ? '#f59e0b' : '#dc2626'}" stroke-opacity="${o}" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"/>`; }).join('');
+  const lane = `
+    <rect x="${BX}" y="80" width="${BW}" height="822" rx="8" fill="url(#gBand)"/>
+    <rect x="${BX}" y="80" width="${BW}" height="822" rx="8" fill="url(#pBand)"/>
+    <rect x="${BX}" y="80" width="${BW}" height="822" rx="8" fill="none" stroke="#e8b4b4" stroke-width="2" stroke-dasharray="6 6"/>
+    <ellipse cx="${BC}" cy="${866}" rx="50" ry="7" fill="#1e3a6e" opacity=".12"/>
+    ${floor(830, 'SILICON', '#fde7c4', '#b45309')}${floor(796, 'STACK', '#ccf3ec', '#0f766e')}${floor(762, 'MODEL', '#ede9fe', '#6d28d9')}
+    ${ghosts}${chev}
+    <text x="${BC}" y="${888}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#b45309">more floors?</text>`;
+  const burst = `
+    <circle cx="${XC}" cy="${OY}" r="66" fill="url(#gOrb)"/>
+    <circle cx="${XC}" cy="${OY}" r="28" fill="#fff" stroke="#dc2626" stroke-width="3.4"/>
+    <text x="${XC}" y="${OY + 6}" text-anchor="middle" font-family="Inter" font-weight="900" font-size="15" fill="#b91c1c">RSI</text>
+    ${star(XC - 44, OY - 30, 9, '#f59e0b')}${star(XC + 40, OY - 40, 6, '#dc2626')}${star(XC + 46, OY + 22, 7, '#f59e0b')}${star(XC - 40, OY + 34, 5, '#fb923c')}`;
   const dots = pts.map((p, i) => `<circle cx="${p[0]}" cy="${p[1]}" r="${i === pts.length - 1 ? 9 : 7}" fill="#fff" stroke="${cols[i]}" stroke-width="4"/>`).join('');
   document.getElementById('trail').innerHTML = `
-    <defs><linearGradient id="gTrail" gradientUnits="userSpaceOnUse" x1="${x0}" y1="0" x2="${x1}" y2="0">${stops}</linearGradient></defs>
+    <defs><marker id="trailHead" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="3.6" markerHeight="3.6" orient="auto"><path d="M0 0 L10 5 L0 10 z" fill="#991b1b"/></marker><linearGradient id="gUp" gradientUnits="userSpaceOnUse" x1="${pe[0]}" y1="${pe[1]}" x2="${XC}" y2="${TIP}"><stop offset="0" stop-color="${cols[cols.length - 1]}"/><stop offset=".55" stop-color="#dc2626"/><stop offset="1" stop-color="#991b1b"/></linearGradient>
+    <linearGradient id="gBand" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#ffe4d6" stop-opacity=".95"/><stop offset=".55" stop-color="#fff4ec" stop-opacity=".7"/><stop offset="1" stop-color="#f5f3ff" stop-opacity=".5"/></linearGradient>
+    <pattern id="pBand" width="9" height="9" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><path d="M0 0 V9" stroke="#f3c6c6" stroke-width="1.4" opacity=".55"/></pattern>
+    <radialGradient id="gOrb"><stop offset="0" stop-color="#fde68a" stop-opacity=".95"/><stop offset=".5" stop-color="#fdba74" stop-opacity=".55"/><stop offset="1" stop-color="#fca5a5" stop-opacity="0"/></radialGradient>
+    <filter id="fGlow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="7"/></filter>
+    <linearGradient id="gTrail" gradientUnits="userSpaceOnUse" x1="${x0}" y1="0" x2="${x1}" y2="0">${stops}</linearGradient></defs>
     <path d="${d}" fill="none" stroke="#fff" stroke-width="11" stroke-linejoin="round" stroke-linecap="round" opacity=".9"/>
     <path d="${d}" fill="none" stroke="url(#gTrail)" stroke-width="5" stroke-dasharray="14 10" stroke-linejoin="round" stroke-linecap="round"/>
+    ${lane}
+    ${burst}
+    <path d="${up}" fill="none" stroke="url(#gUp)" stroke-width="22" stroke-linecap="round" opacity=".28" filter="url(#fGlow)"/>
+    ${speed}
+    <path d="${up}" fill="none" stroke="#fff" stroke-width="15" stroke-linecap="round" opacity=".95"/>
+    <path d="${up}" fill="none" stroke="url(#gUp)" stroke-width="8.5" stroke-linecap="round" marker-end="url(#trailHead)"/>
+    ${way}
     ${dots}`;
 }
 document.fonts.ready.then(drawTrail);

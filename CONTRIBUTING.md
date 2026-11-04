@@ -31,7 +31,7 @@ Thanks for helping keep this map accurate. The quickest way to suggest a work is
 Answer three questions in the note or the pull request:
 
 - **Layer.** Which edge of the tower does it act on: Model → Silicon, Model → Stack, Silicon → Model, or a cross-layer loop?
-- **Level.** How much of the R&D loop does the AI run? Use the L0–L4 decision rules in the README. Use `Human` for cross-layer co-design decided by people, and `Claimed` or `Undisclosed` for industrial statements that cannot be checked. Leave the level empty for foundations, theory and classic hardware papers.
+- **Level.** How much of the R&D loop does the AI run? Use the L0–L4 decision rules in the README. Use `Human` for cross-layer co-design decided by people, and `Possible L1` / `Possible L3` when the level hinges on undisclosed information. Leave the level empty for foundations, theory and classic hardware papers.
 - **Signal.** Which feedback tier does its loop depend on (S1 compile, S2 function, S3 PPA, S4 profile, S5 end-to-end, S6 post-silicon)?
 
 If a work changes several layers, place it under the highest level it actually demonstrates. Set `lsrc: survey` only when the level is stated in the survey; otherwise use `lsrc: curator`, which shows a † in the README.

@@ -15,7 +15,7 @@ parts:
     survey: "§5"
     edge: loop
     blurb: >-
-      Ten cases where an AI-designed artifact reaches the hardware or software that trains or serves AI.
+      Cases where an AI-designed artifact reaches the hardware or software that trains or serves AI.
     topics:
       - id: cases
         title: Case studies
@@ -63,6 +63,8 @@ parts:
         title: Human-built stacks for specific models
       - id: ms-kernel
         title: LLM-generated kernels
+      - id: ms-e2e
+        title: From kernels to end-to-end workloads
       - id: ms-compiler
         title: ML and LLMs for compilers
       - id: ms-serving
@@ -86,6 +88,16 @@ parts:
         title: Low precision and numeric formats
       - id: hm-parallel
         title: Parallelism and system-level co-design
+
+  - id: cross
+    title: "Who Carries the Constraints Up? LLM-Involved Cross-Layer Co-Design"
+    survey: "§4.4"
+    edge: loop
+    blurb: >-
+      The first works in which an LLM changes two layers in one loop. Each adapts in one direction over one generation: precursors of L4, not yet co-evolution.
+    topics:
+      - id: cross
+        title: LLM-involved cross-layer co-design
 
   - id: foundations
     title: Formalization and Co-Design Foundations
@@ -123,7 +135,11 @@ parts:
       - id: in-pretrain
         title: Pretraining, data and domain adaptation
       - id: in-reward
-        title: Verifiable rewards and post-training
+        title: Verifiable rewards, post-training and agentic RL
+      - id: in-harness
+        title: Harnesses and skills
+      - id: in-coevo
+        title: Model–harness co-evolution
       - id: in-formal
         title: Simulation and formal verification tools
       - id: in-hacking
@@ -185,11 +201,11 @@ parts:
         title: World models
 
 levels:
-  L0: {name: Design assistance, color: 64748b, rule: "AI generates code, designs or analysis but does not run a propose–verify–revise loop on its own."}
-  L1: {name: Local autonomous optimization, color: 2563eb, rule: "Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates."}
-  L2: {name: End-to-end autonomous design, color: 7c3aed, rule: "From a spec, AI decomposes the task, orchestrates tools and delivers a verified system within one layer."}
-  L3: {name: Cross-layer autonomous co-design, color: d97706, rule: "Around a system-level goal, AI decides which layers to change; one layer's needs or measurements change another layer's design through AI."}
-  L4: {name: Recursive self-enhancement, color: 16a34a, rule: "Hardware or software that AI helped design is used to train or run the designer itself or its successors."}
+  L0: {name: Design assistance, color: 64748b, rule: "AI generates code, design proposals or analysis but does not run the propose–verify–revise loop on its own."}
+  L1: {name: Autonomous optimization, color: 2563eb, rule: "Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates."}
+  L2: {name: End-to-end autonomous design, color: 7c3aed, rule: "From a target spec, AI decomposes the task, orchestrates tools, carries the design through verification and delivers a working system."}
+  L3: {name: Self-improvement, color: 16a34a, rule: "Design results flow back into the designer itself or its successors, raising the capability or efficiency of its later R&D."}
+  L4: {name: Cross-layer co-evolution, color: d97706, rule: "AI decides which layers to update; at least two of model, stack and hardware keep adapting to one another, and the gains return to the designer."}
   L5: {name: Recursive self-expansion, color: dc2626, rule: "R&D gains turn into more compute, facilities and deployment capacity, reinvested into the next round."}
   L6: {name: Open-ended autonomous evolution, color: 991b1b, rule: "Within external goals and constraints, AI discovers research questions, methods and new computing paradigms."}
 

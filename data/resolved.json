@@ -1,4 +1,29 @@
 {
+ "abaskohi2026sedima": {
+  "arxiv": {
+   "id": "2610.02361",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "SEDIMA: Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.realm-1.62",
+   "sim": 1.0,
+   "title": "SEDIMA: Cross-Run Hierarchical Insight Memory for Evolutionary Search Agents",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the Second Workshop for REsearch on Agent Language Models (REALM 2026)",
+   "year": 2026
+  }
+ },
+ "agarwal2024onpolicy": {
+  "arxiv": {
+   "id": "2306.13649",
+   "published": "2023",
+   "sim": 1.0,
+   "title": "On-Policy Distillation of Language Models: Learning from Self-Generated Mistakes"
+  },
+  "crossref": null
+ },
  "agrawal2024vidur": {
   "arxiv": {
    "id": "2405.05465",
@@ -42,6 +67,10 @@
    "year": 2019
   }
  },
+ "alibaba2026yunqi": {
+  "arxiv": null,
+  "crossref": null
+ },
  "allam2024rtlrepo": {
   "arxiv": {
    "id": "2405.17378",
@@ -74,6 +103,22 @@
    "year": 2025
   }
  },
+ "alzubi2026evoskill": {
+  "arxiv": {
+   "id": "2603.02766",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "EvoSkill: Automated Skill Discovery for Multi-Agent Systems"
+  },
+  "crossref": {
+   "doi": "10.1109/ice.2017.8280025",
+   "sim": 0.718,
+   "title": "An automated knowledge discovery framework with multi-agent systems — KDMAS",
+   "type": "proceedings-article",
+   "venue": "2017 International Conference on Engineering, Technology and Innovation (ICE/ITMC)",
+   "year": 2017
+  }
+ },
  "amd2026agentkernelarena": {
   "arxiv": {
    "id": "2605.16819",
@@ -82,6 +127,17 @@
    "title": "AgentKernelArena: Generalization-Aware Benchmarking of GPU Kernel Optimization Agents"
   },
   "crossref": null
+ },
+ "amd2026geakrelease": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1163/2211-4386_rwwtogatt_wtogatt-p1-3",
+   "sim": 0.703,
+   "title": "Release Notes",
+   "type": "dataset",
+   "venue": "Handbook of WTO/GATT Dispute Settlement",
+   "year": null
+  }
  },
  "amd2026geakv4": {
   "arxiv": null,
@@ -130,6 +186,46 @@
    "type": "proceedings-article",
    "venue": "Proceedings of the 29th ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2",
    "year": 2024
+  }
+ },
+ "anthropic2024mcp": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "anthropic2025skills": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "architect2026redwood": {
+  "arxiv": {
+   "id": "2608.26418",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Redwood: A Frontier AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI"
+  },
+  "crossref": {
+   "doi": "10.64628/ab.rvcpujjdg",
+   "sim": 0.396,
+   "title": "Scientists have designed a functioning virus from scratch using AI – what you need to know",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2026
+  }
+ },
+ "bai2025assertionforge": {
+  "arxiv": {
+   "id": "2503.19174",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "AssertionForge: Enhancing Formal Verification Assertion Generation with Structured Representation of Specifications and RTL"
+  },
+  "crossref": {
+   "doi": "10.1109/iclad65226.2025.00009",
+   "sim": 1.0,
+   "title": "AssertionForge: Enhancing Formal Verification Assertion Generation with Structured Representation of Specifications and RTL",
+   "type": "proceedings-article",
+   "venue": "2025 IEEE International Conference on LLM-Aided Design (ICLAD)",
+   "year": 2025
   }
  },
  "baker2025monitoring": {
@@ -253,10 +349,10 @@
  },
  "brockman2016openai": {
   "arxiv": {
-   "id": "2303.02271",
-   "published": "2023",
-   "sim": 0.294,
-   "title": "Double A3C: Deep Reinforcement Learning on OpenAI Gym Games"
+   "id": "1606.01540",
+   "published": "2016-06-05",
+   "sim": 1.0,
+   "title": "OpenAI Gym"
   },
   "crossref": {
    "doi": "10.1145/3345768.3355908",
@@ -299,6 +395,22 @@
    "year": 2023
   }
  },
+ "castro2025quartet": {
+  "arxiv": {
+   "id": "2505.14669",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Quartet: Native FP4 Training Can Be Optimal for Large Language Models"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-1449",
+   "sim": 1.0,
+   "title": "Quartet: Native FP4 Training Can Be Optimal for Large Language Models",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
+   "year": 2025
+  }
+ },
  "chai2023circuitnet": {
   "arxiv": null,
   "crossref": {
@@ -307,6 +419,22 @@
    "title": "CircuitNet: An Open-Source Dataset for Machine Learning in VLSI CAD Applications With Improved Domain-Specific Evaluation Metric and Learning Strategies",
    "type": "journal-article",
    "venue": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+   "year": 2023
+  }
+ },
+ "chakraborty2026sparsecraft": {
+  "arxiv": {
+   "id": "2610.05037",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "SparseCraft: Agentic Hardware-Software Co-Optimization for Sparse Computing"
+  },
+  "crossref": {
+   "doi": "10.1109/les.2023.3298734",
+   "sim": 0.694,
+   "title": "Hardware–Software Co-Optimization of Long-Latency Stochastic Computing",
+   "type": "journal-article",
+   "venue": "IEEE Embedded Systems Letters",
    "year": 2023
   }
  },
@@ -374,6 +502,22 @@
    "year": 2026
   }
  },
+ "chang2025llmulator": {
+  "arxiv": {
+   "id": "2508.17826",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "LLMulator: Generalizable Cost Modeling for Dataflow Accelerators with Input-Adaptive Control Flow"
+  },
+  "crossref": {
+   "doi": "10.1145/3725843.3756027",
+   "sim": 1.0,
+   "title": "LLMulator: Generalizable Cost Modeling for Dataflow Accelerators with Input-Adaptive Control Flow",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 58th IEEE/ACM International Symposium on Microarchitecture",
+   "year": 2025
+  }
+ },
  "chen2014diannao": {
   "arxiv": null,
   "crossref": {
@@ -428,6 +572,56 @@
    "year": 2025
   }
  },
+ "chen2026chipseek": {
+  "arxiv": {
+   "id": "2507.04736",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "ChipSeek: Optimizing Verilog Generation via EDA-Integrated Reinforcement Learning"
+  },
+  "crossref": {
+   "doi": "10.18653/v1/2026.acl-long.1154",
+   "sim": 1.0,
+   "title": "ChipSeek: Optimizing Verilog Generation via EDA-Integrated Reinforcement Learning",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers)",
+   "year": 2026
+  }
+ },
+ "chen2026coharness": {
+  "arxiv": {
+   "id": "2607.22688",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Co-Harness: Co-Evolving Harnesses and Model Weights for LLM Agents"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.emnlp-main.1200",
+   "sim": 0.667,
+   "title": "CoMAP: Co-Evolving World Models and Agent Policies for LLM Agents",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing",
+   "year": 2026
+  }
+ },
+ "chen2026harnessforge": {
+  "arxiv": {
+   "id": "2606.01779",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HarnessForge: Joint Harness and Policy Evolution for Adaptive Agent Systems"
+  },
+  "crossref": null
+ },
+ "chen2026kope": {
+  "arxiv": {
+   "id": "2608.25570",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Beyond Scaling: Self-Evolving LLM Agents for Hardware Kernel Optimization via an Experience-Driven Workflow and Experience Graph Memory"
+  },
+  "crossref": null
+ },
  "cheng2019replace": {
   "arxiv": null,
   "crossref": {
@@ -471,6 +665,42 @@
    "year": 2016
   }
  },
+ "cheng2025adrs": {
+  "arxiv": {
+   "id": "2510.06189",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Barbarians at the Gate: How AI is Upending Systems Research"
+  },
+  "crossref": {
+   "doi": "10.2307/jj.1744982.4",
+   "sim": 0.55,
+   "title": "BARBARIANS AT THE GATE",
+   "type": "book-chapter",
+   "venue": "The People vs The Banks",
+   "year": 2019
+  }
+ },
+ "cheng2026kernelagent": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "cheng2026mpk": {
+  "arxiv": {
+   "id": "2512.22219",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "MPK: A Compiler and Runtime for Mega-Kernelizing Tensor Programs"
+  },
+  "crossref": {
+   "doi": "10.1145/181181.181571",
+   "sim": 0.633,
+   "title": "Compiler and runtime support for out-of-core HPF programs",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 8th international conference on Supercomputing  - ICS '94",
+   "year": 1994
+  }
+ },
  "chetlur2014cudnn": {
   "arxiv": {
    "id": "1410.0759",
@@ -488,7 +718,12 @@
   }
  },
  "chipbench2024": {
-  "arxiv": null,
+  "arxiv": {
+   "id": "2407.15026",
+   "published": "2024-07-03",
+   "sim": 1.0,
+   "title": "Benchmarking End-To-End Performance of AI-Based Chip Placement Algorithms"
+  },
   "crossref": {
    "doi": "10.52202/085713-0673",
    "sim": 0.936,
@@ -530,8 +765,17 @@
    "year": 2026
   }
  },
- "cktevo2026": {
+ "chu2025llama3": {
   "arxiv": null,
+  "crossref": null
+ },
+ "cktevo2026": {
+  "arxiv": {
+   "id": "2603.08718",
+   "published": "2026-02-10",
+   "sim": 1.0,
+   "title": "CktEvo: Repository-Level RTL Code Benchmark for Design Evolution"
+  },
   "crossref": {
    "doi": "10.1109/lad62341.2024.10691810",
    "sim": 0.403,
@@ -555,8 +799,8 @@
  "closerbench2026": {
   "arxiv": {
    "id": "2607.16632",
-   "published": "2026",
-   "sim": 0.264,
+   "published": "2026-07-18",
+   "sim": 1.0,
    "title": "CLOSER-Bench: Evaluating Budgeted Cross-Stage Design Closure for Hardware Agents"
   },
   "crossref": {
@@ -632,6 +876,15 @@
    "venue": "Proceedings of the 43rd IEEE/ACM International Conference on Computer-Aided Design",
    "year": 2024
   }
+ },
+ "cui2026hwebench": {
+  "arxiv": {
+   "id": "2604.14709",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HWE-Bench: Benchmarking LLM Agents on Real-World Hardware Bug Repair Tasks"
+  },
+  "crossref": null
  },
  "cummins2022compilergym": {
   "arxiv": {
@@ -880,6 +1133,27 @@
    "year": 2025
   }
  },
+ "deepseek2025v32": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "deepseek2026tilekernels": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "deepseek2026v4": {
+  "arxiv": {
+   "id": "2606.19348",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "DeepSeek-V4: Towards Highly Efficient Million-Token Context Intelligence"
+  },
+  "crossref": null
+ },
+ "deepseek2026v41flash": {
+  "arxiv": null,
+  "crossref": null
+ },
  "demicheli1997hardware": {
   "arxiv": {
    "id": "2411.06980",
@@ -894,6 +1168,54 @@
    "type": "book-chapter",
    "venue": "Lecture Notes in Electrical Engineering",
    "year": 2019
+  }
+ },
+ "deng2025chipalign": {
+  "arxiv": {
+   "id": "2412.19819",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "ChipAlign: Instruction Alignment in Large Language Models for Chip Design via Geodesic Interpolation"
+  },
+  "crossref": {
+   "doi": "10.1109/dac63849.2025.11132537",
+   "sim": 1.0,
+   "title": "ChipAlign: Instruction Alignment in Large Language Models for Chip Design via Geodesic Interpolation",
+   "type": "proceedings-article",
+   "venue": "2025 62nd ACM/IEEE Design Automation Conference (DAC)",
+   "year": 2025
+  }
+ },
+ "deng2025scalertl": {
+  "arxiv": {
+   "id": "2506.05566",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "ScaleRTL: Scaling LLMs with Reasoning Data and Test-Time Compute for Accurate RTL Code Generation"
+  },
+  "crossref": {
+   "doi": "10.1109/mlcad65511.2025.11189212",
+   "sim": 1.0,
+   "title": "ScaleRTL: Scaling LLMs with Reasoning Data and Test-Time Compute for Accurate RTL Code Generation",
+   "type": "proceedings-article",
+   "venue": "2025 ACM/IEEE 7th Symposium on Machine Learning for CAD (MLCAD)",
+   "year": 2025
+  }
+ },
+ "deng2026rtl2gds": {
+  "arxiv": {
+   "id": "2607.17528",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Can AI Agents Really Complete RTL-to-GDS? Lessons from Benchmarking Tool-Interactive EDA Workflows"
+  },
+  "crossref": {
+   "doi": "10.1109/mwscas67364.2026.11680955",
+   "sim": 0.452,
+   "title": "MAI-EDA: Multi-Agent AI Co-Pilot for RTL-to-GDSII EDA Education at Scale",
+   "type": "proceedings-article",
+   "venue": "2026 IEEE 69th International Midwest Symposium on Circuits and Systems (MWSCAS)",
+   "year": 2026
   }
  },
  "denison2024sycophancy": {
@@ -934,6 +1256,22 @@
    "year": 2022
   }
  },
+ "ding2026higher": {
+  "arxiv": {
+   "id": "2609.21157",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Can Agents Design Better Chips with a Higher Level Abstraction?"
+  },
+  "crossref": {
+   "doi": "10.1111/j.1462-2920.2006.01222_7.x",
+   "sim": 0.594,
+   "title": "Moving to a higher level of abstraction",
+   "type": "journal-article",
+   "venue": "Environmental Microbiology",
+   "year": 2007
+  }
+ },
  "dong2026kernelblaster": {
   "arxiv": {
    "id": "2602.14293",
@@ -964,6 +1302,33 @@
    "type": "journal-article",
    "venue": "Wochenblatt für Papierfabrikation",
    "year": 2022
+  }
+ },
+ "dong2026tensify": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/isca66397.2026.00038",
+   "sim": 1.0,
+   "title": "QiMeng-Tensify: Scaling Up Tensor Computation Optimization via Architecture-Aware LLM-Guided MCTS",
+   "type": "proceedings-article",
+   "venue": "2026 ACM/IEEE 53rd Annual International Symposium on Computer Architecture (ISCA)",
+   "year": 2026
+  }
+ },
+ "duan2026last": {
+  "arxiv": {
+   "id": "2609.11873",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "The Last AI Built by Humans: Toward Genuine Recursive Self-Improvement"
+  },
+  "crossref": {
+   "doi": "10.1007/s12129-001-1054-z",
+   "sim": 0.545,
+   "title": "Toward genuine self-government",
+   "type": "journal-article",
+   "venue": "Academic Questions",
+   "year": 2001
   }
  },
  "elsken2019neural": {
@@ -1061,7 +1426,7 @@
   "arxiv": {
    "id": "2508.07407",
    "published": "2025-08-10",
-   "sim": 0.58,
+   "sim": 1.0,
    "title": "A Comprehensive Survey of Self-Evolving AI Agents: A New Paradigm Bridging Foundation Models and Lifelong Agentic Systems"
   },
   "crossref": {
@@ -1071,6 +1436,22 @@
    "type": "journal-article",
    "venue": "Journal of Biomedical Informatics",
    "year": 2026
+  }
+ },
+ "fang2026drrtl": {
+  "arxiv": {
+   "id": "2604.14989",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement"
+  },
+  "crossref": {
+   "doi": "10.1109/ets.2011.58",
+   "sim": 0.414,
+   "title": "Accelerating RTL Fault Simulation through RTL-to-TLM Abstraction",
+   "type": "proceedings-article",
+   "venue": "2011 Sixteenth IEEE European Test Symposium",
+   "year": 2011
   }
  },
  "fawzi2022discovering": {
@@ -1116,6 +1497,17 @@
    "year": 2023
   }
  },
+ "feng2026cheetah": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/rams.2014.6798490",
+   "sim": 0.49,
+   "title": "Accelerating accurate fault tree analysis using HW/SW co-design",
+   "type": "proceedings-article",
+   "venue": "2014 Reliability and Maintainability Symposium",
+   "year": 2014
+  }
+ },
  "firoozshahian2023mtia": {
   "arxiv": null,
   "crossref": {
@@ -1125,6 +1517,17 @@
    "type": "proceedings-article",
    "venue": "Proceedings of the 50th Annual International Symposium on Computer Architecture",
    "year": 2023
+  }
+ },
+ "fisches2025kernelllm": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1057/9781137353269.0010",
+   "sim": 0.643,
+   "title": "Making Innovation More Accessible",
+   "type": "book-chapter",
+   "venue": "Coaching for Innovation",
+   "year": null
   }
  },
  "frantar2023gptq": {
@@ -1191,6 +1594,22 @@
    "year": 2012
   }
  },
+ "fu2026mappingevolve": {
+  "arxiv": {
+   "id": "2604.26591",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "MappingEvolve: LLM-Driven Code Evolution for Technology Mapping"
+  },
+  "crossref": {
+   "doi": "10.1145/3770743.3803988",
+   "sim": 1.0,
+   "title": "MappingEvolve: LLM-Driven Code Evolution for Technology Mapping",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 63rd ACM/IEEE Design Automation Conference",
+   "year": 2026
+  }
+ },
  "gajski1983new": {
   "arxiv": null,
   "crossref": {
@@ -1218,11 +1637,20 @@
    "year": 2024
   }
  },
+ "gao2025analoggenie": {
+  "arxiv": {
+   "id": "2503.00205",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "AnalogGenie: A Generative Engine for Automatic Discovery of Analog Circuit Topologies"
+  },
+  "crossref": null
+ },
  "gao2025selfevolving": {
   "arxiv": {
    "id": "2507.21046",
    "published": "2025-07-28",
-   "sim": 0.746,
+   "sim": 1.0,
    "title": "A Survey of Self-Evolving Agents: What, When, How, and Where to Evolve on the Path to Artificial Super Intelligence"
   },
   "crossref": {
@@ -1232,6 +1660,17 @@
    "type": "book-chapter",
    "venue": "Lecture Notes in Computer Science",
    "year": 2010
+  }
+ },
+ "gao2026experience": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.18653/v1/2026.findings-acl.2091",
+   "sim": 0.504,
+   "title": "On Safety Risks in Experience-Driven Self-Evolving Agents",
+   "type": "proceedings-article",
+   "venue": "Findings of the Association for Computational Linguistics: ACL 2026",
+   "year": 2026
   }
  },
  "garciagasulla2025turtle": {
@@ -1264,6 +1703,22 @@
    "type": "proceedings-article",
    "venue": "2025 IEEE International Conference on LLM-Aided Design (ICLAD)",
    "year": 2025
+  }
+ },
+ "ghose2026audopeda": {
+  "arxiv": {
+   "id": "2601.06268",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Automated QoR improvement in OpenROAD with coding agents"
+  },
+  "crossref": {
+   "doi": "10.1109/dsd.2010.60",
+   "sim": 0.458,
+   "title": "QoR Analysis of Automated Clock-Mesh Implementation under OCV Consideration",
+   "type": "proceedings-article",
+   "venue": "2010 13th Euromicro Conference on Digital System Design: Architectures, Methods and Tools",
+   "year": 2010
   }
  },
  "goldie2024alphachip": {
@@ -1304,6 +1759,22 @@
    "year": 2026
   }
  },
+ "gu2025jetnemotron": {
+  "arxiv": {
+   "id": "2508.15884",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-1572",
+   "sim": 1.0,
+   "title": "Jet-Nemotron: Efficient Language Model with Post Neural Architecture Search",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
+   "year": 2025
+  }
+ },
  "gunasekar2023textbooks": {
   "arxiv": {
    "id": "2306.11644",
@@ -1336,6 +1807,38 @@
    "year": 2025
   }
  },
+ "guo2026drtriton": {
+  "arxiv": {
+   "id": "2603.21465",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "DRTriton: Large-Scale Synthetic Data Driven Reinforcement Learning for Triton Kernel Generation"
+  },
+  "crossref": {
+   "doi": "10.1016/j.jbi.2026.105096",
+   "sim": 0.526,
+   "title": "A reinforcement learning approach to synthetic data generation",
+   "type": "journal-article",
+   "venue": "Journal of Biomedical Informatics",
+   "year": 2026
+  }
+ },
+ "gupta2026archagent": {
+  "arxiv": {
+   "id": "2602.22425",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "ArchAgent: Agentic AI-driven Computer Architecture Discovery"
+  },
+  "crossref": {
+   "doi": "10.1038/s43586-026-00534-y",
+   "sim": 0.51,
+   "title": "Agentic AI systems for scientific discovery",
+   "type": "journal-article",
+   "venue": "Nature Reviews Methods Primers",
+   "year": 2026
+  }
+ },
  "gururangan2020dont": {
   "arxiv": null,
   "crossref": {
@@ -1349,10 +1852,10 @@
  },
  "ha2018world": {
   "arxiv": {
-   "id": "2610.30136",
-   "published": "2026",
-   "sim": 0.615,
-   "title": "Agentic World Action Models"
+   "id": "1803.10122",
+   "published": "2018-03-27",
+   "sim": 1.0,
+   "title": "World Models"
   },
   "crossref": {
    "doi": "10.1007/3-540-31635-3_22",
@@ -1373,6 +1876,24 @@
    "venue": "Nature",
    "year": 2025
   }
+ },
+ "hamadanian2026glia": {
+  "arxiv": {
+   "id": "2510.27176",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Glia: A Human-Inspired AI for Automated Systems Design and Optimization"
+  },
+  "crossref": null
+ },
+ "hammond2026tritorx": {
+  "arxiv": {
+   "id": "2512.10977",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Agentic Operator Generation for ML ASICs"
+  },
+  "crossref": null
  },
  "han2016deep": {
   "arxiv": {
@@ -1420,6 +1941,17 @@
    "type": "proceedings-article",
    "venue": "NAECON 2026 - IEEE National Aerospace and Electronics Conference",
    "year": 2026
+  }
+ },
+ "hari2026mucutlass": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1007/11561347_5",
+   "sim": 0.582,
+   "title": "Efficient Code Generation for a Domain Specific Language",
+   "type": "book-chapter",
+   "venue": "Lecture Notes in Computer Science",
+   "year": 2005
   }
  },
  "he2024chateda": {
@@ -1540,6 +2072,10 @@
    "year": null
   }
  },
+ "hsiao2025buffalo": {
+  "arxiv": null,
+  "crossref": null
+ },
  "hu2024uvllm": {
   "arxiv": {
    "id": "2411.16238",
@@ -1572,6 +2108,22 @@
    "year": 2025
   }
  },
+ "hu2026m2xfp": {
+  "arxiv": {
+   "id": "2601.19213",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "M2XFP: A Metadata-Augmented Microscaling Data Format for Efficient Low-bit Quantization"
+  },
+  "crossref": {
+   "doi": "10.1145/3779212.3790185",
+   "sim": 0.945,
+   "title": "M\n                    <sup>2</sup>\n                    XFP: A Metadata-Augmented Microscaling Data Format for Efficient Low-bit Quantization",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2",
+   "year": 2026
+  }
+ },
  "huang2021machine": {
   "arxiv": {
    "id": "2102.03357",
@@ -1602,6 +2154,17 @@
    "type": "proceedings-article",
    "venue": "Advances in Neural Information Processing Systems 38",
    "year": 2025
+  }
+ },
+ "huang2026saftac": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.9728/dcs.2024.25.11.3167",
+   "sim": 0.515,
+   "title": "Fine-Tuning Open-Source LLMs for Plot Generation in Korean Popular Culture Content",
+   "type": "journal-article",
+   "venue": "Journal of Digital Contents Society",
+   "year": 2024
   }
  },
  "hwcodesign2026scaling": {
@@ -1663,6 +2226,31 @@
    "year": 2021
   }
  },
+ "jiang2025maco": {
+  "arxiv": {
+   "id": "2509.13557",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "MACO: A Multi-Agent LLM Framework for Automated CGRA Hardware/Software Co-Design"
+  },
+  "crossref": {
+   "doi": "10.63808/tcs.v2i2.447",
+   "sim": 0.803,
+   "title": "A Multi-Agent LLM Framework for Automated Software Testing",
+   "type": "journal-article",
+   "venue": "Transactions on Computing Science",
+   "year": 2026
+  }
+ },
+ "jiang2026harnessevolve": {
+  "arxiv": {
+   "id": "2609.00829",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HarnessEvolve: Learning from Reference Trajectories for Reliable Agent Self-Evolution"
+  },
+  "crossref": null
+ },
  "jimenez2024swebench": {
   "arxiv": {
    "id": "2310.06770",
@@ -1676,6 +2264,22 @@
    "title": "ECom-Bench: Can LLM Agent Resolve Real-World E-commerce Customer Support Issues?",
    "type": "proceedings-article",
    "venue": "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: Industry Track",
+   "year": 2025
+  }
+ },
+ "jin2025searchr1": {
+  "arxiv": {
+   "id": "2503.09516",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Search-R1: Training LLMs to Reason and Leverage Search Engines with Reinforcement Learning"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-2858",
+   "sim": 0.695,
+   "title": "ReSearch: Learning to Reason with Search for LLMs via Reinforcement Learning",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
    "year": 2025
   }
  },
@@ -1722,6 +2326,33 @@
    "year": 2018
   }
  },
+ "kahng2026helix": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1609/aaai.v40i21.38868",
+   "sim": 0.528,
+   "title": "TrajEvo: Trajectory Prediction Heuristics Design via LLM-driven Evolution",
+   "type": "journal-article",
+   "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+   "year": 2026
+  }
+ },
+ "kaintura2024orassistant": {
+  "arxiv": {
+   "id": "2410.03845",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "ORAssistant: A Custom RAG-based Conversational Assistant for OpenROAD"
+  },
+  "crossref": {
+   "doi": "10.5753/eniac.2024.245243",
+   "sim": 0.583,
+   "title": "A RAG-Based Institutional Assistant",
+   "type": "proceedings-article",
+   "venue": "Anais do XXI Encontro Nacional de Inteligência Artificial e Computacional (ENIAC 2024)",
+   "year": 2024
+  }
+ },
  "kandasamy2016gaussian": {
   "arxiv": null,
   "crossref": {
@@ -1760,6 +2391,17 @@
    "year": 2025
   }
  },
+ "kang2026thunderagent": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.18653/v1/2021.eacl-main.51",
+   "sim": 0.476,
+   "title": "How Fast can BERT Learn Simple Natural Language Inference?",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 16th Conference of the European Chapter of the Association for Computational Linguistics: Main Volume",
+   "year": 2021
+  }
+ },
  "kaplan2020scaling": {
   "arxiv": {
    "id": "2001.08361",
@@ -1788,7 +2430,12 @@
   }
  },
  "kernelpro2026": {
-  "arxiv": null,
+  "arxiv": {
+   "id": "2606.26453",
+   "published": "2026-06-24",
+   "sim": 1.0,
+   "title": "Optimizing CUDA like a Human: Micro-Profiling Tools as Expert Surrogates for LLM-Based GPU Kernel Optimization"
+  },
   "crossref": {
    "doi": "10.64898/2026.10.12.758370",
    "sim": 0.552,
@@ -1807,6 +2454,63 @@
    "type": "proceedings-article",
    "venue": "Proceedings IEEE International Conference on Application-Specific Systems, Architectures and Processors",
    "year": null
+  }
+ },
+ "kim2026interplay": {
+  "arxiv": {
+   "id": "2606.25447",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "The Interplay of Harness Design and Post-Training in LLM Agents"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.findings-emnlp.2207",
+   "sim": 1.0,
+   "title": "The Interplay of Harness Design and Post-training in LLM Agents",
+   "type": "proceedings-article",
+   "venue": "Findings of the Association for Computational Linguistics: EMNLP 2026",
+   "year": 2026
+  }
+ },
+ "kimi2025k2": {
+  "arxiv": {
+   "id": "2507.20534",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Kimi K2: Open Agentic Intelligence"
+  },
+  "crossref": {
+   "doi": "10.1201/9781003791010-10",
+   "sim": 0.755,
+   "title": "Agentic Intelligence",
+   "type": "book-chapter",
+   "venue": "Turing's Mistake",
+   "year": 2026
+  }
+ },
+ "kimi2025linear": {
+  "arxiv": {
+   "id": "2510.26692",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Kimi Linear: An Expressive, Efficient Attention Architecture"
+  },
+  "crossref": null
+ },
+ "kimi2026k3": {
+  "arxiv": {
+   "id": "2607.24653",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Kimi K3: Open Frontier Intelligence"
+  },
+  "crossref": {
+   "doi": "10.1163/9789004351530_026",
+   "sim": 0.56,
+   "title": "An Open Frontier",
+   "type": "book-chapter",
+   "venue": "The Near East under Roman Rule",
+   "year": 1998
   }
  },
  "kocetkov2023stack": {
@@ -1929,6 +2633,22 @@
    "year": 2026
   }
  },
+ "kumar2025scaling": {
+  "arxiv": {
+   "id": "2411.04330",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "Scaling Laws for Precision"
+  },
+  "crossref": {
+   "doi": "10.1017/cbo9780511624285.012",
+   "sim": 0.632,
+   "title": "Scaling laws",
+   "type": "book-chapter",
+   "venue": "Structural Impact",
+   "year": 1990
+  }
+ },
  "kwa2025measuring": {
   "arxiv": {
    "id": "2503.14499",
@@ -1991,6 +2711,22 @@
    "type": "journal-article",
    "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
    "year": 2025
+  }
+ },
+ "lai2026analogcoderpro": {
+  "arxiv": {
+   "id": "2508.02518",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multi-modal LLMs"
+  },
+  "crossref": {
+   "doi": "10.1109/tcad.2026.3673493",
+   "sim": 0.994,
+   "title": "AnalogCoder-Pro: Unifying Analog Circuit Generation and Optimization via Multimodal LLMs",
+   "type": "journal-article",
+   "venue": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+   "year": 2026
   }
  },
  "lambert2024tulu3": {
@@ -2062,6 +2798,15 @@
    "venue": "Advances in Neural Information Processing Systems 35",
    "year": 2022
   }
+ },
+ "lee2025mxplus": {
+  "arxiv": {
+   "id": "2510.14557",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "MX+: Pushing the Limits of Microscaling Formats for Efficient Large Language Model Serving"
+  },
+  "crossref": null
  },
  "leiserson2020there": {
   "arxiv": null,
@@ -2197,6 +2942,22 @@
    "year": 2011
   }
  },
+ "li2025eagle3": {
+  "arxiv": {
+   "id": "2503.01840",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-4562",
+   "sim": 1.0,
+   "title": "EAGLE-3: Scaling up Inference Acceleration of Large Language Models via Training-Time Test",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
+   "year": 2025
+  }
+ },
  "li2025tritonbench": {
   "arxiv": {
    "id": "2502.14752",
@@ -2212,6 +2973,31 @@
    "venue": "Findings of the Association for Computational Linguistics: ACL 2025",
    "year": 2025
   }
+ },
+ "li2026statetune": {
+  "arxiv": {
+   "id": "2608.23601",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "StateTune: Transforming LLM-Assisted EDA Flow Tuning into a Stateful, Closed-Loop Process"
+  },
+  "crossref": {
+   "doi": "10.1088/1755-1315/664/1/012030",
+   "sim": 0.405,
+   "title": "Parameter tuning process for a closed-loop pneumatic actuator",
+   "type": "journal-article",
+   "venue": "IOP Conference Series: Earth and Environmental Science",
+   "year": 2021
+  }
+ },
+ "liao2026kernelevolve": {
+  "arxiv": {
+   "id": "2512.23236",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "KernelEvolve: Scaling Agentic Kernel Coding for Heterogeneous AI Accelerators at Meta"
+  },
+  "crossref": null
  },
  "lightman2023lets": {
   "arxiv": null,
@@ -2278,6 +3064,15 @@
    "year": 2021
   }
  },
+ "lin2026solexecbench": {
+  "arxiv": {
+   "id": "2603.19173",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "SOL-ExecBench: Speed-of-Light Benchmarking for Real-World GPU Kernels Against Hardware Limits"
+  },
+  "crossref": null
+ },
  "liu2023chipnemo": {
   "arxiv": {
    "id": "2311.00176",
@@ -2338,7 +3133,12 @@
   }
  },
  "liu2024rtllm2": {
-  "arxiv": null,
+  "arxiv": {
+   "id": "2503.15112",
+   "published": "2025-03-19",
+   "sim": 1.0,
+   "title": "OpenLLM-RTL: Open Dataset and Benchmark for LLM-Aided Design RTL Generation"
+  },
   "crossref": {
    "doi": "10.1145/3676536.3697118",
    "sim": 0.937,
@@ -2379,6 +3179,31 @@
    "venue": "Lecture Notes in Computer Science",
    "year": 2026
   }
+ },
+ "liu2026drkernel": {
+  "arxiv": {
+   "id": "2602.05885",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Dr. Kernel: Reinforcement Learning Done Right for Triton Kernel Generations"
+  },
+  "crossref": {
+   "doi": "10.1023/a:1017928328829",
+   "sim": 0.537,
+   "title": "Kernel-Based Reinforcement Learning",
+   "type": "journal-article",
+   "venue": "Machine Learning",
+   "year": 2002
+  }
+ },
+ "liu2026hnlpu": {
+  "arxiv": {
+   "id": "2508.16151",
+   "published": "2025-08-22",
+   "sim": 0.994,
+   "title": "Hardwired-Neurons Language Processing Units as General-Purpose Cognitive Substrates"
+  },
+  "crossref": null
  },
  "llmverif2025survey": {
   "arxiv": null,
@@ -2423,6 +3248,38 @@
    "year": 2024
   }
  },
+ "lu2025onpolicy": {
+  "arxiv": {
+   "id": "1511.06295",
+   "published": "2015-11-19",
+   "sim": 0.927,
+   "title": "Policy Distillation"
+  },
+  "crossref": {
+   "doi": "10.64434/tml.20251026",
+   "sim": 1.0,
+   "title": "On-Policy Distillation",
+   "type": "report",
+   "venue": "",
+   "year": 2025
+  }
+ },
+ "lu2026pcpo": {
+  "arxiv": {
+   "id": "2609.38757",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Self-Evolving Algorithm-Design Agents: Escaping In-Context Evolutionary Stagnation via Population-Curated Policy Optimization"
+  },
+  "crossref": {
+   "doi": "10.2139/ssrn.4128607",
+   "sim": 0.417,
+   "title": "Escaping Secular Stagnation with Unconventional Monetary Policy",
+   "type": "journal-article",
+   "venue": "SSRN Electronic Journal",
+   "year": 2022
+  }
+ },
  "lu2026rtlopt": {
   "arxiv": {
    "id": "2601.01765",
@@ -2454,6 +3311,40 @@
    "venue": "Findings of the Association for Computational Linguistics: ACL 2023",
    "year": 2023
   }
+ },
+ "luo2024hifloat8": {
+  "arxiv": {
+   "id": "2409.16626",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "Ascend HiFloat8 Format for Deep Learning"
+  },
+  "crossref": null
+ },
+ "luo2026hase": {
+  "arxiv": {
+   "id": "2607.03935",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.findings-emnlp.1316",
+   "sim": 0.481,
+   "title": "AEL: Evolving Agent Harness in Open-Ended Environments",
+   "type": "proceedings-article",
+   "venue": "Findings of the Association for Computational Linguistics: EMNLP 2026",
+   "year": 2026
+  }
+ },
+ "lyu2026chipvrtl": {
+  "arxiv": {
+   "id": "2602.00704",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "QiMeng-ChipV-RTL: Exploiting Information Locality for IP-level Verilog Generation"
+  },
+  "crossref": null
  },
  "ma2024era": {
   "arxiv": null,
@@ -2566,10 +3457,10 @@
  },
  "micikevicius2018mixed": {
   "arxiv": {
-   "id": "1802.00930",
-   "published": "2018",
-   "sim": 0.453,
-   "title": "Mixed Precision Training of Convolutional Neural Networks using Integer Operations"
+   "id": "1710.03740",
+   "published": "2017-10-10",
+   "sim": 1.0,
+   "title": "Mixed Precision Training"
   },
   "crossref": {
    "doi": "10.1137/25m1821405",
@@ -2594,6 +3485,26 @@
    "type": "journal-article",
    "venue": "IEICE Communications Express",
    "year": 2023
+  }
+ },
+ "minimax2025m2blog": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "minimax2025minimax01": {
+  "arxiv": {
+   "id": "2501.08313",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "MiniMax-01: Scaling Foundation Models with Lightning Attention"
+  },
+  "crossref": {
+   "doi": "10.3997/1365-2397.fb2025016",
+   "sim": 0.532,
+   "title": "Scaling Seismic Foundation Models",
+   "type": "journal-article",
+   "venue": "First Break",
+   "year": 2025
   }
  },
  "mirhoseini2021graph": {
@@ -2677,6 +3588,26 @@
    "year": 2026
   }
  },
+ "nagaitsev2026pytorch": {
+  "arxiv": {
+   "id": "2511.16964",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Optimizing PyTorch Inference with LLM-Based Multi-Agent Systems"
+  },
+  "crossref": null
+ },
+ "nair2026raptor": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/isca66397.2026.00183",
+   "sim": 1.0,
+   "title": "Early Silicon of Raptor: The First 3D-DRAM Accelerator for Generative Inference",
+   "type": "proceedings-article",
+   "venue": "2026 ACM/IEEE 53rd Annual International Symposium on Computer Architecture (ISCA)",
+   "year": 2026
+  }
+ },
  "nathani2025mlgym": {
   "arxiv": {
    "id": "2502.14499",
@@ -2708,6 +3639,15 @@
    "venue": "Proceedings of the 33rd International Symposium on High-Performance Parallel and Distributed Computing",
    "year": 2024
   }
+ },
+ "nie2026hiersva": {
+  "arxiv": {
+   "id": "2606.13706",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HierSVA: A Data Synthesis Pipeline, Dataset, and Benchmark for LLM-Driven Hierarchical Hardware Formal Verification"
+  },
+  "crossref": null
  },
  "novikov2025alphaevolve": {
   "arxiv": {
@@ -2752,6 +3692,15 @@
    "year": 2025
   }
  },
+ "nvidia2026nemotron3super": {
+  "arxiv": {
+   "id": "2604.12374",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Nemotron 3 Super: Open, Efficient Mixture-of-Experts Hybrid Mamba-Transformer Model for Agentic Reasoning"
+  },
+  "crossref": null
+ },
  "openai2025broadcom": {
   "arxiv": null,
   "crossref": {
@@ -2761,6 +3710,22 @@
    "type": "journal-article",
    "venue": "Chemical &amp; Engineering News",
    "year": 2022
+  }
+ },
+ "openai2025gptoss": {
+  "arxiv": {
+   "id": "2508.10925",
+   "published": "2025",
+   "sim": 0.946,
+   "title": "gpt-oss-120b &amp; gpt-oss-20b Model Card"
+  },
+  "crossref": {
+   "doi": "10.71091/2354-113x/372",
+   "sim": 0.364,
+   "title": "Evaluating GPT-OSS-20B Model for Hate Speech Detection: Advances in  Parameter-Efficient Adaptation",
+   "type": "journal-article",
+   "venue": "Tạp chí Khoa học HUFLIT",
+   "year": 2026
   }
  },
  "openai2026jalapeno": {
@@ -2838,6 +3803,15 @@
    "year": 2025
   }
  },
+ "pan2025compilerr1": {
+  "arxiv": {
+   "id": "2506.15701",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Compiler-R1: Towards Agentic Compiler Auto-tuning with Reinforcement Learning"
+  },
+  "crossref": null
+ },
  "pan2025survey": {
   "arxiv": {
    "id": "2501.09655",
@@ -2854,6 +3828,24 @@
    "year": 2025
   }
  },
+ "pan2026cannbotcake": {
+  "arxiv": {
+   "id": "2610.31034",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "CANNBot-CAKE: Collaborative Agentic Kernel Evolution for Ascend NPU"
+  },
+  "crossref": null
+ },
+ "pandya2026echoverse": {
+  "arxiv": {
+   "id": "2607.28074",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Echoverse: Deep, Evolving Environments for Training Computer-Use Agents at Scale"
+  },
+  "crossref": null
+ },
  "parashar2019timeloop": {
   "arxiv": null,
   "crossref": {
@@ -2868,8 +3860,8 @@
  "pdagentbench2026": {
   "arxiv": {
    "id": "2606.17253",
-   "published": "2026",
-   "sim": 0.241,
+   "published": "2026-06-15",
+   "sim": 1.0,
    "title": "PDAGENT-BENCH: Characterizing, Grounding, and Architecting LLM/VLM Agents for VLSI Physical Design"
   },
   "crossref": {
@@ -2914,7 +3906,12 @@
   }
  },
  "pinckney2024revisiting": {
-  "arxiv": null,
+  "arxiv": {
+   "id": "2408.11053",
+   "published": "2024-08-20",
+   "sim": 1.0,
+   "title": "Revisiting VerilogEval: A Year of Improvements in Large-Language Models for Hardware Code Generation"
+  },
   "crossref": {
    "doi": "10.1109/ismar-adjunct68609.2025.00104",
    "sim": 0.5,
@@ -2951,6 +3948,15 @@
    "year": 2021
   }
  },
+ "prakriya2026arbor": {
+  "arxiv": {
+   "id": "2606.12563",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Arbor: Tree Search as a Cognition Layer for Autonomous Agents"
+  },
+  "crossref": null
+ },
  "pulavarthi2025assertionbench": {
   "arxiv": {
    "id": "2406.18627",
@@ -2967,12 +3973,48 @@
    "year": 2025
   }
  },
+ "qin2025mooncake": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1145/3773772",
+   "sim": 0.586,
+   "title": "Mooncake: A KVCache-centric Disaggregated Architecture for LLM Serving",
+   "type": "journal-article",
+   "venue": "ACM Transactions on Storage",
+   "year": 2026
+  }
+ },
+ "qiu2026algoevo": {
+  "arxiv": {
+   "id": "2609.15820",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "AlgoEvo: Self-Evolving Agentic Search for Automated Algorithm Discovery"
+  },
+  "crossref": null
+ },
+ "qu2026qwenplanner": {
+  "arxiv": {
+   "id": "2609.29892",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents"
+  },
+  "crossref": {
+   "doi": "10.26562/ijiris.2025.v1102.11",
+   "sim": 0.175,
+   "title": "AI Powered Travel Planner",
+   "type": "journal-article",
+   "venue": "International Journal of Innovative Research in Information Security",
+   "year": 2025
+  }
+ },
  "qwen2026xinmo": {
   "arxiv": {
-   "id": "2610.28711",
-   "published": "2026",
-   "sim": 0.205,
-   "title": "Qwen-Audio-3.1-ASR Technical Report"
+   "id": "2309.16609",
+   "published": "2023-09-28",
+   "sim": 0.32,
+   "title": "Qwen Technical Report"
   },
   "crossref": {
    "doi": "10.3788/gzxb20225111.1113003",
@@ -2982,6 +4024,15 @@
    "venue": "ACTA PHOTONICA SINICA",
    "year": 2022
   }
+ },
+ "rafailov2023dpo": {
+  "arxiv": {
+   "id": "2305.18290",
+   "published": "2023",
+   "sim": 1.0,
+   "title": "Direct Preference Optimization: Your Language Model is Secretly a Reward Model"
+  },
+  "crossref": null
  },
  "ragankelley2013halide": {
   "arxiv": null,
@@ -3020,6 +4071,15 @@
    "venue": "SC20: International Conference for High Performance Computing, Networking, Storage and Analysis",
    "year": 2020
   }
+ },
+ "ran2026kernelband": {
+  "arxiv": {
+   "id": "2511.18868",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "KernelBand: Steering LLM-based Kernel Optimization via Hardware-Aware Multi-Armed Bandits"
+  },
+  "crossref": null
  },
  "reddi2020mlperf": {
   "arxiv": {
@@ -3155,6 +4215,22 @@
    "year": 2020
   }
  },
+ "schulman2017ppo": {
+  "arxiv": {
+   "id": "1707.06347",
+   "published": "2017",
+   "sim": 1.0,
+   "title": "Proximal Policy Optimization Algorithms"
+  },
+  "crossref": {
+   "doi": "10.1016/b978-0-443-27436-7.00007-2",
+   "sim": 0.836,
+   "title": "Proximal policy optimization",
+   "type": "book-chapter",
+   "venue": "ChatGPT",
+   "year": 2025
+  }
+ },
  "sevilla2022compute": {
   "arxiv": {
    "id": "2202.05924",
@@ -3201,6 +4277,22 @@
    "type": "proceedings-article",
    "venue": "Advances in Neural Information Processing Systems 35",
    "year": 2022
+  }
+ },
+ "shao2024deepseekmath": {
+  "arxiv": {
+   "id": "2402.03300",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "DeepSeekMath: Pushing the Limits of Mathematical Reasoning in Open Language Models"
+  },
+  "crossref": {
+   "doi": "10.18653/v1/2023.acl-industry.4",
+   "sim": 0.708,
+   "title": "MathPrompter: Mathematical Reasoning using Large Language Models",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 5: Industry Track)",
+   "year": 2023
   }
  },
  "shapley1953value": {
@@ -3359,6 +4451,37 @@
    "year": 2007
   }
  },
+ "smith2026jalapeno": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "soi2026twill": {
+  "arxiv": {
+   "id": "2512.18134",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Optimal Software Pipelining and Warp Specialization for Tensor Core GPUs"
+  },
+  "crossref": {
+   "doi": "10.1142/s0129054101000825",
+   "sim": 0.667,
+   "title": "OPTIMAL SOFTWARE PIPELINING UNDER RESOURCE CONSTRAINTS",
+   "type": "journal-article",
+   "venue": "International Journal of Foundations of Computer Science",
+   "year": 2001
+  }
+ },
+ "song2026acceleval": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.2139/ssrn.6835659",
+   "sim": 1.0,
+   "title": "AccelEval: A Whole-Program Benchmark for LLM-Generated CPU-to-GPU Code Acceleration",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2026
+  }
+ },
  "spector2024thunderkittens": {
   "arxiv": {
    "id": "2410.20399",
@@ -3375,6 +4498,22 @@
    "year": 2026
   }
  },
+ "srikanth2026recursive": {
+  "arxiv": {
+   "id": "2609.26457",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Recursive self-improvement of AI research agents"
+  },
+  "crossref": {
+   "doi": "10.7249/pea5068-1",
+   "sim": 0.776,
+   "title": "Recursive Self-Improvement and Automated AI Research and Development",
+   "type": "edited-book",
+   "venue": "",
+   "year": 2026
+  }
+ },
  "starace2025paperbench": {
   "arxiv": null,
   "crossref": {
@@ -3384,6 +4523,47 @@
    "type": "journal-article",
    "venue": "DESIDOC Journal of Library &amp; Information Technology",
    "year": 2026
+  }
+ },
+ "stepfun2025step3": {
+  "arxiv": {
+   "id": "2507.19427",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Step-3 is Large yet Affordable: Model-system Co-design for Cost-effective Decoding"
+  },
+  "crossref": {
+   "doi": "10.1109/edaps.2009.5403995",
+   "sim": 0.494,
+   "title": "Power distribution network co-simulation for cost-effective system design",
+   "type": "proceedings-article",
+   "venue": "2009 IEEE Electrical Design of Advanced Packaging &amp; Systems Symposium (EDAPS)",
+   "year": 2009
+  }
+ },
+ "su2026coevorsi": {
+  "arxiv": {
+   "id": "2610.25078",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "CoEvo-RSI: When Harnesses Evolve, Which Models Should Follow?"
+  },
+  "crossref": null
+ },
+ "sul2026parallelkittens": {
+  "arxiv": {
+   "id": "2511.13940",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "ParallelKittens: Systematic and Practical Simplification of Multi-GPU AI Kernels"
+  },
+  "crossref": {
+   "doi": "10.1109/sc.companion.2012.298",
+   "sim": 0.528,
+   "title": "Poster: Statistical Power and Energy Modeling of Multi-GPU Kernels",
+   "type": "proceedings-article",
+   "venue": "2012 SC Companion: High Performance Computing, Networking Storage and Analysis",
+   "year": 2012
   }
  },
  "sutton2018reinforcement": {
@@ -3465,6 +4645,67 @@
    "type": "proceedings-article",
    "venue": "2019 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)",
    "year": 2019
+  }
+ },
+ "tan2026metarsi": {
+  "arxiv": {
+   "id": "2609.06396",
+   "published": "2026",
+   "sim": 0.974,
+   "title": "MetaRSI / RSI2: A Meta-Recursive Self-Improving System for Recursive Self-Improving Systems Themselves"
+  },
+  "crossref": {
+   "doi": "10.1007/978-3-662-54033-6_7",
+   "sim": 0.458,
+   "title": "Diminishing Returns and Recursive Self Improving Artificial Intelligence",
+   "type": "book-chapter",
+   "venue": "The Frontiers Collection",
+   "year": 2017
+  }
+ },
+ "tang2025pangumoe": {
+  "arxiv": {
+   "id": "2505.04519",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Pangu Ultra MoE: How to Train Your Big MoE on Ascend NPUs"
+  },
+  "crossref": {
+   "doi": "10.5040/9798765165430.ch-002",
+   "sim": 0.239,
+   "title": "Moe, Moe, Moe",
+   "type": "other",
+   "venue": "SHEMP!",
+   "year": 2024
+  }
+ },
+ "tang2025panguprom": {
+  "arxiv": {
+   "id": "2505.21411",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Pangu Pro MoE: Mixture of Grouped Experts for Efficient Sparsity"
+  },
+  "crossref": null
+ },
+ "tang2025reasoningcompiler": {
+  "arxiv": {
+   "id": "2506.01374",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "REASONING COMPILER: LLM-Guided Optimizations for Efficient Model Serving"
+  },
+  "crossref": null
+ },
+ "tang2026mtia300": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/isca66397.2026.00085",
+   "sim": 1.0,
+   "title": "MTIA 300: Meta's First Training Chip Featuring Built-in NICs and Collective Offloading Engines",
+   "type": "proceedings-article",
+   "venue": "2026 ACM/IEEE 53rd Annual International Symposium on Computer Architecture (ISCA)",
+   "year": 2026
   }
  },
  "teich2012hardware": {
@@ -3591,6 +4832,15 @@
    "year": 2009
   }
  },
+ "uchendu2026veoplace": {
+  "arxiv": {
+   "id": "2603.28733",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "See it to Place it: Evolving Macro Placements with Vision-Language Models"
+  },
+  "crossref": null
+ },
  "verilator": {
   "arxiv": null,
   "crossref": {
@@ -3698,6 +4948,10 @@
    "year": 2015
   }
  },
+ "wang2025kernelfalcon": {
+  "arxiv": null,
+  "crossref": null
+ },
  "wang2025llmdse": {
   "arxiv": {
    "id": "2505.12188",
@@ -3712,6 +4966,54 @@
    "type": "proceedings-article",
    "venue": "Proceedings of the 49th International ACM SIGIR Conference on Research and Development in Information Retrieval",
    "year": 2026
+  }
+ },
+ "wang2025mcp4eda": {
+  "arxiv": {
+   "id": "2507.19570",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "MCP4EDA: LLM-Powered Model Context Protocol RTL-to-GDSII Automation with Backend Aware Synthesis Optimization"
+  },
+  "crossref": {
+   "doi": "10.1109/compsac69091.2026.00233",
+   "sim": 0.407,
+   "title": "A Context-Aware Platform for Evaluating LLM-Generated Backend Applications",
+   "type": "proceedings-article",
+   "venue": "2026 IEEE 50th Annual Computers, Software, and Applications Conference (COMPSAC)",
+   "year": 2026
+  }
+ },
+ "wang2025ragen": {
+  "arxiv": {
+   "id": "2504.20073",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "RAGEN: Understanding Self-Evolution in LLM Agents via Multi-Turn Reinforcement Learning"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.findings-emnlp.136",
+   "sim": 0.704,
+   "title": "Ability-Aligned Skill Evolution for LLM Agents via Reinforcement Learning",
+   "type": "proceedings-article",
+   "venue": "Findings of the Association for Computational Linguistics: EMNLP 2026",
+   "year": 2026
+  }
+ },
+ "wang2025symrtlo": {
+  "arxiv": {
+   "id": "2504.10369",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "SymRTLO: Enhancing RTL Code Optimization with LLMs and Neuron-Inspired Symbolic Reasoning"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-1670",
+   "sim": 1.0,
+   "title": "SymRTLO: Enhancing RTL Code Optimization with LLMs and Neuron-Inspired Symbolic Reasoning",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
+   "year": 2025
   }
  },
  "wang2025tilelang": {
@@ -3760,6 +5062,92 @@
    "type": "proceedings-article",
    "venue": "Proceedings of the Great Lakes Symposium on VLSI 2026",
    "year": 2026
+  }
+ },
+ "wang2026autogate": {
+  "arxiv": {
+   "id": "2606.17461",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "AUTOGATE: Automated Clock Gating via Toggling-Aware LLM-based RTL Rewriting"
+  },
+  "crossref": {
+   "doi": "10.3390/electronics15112492",
+   "sim": 0.385,
+   "title": "RTL-Level Power Optimization of CNN Accelerators via Clock Gating and Sparsity-Aware MAC Suppression on FPGA",
+   "type": "journal-article",
+   "venue": "Electronics",
+   "year": 2026
+  }
+ },
+ "wang2026hgm": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.70777/si.v2i3.15063",
+   "sim": 0.497,
+   "title": "Darwin Gödel Machine: Open-Ended Evolution of Self-Improving Agents",
+   "type": "journal-article",
+   "venue": "SuperIntelligence - Robotics - Safety &amp; Alignment",
+   "year": 2025
+  }
+ },
+ "wei2025swerl": {
+  "arxiv": {
+   "id": "2502.18449",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "SWE-RL: Advancing LLM Reasoning via Reinforcement Learning on Open Software Evolution"
+  },
+  "crossref": {
+   "doi": "10.52202/085713-2629",
+   "sim": 1.0,
+   "title": "SWE-RL: Advancing LLM Reasoning via Reinforcement Learning on Open Software Evolution",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 38",
+   "year": 2025
+  }
+ },
+ "wei2025vflow": {
+  "arxiv": {
+   "id": "2504.03723",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "VFlow: Discovering Optimal Agentic Workflows for Verilog Generation"
+  },
+  "crossref": {
+   "doi": "10.1109/asp-dac66049.2026.11420713",
+   "sim": 1.0,
+   "title": "VFlow: Discovering Optimal Agentic Workflows for Verilog Generation",
+   "type": "proceedings-article",
+   "venue": "2026 31st Asia and South Pacific Design Automation Conference (ASP-DAC)",
+   "year": 2026
+  }
+ },
+ "wei2026evomas": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.18653/v1/2025.emnlp-demos.47",
+   "sim": 0.583,
+   "title": "EvoAgentX: An Automated Framework for Evolving Agentic Workflows",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 2025 Conference on Empirical Methods in Natural Language Processing: System Demonstrations",
+   "year": 2025
+  }
+ },
+ "wei2026servenow": {
+  "arxiv": {
+   "id": "2610.06212",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Serve Now or Improve Later? Scheduling Self-Evolution in Online Agent Systems"
+  },
+  "crossref": {
+   "doi": "10.5353/th_b3462401",
+   "sim": 0.509,
+   "title": "Scheduling online batching systems",
+   "type": "dissertation",
+   "venue": "",
+   "year": null
   }
  },
  "wijk2024rebench": {
@@ -3843,6 +5231,38 @@
    "year": 2024
   }
  },
+ "wu2025mirage": {
+  "arxiv": {
+   "id": "2405.05751",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "Mirage: A Multi-Level Superoptimizer for Tensor Programs"
+  },
+  "crossref": {
+   "doi": "10.1007/s11002-015-9385-7",
+   "sim": 0.5,
+   "title": "Price discrimination through multi-level loyalty programs",
+   "type": "journal-article",
+   "venue": "Marketing Letters",
+   "year": 2015
+  }
+ },
+ "wu2026harnessdev": {
+  "arxiv": {
+   "id": "2609.01437",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HarnessDev: Can LLMs Create and Evolve Their Own Agent Harness?"
+  },
+  "crossref": {
+   "doi": "10.1146/katina-030625-1",
+   "sim": 0.602,
+   "title": "How Libraries Can Create Their Own Futures",
+   "type": "journal-article",
+   "venue": "Katina Magazine",
+   "year": 2025
+  }
+ },
  "xiao2023smoothquant": {
   "arxiv": {
    "id": "2211.10438",
@@ -3857,6 +5277,17 @@
    "type": "journal-article",
    "venue": "Neural Networks",
    "year": 2027
+  }
+ },
+ "xiao2025edacopilot": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1145/3715326",
+   "sim": 1.0,
+   "title": "EDA-Copilot: A RAG-Powered Intelligent Assistant for EDA Tools",
+   "type": "journal-article",
+   "venue": "ACM Transactions on Design Automation of Electronic Systems",
+   "year": 2025
   }
  },
  "xie2018routenet": {
@@ -3886,6 +5317,26 @@
    "year": 2024
   }
  },
+ "xiong2026automegakernel": {
+  "arxiv": null,
+  "crossref": null
+ },
+ "xiong2026microevo": {
+  "arxiv": {
+   "id": "2608.06183",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "MicroEvo: Knowledge-Guided LLM Sampling for Efficient Microarchitecture Design Space Exploration"
+  },
+  "crossref": {
+   "doi": "10.1145/3787109.3815209",
+   "sim": 0.649,
+   "title": "FastDSE: Enabling Efficient CPU Microarchitecture Design Space Exploration with FPGA Acceleration",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the Great Lakes Symposium on VLSI 2026",
+   "year": 2026
+  }
+ },
  "xu2024meic": {
   "arxiv": {
    "id": "2405.06840",
@@ -3902,6 +5353,62 @@
    "year": 2024
   }
  },
+ "xu2026agentskills": {
+  "arxiv": {
+   "id": "2602.12430",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward"
+  },
+  "crossref": null
+ },
+ "xu2026lpo": {
+  "arxiv": {
+   "id": "2508.16125",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "LPO: Discovering Missed Peephole Optimizations with Large Language Models"
+  },
+  "crossref": {
+   "doi": "10.1145/3779212.3790184",
+   "sim": 1.0,
+   "title": "LPO: Discovering Missed Peephole Optimizations with Large Language Models",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2",
+   "year": 2026
+  }
+ },
+ "xu2026pfllm": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1145/3779212.3790202",
+   "sim": 0.809,
+   "title": "PF-LLM:\n                    <u>L</u>\n                    arge\n                    <u>L</u>\n                    anguage\n                    <u>M</u>\n                    odel Hinted Hardware\n                    <u>P</u>\n                    re\n                    <u>f</u>\n                    etching",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 31st ACM International Conference on Architectural Support for Programming Languages and Operating Systems, Volume 2",
+   "year": 2026
+  }
+ },
+ "xu2026seis": {
+  "arxiv": {
+   "id": "2610.04646",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "SEIS: Self-Evolving Inference Systems"
+  },
+  "crossref": null
+ },
+ "xu2026slic": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/icecs58634.2023.10382906",
+   "sim": 0.662,
+   "title": "ANN-Powered Reinforcement Learning-Based Analog Circuit Optimization",
+   "type": "proceedings-article",
+   "venue": "2023 30th IEEE International Conference on Electronics, Circuits and Systems (ICECS)",
+   "year": 2023
+  }
+ },
  "yang2024large": {
   "arxiv": {
    "id": "2309.03409",
@@ -3912,6 +5419,49 @@
   "crossref": {
    "doi": "10.1109/cec60901.2024.10611913",
    "sim": 0.843,
+   "title": "Large Language Models as Evolutionary Optimizers",
+   "type": "proceedings-article",
+   "venue": "2024 IEEE Congress on Evolutionary Computation (CEC)",
+   "year": 2024
+  }
+ },
+ "yang2024sweagent": {
+  "arxiv": {
+   "id": "2405.15793",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering"
+  },
+  "crossref": {
+   "doi": "10.52202/079017-1601",
+   "sim": 1.0,
+   "title": "SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering",
+   "type": "proceedings-article",
+   "venue": "Advances in Neural Information Processing Systems 37",
+   "year": 2024
+  }
+ },
+ "yang2025qwen3": {
+  "arxiv": {
+   "id": "2505.09388",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Qwen3 Technical Report"
+  },
+  "crossref": {
+   "doi": "10.6027/tn2016-545",
+   "sim": 0.842,
+   "title": "Technical report",
+   "type": "edited-book",
+   "venue": "TemaNord",
+   "year": 2016
+  }
+ },
+ "yang2026cirbench": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/cec60901.2024.10611913",
+   "sim": 0.703,
    "title": "Large Language Models as Evolutionary Optimizers",
    "type": "proceedings-article",
    "venue": "2024 IEEE Congress on Evolutionary Computation (CEC)",
@@ -3950,6 +5500,33 @@
    "year": 2025
   }
  },
+ "yao2024rtlrewriter": {
+  "arxiv": {
+   "id": "2409.11414",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "RTLRewriter: Methodologies for Large Models aided RTL Code Optimization"
+  },
+  "crossref": {
+   "doi": "10.1145/3676536.3676775",
+   "sim": 1.0,
+   "title": "RTLRewriter: Methodologies for Large Models aided RTL Code Optimization",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 43rd IEEE/ACM International Conference on Computer-Aided Design",
+   "year": 2024
+  }
+ },
+ "yao2026evoplace": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/tcad.2026.3652945",
+   "sim": 1.0,
+   "title": "EvoPlace: Evolution of Optimization Algorithms for Global Placement via Large Language Models",
+   "type": "journal-article",
+   "venue": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+   "year": 2026
+  }
+ },
  "yasin2014topdown": {
   "arxiv": null,
   "crossref": {
@@ -3976,6 +5553,15 @@
    "venue": "IEEE Computer Architecture Letters",
    "year": 2024
   }
+ },
+ "ye2026cake": {
+  "arxiv": {
+   "id": "2608.12629",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "CAKE: Compiler-Agent Co-Design for Frontier Kernel Evolution"
+  },
+  "crossref": null
  },
  "yin2024godel": {
   "arxiv": null,
@@ -4015,6 +5601,15 @@
    "year": 2026
   }
  },
+ "yu2025spec2rtl": {
+  "arxiv": {
+   "id": "2506.13905",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Spec2RTL-Agent: Automated Hardware Code Generation from Complex Specifications Using LLM Agent Systems"
+  },
+  "crossref": null
+ },
  "yu2026autonomous": {
   "arxiv": {
    "id": "2604.15082",
@@ -4030,6 +5625,31 @@
    "venue": "Proceedings of 6th International Fuzzy Systems Conference",
    "year": null
   }
+ },
+ "yu2026coevolving": {
+  "arxiv": {
+   "id": "2609.09134",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Co-Evolving Harnesses and Models: On-Policy Correction Helps Weaker Models Catch Up Where Imitation Fails"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.groundlm-1.3",
+   "sim": 0.373,
+   "title": "MSRA: A Parameter-Efficient Spectral Correction for Local Attention — Where It Helps, and Where It Fails",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 1st Workshop on Grounding Language Models: Learning Faithfully and Efficiently (GroundLM 2026)",
+   "year": 2026
+  }
+ },
+ "yu2026horizon": {
+  "arxiv": {
+   "id": "2606.28279",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Agentic Hardware Design as Repository-Level Code Evolution"
+  },
+  "crossref": null
  },
  "yuan2024selfrewarding": {
   "arxiv": {
@@ -4079,6 +5699,15 @@
    "year": 2025
   }
  },
+ "zadouri2026fa4": {
+  "arxiv": {
+   "id": "2603.05451",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "FlashAttention-4: Algorithm and Kernel Pipelining Co-Design for Asymmetric Hardware Scaling"
+  },
+  "crossref": null
+ },
  "zandieh2025turboquant": {
   "arxiv": {
    "id": "2504.19874",
@@ -4109,6 +5738,22 @@
    "type": "proceedings-article",
    "venue": "Advances in Neural Information Processing Systems 35",
    "year": 2022
+  }
+ },
+ "zeng2026llm4llm": {
+  "arxiv": {
+   "id": "2608.21836",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "LLM4LLM: Bridging Kernel Benchmarks and Real Deployment via Closed-Loop Agentic Optimization"
+  },
+  "crossref": {
+   "doi": "10.18653/2026.emnlp-main.859",
+   "sim": 1.0,
+   "title": "LLM4LLM: Bridging Kernel Benchmarks and Real Deployment via Closed-Loop Agentic Optimization",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 2026 Conference on Empirical Methods in Natural Language Processing",
+   "year": 2026
   }
  },
  "zhang2023llm4dv": {
@@ -4154,8 +5799,65 @@
    "year": 2024
   }
  },
- "zhang2025darwin": {
+ "zhang2025accelopt": {
+  "arxiv": {
+   "id": "2511.15915",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "AccelOpt: A Self-Improving LLM Agentic System for AI Accelerator Kernel Optimization"
+  },
+  "crossref": {
+   "doi": "10.2139/ssrn.5190135",
+   "sim": 0.504,
+   "title": "Self-Improving Agentic AI through Bayesian Meta-Learning",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2025
+  }
+ },
+ "zhang2025adaptive": {
+  "arxiv": {
+   "id": "2502.02534",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Adaptive Self-improvement LLM Agentic System for ML Library Development"
+  },
+  "crossref": {
+   "doi": "10.3390/software5020016",
+   "sim": 0.579,
+   "title": "Adaptive Self-Prompting in Agentic LLM Frameworks for Code Fault Detection",
+   "type": "journal-article",
+   "venue": "Software",
+   "year": 2026
+  }
+ },
+ "zhang2025agenticrl": {
+  "arxiv": {
+   "id": "2509.02547",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "The Landscape of Agentic Reinforcement Learning for LLMs: A Survey"
+  },
+  "crossref": {
+   "doi": "10.36227/techrxiv.176972131.13438500/v1",
+   "sim": 0.797,
+   "title": "Training Recipes for Agentic Reinforcement Learning in LLMs: A Survey",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2026
+  }
+ },
+ "zhang2025aspen": {
   "arxiv": null,
+  "crossref": null
+ },
+ "zhang2025darwin": {
+  "arxiv": {
+   "id": "2505.22954",
+   "published": "2025-05-29",
+   "sim": 0.985,
+   "title": "Darwin Godel Machine: Open-Ended Evolution of Self-Improving Agents"
+  },
   "crossref": {
    "doi": "10.70777/si.v2i3.15063",
    "sim": 1.0,
@@ -4163,6 +5865,22 @@
    "type": "journal-article",
    "venue": "SuperIntelligence - Robotics - Safety &amp; Alignment",
    "year": 2025
+  }
+ },
+ "zhang2025ladder": {
+  "arxiv": {
+   "id": "2501.06589",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Ladder-residual: parallelism-aware architecture for accelerating large model inference with communication overlapping"
+  },
+  "crossref": {
+   "doi": "10.1109/isca59077.2024.00077",
+   "sim": 0.503,
+   "title": "ALISA: Accelerating Large Language Model Inference via Sparsity-Aware KV Caching",
+   "type": "proceedings-article",
+   "venue": "2024 ACM/IEEE 51st Annual International Symposium on Computer Architecture (ISCA)",
+   "year": 2024
   }
  },
  "zhang2025qimeng": {
@@ -4179,6 +5897,108 @@
    "type": "proceedings-article",
    "venue": "Proceedings Design, Automation and Test in Europe",
    "year": null
+  }
+ },
+ "zhang2026amsio": {
+  "arxiv": {
+   "id": "2512.21613",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "AMS-IO-Bench and AMS-IO-Agent: Benchmarking and Structured Reasoning for Analog and Mixed-Signal Integrated Circuit Input/Output Design"
+  },
+  "crossref": {
+   "doi": "10.1609/aaai.v40i2.37134",
+   "sim": 1.0,
+   "title": "AMS-IO-Bench and AMS-IO-Agent: Benchmarking and Structured Reasoning for Analog and Mixed-Signal Integrated Circuit Input/Output Design",
+   "type": "journal-article",
+   "venue": "Proceedings of the AAAI Conference on Artificial Intelligence",
+   "year": 2026
+  }
+ },
+ "zhang2026cedar": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/tcad.2024.3410154",
+   "sim": 0.537,
+   "title": "ROVER: RTL Optimization via Verified E-Graph Rewriting",
+   "type": "journal-article",
+   "venue": "IEEE Transactions on Computer-Aided Design of Integrated Circuits and Systems",
+   "year": 2024
+  }
+ },
+ "zhang2026hyperagents": {
+  "arxiv": {
+   "id": "2603.19461",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Hyperagents"
+  },
+  "crossref": {
+   "doi": "10.1145/3176258.3176317",
+   "sim": 1.0,
+   "title": "Hyperagents",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the Eighth ACM Conference on Data and Application Security and Privacy",
+   "year": 2018
+  }
+ },
+ "zhang2026llm4cov": {
+  "arxiv": {
+   "id": "2602.16953",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "LLM4Cov: Execution-Aware Agentic Learning for High-coverage Testbench Generation"
+  },
+  "crossref": {
+   "doi": "10.1145/3832783.3834355",
+   "sim": 0.548,
+   "title": "AgentExecutor: Partial Code Execution via Agentic Context Generation",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 41st IEEE/ACM International Conference on Automated Software Engineering",
+   "year": 2026
+  }
+ },
+ "zhang2026pcbgen": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1145/3770743.3803934",
+   "sim": 1.0,
+   "title": "PCBgen: Self-Evolving LLM Agent for Specification-to-Schematic PCB Design with Parameter Tuning",
+   "type": "proceedings-article",
+   "venue": "Proceedings of the 63rd ACM/IEEE Design Automation Conference",
+   "year": 2026
+  }
+ },
+ "zhang2026selfharness": {
+  "arxiv": {
+   "id": "2606.09498",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Self-Harness: Harnesses That Improve Themselves"
+  },
+  "crossref": {
+   "doi": "10.20944/preprints202611.0303.v1",
+   "sim": 0.491,
+   "title": "Harness Learning: Agent Harnesses Are Learnable Policy Components",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2026
+  }
+ },
+ "zhang2026stop": {
+  "arxiv": {
+   "id": "2605.23950",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Stop Comparing LLM Agents Without Disclosing the Harness"
+  },
+  "crossref": {
+   "doi": "10.20944/preprints202605.0711.v1",
+   "sim": 1.0,
+   "title": "Stop Comparing LLM Agents Without Disclosing the Harness",
+   "type": "posted-content",
+   "venue": "",
+   "year": 2026
   }
  },
  "zhao2024codev": {
@@ -4223,6 +6043,26 @@
    "venue": "Proceedings of the 52nd Annual International Symposium on Computer Architecture",
    "year": 2025
   }
+ },
+ "zhao2025ppartl": {
+  "arxiv": null,
+  "crossref": {
+   "doi": "10.1109/dac63849.2025.11132897",
+   "sim": 1.0,
+   "title": "Hardware Generation with High Flexibility using Reinforcement Learning Enhanced LLMs",
+   "type": "proceedings-article",
+   "venue": "2025 62nd ACM/IEEE Design Automation Conference (DAC)",
+   "year": 2025
+  }
+ },
+ "zhao2026prov": {
+  "arxiv": {
+   "id": "2506.12200",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "PRO-V-R1: Reasoning Enhanced Programming Agent for RTL Verification"
+  },
+  "crossref": null
  },
  "zheng2020ansor": {
   "arxiv": {
@@ -4304,6 +6144,10 @@
    "year": 2025
   }
  },
+ "zhu2025megascaleinfer": {
+  "arxiv": null,
+  "crossref": null
+ },
  "zong2026coevolution": {
   "arxiv": {
    "id": "2608.10299",
@@ -4318,6 +6162,47 @@
    "type": "journal-article",
    "venue": "Current Opinion in Biotechnology",
    "year": 2010
+  }
+ },
+ "zou2026hlsseek": {
+  "arxiv": {
+   "id": "2605.13536",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "HLS-Seek: QoR-Aware Code Generation for High-Level Synthesis via Proxy Comparative Reward Reinforcement Learning"
+  },
+  "crossref": null
+ },
+ "zou2026phoenix": {
+  "arxiv": {
+   "id": "2605.15226",
+   "published": "2026",
+   "sim": 1.0,
+   "title": "Is Agentic AI Ready for Real-World Hardware Engineering? A Deep Dive with Phoenix-bench"
+  },
+  "crossref": {
+   "doi": "10.1007/979-8-8688-1542-3_8",
+   "sim": 0.426,
+   "title": "Case Studies: Agentic AI in Real-World Applications",
+   "type": "book-chapter",
+   "venue": "Agentic AI in Enterprise",
+   "year": 2025
+  }
+ },
+ "zuo2025cloudmatrix": {
+  "arxiv": {
+   "id": "2506.12708",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Serving Large Language Models on Huawei CloudMatrix384"
+  },
+  "crossref": {
+   "doi": "10.1109/tai.2024.3429480",
+   "sim": 0.621,
+   "title": "LLMaaS: Serving Large-Language Models on Trusted Serverless Computing Platforms",
+   "type": "journal-article",
+   "venue": "IEEE Transactions on Artificial Intelligence",
+   "year": 2025
   }
  }
 }

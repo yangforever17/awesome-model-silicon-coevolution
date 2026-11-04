@@ -3,7 +3,7 @@
   README Figure 2 / paper figure: intelligence climbs, and starts to redesign its own machine.
   Top panel: cross-domain capability trajectories, after Duan et al. (2026), "The Last AI Built by Humans"
              (arXiv:2609.11873).
-  Bottom panel: this survey's L0–L4 AI R&D autonomy levels on the model–stack–silicon tower, with milestones
+  Bottom panel: this survey's Levels of Self-Scaling Intelligence on the model–stack–silicon tower, with milestones
              placed by first public date (arXiv month where available).
   Render: bash scripts/figures/render.sh  (assets/trajectories.png and assets/trajectories.pdf)
 -->
@@ -71,8 +71,8 @@ const EDGE = {
   lp: { label: 'Cross-layer loop', color: '#6d28d9', fill: '#f5f3ff' },
 };
 const LEVELS = [
-  ['L0', 'Design assistance', '#64748b'], ['L1', 'Local optimization', '#2563eb'], ['L2', 'End-to-end design', '#7c3aed'],
-  ['L3', 'Cross-layer co-design', '#d97706'], ['L4', 'Recursive self-enhancement', '#16a34a'],
+  ['L0', 'Design assistance', '#64748b'], ['L1', 'Autonomous optimization', '#2563eb'], ['L2', 'End-to-end design', '#7c3aed'],
+  ['L3', 'Self-improvement', '#16a34a'], ['L4', 'Cross-layer co-evolution', '#d97706'],
   ['L5', 'Self-expansion', '#dc2626'], ['L6', 'Open-ended evolution', '#991b1b'],
 ];
 // [name, level, date, edge, logo, sub-row (-1 above / 0 / +1 below), anchor ('R' pill right of dot, 'L' left)]
@@ -85,13 +85,15 @@ const MILES = [
   ['CUDA Agent', 1, 2026.15, 'mk', 'bytedance', 1, 'R'],
   ['Self-Evolved ABC', 1, 2026.28, 'ms', null, -1, 'R'],
   ['ASIC-Agent', 2, 2025.62, 'ms', null, -1, 'L'],
-  ['Design Conductor', 2, 2026.18, 'ms', null, -1, 'R'],
-  ['Qwen chip–model', 2, 2026.68, 'lp', 'qwen', 1, 'L'],
-  ['Design Conductor 2.0', 3, 2026.34, 'lp', null, -1, 'L'],
-  ['HSCO-Bench', 3, 2026.37, 'lp', null, 1, 'R'],
-  ['AlphaEvolve', 4, 2025.37, 'lp', 'deepmind', 0, 'R'],
+  ['Design Conductor', 2, 2026.18, 'ms', null, -1, 'L'],
+  ['Conductor 2.0', 2, 2026.34, 'lp', null, -1, 'R'],
+  ['MACO', 2, 2025.7, 'lp', null, 1, 'R'],
+  ['AccelOpt', 3, 2025.87, 'mk', null, -0.75, 'R'],
+  ['KernelBlaster', 3, 2026.1, 'mk', null, 0.75, 'R'],
+  ['Qwen co-evo', 3, 2026.72, 'lp', 'qwen', -0.75, 'L'],
+  ['AlphaEvolve', 3, 2025.37, 'lp', 'deepmind', 0, 'R'],
 ];
-const FIRST = [[2023.37, 0], [2023.86, 1], [2025.62, 2], [2026.34, 3]];   // first arrival of L0–L3
+const FIRST = [[2023.37, 0], [2023.86, 1], [2025.62, 2], [2025.87, 3]];   // first arrival of L0–L3
 
 // ---------------------------------------------------------------- layout
 const L = 262, R = 1352, RSI = 2026.8, XEND = 2027.42;
@@ -99,7 +101,7 @@ const T1 = 92, B1 = 492;            // panel 1
 const T2 = 586, B2 = 958;           // panel 2
 const x = d3.scaleLinear().domain([2023.22, XEND + 0.06]).range([L, R]);
 const y = d3.scaleLinear().domain([-6, 106]).range([B1, T1]);
-const LH = [62, 62, 62, 62, 62, 31, 31];                  // lane heights, L0 at the bottom
+const LH = [62, 62, 62, 96, 28, 31, 31];                  // lane heights, L0 at the bottom
 const lb = (k) => B2 - LH.slice(0, k).reduce((a, b) => a + b, 0);
 const ly = (k) => { const f = Math.floor(k), r = k - f; const c = (q) => lb(q) - LH[Math.min(q, 6)] / 2; return r ? c(f) + (c(Math.min(f + 1, 6)) - c(f)) * r : c(f); };
 const laneH = 62;
@@ -240,15 +242,20 @@ MILES.forEach(([name, k, d, e, lg, sub, anc]) => {
         ${lg ? `<image href="${LOGO[lg]}" x="6" y="4" width="14" height="14"/>` : ''}
         <text x="${lg ? 25 : 9}" y="15.5" font-weight="700" font-size="11.8" fill="#17203a">${name}</text></g>`;
 });
-// AlphaEvolve: early, narrow L4
-const ae = [x(2025.37), ly(4)];
+// AlphaEvolve: early, narrow L3
+const ae = [x(2025.37), ly(3)];
 s += `<circle cx="${ae[0]}" cy="${ae[1]}" r="34" fill="url(#burst)"/>
-      <text x="${ae[0] - 14}" y="${ae[1] + 5}" text-anchor="end" font-family="Patrick Hand" font-size="18" fill="#15803d">an early, narrow L4 →</text>`;
-// Jalapeño (claimed, undisclosed)
-s += `<circle cx="${x(2026.45)}" cy="${ly(4)}" r="4.2" fill="#6d28d9" stroke="#fff" stroke-width="1.6"/>
-      <g transform="translate(${x(2026.45) + 7},${ly(4) - 11})"><rect width="104" height="22" rx="11" fill="url(#hatchC)" stroke="#6d28d9" stroke-width="1.6" stroke-dasharray="4 3"/>
-      <rect x="3" y="3" width="98" height="16" rx="8" fill="#fff" opacity=".82"/>
-      <image href="${LOGO.openai}" x="7" y="4" width="14" height="14"/><text x="26" y="15.5" font-weight="700" font-size="11.8" fill="#17203a">Jalapeño ?</text></g>`;
+      <text x="${ae[0] - 14}" y="${ae[1] + 5}" text-anchor="end" font-family="Patrick Hand" font-size="18" fill="#15803d">an early, narrow L3 →</text>`;
+// possible L3: hatched pills, not verified
+[['Jalapeño ?', 2026.45, -2.2, 'openai', 104], ['Kimi K3 ?', 2026.57, 2.2, 'kimi', 96]].forEach(([name, d, sub, lg, w]) => {
+  const cx = x(d), cy = ly(3) + sub * 16;
+  s += `<circle cx="${cx}" cy="${cy}" r="4.2" fill="#6d28d9" stroke="#fff" stroke-width="1.6"/>
+      <g transform="translate(${cx + 7},${cy - 11})"><rect width="${w}" height="22" rx="11" fill="url(#hatchC)" stroke="#6d28d9" stroke-width="1.6" stroke-dasharray="4 3"/>
+      <rect x="3" y="3" width="${w - 6}" height="16" rx="8" fill="#fff" opacity=".82"/>
+      <image href="${LOGO[lg]}" x="7" y="4" width="14" height="14"/><text x="26" y="15.5" font-weight="700" font-size="11.8" fill="#17203a">${name}</text></g>`;
+});
+
+s += `<text x="${x(2025.4)}" y="${ly(4) + 5}" text-anchor="middle" font-family="Patrick Hand" font-size="17" fill="#b45309">no instance yet</text>`;
 
 // ---------------------------------------------------------------- RSI orb and labels
 s += `<circle cx="${ORB[0]}" cy="${ORB[1]}" r="58" fill="url(#orb)"/>

@@ -30,6 +30,17 @@ from bibparse import clean, parse  # noqa: E402
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 CACHE = os.path.join(ROOT, "data", "resolved.json")
 UA = {"User-Agent": "awesome-model-silicon-coevolution/1.0"}
+
+
+def get(url, **kw):
+    """requests.get with a few retries on transient network errors."""
+    for attempt in range(4):
+        try:
+            return requests.get(url, **kw)
+        except requests.exceptions.RequestException:
+            if attempt == 3:
+                raise
+            time.sleep(2 * (attempt + 1))
 ATOM = "{http://www.w3.org/2005/Atom}"
 
 
@@ -48,7 +59,7 @@ def ascii_words(title):
 
 def datacite_search(title):
     phrase = " ".join(ascii_words(title))
-    r = requests.get(
+    r = get(
         "https://api.datacite.org/dois",
         params={"query": f'titles.title:"{phrase}"', "client-id": "arxiv.content", "page[size]": 5},
         headers=UA,
@@ -70,7 +81,7 @@ def arxiv_search(title):
     words = ascii_words(title)
     query = "ti:" + urllib.parse.quote('"' + " ".join(words) + '"')
     for attempt in range(4):
-        r = requests.get(
+        r = get(
             f"https://export.arxiv.org/api/query?search_query={query}&max_results=5",
             headers=UA,
             timeout=30,
@@ -92,7 +103,7 @@ def arxiv_search(title):
 
 
 def crossref_search(title):
-    r = requests.get(
+    r = get(
         "https://api.crossref.org/works",
         params={"query.title": title, "rows": 5, "select": "title,DOI,issued,container-title,type"},
         headers=UA,

@@ -30,9 +30,9 @@ Unlike static co-design, the target moves, the layers update at very different s
 
 | Path | Levels | Signals | Executor | Loop period | Highest-level work |
 | --- | --- | --- | --- | --- | --- |
-| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | Design Conductor 2.0 (L3) |
-| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | AlphaEvolve (L4) |
-| Silicon → Model | human | S4–S6 | human teams | months to years | DeepSeek-V3.1 |
+| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | AlphaEvolve, PCPO (L3) |
+| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | AlphaEvolve, CAKE (L3) |
+| Silicon → Model | not rated | S4–S6 | human teams | months to years | DeepSeek-V2 to V4, Step-3 |
 
 </details>
 
