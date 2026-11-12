@@ -9,7 +9,7 @@ We split the system into three layers: the **model** $M$, the **software stack**
   <p><sub><b>Figure 3.</b> The model–stack–silicon tower. AI already sends designs down; constraints are still hauled up almost entirely by people.</sub></p>
 </div>
 
-**Autonomy levels.** How much of the R&D loop does the AI run? The catalog covers L0–L4; L5–L6 are the horizon.
+**Autonomy levels.** How much of the R&D loop does the AI run? The catalog covers L0–L4; L5–L6 are the horizon. L3 builds on L2 and splits by return path: L3[θ] returns through the designer's own experience, L3[S] and L3[H] through the software and chips it designed.
 
 {{LEVEL_TABLE}}
 
@@ -21,17 +21,17 @@ We split the system into three layers: the **model** $M$, the **software stack**
 Each layer is updated by an operator that reads a measurement of the whole system, and the executor's capability $\theta$ may itself depend on the system:
 
 ```math
-X_{t+1} = f_X(X_t,\ y_t;\ \theta_t),\quad y_t = m(M_t, S_t, H_t),\quad X \in \{M, S, H\},\qquad \theta_{t+1} = g(\theta_t;\ M_{t+1}, S_{t+1}, H_{t+1})
+X_{t+1} = f_X(X_t,\ y_t;\ \theta_t),\quad y_t = m(M_t, S_t, H_t),\quad X \in \{M, S, H\},\qquad \theta_{t+1} = g(\theta_t;\ e_t,\ M_{t+1}, S_{t+1}, H_{t+1})
 ```
 
-Unlike static co-design, the target moves, the layers update at very different speeds ($f_S$ hourly, $f_M$ monthly, $f_H$ yearly), and when the executor is a language model it can improve the machine it runs on.
+Here $e_t$ is the trace a round of design leaves behind (attempts, measurements, successes and failures). Unlike static co-design, the target moves, the layers update at very different speeds ($f_S$ hourly, $f_M$ monthly, $f_H$ yearly), and when the executor is a language model it can improve the machine it runs on.
 
 **Feedback signals**, by cost: **S1** compilation (seconds) · **S2** functional tests (minutes–hours) · **S3** timing, area, power (hours) · **S4** profiling (minutes) · **S5** end-to-end on hardware (hours–days) · **S6** post-silicon and deployment (months–years).
 
 | Path | Levels | Signals | Executor | Loop period | Highest-level work |
 | --- | --- | --- | --- | --- | --- |
-| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | AlphaEvolve, PCPO (L3) |
-| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | AlphaEvolve, CAKE (L3) |
+| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | PCPO (L3[θ]); AlphaEvolve becomes L3[H] after tape-out |
+| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | CAKE (L3[θ]); AlphaEvolve (L3[S]) |
 | Silicon → Model | not rated | S4–S6 | human teams | months to years | DeepSeek-V2 to V4, Step-3 |
 
 </details>

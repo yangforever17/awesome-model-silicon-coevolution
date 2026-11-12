@@ -2623,15 +2623,13 @@
   }
  },
  "kumar2025saarthi": {
-  "arxiv": null,
-  "crossref": {
-   "doi": "10.1039/d5dd00435g",
-   "sim": 0.76,
-   "title": "Multi-agentic AI framework for end-to-end atomistic simulations",
-   "type": "journal-article",
-   "venue": "Digital Discovery",
-   "year": 2026
-  }
+  "arxiv": {
+   "id": "2502.16662",
+   "published": "2025",
+   "sim": 1.0,
+   "title": "Saarthi: The First AI Formal Verification Engineer"
+  },
+  "crossref": null
  },
  "kumar2025scaling": {
   "arxiv": {
@@ -2965,14 +2963,7 @@
    "sim": 1.0,
    "title": "TritonBench: Benchmarking Large Language Model Capabilities for Generating Triton Operators"
   },
-  "crossref": {
-   "doi": "10.18653/v1/2025.findings-acl.1183",
-   "sim": 1.0,
-   "title": "TritonBench: Benchmarking Large Language Model Capabilities for Generating Triton Operators",
-   "type": "proceedings-article",
-   "venue": "Findings of the Association for Computational Linguistics: ACL 2025",
-   "year": 2025
-  }
+  "crossref": null
  },
  "li2026statetune": {
   "arxiv": {
@@ -3665,6 +3656,10 @@
    "year": 2026
   }
  },
+ "nvidia2024gb200nvl72": {
+  "arxiv": null,
+  "crossref": null
+ },
  "nvidia2025automating": {
   "arxiv": null,
   "crossref": {
@@ -3703,13 +3698,17 @@
  },
  "openai2025broadcom": {
   "arxiv": null,
+  "crossref": null
+ },
+ "openai2025broadcompress": {
+  "arxiv": null,
   "crossref": {
-   "doi": "10.47287/cen-10039-acsnews4",
-   "sim": 0.552,
-   "title": "Dow and CAS announce strategic collaboration",
-   "type": "journal-article",
-   "venue": "Chemical &amp; Engineering News",
-   "year": 2022
+   "doi": "10.1007/979-8-8688-3186-7_5",
+   "sim": 0.345,
+   "title": "OpenAI and PostgreSQL AI Extensions",
+   "type": "book-chapter",
+   "venue": "Mastering PostgreSQL in the Cloud",
+   "year": 2026
   }
  },
  "openai2025gptoss": {
@@ -4011,10 +4010,10 @@
  },
  "qwen2026xinmo": {
   "arxiv": {
-   "id": "2309.16609",
-   "published": "2023-09-28",
-   "sim": 0.32,
-   "title": "Qwen Technical Report"
+   "id": "2610.28711",
+   "published": "2026",
+   "sim": 0.205,
+   "title": "Qwen-Audio-3.1-ASR Technical Report"
   },
   "crossref": {
    "doi": "10.3788/gzxb20225111.1113003",
@@ -4187,6 +4186,15 @@
    "venue": "International Journal of Scientific Engineering and Research",
    "year": 2013
   }
+ },
+ "schick2023toolformer": {
+  "arxiv": {
+   "id": "2302.04761",
+   "published": "2023",
+   "sim": 1.0,
+   "title": "Toolformer: Language Models Can Teach Themselves to Use Tools"
+  },
+  "crossref": null
  },
  "schmidhuber2003godel": {
   "arxiv": null,
@@ -4564,6 +4572,22 @@
    "type": "proceedings-article",
    "venue": "2012 SC Companion: High Performance Computing, Networking Storage and Analysis",
    "year": 2012
+  }
+ },
+ "sumers2024coala": {
+  "arxiv": {
+   "id": "2309.02427",
+   "published": "2023",
+   "sim": 1.0,
+   "title": "Cognitive Architectures for Language Agents"
+  },
+  "crossref": {
+   "doi": "10.1007/978-3-662-43505-2_36",
+   "sim": 0.857,
+   "title": "Cognitive Architectures and Agents",
+   "type": "book-chapter",
+   "venue": "Springer Handbook of Computational Intelligence",
+   "year": 2015
   }
  },
  "sutton2018reinforcement": {
@@ -4982,6 +5006,22 @@
    "type": "proceedings-article",
    "venue": "2026 IEEE 50th Annual Computers, Software, and Applications Conference (COMPSAC)",
    "year": 2026
+  }
+ },
+ "wang2025openhands": {
+  "arxiv": {
+   "id": "2407.16741",
+   "published": "2024",
+   "sim": 1.0,
+   "title": "OpenHands: An Open Platform for AI Software Developers as Generalist Agents"
+  },
+  "crossref": {
+   "doi": "10.1109/2.330076",
+   "sim": 0.575,
+   "title": "Mobile agents make a network an open platform for third-party developers",
+   "type": "journal-article",
+   "venue": "Computer",
+   "year": 1994
   }
  },
  "wang2025ragen": {
@@ -5482,6 +5522,22 @@
    "type": "proceedings-article",
    "venue": "Advances in Neural Information Processing Systems 35",
    "year": 2022
+  }
+ },
+ "yao2023react": {
+  "arxiv": {
+   "id": "2210.03629",
+   "published": "2022",
+   "sim": 1.0,
+   "title": "ReAct: Synergizing Reasoning and Acting in Language Models"
+  },
+  "crossref": {
+   "doi": "10.5463/thesis.1845",
+   "sim": 0.659,
+   "title": "Reasoning in Language Models",
+   "type": "dissertation",
+   "venue": "",
+   "year": null
   }
  },
  "yao2024hdldebugger": {

@@ -53,10 +53,21 @@ def parse(text):
     return entries
 
 
+def _zhen(s):
+    """Keep the original (first) argument of \\zhen{original}{english}."""
+    while "\\zhen{" in s:
+        i = s.index("\\zhen{")
+        zh, j = _read_value(s, i + 5)
+        _, k = _read_value(s, j)
+        s = s[:i] + "{" + zh + "}" + s[k:]
+    return s
+
+
 def clean(s):
     """Strip TeX markup for display."""
     if not s:
         return s
+    s = _zhen(s)
     s = re.sub(
         r'\{?\\(["\'`^~=.])\{?([A-Za-z])\}?\}?',
         lambda m: unicodedata.normalize("NFC", m.group(2) + _ACCENTS[m.group(1)]),

@@ -204,7 +204,9 @@ levels:
   L0: {name: Design assistance, color: 64748b, rule: "AI generates code, design proposals or analysis but does not run the propose–verify–revise loop on its own."}
   L1: {name: Autonomous optimization, color: 2563eb, rule: "Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates."}
   L2: {name: End-to-end autonomous design, color: 7c3aed, rule: "From a target spec, AI decomposes the task, orchestrates tools, carries the design through verification and delivers a working system."}
-  L3: {name: Self-improvement, color: 16a34a, rule: "Design results flow back into the designer itself or its successors, raising the capability or efficiency of its later R&D."}
+  "L3[θ]": {name: "Self-improvement, internal", color: 16a34a, rule: "Building on L2, the designer updates its own weights, memory, skills or tools from its design experience; the return does not pass through the hardware and software that host it. The experience must come from its own runs, persist across tasks or designs, and help later rounds in an ablation."}
+  "L3[S]": {name: "Self-improvement through the stack", color: 15803d, rule: "Software the AI designed is deployed in the stack that trains or runs the designer and its successors."}
+  "L3[H]": {name: "Self-improvement through silicon", color: 166534, rule: "Hardware the AI designed is deployed in the chips that train or run the designer and its successors."}
   L4: {name: Cross-layer co-evolution, color: d97706, rule: "AI decides which layers to update; at least two of model, stack and hardware keep adapting to one another, and the gains return to the designer."}
   L5: {name: Recursive self-expansion, color: dc2626, rule: "R&D gains turn into more compute, facilities and deployment capacity, reinvested into the next round."}
   L6: {name: Open-ended autonomous evolution, color: 991b1b, rule: "Within external goals and constraints, AI discovers research questions, methods and new computing paradigms."}

@@ -7,7 +7,7 @@
 <p><b>How models, software stacks and chips are starting to improve one another.</b></p>
 
 <p>
-  <a href="#contents"><img alt="Entries" src="https://img.shields.io/badge/entries-454-2563eb?style=flat-square"></a>
+  <a href="#contents"><img alt="Entries" src="https://img.shields.io/badge/entries-460-2563eb?style=flat-square"></a>
   <a href="https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml"><img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-16a34a?style=flat-square"></a>
   <a href="https://github.com/yangforever17/awesome-model-silicon-coevolution/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/yangforever17/awesome-model-silicon-coevolution?style=flat-square&color=eab308"></a>
   <a href="LICENSE"><img alt="License: CC0" src="https://img.shields.io/badge/license-CC0-64748b?style=flat-square"></a>
@@ -24,17 +24,18 @@
 
 </div>
 
-Every model runs on a machine it did not design. That is starting to change: language models now write RTL, tune kernels, run EDA flows and help design the chips that train and serve them. This list collects the **454 works** mapped in our survey and tags each with the layer it acts on and how much of the R&D loop the AI runs.
+Every model runs on a machine it did not design. That is starting to change: language models now write RTL, tune kernels, run EDA flows and help design the chips that train and serve them. This list collects the **460 works** mapped in our survey and tags each with the layer it acts on and how much of the R&D loop the AI runs.
 
 <div align="center">
-  <img src="./assets/overview.png" width="100%" alt="Overview of model–stack–silicon co-evolution by autonomy level, from human-led co-design through L0 design assistance, L1 autonomous optimization and L2 end-to-end design to L3 self-improvement and an empty L4 cross-layer co-evolution, with representative works and mechanisms in each column.">
-  <p><sub><b>Figure 1.</b> The landscape by autonomy level. The higher the level, the fewer the works; L4 has no instance yet.</sub></p>
+  <img src="./assets/overview.png" width="100%" alt="Overview of model–stack–silicon co-evolution by autonomy level, from human-led co-design through L0 design assistance, L1 autonomous optimization and L2 end-to-end design to L3 self-improvement (internal L3[θ], external L3[S] and L3[H]) and an empty L4 cross-layer co-evolution, with representative works and mechanisms in each column.">
+  <p><sub><b>Figure 1.</b> The landscape by autonomy level. L3[θ] is common and low in cost, L3[S] has a single verifiable instance, and L4 has no instance yet.</sub></p>
 </div>
 
 <a id="news"></a>
 
 ## News
 
+- **2026-11-12** L3 is split by return path: L3[θ] (the designer's own experience), L3[S] and L3[H] (the software and chips it designed). The closed-loop cases are regrouped into six, following the survey; 460 works in total.
 - **2026-11-04** Synced with the latest survey: 454 works, including 150 new entries (RTL and PPA optimization, end-to-end workloads, harnesses and model–harness co-evolution, cross-layer co-design). Levels follow the revised scale: L3 is self-improvement and L4, cross-layer co-evolution, has no instance yet.
 - **2026-10-23** Code links with live GitHub stars for 158 entries. Suggest a paper in one step with the [issue form](https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml).
 - **2026-10-22** Repository launched with the survey's full reference map.
@@ -47,14 +48,14 @@ Every model runs on a machine it did not design. That is starting to change: lan
 
 | | Part | Entries | Survey |
 | ---: | --- | ---: | --- |
-| 1 | [Closed-Loop Case Studies](#part-cases) | 12 | §5 |
+| 1 | [Closed-Loop Case Studies](#part-cases) | 9 | §5 |
 | 2 | [Design Flows Down (I): Model → Silicon](#part-model-silicon) | 102 | §2.1, §4.1 |
-| 3 | [Design Flows Down (II): Model → Software Stack](#part-model-stack) | 73 | §2.2.4, §4.2 |
-| 4 | [Constraints Flow Up: Silicon → Model](#part-silicon-model) | 68 | §2.2, §4.3 |
-| 5 | [Who Carries the Constraints Up? LLM-Involved Cross-Layer Co-Design](#part-cross) | 4 | §4.4 |
+| 3 | [Design Flows Down (II): Model → Software Stack](#part-model-stack) | 75 | §2.2.4, §4.2 |
+| 4 | [Constraints Flow Up: Silicon → Model](#part-silicon-model) | 72 | §2.2, §4.3 |
+| 5 | [Who Carries the Constraints Up? LLM-Involved Cross-Layer Co-Design](#part-cross) | 3 | §4.4 |
 | 6 | [Formalization and Co-Design Foundations](#part-foundations) | 27 | §3 |
 | 7 | [Self-Improvement Engines](#part-engines) | 15 | §1, §2.3, §3.3 |
-| 8 | [Intelligence: Knowledge, Rewards and Verification](#part-intelligence) | 82 | §6 |
+| 8 | [Intelligence: Knowledge, Rewards and Verification](#part-intelligence) | 86 | §6 |
 | 9 | [Benchmarks: From Exam Hall to Training Ground](#part-benchmarks) | 44 | §7 |
 | 10 | [Related Surveys](#part-surveys) | 17 | §1.5, §3 |
 | 11 | [Outlook: Recursion, Governance and World Models](#part-outlook) | 10 | §8 |
@@ -63,7 +64,7 @@ Every model runs on a machine it did not design. That is starting to change: lan
 
 ## Why now
 
-General capability is climbing fastest in software engineering and agentic tool use, the very skills kernel agents and design agents run on. On our autonomy scale, the first arrival of each level stepped from L0 (2023) to L3 (late 2025), with AlphaEvolve an earlier, narrow L3.
+General capability is climbing fastest in software engineering and agentic tool use, the very skills kernel agents and design agents run on. On our autonomy scale, the first arrival of each level stepped from L0 (2023) to L3[θ] (late 2025), with AlphaEvolve an earlier L3[S].
 
 <div align="center">
   <img src="./assets/trajectories.png" width="100%" alt="Left: cross-domain capability trajectories from 2023 to 2026, with software engineering and tool use climbing fastest. Right: this survey's autonomy levels L0 to L6 with milestones by first public date; a staircase marks each level's first arrival, continuing through empty L5 and L6 lanes toward recursive self-improvement.">
@@ -81,14 +82,16 @@ We split the system into three layers: the **model** $M$, the **software stack**
   <p><sub><b>Figure 3.</b> The model–stack–silicon tower. AI already sends designs down; constraints are still hauled up almost entirely by people.</sub></p>
 </div>
 
-**Autonomy levels.** How much of the R&D loop does the AI run? The catalog covers L0–L4; L5–L6 are the horizon.
+**Autonomy levels.** How much of the R&D loop does the AI run? The catalog covers L0–L4; L5–L6 are the horizon. L3 builds on L2 and splits by return path: L3[θ] returns through the designer's own experience, L3[S] and L3[H] through the software and chips it designed.
 
 | Level | Name | Decision rule | Entries |
 | :---: | --- | --- | ---: |
 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) | Design assistance | AI generates code, design proposals or analysis but does not run the propose–verify–revise loop on its own. | 21 |
-| ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Autonomous optimization | Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates. | 43 |
-| ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | End-to-end autonomous design | From a target spec, AI decomposes the task, orchestrates tools, carries the design through verification and delivers a working system. | 9 |
-| ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | Self-improvement | Design results flow back into the designer itself or its successors, raising the capability or efficiency of its later R&D. | 8 |
+| ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Autonomous optimization | Given a task, interface and evaluator, AI proposes candidates, calls tools, reads feedback and iterates. | 42 |
+| ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | End-to-end autonomous design | From a target spec, AI decomposes the task, orchestrates tools, carries the design through verification and delivers a working system. | 10 |
+| ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | Self-improvement, internal | Building on L2, the designer updates its own weights, memory, skills or tools from its design experience; the return does not pass through the hardware and software that host it. The experience must come from its own runs, persist across tasks or designs, and help later rounds in an ablation. | 14 |
+| ![L3[S]](https://img.shields.io/badge/-L3%5BS%5D-15803d?style=flat-square) | Self-improvement through the stack | Software the AI designed is deployed in the stack that trains or runs the designer and its successors. | 1 |
+| ![L3[H]](https://img.shields.io/badge/-L3%5BH%5D-166534?style=flat-square) | Self-improvement through silicon | Hardware the AI designed is deployed in the chips that train or run the designer and its successors. | — |
 | ![L4](https://img.shields.io/badge/-L4-d97706?style=flat-square) | Cross-layer co-evolution | AI decides which layers to update; at least two of model, stack and hardware keep adapting to one another, and the gains return to the designer. | — |
 | ![L5](https://img.shields.io/badge/-L5-dc2626?style=flat-square) | Recursive self-expansion | R&D gains turn into more compute, facilities and deployment capacity, reinvested into the next round. | — |
 | ![L6](https://img.shields.io/badge/-L6-991b1b?style=flat-square) | Open-ended autonomous evolution | Within external goals and constraints, AI discovers research questions, methods and new computing paradigms. | — |
@@ -101,17 +104,17 @@ We split the system into three layers: the **model** $M$, the **software stack**
 Each layer is updated by an operator that reads a measurement of the whole system, and the executor's capability $\theta$ may itself depend on the system:
 
 ```math
-X_{t+1} = f_X(X_t,\ y_t;\ \theta_t),\quad y_t = m(M_t, S_t, H_t),\quad X \in \{M, S, H\},\qquad \theta_{t+1} = g(\theta_t;\ M_{t+1}, S_{t+1}, H_{t+1})
+X_{t+1} = f_X(X_t,\ y_t;\ \theta_t),\quad y_t = m(M_t, S_t, H_t),\quad X \in \{M, S, H\},\qquad \theta_{t+1} = g(\theta_t;\ e_t,\ M_{t+1}, S_{t+1}, H_{t+1})
 ```
 
-Unlike static co-design, the target moves, the layers update at very different speeds ($f_S$ hourly, $f_M$ monthly, $f_H$ yearly), and when the executor is a language model it can improve the machine it runs on.
+Here $e_t$ is the trace a round of design leaves behind (attempts, measurements, successes and failures). Unlike static co-design, the target moves, the layers update at very different speeds ($f_S$ hourly, $f_M$ monthly, $f_H$ yearly), and when the executor is a language model it can improve the machine it runs on.
 
 **Feedback signals**, by cost: **S1** compilation (seconds) · **S2** functional tests (minutes–hours) · **S3** timing, area, power (hours) · **S4** profiling (minutes) · **S5** end-to-end on hardware (hours–days) · **S6** post-silicon and deployment (months–years).
 
 | Path | Levels | Signals | Executor | Loop period | Highest-level work |
 | --- | --- | --- | --- | --- | --- |
-| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | AlphaEvolve, PCPO (L3) |
-| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | AlphaEvolve, CAKE (L3) |
+| Model → Silicon | L0–L2 | S1–S3 | LLM agents | hours to days; tape-out in years | PCPO (L3[θ]); AlphaEvolve becomes L3[H] after tape-out |
+| Model → Stack | L1–L2 | S2, S4–S5 | LLM agents | minutes to hours | CAKE (L3[θ]); AlphaEvolve (L3[S]) |
 | Silicon → Model | not rated | S4–S6 | human teams | months to years | DeepSeek-V2 to V4, Step-3 |
 
 </details>
@@ -131,26 +134,22 @@ Unlike static co-design, the target moves, the layers update at very different s
 
 <a id="catalog"></a>
 
-> **How to read the tables.** ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) ![Possible L1](https://img.shields.io/badge/-Possible_L1-93c5fd?style=flat-square) ![Possible L3](https://img.shields.io/badge/-Possible_L3-86efac?style=flat-square) autonomy level &nbsp;·&nbsp; ⭐ key work &nbsp;·&nbsp; † level assigned by the curators, not the survey &nbsp;·&nbsp; the venue links to the DOI or proceedings page
+> **How to read the tables.** ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) ![L3[S]](https://img.shields.io/badge/-L3%5BS%5D-15803d?style=flat-square) ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) ![Possible L3[S]](https://img.shields.io/badge/-Possible_L3%5BS%5D-86efac?style=flat-square) ![Possible L3[H]](https://img.shields.io/badge/-Possible_L3%5BH%5D-bbf7d0?style=flat-square) autonomy level &nbsp;·&nbsp; ⭐ key work &nbsp;·&nbsp; † level assigned by the curators, not the survey &nbsp;·&nbsp; the venue links to the DOI or proceedings page
 
 <a id="part-cases"></a>
 
 ## 1. Closed-Loop Case Studies
 
-Cases where an AI-designed artifact reaches the hardware or software that trains or serves AI. <sub>Survey §5 · 12 entries</sub>
+Cases where an AI-designed artifact reaches the hardware or software that trains or serves AI. <sub>Survey §5 · 9 entries</sub>
 
 | Case | Year · source | Loop | Level | Where it breaks |
 | --- | --- | --- | :---: | --- |
-| NVCell | 2021&nbsp;·&nbsp;DAC | RL generates standard-cell layouts | L1 | Designer is not the model being trained |
-| AlphaTensor | 2022&nbsp;·&nbsp;Nature | Searches matmul algorithms for specific hardware | L1 | Hardware is fixed |
-| PrefixRL | 2022&nbsp;·&nbsp;DAC | RL prefix circuits shipped in NVIDIA GPUs | L1 | Designer is not the model being trained |
-| AlphaDev | 2023&nbsp;·&nbsp;Nature | Sorting routines merged into LLVM libc++ | L1 | Only software updates |
-| AlphaEvolve | 2025&nbsp;·&nbsp;DeepMind | One agent rewrites a TPU circuit and a Gemini kernel | **L3** | Closed, but one turn is worth ~1% |
-| OpenAI × Broadcom | 2025&nbsp;·&nbsp;interview | ~20 optimizations on human-optimized blocks | Possible L1 | Cannot be verified |
-| MTIA v2 | 2025&nbsp;·&nbsp;ISCA | Recommendation workloads drive chip design | Human | Executor is not a model |
-| Pangu Ultra × Ascend | 2025&nbsp;·&nbsp;tech&nbsp;report | Model and recipe built around NPUs | Human | Executor is not a model |
-| Jalapeño | 2026&nbsp;·&nbsp;press | Nine months from design to tape-out | Possible L3 | Cannot be verified |
-| Qwen chip–model | 2026&nbsp;·&nbsp;blog | Chip and inference stack adapted in parallel | L3 | The two ends are not connected |
+| AlphaChip | 2020–24&nbsp;·&nbsp;Nature | RL placement in three TPU generations | L1 | Designer is not the model being trained |
+| PrefixRL | 2022&nbsp;·&nbsp;DAC | RL designs parallel prefix circuits for NVIDIA GPUs | L1 | Designer is not the model being trained |
+| AlphaEvolve | 2025&nbsp;·&nbsp;DeepMind | One agent rewrites a TPU circuit and a Gemini kernel | **L3[S]** | Closed, but one turn is worth ~1% and the layers do not co-adapt |
+| OpenAI × Broadcom, Jalapeño | 2025–26&nbsp;·&nbsp;podcast,&nbsp;press | Models help design the inference chip that serves them, taped out in nine months | Possible L3[H] | Cannot be verified |
+| Kimi K3 | 2026&nbsp;·&nbsp;tech&nbsp;report | Kernels for its own modules; a chip prototype for a small model of the same architecture | Possible L3[S] | Kernels adapt one way; the chip does not return to K3 |
+| Qwen chip–model | 2026&nbsp;·&nbsp;blog | Chip-block design, inference-stack adaptation and self-directed training | L3[θ] | Self-improvement bypasses the chip and inference ends |
 | *Design Conductor 2.0* | 2026&nbsp;·&nbsp;arXiv | Reads an algorithm paper, designs an accelerator | L2 | Product does not flow back to the designer |
 
 Three failure patterns: the **executor** is not the trained model or is a human team; the **signal** does not flow between the two ends; or the **gain** per turn is too small or cannot be checked.
@@ -161,17 +160,14 @@ Three failure patterns: the **executor** is not the trained model or is a human 
 | Work | Venue | Level | Note |
 | :--- | :--- | :---: | :--- |
 | ⭐ [NVCell: Standard Cell Layout in Advanced Technology Nodes with Reinforcement Learning](https://arxiv.org/abs/2107.07044) | [DAC&nbsp;2021](https://doi.org/10.1109/dac18074.2021.9586188) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | RL generates standard-cell layouts and fixes DRC violations, bringing cell-library development into an automated flow. |
-| ⭐ [Discovering Faster Matrix Multiplication Algorithms with Reinforcement Learning](https://doi.org/10.1038/s41586-022-05172-4) [![Code](https://img.shields.io/github/stars/google-deepmind/alphatensor?style=social&label=Code)](https://github.com/google-deepmind/alphatensor) | Nature&nbsp;2022 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | AlphaTensor searches matrix-multiplication decompositions with RL and can target measured runtime on a specific GPU or TPU, putting hardware measurements directly into algorithm design. |
 | ⭐ [PrefixRL: Optimization of Parallel Prefix Circuits using Deep Reinforcement Learning](https://arxiv.org/abs/2205.07000) [[Link](https://developer.nvidia.com/blog/designing-arithmetic-circuits-with-deep-reinforcement-learning/)] | [DAC&nbsp;2022](https://doi.org/10.1109/dac18074.2021.9586094) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | RL designs parallel-prefix circuits with post-synthesis area/delay as reward; ~13,000 AI-designed circuit instances ship in NVIDIA Hopper. |
-| ⭐ [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning](https://doi.org/10.1038/s41586-023-06004-9) [![Code](https://img.shields.io/github/stars/google-deepmind/alphadev?style=social&label=Code)](https://github.com/google-deepmind/alphadev) | Nature&nbsp;2023 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | AlphaDev discovers assembly-level sorting routines that were merged into LLVM's libc++, a precedent for AI-found low-level improvements entering production stacks. |
-| ⭐ [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) | [Google DeepMind white paper&nbsp;2025](https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | An early, narrow L3: a Gemini-driven evolutionary coding agent rewrote a TPU arithmetic circuit and sped up a Gemini training kernel by 23% (~1% of total training time). |
-| ⭐ [Meta's Second Generation AI Chip: Model-Chip Co-Design and Productionization Experiences](https://doi.org/10.1145/3695053.3731409) | ISCA&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | MTIA v2: recommendation-model workloads directly set the chip's compute/memory balance; strong cross-layer coupling executed by human teams. |
-| ⭐ [OpenAI and Broadcom Announce Strategic Collaboration to Deploy 10 Gigawatts of Custom AI Accelerators](https://tech.yahoo.com/ai/articles/greg-brockman-says-openais-tech-035921214.html) | Press release and The OpenAI Podcast&nbsp;2025 | ![Possible L1](https://img.shields.io/badge/-Possible_L1-93c5fd?style=flat-square) | OpenAI states its models found ~20 optimizations on human-optimized components of its custom accelerator (L1 by description); not independently verifiable. |
-| [Pangu Ultra MoE: How to Train Your Big MoE on Ascend NPUs](https://arxiv.org/abs/2505.04519) | arXiv&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | Pangu Ultra on Ascend: simulation before training picks hyperparameters suited to the NPU, and a 718B model trains at 30% MFU on 6K Ascend NPUs. |
-| ⭐ [Pangu Ultra: Pushing the Limits of Dense Large Language Models on Ascend NPUs](https://arxiv.org/abs/2504.07866) | arXiv&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | A dense ~100B+ model whose architecture and training recipe were adapted to large Ascend NPU clusters; human-driven co-design. |
-| [Alibaba Reports Progress on Omni-Modal Models, with Qwen4 and a Next-Generation Video Model in Training (阿里公布全模态模型新进展，Qwen4 和下代视频模型均在训练中)](https://www.qbitai.com/2026/09/493625.html) | QbitAI report on the 2026 Apsara Conference&nbsp;2026 |  | Alibaba Cloud reports that a model iterated its own training for over a month and 33 rounds without humans, raising its Artificial Analysis score from 40 to 45. |
-| ⭐ [Chip–Model Co-Evolution: Qwen in Production Chip Design and Inference Adaptation (芯模协同进化：Qwen 落地生产级芯片设计与推理适配)](https://mp.weixin.qq.com/s/UosZXtL16-VxSrDQ5WGwOw) | Qwen official WeChat account&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | Qwen3.8-Max takes a NoC module from spec through RTL, verification and physical implementation, and separately deploys and tunes a new model on a domestic accelerator; the two ends are not yet connected. |
-| ⭐ [OpenAI and Broadcom Unveil LLM-Optimized Inference Chip Jalapeño](https://openai.com/index/openai-broadcom-jalapeno-inference-chip/) | Press release&nbsp;2026 | ![Possible L3](https://img.shields.io/badge/-Possible_L3-86efac?style=flat-square) | OpenAI–Broadcom LLM inference chip taped out nine months from initial design, with models said to have helped design and optimization; the model's role is not disclosed. |
+| ⭐ [AlphaEvolve: A Coding Agent for Scientific and Algorithmic Discovery](https://arxiv.org/abs/2506.13131) | [Google DeepMind white paper&nbsp;2025](https://deepmind.google/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/) | ![L3[S]](https://img.shields.io/badge/-L3%5BS%5D-15803d?style=flat-square) | The only verifiable L3[S]: a Gemini-driven evolutionary coding agent sped up a Gemini training kernel by 23% (~1% of total training time); its TPU arithmetic circuit becomes L3[H] once the next TPU tapes out. |
+| [OpenAI and Broadcom Announce Strategic Collaboration to Deploy 10 Gigawatts of OpenAI-Designed AI Accelerators](https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/) | Press release, October 13&nbsp;2025 |  | OpenAI and Broadcom announce a collaboration to deploy 10 GW of OpenAI-designed AI accelerators. |
+| ⭐ [OpenAI x Broadcom and the Future of Compute](https://shows.acast.com/openai-podcast/episodes/episode-8-openai-x-broadcom-and-the-future-of-compute) | The OpenAI Podcast, Episode 8, October 13&nbsp;2025 | ![Possible L3[H]](https://img.shields.io/badge/-Possible_L3%5BH%5D-bbf7d0?style=flat-square) | OpenAI says its models found ~20 optimizations on human-optimized blocks of its custom accelerator, the chip that became Jalapeño; not independently verifiable. |
+| [Alibaba Reports Progress on Omni-Modal Models, with Qwen4 and a Next-Generation Video Model in Training (阿里公布全模态模型新进展，Qwen4 和下代视频模型均在训练中)](https://www.qbitai.com/2026/09/493625.html) | QbitAI report on the 2026 Apsara Conference&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | Alibaba Cloud reports that a model iterated its own training for over a month and 33 rounds without humans, raising its Artificial Analysis score from 40 to 45. |
+| ⭐ [Chip–Model Co-Evolution: Qwen in Production Chip Design and Inference Adaptation (芯模协同进化：Qwen 落地生产级芯片设计与推理适配)](https://mp.weixin.qq.com/s/UosZXtL16-VxSrDQ5WGwOw) | Qwen official WeChat account&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | Qwen3.8-Max takes a NoC module from spec through RTL, verification and physical implementation, and separately deploys and tunes a new model on a domestic accelerator; the two ends are not yet connected. |
+| [Kimi K3: Open Frontier Intelligence](https://arxiv.org/abs/2607.24653) | arXiv&nbsp;2026 | ![Possible L3[S]](https://img.shields.io/badge/-Possible_L3%5BS%5D-86efac?style=flat-square) | Kimi K3 rewrote kernels for its own modules and, in one 48-hour run, designed an inference-chip prototype for a small model of its architecture; whether the kernels entered its own training and serving is not disclosed. |
+| ⭐ [OpenAI and Broadcom Unveil LLM-Optimized Inference Chip Jalapeño](https://openai.com/index/openai-broadcom-jalapeno-inference-chip/) | Press release&nbsp;2026 | ![Possible L3[H]](https://img.shields.io/badge/-Possible_L3%5BH%5D-bbf7d0?style=flat-square) | OpenAI–Broadcom LLM inference chip taped out nine months from initial design, with models said to have helped design and optimization; the model's role is not disclosed. |
 
 </details>
 
@@ -209,7 +205,7 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | :--- | :--- | :---: | :--- |
 | [Machine Learning Applications in Physical Design: Recent Results and Directions](https://doi.org/10.1145/3177540.3177554) | ISPD&nbsp;2018 |  | Overview of ML applications in physical design and their open directions. |
 | [RouteNet: Routability Prediction for Mixed-Size Designs Using Convolutional Neural Network](https://doi.org/10.1145/3240765.3240843) | ICCAD&nbsp;2018 |  | RouteNet predicts routability with a CNN, an early example of ML replacing expensive implementation runs with prediction. |
-| [DSO.ai: AI-Driven Design Space Optimization](https://www.synopsys.com/ai/chip-design/dso-ai.html) | Press release, March 11, 2020&nbsp;2020 |  | Synopsys DSO.ai uses reinforcement learning to search chip design-space parameters. |
+| [DSO.ai: AI-Driven Design Space Optimization](https://www.synopsys.com/ai/chip-design/dso-ai.html) | Press release, March 11&nbsp;2020 |  | Synopsys DSO.ai uses reinforcement learning to search chip design-space parameters. |
 | ⭐ [A Graph Placement Methodology for Fast Chip Design](https://doi.org/10.1038/s41586-021-03544-w) [![Code](https://img.shields.io/github/stars/google-research/circuit_training?style=social&label=Code)](https://github.com/google-research/circuit_training) | Nature&nbsp;2021 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | RL macro placement, later reported in use for TPU v5e, v5p and Trillium. |
 | [Assessment of Reinforcement Learning for Macro Placement](https://doi.org/10.1145/3569052.3578926) [![Code](https://img.shields.io/github/stars/TILOS-AI-Institute/MacroPlacement?style=social&label=Code)](https://github.com/TILOS-AI-Institute/MacroPlacement) | ISPD&nbsp;2023 |  | Independent assessment of RL macro placement; part of the reproducibility debate around AlphaChip. |
 | [How AlphaChip Transformed Computer Chip Design](https://deepmind.google/blog/how-alphachip-transformed-computer-chip-design/) | Google DeepMind Blog&nbsp;2024 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Google DeepMind's retrospective on AlphaChip and its use across TPU generations. |
@@ -254,10 +250,10 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [VFlow: Discovering Optimal Agentic Workflows for Verilog Generation](https://arxiv.org/abs/2504.03723) | [arXiv&nbsp;2025](https://doi.org/10.1109/asp-dac66049.2026.11420713) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | VFlow evolves the agentic workflow that generates RTL with multi-population co-evolution and MCTS, jointly optimizing correctness, PPA and token cost. |
 | [Agentic Hardware Design as Repository-Level Code Evolution](https://arxiv.org/abs/2606.28279) | arXiv&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | HORIZON treats hardware design as repository-level code evolution under an executable evaluator and acceptance conditions. |
 | [AutoGate: Automated Clock Gating via Toggling-Aware LLM-based RTL Rewriting](https://arxiv.org/abs/2606.17461) | arXiv&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | AutoGate inserts fine-grained clock gating from real-workload toggle activity, reducing dynamic power on NVDLA by 19.34%. |
-| Cedar: Learning to Optimize RTL via Accumulating Verified Rewrite Rules | ICCAD&nbsp;2026 |  | Cedar has an LLM propose rewrite rules, verifies each with Z3 and keeps verified rules for later designs, cutting area and power by ~19% on RTLLM. |
+| Cedar: Learning to Optimize RTL via Accumulating Verified Rewrite Rules | ICCAD&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | Cedar has an LLM propose rewrite rules, verifies each with Z3 and keeps verified rules for later designs, cutting area and power by ~19% on RTLLM. |
 | [ChipSeek: Optimizing Verilog Generation via EDA-Integrated Reinforcement Learning](https://arxiv.org/abs/2507.04736) | [ACL&nbsp;2026](https://doi.org/10.18653/v1/2026.acl-long.1154) |  | ChipSeek puts post-synthesis PPA into the RL reward after functional correctness, bringing S3 signals into training. |
 | [CodeV: Empowering LLMs With HDL Generation Through Multilevel Summarization](https://arxiv.org/abs/2407.10424) [![Code](https://img.shields.io/github/stars/IPRC-DIP/CodeV?style=social&label=Code)](https://github.com/IPRC-DIP/CodeV) | TCAD&nbsp;2026 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) † | CodeV back-translates code into descriptions through multi-level summarization to build fine-tuning data. |
-| [Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement](https://arxiv.org/abs/2604.14989) | ICCAD&nbsp;2026 |  | Dr. RTL distills a reusable skill library from parallel rewrites, improving WNS/TNS by 21%/17% and area by 6% against a commercial tool on 20 real designs. |
+| [Dr. RTL: Autonomous Agentic RTL Optimization through Tool-Grounded Self-Improvement](https://arxiv.org/abs/2604.14989) | ICCAD&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | Dr. RTL distills a reusable skill library from parallel rewrites, improving WNS/TNS by 21%/17% and area by 6% against a commercial tool on 20 real designs. |
 | [QiMeng-ChipV-RTL: Exploiting Information Locality for IP-level Verilog Generation](https://arxiv.org/abs/2602.00704) | ICML&nbsp;2026 |  | QiMeng-ChipV-RTL splits long specifications into local tasks, raising the RealBench pass rate from 21.6% to 45.0% as the frontier moves to IP level. |
 
 ### Debugging and repair
@@ -277,7 +273,7 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [AssertLLM: Generating and Evaluating Hardware Verification Assertions from Design Specifications via Multi-LLMs](https://arxiv.org/abs/2402.00386) [![Code](https://img.shields.io/github/stars/hkust-zhiyao/AssertLLM?style=social&label=Code)](https://github.com/hkust-zhiyao/AssertLLM) | LAD&nbsp;2024 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) † | AssertLLM extracts verification assertions from design specifications with multiple LLMs. |
 | [AssertionForge: Enhancing Formal Verification Assertion Generation with Structured Representation of Specifications and RTL](https://arxiv.org/abs/2503.19174) | [ICLAD&nbsp;2025](https://doi.org/10.1109/iclad65226.2025.00009) |  | AssertionForge builds a knowledge graph from the specification and RTL and generates formal assertions from it. |
 | [LLM4DV: Using Large Language Models for Hardware Test Stimuli Generation](https://arxiv.org/abs/2310.04535) [![Code](https://img.shields.io/github/stars/ZixiBenZhang/ml4dv?style=social&label=Code)](https://github.com/ZixiBenZhang/ml4dv) | [FCCM&nbsp;2025](https://doi.org/10.1109/fccm62733.2025.00048) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) † | LLM4DV generates hardware test stimuli with LLMs, iterating on coverage feedback. |
-| ⭐ [Saarthi: An Agentic AI Framework for End-to-End Formal Verification](https://arxiv.org/abs/2502.16662) | arXiv&nbsp;2025 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) † | Saarthi coordinates multiple agents to carry out end-to-end formal verification. |
+| ⭐ [Saarthi: The First AI Formal Verification Engineer](https://arxiv.org/abs/2502.16662) | arXiv&nbsp;2025 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) † | Saarthi coordinates multiple agents to carry out end-to-end formal verification. |
 | [UVLLM: An Automated Universal RTL Verification Framework using LLMs](https://arxiv.org/abs/2411.16238) [![Code](https://img.shields.io/github/stars/amyuch/UVLLM?style=social&label=Code)](https://github.com/amyuch/UVLLM) | [DAC&nbsp;2025](https://doi.org/10.1109/dac63849.2025.11435108) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) † | UVLLM automates UVM-style RTL verification, generating test environments and fixing errors in a loop. |
 | [HierSVA: A Data Synthesis Pipeline, Dataset, and Benchmark for LLM-Driven Hierarchical Hardware Formal Verification](https://arxiv.org/abs/2606.13706) | NeurIPS&nbsp;2026 |  | 82.1% of generated assertions prove non-vacuously yet catch only 70.2% of injected faults; a provable assertion is not a reliable gate. |
 | [LLM4Cov: Execution-Aware Agentic Learning for High-Coverage Testbench Generation](https://arxiv.org/abs/2602.16953) | ICML&nbsp;2026 |  | LLM4Cov approaches coverage closure through offline agent learning, bringing a 4B model to 90.4% average coverage. |
@@ -319,8 +315,8 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [HELIX: Placement Heuristics Evolution via LLM-Instructed Code Exploration](https://vlsicad.ucsd.edu/Publications/Conferences/430/c430.pdf) | ICCAD&nbsp;2026 |  | HELIX edits OpenROAD's C++ source directly, cutting routed wirelength by 5.6% in geometric mean and up to 23%. |
 | [MappingEvolve: LLM-Driven Code Evolution for Technology Mapping](https://arxiv.org/abs/2604.26591) | [DAC&nbsp;2026](https://doi.org/10.1145/3770743.3803988) |  | MappingEvolve evolves technology-mapping code, reducing area by 10.04% against ABC. |
 | [See it to Place it: Evolving Macro Placements with Vision-Language Models](https://arxiv.org/abs/2603.28733) | NeurIPS&nbsp;2026 |  | VeoPlace has a vision-language model draw region constraints for an existing placer, improving DREAMPlace by up to 4.4% on Superblue designs. |
-| [Self-Evolving Algorithm-Design Agents: Escaping In-Context Evolutionary Stagnation via Population-Curated Policy Optimization](https://arxiv.org/abs/2609.38757) | arXiv&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | PCPO's algorithm-designing model grows stronger through its own placement designs, bringing chip design into L3. |
-| [StateTune: Transforming LLM-Assisted EDA Flow Tuning into a Stateful, Closed-Loop Process](https://arxiv.org/abs/2608.23601) | ICCAD&nbsp;2026 |  | StateTune keeps a persistent memory for flow tuning, reaching the best hypervolume on all six blocks of a Cadence industrial flow; removing memory loses 58.5%. |
+| [Self-Evolving Algorithm-Design Agents: Escaping In-Context Evolutionary Stagnation via Population-Curated Policy Optimization](https://arxiv.org/abs/2609.38757) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | PCPO's algorithm-designing model grows stronger through its own placement designs, bringing chip design into L3. |
+| [StateTune: Transforming LLM-Assisted EDA Flow Tuning into a Stateful, Closed-Loop Process](https://arxiv.org/abs/2608.23601) | ICCAD&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | StateTune keeps a persistent memory for flow tuning, reaching the best hypervolume on all six blocks of a Cadence industrial flow; removing memory loses 58.5%. |
 
 ### End-to-end agents
 
@@ -331,10 +327,10 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 | [AMS-IO-Bench and AMS-IO-Agent: Benchmarking and Structured Reasoning for Analog and Mixed-Signal Integrated Circuit Input/Output Design](https://arxiv.org/abs/2512.21613) | [AAAI&nbsp;2026](https://doi.org/10.1609/aaai.v40i2.37134) |  | AMS-IO-Agent generates an I/O ring that was taped out in a 28 nm process, a single subsystem rather than a whole chip. |
 | ⭐ [Design Conductor 2.0: An Agent Builds a TurboQuant Inference Accelerator in 80 Hours](https://arxiv.org/abs/2605.05170) | arXiv&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | Design Conductor 2.0 reads the TurboQuant paper and designs VerTQ, an LLM-inference accelerator (5,129 FP units, 240-stage pipeline) in 80 hours; a cross-layer decision made from the model side, at L2. |
 | ⭐ [Design Conductor: An Agent Autonomously Builds a RISC-V CPU](https://arxiv.org/abs/2603.08716) | arXiv&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | Design Conductor builds a tape-out-ready RISC-V core from a 219-word spec in 12 hours, closing timing at 1.48 GHz in ASAP7. |
-| [How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip](https://spectrum.ieee.org/llms-for-chip-design) | IEEE Spectrum, September 14, 2026&nbsp;2026 |  | Jalapeño's first silicon returned in May 2026, human-led with models contributing to the front end. |
+| [How OpenAI Used Its Own LLMs to Design Its Jalapeño Chip](https://spectrum.ieee.org/llms-for-chip-design) | IEEE Spectrum, September 14&nbsp;2026 |  | Jalapeño's first silicon returned in May 2026, human-led with models contributing to the front end. |
 | [PCBgen: Self-Evolving LLM Agent for Specification-to-Schematic PCB Design with Parameter Tuning](https://doi.org/10.1145/3770743.3803934) | DAC&nbsp;2026 |  | PCBgen has a self-evolving agent generate PCB schematics from specifications and tune their parameters, reaching beyond the chip itself. |
 | [Redwood: A Frontier AI Accelerator Designed, Verified, and Deployed from Scratch in 2 Weeks by AI](https://arxiv.org/abs/2608.26418) | arXiv&nbsp;2026 |  | An accelerator SoC whose performance model, RTL, verification and firmware were produced by AI in two weeks; FPGA only so far. |
-| [The State of Agentic AI in Chip Design Tools in 2026: Cadence, Synopsys, and Siemens All Pitch Autonomous Engineers](https://www.tomshardware.com/tech-industry/semiconductors/the-state-of-agentic-ai-in-chip-design-tools-in-2026-cadence-synopsys-and-siemens-all-pitch-autonomous-engineers) | Tom's Hardware&nbsp;2026 | ![L1–L2](https://img.shields.io/badge/-L1%E2%80%93L2-4f46e5?style=flat-square) | Overview of the 2026 agentic EDA products from Cadence, Synopsys and Siemens, which automate whole flow segments rather than single steps. |
+| [The State of Agentic AI in Chip Design Tools in 2026: Cadence, Synopsys, and Siemens All Pitch Autonomous Engineers](https://www.tomshardware.com/tech-industry/semiconductors/the-state-of-agentic-ai-in-chip-design-tools-in-2026-cadence-synopsys-and-siemens-all-pitch-autonomous-engineers) | Tom's Hardware&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | Overview of the 2026 agentic EDA products from Cadence, Synopsys and Siemens, which automate whole flow segments rather than single steps. |
 
 ### Analog circuits
 
@@ -353,9 +349,9 @@ Language models as chip designers, from tuning tools to writing RTL to rewriting
 
 ## 3. Design Flows Down (II): Model → Software Stack
 
-The stack returns feedback fastest (profiles in minutes, end-to-end runs in hours), so loops close here first. <sub>Survey §2.2.4, §4.2 · 73 entries</sub>
+The stack returns feedback fastest (profiles in minutes, end-to-end runs in hours), so loops close here first. <sub>Survey §2.2.4, §4.2 · 75 entries</sub>
 
-> [Tensor compilers and kernel languages](#tensor-compilers-and-kernel-languages) 16 · [Human-built stacks for specific models](#human-built-stacks-for-specific-models) 7 · [LLM-generated kernels](#llm-generated-kernels) 25 · [From kernels to end-to-end workloads](#from-kernels-to-end-to-end-workloads) 8 · [ML and LLMs for compilers](#ml-and-llms-for-compilers) 8 · [Inference systems and deployment adaptation](#inference-systems-and-deployment-adaptation) 9
+> [Tensor compilers and kernel languages](#tensor-compilers-and-kernel-languages) 16 · [Human-built stacks for specific models](#human-built-stacks-for-specific-models) 7 · [LLM-generated kernels](#llm-generated-kernels) 25 · [From kernels to end-to-end workloads](#from-kernels-to-end-to-end-workloads) 8 · [ML and LLMs for compilers](#ml-and-llms-for-compilers) 10 · [Inference systems and deployment adaptation](#inference-systems-and-deployment-adaptation) 9
 
 ### Tensor compilers and kernel languages
 
@@ -394,26 +390,26 @@ The stack returns feedback fastest (profiles in minutes, end-to-end runs in hour
 
 | Work | Venue | Level | Note |
 | :--- | :--- | :---: | :--- |
-| [AccelOpt: A Self-Improving LLM Agentic System for AI Accelerator Kernel Optimization](https://arxiv.org/abs/2511.15915) | arXiv&nbsp;2025 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | AccelOpt distills experience from slow/fast kernel pairs and keeps improving on AWS Trainium as experience accumulates. |
+| [AccelOpt: A Self-Improving LLM Agentic System for AI Accelerator Kernel Optimization](https://arxiv.org/abs/2511.15915) | arXiv&nbsp;2025 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | AccelOpt distills experience from slow/fast kernel pairs and keeps improving on AWS Trainium as experience accumulates. |
 | [Adaptive Self-Improvement LLM Agentic System for ML Library Development](https://arxiv.org/abs/2502.02534) | ICML&nbsp;2025 |  | Agents filter high-quality samples from accumulated experience and reuse them as demonstrations, improving ML library generation by up to 3.9×. |
 | [Automating GPU Kernel Generation with DeepSeek-R1 and Inference Time Scaling](https://developer.nvidia.com/blog/automating-gpu-kernel-generation-with-deepseek-r1-and-inference-time-scaling/) | NVIDIA Technical Blog&nbsp;2025 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | NVIDIA pairs DeepSeek-R1 with a verifier and inference-time scaling to generate attention kernels. |
 | ⭐ [GEAK: Introducing Triton Kernel AI Agent & Evaluation Benchmarks](https://arxiv.org/abs/2507.23194) [![Code](https://img.shields.io/github/stars/AMD-AGI/GEAK?style=social&label=Code)](https://github.com/AMD-AGI/GEAK) | arXiv&nbsp;2025 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | GEAK generates Triton kernels for AMD GPUs in a Reflexion-style loop: ~55% execution accuracy and 2.59x mean speedup on revised TritonBench. |
 | [KernelLLM: Making Kernel Development More Accessible](https://huggingface.co/facebook/KernelLLM) | Hugging Face model release, Meta&nbsp;2025 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) | Meta's KernelLLM translates PyTorch modules directly into Triton kernels. |
 | [The AI CUDA Engineer: Agentic CUDA Kernel Discovery, Optimization and Composition](https://sakana.ai/ai-cuda-engineer/) | Sakana AI technical report&nbsp;2025 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Sakana's AI CUDA Engineer; its inflated speedups from an evaluation loophole were later corrected, an early warning on reward hacking. |
 | [Agentic Operator Generation for ML ASICs](https://arxiv.org/abs/2512.10977) | Conference on Machine Learning and Systems (MLSys), Industry Track&nbsp;2026 |  | TritorX generates ATen operators for MTIA on real chips and simulators of next-generation chips, so an operator library exists before the chip. |
-| [Beyond Scaling: Self-Evolving LLM Agents for Hardware Kernel Optimization via an Experience-Driven Workflow and Experience Graph Memory](https://arxiv.org/abs/2608.25570) | arXiv&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | KOPE organizes Ascend kernel-optimization experience into a graph; with the base model unchanged, the pass rate rises from 55.2% to 84.6%. |
-| [CAKE: Compiler-Agent Co-Design for Frontier Kernel Evolution](https://arxiv.org/abs/2608.12629) | arXiv&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | CAKE lets agents extend the IR, verifier rules, compiler and cost model when a kernel exposes an expressiveness gap, so later kernels use the improved toolchain. |
-| [CANNBot-CAKE: Collaborative Agentic Kernel Evolution for Ascend NPU](https://arxiv.org/abs/2610.31034) | arXiv&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | CANNBot-CAKE analyzes recurring failures in its run logs and proposes changes to its own skills, routing and prompts, with merging left to humans. |
+| [Beyond Scaling: Self-Evolving LLM Agents for Hardware Kernel Optimization via an Experience-Driven Workflow and Experience Graph Memory](https://arxiv.org/abs/2608.25570) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | KOPE organizes Ascend kernel-optimization experience into a graph; with the base model unchanged, the pass rate rises from 55.2% to 84.6%. |
+| [CAKE: Compiler-Agent Co-Design for Frontier Kernel Evolution](https://arxiv.org/abs/2608.12629) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | CAKE lets agents extend the IR, verifier rules, compiler and cost model when a kernel exposes an expressiveness gap, so later kernels use the improved toolchain. |
+| [CANNBot-CAKE: Collaborative Agentic Kernel Evolution for Ascend NPU](https://arxiv.org/abs/2610.31034) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | CANNBot-CAKE analyzes recurring failures in its run logs and proposes changes to its own skills, routing and prompts, with merging left to humans. |
 | ⭐ [CUDA Agent: Large-Scale Agentic RL for High-Performance CUDA Kernel Generation](https://arxiv.org/abs/2602.24286) [![Code](https://img.shields.io/github/stars/BytedTsinghua-SIA/CUDA-Agent?style=social&label=Code)](https://github.com/BytedTsinghua-SIA/CUDA-Agent) | arXiv&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Large-scale agentic RL over 6,000+ synthetic operators in a sandbox with automatic verification and profiling; beats torch.compile on all three KernelBench levels. |
 | [CUDA-L1: Improving CUDA Optimization via Contrastive Reinforcement Learning](https://arxiv.org/abs/2507.14111) [![Code](https://img.shields.io/github/stars/ornith-ai/CUDA-L1?style=social&label=Code)](https://github.com/ornith-ai/CUDA-L1) | [ICLR&nbsp;2026](https://iclr.cc/virtual/2026/poster/10007945) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | CUDA-L1 improves CUDA optimization with contrastive reinforcement learning. |
-| ⭐ [daVinci-kernel: Co-Evolving Skill Selection, Summarization, and Utilization via RL for GPU Kernel Optimization](https://arxiv.org/abs/2606.16497) | arXiv&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | daVinci-kernel co-evolves a skill library with RL training, admitting a skill only after execution confirms a reproducible speedup. |
+| ⭐ [daVinci-kernel: Co-Evolving Skill Selection, Summarization, and Utilization via RL for GPU Kernel Optimization](https://arxiv.org/abs/2606.16497) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | daVinci-kernel co-evolves a skill library with RL training, admitting a skill only after execution confirms a reproducible speedup. |
 | [Dr. Kernel: Reinforcement Learning Done Right for Triton Kernel Generations](https://arxiv.org/abs/2602.05885) | ICML&nbsp;2026 |  | Dr. Kernel corrects a gradient bias in multi-turn GRPO and uses profiling-based rewards against reward hacking, bringing a 14B model level with Claude 4.5 Sonnet. |
 | [DRTriton: Large-Scale Synthetic Data Driven Reinforcement Learning for Triton Kernel Generation](https://arxiv.org/abs/2603.21465) | NeurIPS&nbsp;2026 |  | DRTriton trains a 7B model with synthetic data and curriculum RL, beating PyTorch on 92% of KernelBench Level-2 tasks against 23% for GPT-5.2. |
 | [Efficient Agentic GPU Kernel Optimization with a Compact Domain-Specific Language and Speed-of-Light Guidance](https://arxiv.org/abs/2603.29010) | NeurIPS&nbsp;2026 |  | Rewriting a compact CUTLASS DSL instead of low-level code turns a 0.40× regression on H100 into a 1.27× speedup; unchecked speedups can be inflated up to 1.9×. |
 | ⭐ [GEAK v4: From Faster Kernels to Faster Workloads](https://www.amd.com/en/developer/resources/technical-articles/2026/geak-v4.html) | AMD technical article&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | GEAK v4 optimizes whole SGLang/vLLM serving workloads: profile, triage with Amdahl's law, generate across Triton/TileLang/HIP, validate end to end. |
 | [KernelAgent: Hardware-Guided GPU Kernel Optimization via Multi-Agent Orchestration](https://pytorch.org/blog/kernelagent-hardware-guided-gpu-kernel-optimization-via-multi-agent-orchestration/) | PyTorch Blog&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Meta's KernelAgent diagnoses bottlenecks with Nsight Compute and roofline analysis, reaching 1.56× over torch.compile on KernelBench Level 1. |
 | [KernelBand: Steering LLM-based Kernel Optimization via Hardware-Aware Multi-Armed Bandits](https://arxiv.org/abs/2511.18868) | ICML&nbsp;2026 |  | KernelBand treats kernel optimization as a multi-armed bandit pruned by profiling bounds, up to 1.91× faster than the strongest agent baseline. |
-| [KernelBlaster: Continual Cross-Task CUDA Optimization via Memory-Augmented In-Context Reinforcement Learning](https://arxiv.org/abs/2602.14293) [![Code](https://img.shields.io/github/stars/NVlabs/KernelBlaster?style=social&label=Code)](https://github.com/NVlabs/KernelBlaster) | arXiv&nbsp;2026 | ![L3](https://img.shields.io/badge/-L3-16a34a?style=flat-square) | KernelBlaster transfers optimization knowledge across GPU generations with memory-augmented in-context RL. |
+| [KernelBlaster: Continual Cross-Task CUDA Optimization via Memory-Augmented In-Context Reinforcement Learning](https://arxiv.org/abs/2602.14293) [![Code](https://img.shields.io/github/stars/NVlabs/KernelBlaster?style=social&label=Code)](https://github.com/NVlabs/KernelBlaster) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | KernelBlaster transfers optimization knowledge across GPU generations with memory-augmented in-context RL. |
 | [KernelEvolve: Scaling Agentic Kernel Coding for Heterogeneous AI Accelerators at Meta](https://arxiv.org/abs/2512.23236) | ISCA&nbsp;2026 |  | KernelEvolve deploys a graph-search kernel agent on Meta's production recommendation models across NVIDIA, AMD and MTIA, cutting development from weeks to hours. |
 | [Kevin: Multi-Turn RL for Generating CUDA Kernels](https://arxiv.org/abs/2507.11948) | [ICLR&nbsp;2026](https://iclr.cc/virtual/2026/poster/10006612) | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | Kevin trains CUDA-kernel writing with multi-turn reinforcement learning. |
 | [Optimizing CUDA like a Human: Micro-Profiling Tools as Expert Surrogates for LLM-Based GPU Kernel Optimization](https://arxiv.org/abs/2606.26453) | arXiv&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | KernelPro closes the loop with profiler feedback and pluggable bottleneck-detection tools. |
@@ -439,6 +435,8 @@ The stack returns feedback fastest (profiles in minutes, end-to-end runs in hour
 | :--- | :--- | :---: | :--- |
 | [MLGO: A Machine Learning Guided Compiler Optimizations Framework](https://arxiv.org/abs/2101.04808) [![Code](https://img.shields.io/github/stars/google/ml-compiler-opt?style=social&label=Code)](https://github.com/google/ml-compiler-opt) | arXiv&nbsp;2021 |  | MLGO brings learned policies into LLVM optimization decisions such as inlining. |
 | [CompilerGym: Robust, Performant Compiler Optimization Environments for AI Research](https://arxiv.org/abs/2109.08267) [![Code](https://img.shields.io/github/stars/facebookresearch/CompilerGym?style=social&label=Code)](https://github.com/facebookresearch/CompilerGym) | [CGO&nbsp;2022](https://doi.org/10.1109/cgo53902.2022.9741258) |  | CompilerGym wraps compiler optimization as RL environments with code size or runtime as reward. |
+| ⭐ [Discovering Faster Matrix Multiplication Algorithms with Reinforcement Learning](https://doi.org/10.1038/s41586-022-05172-4) [![Code](https://img.shields.io/github/stars/google-deepmind/alphatensor?style=social&label=Code)](https://github.com/google-deepmind/alphatensor) | Nature&nbsp;2022 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | AlphaTensor searches matrix-multiplication decompositions with RL and can target measured runtime on a specific GPU or TPU, putting hardware measurements directly into algorithm design. |
+| ⭐ [Faster Sorting Algorithms Discovered Using Deep Reinforcement Learning](https://doi.org/10.1038/s41586-023-06004-9) [![Code](https://img.shields.io/github/stars/google-deepmind/alphadev?style=social&label=Code)](https://github.com/google-deepmind/alphadev) | Nature&nbsp;2023 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | AlphaDev discovers assembly-level sorting routines that were merged into LLVM's libc++, a precedent for AI-found low-level improvements entering production stacks. |
 | [Large Language Models for Compiler Optimization](https://arxiv.org/abs/2309.07062) | arXiv&nbsp;2023 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) † | Trains an LLM to optimize LLVM IR pass ordering directly. |
 | [Compiler-R1: Towards Agentic Compiler Auto-tuning with Reinforcement Learning](https://arxiv.org/abs/2506.15701) | NeurIPS&nbsp;2025 |  | Compiler-R1 trains an agent with RL to choose LLVM pass sequences, cutting IR instruction count a further 8.46% beyond opt -Oz. |
 | ⭐ [LLM Compiler: Foundation Language Models for Compiler Optimization](https://arxiv.org/abs/2407.02524) | CC&nbsp;2025 | ![L0](https://img.shields.io/badge/-L0-64748b?style=flat-square) † | Foundation models pretrained to understand and optimize compiler IR and assembly. |
@@ -466,9 +464,9 @@ The stack returns feedback fastest (profiles in minutes, end-to-end runs in hour
 
 ## 4. Constraints Flow Up: Silicon → Model
 
-Hardware constraints shape model design. This is the most cross-layer path, but its executors are almost all human teams. <sub>Survey §2.2, §4.3 · 68 entries</sub>
+Hardware constraints shape model design. This is the most cross-layer path, but its executors are almost all human teams. <sub>Survey §2.2, §4.3 · 72 entries</sub>
 
-> [From the hardware lottery to specialization](#from-the-hardware-lottery-to-specialization) 17 · [Attention and the memory hierarchy](#attention-and-the-memory-hierarchy) 13 · [Sparsity, MoE and decoding](#sparsity-moe-and-decoding) 8 · [Low precision and numeric formats](#low-precision-and-numeric-formats) 19 · [Parallelism and system-level co-design](#parallelism-and-system-level-co-design) 11
+> [From the hardware lottery to specialization](#from-the-hardware-lottery-to-specialization) 17 · [Attention and the memory hierarchy](#attention-and-the-memory-hierarchy) 13 · [Sparsity, MoE and decoding](#sparsity-moe-and-decoding) 8 · [Low precision and numeric formats](#low-precision-and-numeric-formats) 19 · [Parallelism and system-level co-design](#parallelism-and-system-level-co-design) 15
 
 ### From the hardware lottery to specialization
 
@@ -560,9 +558,13 @@ Hardware constraints shape model design. This is the most cross-layer path, but 
 | [ZeRO: Memory Optimizations Toward Training Trillion Parameter Models](https://arxiv.org/abs/1910.02054) [![Code](https://img.shields.io/github/stars/deepspeedai/DeepSpeed?style=social&label=Code)](https://github.com/deepspeedai/DeepSpeed) | [SC&nbsp;2020](https://doi.org/10.1109/sc41405.2020.00024) | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | ZeRO partitions optimizer state according to device memory capacity. |
 | [DeepSeek-V2: A Strong, Economical, and Efficient Mixture-of-Experts Language Model](https://arxiv.org/abs/2405.04434) [![Code](https://img.shields.io/github/stars/deepseek-ai/DeepSeek-V2?style=social&label=Code)](https://github.com/deepseek-ai/DeepSeek-V2) | arXiv&nbsp;2024 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | DeepSeek-V2 introduces MLA to compress the KV cache. |
 | [DeepSeek-V3 Technical Report](https://arxiv.org/abs/2412.19437) [![Code](https://img.shields.io/github/stars/deepseek-ai/DeepSeek-V3?style=social&label=Code)](https://github.com/deepseek-ai/DeepSeek-V3) | arXiv&nbsp;2024 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | DeepSeek-V3 trains on 2,048 H800s with FP8 mixed precision and compute–communication overlap. |
+| [NVIDIA GB200 NVL72](https://www.nvidia.com/en-us/data-center/gb200-nvl72/) | Product page&nbsp;2024 |  | GB200 NVL72 joins 72 GPUs in one NVLink domain, moving co-design from the chip to the rack. |
 | ⭐ [Insights into DeepSeek-V3: Scaling Challenges and Reflections on Hardware for AI Architectures](https://arxiv.org/abs/2505.09343) | [ISCA Industry&nbsp;2025](https://doi.org/10.1145/3695053.3731412) | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | DeepSeek's ISCA 2025 industry paper: how memory, compute and interconnect limits shaped V3, and what next-generation hardware should provide. |
 | [Ladder-Residual: Parallelism-Aware Architecture for Accelerating Large Model Inference with Communication Overlapping](https://arxiv.org/abs/2501.06589) | ICML&nbsp;2025 |  | Ladder-Residual reroutes residual connections to overlap tensor-parallel communication, making 70B inference 29% faster under 8-way TP. |
 | [MegaScale-Infer: Efficient Mixture-of-Experts Model Serving with Disaggregated Expert Parallelism](https://arxiv.org/abs/2504.02263) | ACM SIGCOMM Conference&nbsp;2025 |  | MegaScale-Infer places attention and FFN on separate GPUs, designing model structure and serving system together. |
+| ⭐ [Meta's Second Generation AI Chip: Model-Chip Co-Design and Productionization Experiences](https://doi.org/10.1145/3695053.3731409) | ISCA&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | MTIA v2: recommendation-model workloads directly set the chip's compute/memory balance; strong cross-layer coupling executed by human teams. |
+| [Pangu Ultra MoE: How to Train Your Big MoE on Ascend NPUs](https://arxiv.org/abs/2505.04519) | arXiv&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | Pangu Ultra on Ascend: simulation before training picks hyperparameters suited to the NPU, and a 718B model trains at 30% MFU on 6K Ascend NPUs. |
+| ⭐ [Pangu Ultra: Pushing the Limits of Dense Large Language Models on Ascend NPUs](https://arxiv.org/abs/2504.07866) | arXiv&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | A dense ~100B+ model whose architecture and training recipe were adapted to large Ascend NPU clusters; human-driven co-design. |
 | Scaling Llama 3 Training with Efficient Parallelism Strategies | ISCA&nbsp;2025 | ![Human-driven](https://img.shields.io/badge/-Human--driven-78716c?style=flat-square) | Meta trains Llama 3 with four kinds of parallelism at once and draws recommendations for future hardware. |
 | [Early Silicon of Raptor: The First 3D-DRAM Accelerator for Generative Inference](https://doi.org/10.1109/isca66397.2026.00183) | ISCA&nbsp;2026 |  | d-Matrix's Raptor stacks logic on DRAM, providing up to 100 TB/s per card for decoding. |
 | [Hardwired-Neuron Language Processing Units as General-Purpose Cognitive Substrates](https://arxiv.org/abs/2508.16151) | ASPLOS&nbsp;2026 |  | HNLPU hardwires model weights into the chip, reaching 5,555× GPU throughput by its own evaluation at the price of a tape-out per weight update. |
@@ -574,13 +576,12 @@ Hardware constraints shape model design. This is the most cross-layer path, but 
 
 ## 5. Who Carries the Constraints Up? LLM-Involved Cross-Layer Co-Design
 
-The first works in which an LLM changes two layers in one loop. Each adapts in one direction over one generation: precursors of L4, not yet co-evolution. <sub>Survey §4.4 · 4 entries</sub>
+The first works in which an LLM changes two layers in one loop. Each adapts in one direction over one generation: precursors of L4, not yet co-evolution. <sub>Survey §4.4 · 3 entries</sub>
 
 | Work | Venue | Level | Note |
 | :--- | :--- | :---: | :--- |
 | [MACO: A Multi-Agent LLM Framework for Automated CGRA Hardware/Software Co-Design](https://arxiv.org/abs/2509.13557) | arXiv&nbsp;2025 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | MACO sets CGRA hardware parameters and compiler options jointly with multiple agents over dozens of iterations; the designer itself does not grow stronger. |
 | [Accelerating the Inference Era with AI-Driven, Globally Optimized HW/SW Co-Design](https://neurips.cc/virtual/2026/poster/154818) | NeurIPS&nbsp;2026 | ![L1](https://img.shields.io/badge/-L1-2563eb?style=flat-square) | CHEETAH has an LLM outer loop steer an LP inner loop over hardware datapath, schedule and compiler transforms, ~22× faster than TPU-v3 in six hours; a cross-layer L1. |
-| [Kimi K3: Open Frontier Intelligence](https://arxiv.org/abs/2607.24653) | arXiv&nbsp;2026 | ![Possible L3](https://img.shields.io/badge/-Possible_L3-86efac?style=flat-square) | An early Kimi K3 checkpoint did most of the kernel optimization for K3's own modules; kernels adapt to the model in one direction, a precursor of L4[M·S]. |
 | [SparseCraft: Agentic Hardware-Software Co-Optimization for Sparse Computing](https://arxiv.org/abs/2610.05037) | arXiv&nbsp;2026 | ![L2](https://img.shields.io/badge/-L2-7c3aed?style=flat-square) | SparseCraft has Claude Opus 5 modify Gemmini's Chisel RTL and its sparse-kernel schedule in one loop, cutting EDP 11.8× in 15 iterations; a precursor of L4[S·H]. |
 
 <p align="right"><a href="#contents"><img alt="Back to contents" src="https://img.shields.io/badge/%E2%86%91%20Contents-64748b?style=flat-square"></a></p>
@@ -691,9 +692,9 @@ Update operators that let a model act on the system that runs it. <sub>Survey §
 
 ## 8. Intelligence: Knowledge, Rewards and Verification
 
-Pretraining brings knowledge, post-training teaches iteration toward verifiable targets, and agents extend both to long-horizon tool use. <sub>Survey §6 · 82 entries</sub>
+Pretraining brings knowledge, post-training teaches iteration toward verifiable targets, and agents extend both to long-horizon tool use. <sub>Survey §6 · 86 entries</sub>
 
-> [Pretraining, data and domain adaptation](#pretraining-data-and-domain-adaptation) 10 · [Verifiable rewards, post-training and agentic RL](#verifiable-rewards-post-training-and-agentic-rl) 21 · [Harnesses and skills](#harnesses-and-skills) 18 · [Model–harness co-evolution](#modelharness-co-evolution) 7 · [Simulation and formal verification tools](#simulation-and-formal-verification-tools) 6 · [Reward hacking and specification gaming](#reward-hacking-and-specification-gaming) 8 · [Cross-layer attribution and performance analysis](#cross-layer-attribution-and-performance-analysis) 4 · [Multi-fidelity optimization and fast simulation](#multi-fidelity-optimization-and-fast-simulation) 4 · [The pre-silicon / post-silicon gap](#the-pre-silicon--post-silicon-gap) 4
+> [Pretraining, data and domain adaptation](#pretraining-data-and-domain-adaptation) 10 · [Verifiable rewards, post-training and agentic RL](#verifiable-rewards-post-training-and-agentic-rl) 21 · [Harnesses and skills](#harnesses-and-skills) 22 · [Model–harness co-evolution](#modelharness-co-evolution) 7 · [Simulation and formal verification tools](#simulation-and-formal-verification-tools) 6 · [Reward hacking and specification gaming](#reward-hacking-and-specification-gaming) 8 · [Cross-layer attribution and performance analysis](#cross-layer-attribution-and-performance-analysis) 4 · [Multi-fidelity optimization and fast simulation](#multi-fidelity-optimization-and-fast-simulation) 4 · [The pre-silicon / post-silicon gap](#the-pre-silicon--post-silicon-gap) 4
 
 ### Pretraining, data and domain adaptation
 
@@ -740,9 +741,13 @@ Pretraining brings knowledge, post-training teaches iteration toward verifiable 
 
 | Work | Venue | Note |
 | :--- | :--- | :--- |
+| [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629) | ICLR&nbsp;2023 | ReAct interleaves reasoning traces with tool actions, the basic loop of today's agents. |
+| [Toolformer: Language Models Can Teach Themselves to Use Tools](https://arxiv.org/abs/2302.04761) | NeurIPS&nbsp;2023 | Toolformer teaches a language model to decide when and how to call external tools. |
+| [Cognitive Architectures for Language Agents](https://arxiv.org/abs/2309.02427) | TMLR&nbsp;2024 | CoALA organizes language agents into memory, action space and decision procedure. |
 | [Introducing the Model Context Protocol](https://www.anthropic.com/news/model-context-protocol) | Tool&nbsp;2024 | The Model Context Protocol standardizes the interface between models and tools. |
 | [SWE-agent: Agent-Computer Interfaces Enable Automated Software Engineering](https://arxiv.org/abs/2405.15793) | [NeurIPS&nbsp;2024](https://doi.org/10.52202/079017-1601) | SWE-agent shows that a suitable agent–computer interface greatly raises task completion rates. |
 | [Equipping Agents for the Real World with Agent Skills](https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills) | Anthropic Engineering Blog, https://www.anthropic.com/engineering/equipping-agents-for-the-real-world-with-agent-skills&nbsp;2025 | Agent Skills packages instructions, scripts and resources into folders loaded on demand. |
+| [OpenHands: An Open Platform for AI Software Developers as Generalist Agents](https://arxiv.org/abs/2407.16741) [![Code](https://img.shields.io/github/stars/All-Hands-AI/OpenHands?style=social&label=Code)](https://github.com/All-Hands-AI/OpenHands) | ICLR&nbsp;2025 | OpenHands, an open platform for software-engineering agents that edit code, run commands and browse. |
 | [Agent Skills for Large Language Models: Architecture, Acquisition, Security, and the Path Forward](https://arxiv.org/abs/2602.12430) | arXiv&nbsp;2026 | A survey of agent skills finds about a quarter of community-contributed skills carry security risks. |
 | [AlgoEvo: Self-Evolving Agentic Search for Automated Algorithm Discovery](https://arxiv.org/abs/2609.15820) | arXiv&nbsp;2026 | AlgoEvo distills past search trajectories into hierarchical experience and cross-task skills. |
 | [Can AI Agents Really Complete RTL-to-GDS? Lessons from Benchmarking Tool-Interactive EDA Workflows](https://arxiv.org/abs/2607.17528) | arXiv&nbsp;2026 | In RTL-to-GDS agents, mismatched tool interfaces, especially Tcl commands that change across versions, are the main source of physical-design failures. |
@@ -761,15 +766,15 @@ Pretraining brings knowledge, post-training teaches iteration toward verifiable 
 
 ### Model–harness co-evolution
 
-| Work | Venue | Note |
-| :--- | :--- | :--- |
-| [Co-Evolving Harnesses and Models: On-Policy Correction Helps Weaker Models Catch Up Where Imitation Fails](https://arxiv.org/abs/2609.09134) | arXiv&nbsp;2026 | As the harness improves, imitating a stronger model's full trajectories hurts; only local corrections where the model itself fails restore the fit. |
-| [Co-Harness: Co-Evolving Harnesses and Model Weights for LLM Agents](https://arxiv.org/abs/2607.22688) | arXiv&nbsp;2026 | Co-Harness alternates between revising the harness and fine-tuning the model. |
-| [CoEvo-RSI: When Harnesses Evolve, Which Models Should Follow?](https://arxiv.org/abs/2610.25078) | arXiv&nbsp;2026 | CoEvo-RSI jointly selects among past harnesses and checkpoints and evolves for ten rounds. |
-| [Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions](https://arxiv.org/abs/2607.03935) | arXiv&nbsp;2026 | HASE has the same model generate data, rewrite its own harness and train its own weights, with no external teacher. |
-| [HarnessForge: Joint Harness and Policy Evolution for Adaptive Agent Systems](https://arxiv.org/abs/2606.01779) | arXiv&nbsp;2026 | HarnessForge alternates between revising the harness and fine-tuning the model. |
-| [MetaRSI: A Meta-Recursive Self-Improving System for Recursive Self-Improving Systems Themselves](https://arxiv.org/abs/2609.06396) | arXiv&nbsp;2026 | MetaRSI has the same model generate data, rewrite its own harness and train its own weights, with no external teacher. |
-| [Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents](https://arxiv.org/abs/2609.29892) | arXiv&nbsp;2026 | Qwen-Planner-Agent rewrites the harness after each RL round from the new model's failures and keeps training under the new harness. |
+| Work | Venue | Level | Note |
+| :--- | :--- | :---: | :--- |
+| [Co-Evolving Harnesses and Models: On-Policy Correction Helps Weaker Models Catch Up Where Imitation Fails](https://arxiv.org/abs/2609.09134) | arXiv&nbsp;2026 |  | As the harness improves, imitating a stronger model's full trajectories hurts; only local corrections where the model itself fails restore the fit. |
+| [Co-Harness: Co-Evolving Harnesses and Model Weights for LLM Agents](https://arxiv.org/abs/2607.22688) | arXiv&nbsp;2026 |  | Co-Harness alternates between revising the harness and fine-tuning the model. |
+| [CoEvo-RSI: When Harnesses Evolve, Which Models Should Follow?](https://arxiv.org/abs/2610.25078) | arXiv&nbsp;2026 |  | CoEvo-RSI jointly selects among past harnesses and checkpoints and evolves for ten rounds. |
+| [Harness-Aware Self-Evolving: Co-Evolving Model Weights, Harness, and Task Solutions](https://arxiv.org/abs/2607.03935) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | HASE has the same model generate data, rewrite its own harness and train its own weights, with no external teacher. |
+| [HarnessForge: Joint Harness and Policy Evolution for Adaptive Agent Systems](https://arxiv.org/abs/2606.01779) | arXiv&nbsp;2026 |  | HarnessForge alternates between revising the harness and fine-tuning the model. |
+| [MetaRSI: A Meta-Recursive Self-Improving System for Recursive Self-Improving Systems Themselves](https://arxiv.org/abs/2609.06396) | arXiv&nbsp;2026 | ![L3[θ]](https://img.shields.io/badge/-L3%5B%CE%B8%5D-16a34a?style=flat-square) | MetaRSI has the same model generate data, rewrite its own harness and train its own weights, with no external teacher. |
+| [Qwen-Planner-Agent: A Closed-Loop AI-for-AI Framework for Real-World Mobile Planner Agents](https://arxiv.org/abs/2609.29892) | arXiv&nbsp;2026 |  | Qwen-Planner-Agent rewrites the harness after each RL round from the new model's failures and keeps training under the new harness. |
 
 ### Simulation and formal verification tools
 
@@ -869,7 +874,7 @@ A verifier becomes a reward and a task set becomes an environment. Almost every 
 | [Can Large Language Models Write Parallel Code?](https://arxiv.org/abs/2401.12554) [![Code](https://img.shields.io/github/stars/parallelcodefoundry/ParEval?style=social&label=Code)](https://github.com/parallelcodefoundry/ParEval) | [HPDC&nbsp;2024](https://doi.org/10.1145/3625549.3658689) | ParEval asks whether LLMs can write parallel code. |
 | ⭐ [KernelBench: Can LLMs Write Efficient GPU Kernels?](https://arxiv.org/abs/2502.10517) [![Code](https://img.shields.io/github/stars/ScalingIntelligence/KernelBench?style=social&label=Code)](https://github.com/ScalingIntelligence/KernelBench) | ICML&nbsp;2025 | KernelBench, the standard evaluation for LLM-generated GPU kernels. |
 | [MultiKernelBench: A Multi-Platform Benchmark for Kernel Generation](https://arxiv.org/abs/2507.17773) [![Code](https://img.shields.io/github/stars/wzzll123/MultiKernelBench?style=social&label=Code)](https://github.com/wzzll123/MultiKernelBench) | [arXiv&nbsp;2025](https://doi.org/10.1145/3832783.3837460) | MultiKernelBench extends kernel evaluation to multiple hardware platforms. |
-| [TritonBench: Benchmarking Large Language Model Capabilities for Generating Triton Operators](https://arxiv.org/abs/2502.14752) [![Code](https://img.shields.io/github/stars/thunlp/TritonBench?style=social&label=Code)](https://github.com/thunlp/TritonBench) | [Findings of the Association for Computational Linguistics: ACL 2025&nbsp;2025](https://doi.org/10.18653/v1/2025.findings-acl.1183) | TritonBench evaluates generation of Triton operators. |
+| [TritonBench: Benchmarking Large Language Model Capabilities for Generating Triton Operators](https://arxiv.org/abs/2502.14752) [![Code](https://img.shields.io/github/stars/thunlp/TritonBench?style=social&label=Code)](https://github.com/thunlp/TritonBench) | Findings of the Association for Computational Linguistics: ACL&nbsp;2025 | TritonBench evaluates generation of Triton operators. |
 | [AccelEval: A Whole-Program Benchmark for LLM-Generated CPU-to-GPU Code Acceleration](https://doi.org/10.2139/ssrn.6835659) | [NeurIPS&nbsp;2026](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=6835659) | The best of eight models reaches only 0.75× the performance of human-written CUDA. |
 | [AgentKernelArena: Benchmarking Performance and Generalization of AI Coding Agents on GPU Kernels Optimization](https://github.com/AMD-AGI/AgentKernelArena) [![Code](https://img.shields.io/github/stars/AMD-AGI/AgentKernelArena?style=social&label=Code)](https://github.com/AMD-AGI/AgentKernelArena) | [NeurIPS&nbsp;2026](https://arxiv.org/abs/2605.16819) | AgentKernelArena tests generalization on unseen configurations. |
 | ⭐ [Introducing KernelQuest: Can Agents Write Triton Kernels?](https://www.turing.com/blog/kernelquest-benchmark-ai-agents-triton-kernels) | Turing blog&nbsp;2026 | KernelQuest adds adversarial verification: 565 of 1,200 agent runs were rejected for correctness or authenticity before timing. |
@@ -1015,7 +1020,7 @@ Every model runs on a machine it did not design. This is changing. Language mode
 
 Missing a work or disagree with a level? **[Recommend a paper](https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml)**: fill in a short form with the title, link and a one-line summary, and we will place it and add it. Corrections to † levels are especially welcome. If you prefer a pull request, see [CONTRIBUTING.md](CONTRIBUTING.md).
 
-<sub>447/454 entries are linked (335 arXiv, 175 DOI), matched by exact title against DataCite and Crossref. A flat export is in [`data/catalog.csv`](data/catalog.csv). Logos in Figure 1 are trademarks of their owners, rendered from <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a> and <a href="https://simpleicons.org">Simple Icons</a>.</sub>
+<sub>453/460 entries are linked (339 arXiv, 174 DOI), matched by exact title against DataCite and Crossref. A flat export is in [`data/catalog.csv`](data/catalog.csv). Logos in Figure 1 are trademarks of their owners, rendered from <a href="https://github.com/lobehub/lobe-icons">LobeHub Icons</a> and <a href="https://simpleicons.org">Simple Icons</a>.</sub>
 
 ## Star History
 

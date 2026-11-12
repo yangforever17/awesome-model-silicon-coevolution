@@ -2,8 +2,9 @@
 #
 #   topic     topic id from taxonomy.yaml
 #   type      Paper (default) | Survey | Benchmark | Dataset | Tool | Industry | Essay | Book
-#   level     autonomy level L0–L4, Human (cross-layer work executed by human teams),
-#             or "Possible L1" / "Possible L3" (the level hinges on undisclosed information)
+#   level     autonomy level L0–L4 (L3 split by return path: L3[θ], L3[S], L3[H]),
+#             Human (cross-layer work executed by human teams),
+#             or "Possible L3[S]" / "Possible L3[H]" (the level hinges on undisclosed information)
 #   lsrc      survey  = level stated in the survey's tables or text
 #             curator = assigned by the repository curators using the §3.4 criteria (shown with †)
 #   featured  marked ⭐ as a key work
@@ -25,7 +26,7 @@ ren2021nvcell:
 fawzi2022discovering:
   code: google-deepmind/alphatensor
   short: "AlphaTensor"
-  topic: cases
+  topic: ms-compiler
   level: L1
   lsrc: survey
   featured: true
@@ -39,7 +40,7 @@ roy2022prefixrl:
 mankowitz2023faster:
   code: google-deepmind/alphadev
   short: "AlphaDev"
-  topic: cases
+  topic: ms-compiler
   level: L1
   lsrc: survey
   featured: true
@@ -47,33 +48,41 @@ mankowitz2023faster:
 novikov2025alphaevolve:
   topic: cases
   edge: loop
-  level: L3
+  level: "L3[S]"
   lsrc: survey
   type: Industry
   featured: true
-  note: "An early, narrow L3: a Gemini-driven evolutionary coding agent rewrote a TPU arithmetic circuit and sped up a Gemini training kernel by 23% (~1% of total training time)."
+  note: "The only verifiable L3[S]: a Gemini-driven evolutionary coding agent sped up a Gemini training kernel by 23% (~1% of total training time); its TPU arithmetic circuit becomes L3[H] once the next TPU tapes out."
 openai2025broadcom:
   topic: cases
-  level: "Possible L1"
+  level: "Possible L3[H]"
   lsrc: survey
   type: Industry
   featured: true
-  note: "OpenAI states its models found ~20 optimizations on human-optimized components of its custom accelerator (L1 by description); not independently verifiable."
+  note: "OpenAI says its models found ~20 optimizations on human-optimized blocks of its custom accelerator, the chip that became Jalapeño; not independently verifiable."
+nvidia2024gb200nvl72:
+  topic: hm-parallel
+  type: Industry
+  note: "GB200 NVL72 joins 72 GPUs in one NVLink domain, moving co-design from the chip to the rack."
 meta2025mtiav2:
-  topic: cases
+  topic: hm-parallel
   level: Human
   lsrc: survey
   featured: true
   note: "MTIA v2: recommendation-model workloads directly set the chip's compute/memory balance; strong cross-layer coupling executed by human teams."
 yin2025pangu:
-  topic: cases
+  topic: hm-parallel
   level: Human
   lsrc: survey
   featured: true
   note: "Pangu Ultra: a dense ~100B+ model whose architecture and training recipe were adapted to large Ascend NPU clusters; human-driven co-design."
+openai2025broadcompress:
+  topic: cases
+  type: Industry
+  note: "OpenAI and Broadcom announce a collaboration to deploy 10 GW of OpenAI-designed AI accelerators."
 openai2026jalapeno:
   topic: cases
-  level: "Possible L3"
+  level: "Possible L3[H]"
   lsrc: survey
   type: Industry
   featured: true
@@ -81,13 +90,13 @@ openai2026jalapeno:
 qwen2026xinmo:
   topic: cases
   title_en: "Chip–Model Co-Evolution: Qwen in Production Chip Design and Inference Adaptation"
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   type: Industry
   featured: true
   note: "Qwen3.8-Max takes a NoC module from spec through RTL, verification and physical implementation, and separately deploys and tunes a new model on a domestic accelerator; the two ends are not yet connected."
 tang2025pangumoe:
-  topic: cases
+  topic: hm-parallel
   level: Human
   lsrc: survey
   type: Industry
@@ -95,6 +104,8 @@ tang2025pangumoe:
 alibaba2026yunqi:
   title_en: "Alibaba Reports Progress on Omni-Modal Models, with Qwen4 and a Next-Generation Video Model in Training"
   topic: cases
+  level: "L3[θ]"
+  lsrc: survey
   type: Industry
   note: "Alibaba Cloud reports that a model iterated its own training for over a month and 33 rounds without humans, raising its Artificial Analysis score from 40 to 45."
 feng2026cheetah:
@@ -113,11 +124,11 @@ jiang2025maco:
   lsrc: survey
   note: "MACO sets CGRA hardware parameters and compiler options jointly with multiple agents over dozens of iterations; the designer itself does not grow stronger."
 kimi2026k3:
-  topic: cross
-  level: "Possible L3"
+  topic: cases
+  level: "Possible L3[S]"
   lsrc: survey
   type: Industry
-  note: "An early Kimi K3 checkpoint did most of the kernel optimization for K3's own modules; kernels adapt to the model in one direction, a precursor of L4[M·S]."
+  note: "Kimi K3 rewrote kernels for its own modules and, in one 48-hour run, designed an inference-chip prototype for a small model of its architecture; whether the kernels entered its own training and serving is not disclosed."
 
 # ---------------------------------------------------------------- Model → Silicon
 brayton2010abc:
@@ -345,9 +356,13 @@ yu2026horizon:
   note: "HORIZON treats hardware design as repository-level code evolution under an executable evaluator and acceptance conditions."
 fang2026drrtl:
   topic: mh-rtl
+  level: "L3[θ]"
+  lsrc: survey
   note: "Dr. RTL distills a reusable skill library from parallel rewrites, improving WNS/TNS by 21%/17% and area by 6% against a commercial tool on 20 real designs."
 zhang2026cedar:
   topic: mh-rtl
+  level: "L3[θ]"
+  lsrc: survey
   note: "Cedar has an LLM propose rewrite rules, verifies each with Z3 and keeps verified rules for later designs, cutting area and power by ~19% on RTLLM."
 wei2025vflow:
   topic: mh-rtl
@@ -517,6 +532,8 @@ wang2025mcp4eda:
   note: "MCP4EDA connects synthesis, simulation and place-and-route tools over MCP, feeding back-end timing, power and area into synthesis scripts."
 li2026statetune:
   topic: mh-phys
+  level: "L3[θ]"
+  lsrc: survey
   note: "StateTune keeps a persistent memory for flow tuning, reaching the best hypervolume on all six blocks of a Cadence industrial flow; removing memory loses 58.5%."
 hsiao2025buffalo:
   topic: mh-phys
@@ -538,7 +555,7 @@ uchendu2026veoplace:
   note: "VeoPlace has a vision-language model draw region constraints for an existing placer, improving DREAMPlace by up to 4.4% on Superblue designs."
 lu2026pcpo:
   topic: mh-phys
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "PCPO's algorithm-designing model grows stronger through its own placement designs, bringing chip design into L3."
 allam2025asicagent:
@@ -562,7 +579,7 @@ krishna2026conductor2:
   note: "Design Conductor 2.0 reads the TurboQuant paper and designs VerTQ, an LLM-inference accelerator (5,129 FP units, 240-stage pipeline) in 80 hours; a cross-layer decision made from the model side, at L2."
 tomshardware2026agentic:
   topic: mh-e2e
-  level: L1–L2
+  level: L2
   lsrc: survey
   type: Industry
   note: "Overview of the 2026 agentic EDA products from Cadence, Synopsys and Siemens, which automate whole flow segments rather than single steps."
@@ -754,7 +771,7 @@ dai2026cudaagent:
 dong2026kernelblaster:
   code: NVlabs/KernelBlaster
   topic: ms-kernel
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "KernelBlaster transfers optimization knowledge across GPU generations with memory-augmented in-context RL."
 dong2026stark:
@@ -765,7 +782,7 @@ dong2026stark:
 fu2026davinci:
   short: "daVinci-kernel"
   topic: ms-kernel
-  level: L1
+  level: "L3[θ]"
   lsrc: survey
   featured: true
   note: "daVinci-kernel co-evolves a skill library with RL training, admitting a skill only after execution confirms a reproducible speedup."
@@ -818,22 +835,22 @@ zhang2025adaptive:
   note: "Agents filter high-quality samples from accumulated experience and reuse them as demonstrations, improving ML library generation by up to 3.9×."
 zhang2025accelopt:
   topic: ms-kernel
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "AccelOpt distills experience from slow/fast kernel pairs and keeps improving on AWS Trainium as experience accumulates."
 pan2026cannbotcake:
   topic: ms-kernel
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "CANNBot-CAKE analyzes recurring failures in its run logs and proposes changes to its own skills, routing and prompts, with merging left to humans."
 chen2026kope:
   topic: ms-kernel
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "KOPE organizes Ascend kernel-optimization experience into a graph; with the base model unchanged, the pass rate rises from 55.2% to 84.6%."
 ye2026cake:
   topic: ms-kernel
-  level: L3
+  level: "L3[θ]"
   lsrc: survey
   note: "CAKE lets agents extend the IR, verifier rules, compiler and cost model when a kernel exposes an expressiveness gap, so later kernels use the improved toolchain."
 wang2025kernelfalcon:
@@ -1574,10 +1591,32 @@ yu2026coevolving:
   note: "As the harness improves, imitating a stronger model's full trajectories hurts; only local corrections where the model itself fails restore the fit."
 luo2026hase:
   topic: in-coevo
+  level: "L3[θ]"
+  lsrc: survey
   note: "HASE has the same model generate data, rewrite its own harness and train its own weights, with no external teacher."
 tan2026metarsi:
   topic: in-coevo
+  level: "L3[θ]"
+  lsrc: survey
   note: "MetaRSI has the same model generate data, rewrite its own harness and train its own weights, with no external teacher."
+yao2023react:
+  short: "ReAct"
+  topic: in-harness
+  note: "ReAct interleaves reasoning traces with tool actions, the basic loop of today's agents."
+schick2023toolformer:
+  short: "Toolformer"
+  topic: in-harness
+  note: "Toolformer teaches a language model to decide when and how to call external tools."
+sumers2024coala:
+  short: "CoALA"
+  topic: in-harness
+  note: "CoALA organizes language agents into memory, action space and decision procedure."
+wang2025openhands:
+  code: All-Hands-AI/OpenHands
+  short: "OpenHands"
+  topic: in-harness
+  type: Tool
+  note: "OpenHands, an open platform for software-engineering agents that edit code, run commands and browse."
 yang2024sweagent:
   topic: in-harness
   note: "SWE-agent shows that a suitable agent–computer interface greatly raises task completion rates."
