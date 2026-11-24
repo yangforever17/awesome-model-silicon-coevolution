@@ -7,6 +7,8 @@
 <p><b>How models, software stacks and chips are starting to improve one another.</b></p>
 
 <p>
+  <a href="https://www.preprints.org/manuscript/202611.2415"><img alt="Preprint" src="https://img.shields.io/badge/preprint-202611.2415-b91c1c?style=flat-square"></a>
+  <a href="./paper/When_Models_Build_Their_Own_Machines.pdf"><img alt="Full PDF" src="https://img.shields.io/badge/full%20PDF-80%20pages-7c3aed?style=flat-square"></a>
   <a href="#contents"><img alt="Entries" src="https://img.shields.io/badge/entries-460-2563eb?style=flat-square"></a>
   <a href="https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml"><img alt="Contributions welcome" src="https://img.shields.io/badge/contributions-welcome-16a34a?style=flat-square"></a>
   <a href="https://github.com/yangforever17/awesome-model-silicon-coevolution/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/yangforever17/awesome-model-silicon-coevolution?style=flat-square&color=eab308"></a>
@@ -35,6 +37,7 @@ Every model runs on a machine it did not design. That is starting to change: lan
 
 ## News
 
+- **2026-11-24** The survey is out on [Preprints.org](https://www.preprints.org/manuscript/202611.2415). That version is abridged; the [full PDF](./paper/When_Models_Build_Their_Own_Machines.pdf) is in this repository.
 - **2026-11-12** L3 is split by return path: L3[θ] (the designer's own experience), L3[S] and L3[H] (the software and chips it designed). The closed-loop cases are regrouped into six, following the survey; 460 works in total.
 - **2026-11-04** Synced with the latest survey: 454 works, including 150 new entries (RTL and PPA optimization, end-to-end workloads, harnesses and model–harness co-evolution, cross-layer co-design). Levels follow the revised scale: L3 is self-improvement and L4, cross-layer co-evolution, has no instance yet.
 - **2026-10-23** Code links with live GitHub stars for 158 entries. Suggest a paper in one step with the [issue form](https://github.com/yangforever17/awesome-model-silicon-coevolution/issues/new?template=add-paper.yml).
@@ -994,23 +997,27 @@ Whether recursion accelerates or saturates, where humans stay in the loop, and s
 
 ## Survey
 
-**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** Manuscript in preparation; the preprint link will appear here.
+**When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence.** [Preprint](https://www.preprints.org/manuscript/202611.2415) · [Full PDF](./paper/When_Models_Build_Their_Own_Machines.pdf)
+
+The Preprints.org version is abridged; the full PDF in this repository is the complete survey.
 
 <details>
 <summary>Abstract</summary>
 
 <br>
 
-Every model runs on a machine it did not design. This is changing. Language models already write RTL, tune kernels and orchestrate EDA flows, and they have begun to take part in designing the chips that train and serve them. When models improve chips and chips train stronger models, the growth of intelligence may break through the software ceiling into a scaling loop that drives itself. We treat the chip as the physical layer of recursive self-improvement, describe the co-evolution of model, software stack and silicon as a dynamical system, and propose the Levels of Self-Scaling Intelligence L0–L6, from design assistance, autonomous optimization and end-to-end design to self-improvement and cross-layer co-evolution, with recursive self-expansion and open-ended autonomous evolution as the horizon. Mapping over 400 works, we find that in three years language models have covered most of the ground *within* a single layer, yet decisions that cross layer boundaries are still mostly made by people, and very few works close the loop between silicon and intelligence. The loop breaks in three places: silicon feedback is slow and sparse, agents' horizons and training environments are confined to a single layer, and the ecosystem is fragmented. Intelligence was once shaped by machines; now it is beginning to shape them. The loop is not yet finished, and its next line may well be written by the machines themselves.
+Every model runs on a machine it did not design. This is changing. Language models write RTL, tune kernels and orchestrate EDA flows. They are beginning to help design the chips that train and serve them. As models improve chips and chips train stronger models, intelligence may scale beyond software alone. We treat the chip as the physical layer of recursive self-improvement, describe the co-evolution of model, software stack and silicon as a dynamical system, and propose the Levels of Self-Scaling Intelligence L0–L6, from design assistance, autonomous optimization and end-to-end design to self-improvement and cross-layer co-evolution, with recursive self-expansion and open-ended autonomous evolution as the horizon. Across over 400 works, we find that in three years language models have covered most of the ground *within* a single layer, yet decisions that cross layer boundaries are still mostly made by people, and very few works close the loop between silicon and intelligence. The loop breaks in three places: silicon feedback is slow and sparse, agents' horizons and training environments are confined to a single layer, and the ecosystem is fragmented. Intelligence was once shaped by machines; now it is beginning to shape them. The loop is not yet finished, and its next line may well be written by the machines themselves.
 
 </details>
 
 ```bibtex
-@misc{model-silicon-coevolution-2026,
-  title   = {When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence},
-  author  = {TBD},
-  year    = {2026},
-  note    = {Manuscript in preparation}
+@misc{wei2026models,
+  title     = {When Models Build Their Own Machines: From Silicon to Self-Scaling Intelligence},
+  author    = {Wei, Yangbo and Wang, Qifan and Huang, Zhen and Su, Zhenyu and Huang, Li and Zhong, Yue and Qin, Dongge and Lu, Shaoqiang and Wang, Hong and Tang, Fenghe and Li, Han and Shao, Shitong and Tao, Zhuofu and Huang, Yin and Yao, Qingsong and Lin, Ting-Jung and Wu, Chen and He, Lei},
+  year      = {2026},
+  publisher = {Preprints},
+  doi       = {10.20944/preprints202611.2415.v1},
+  url       = {https://www.preprints.org/manuscript/202611.2415}
 }
 ```
 
